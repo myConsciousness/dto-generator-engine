@@ -20,15 +20,25 @@ repositories {
     jcenter()
 }
 
-dependencies {
-    // This dependency is used by the application.
-    implementation 'com.google.guava:guava:28.2-jre'
+tasks.withType(JavaCompile) { options.encoding = "UTF-8" }
 
-    // Use JUnit test framework
+dependencies {
+    implementation 'com.google.guava:guava:28.2-jre'
     testImplementation 'junit:junit:4.12'
+
+    compile group: 'com.google.flogger', name: 'flogger', version: '0.4'
+    runtime group: 'com.google.flogger', name: 'flogger-system-backend', version: '0.4'
+
+    compile 'commons-io:commons-io:2.4'
+    compile 'org.apache.commons:commons-lang3:3.4'
+
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+	annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    compile fileTree(dir: 'libs', include: '*.jar')
 }
 
 application {
     // Define the main class for the application.
-    mainClassName = 'Generator.App'
+    mainClassName = 'Generator.org.thinkit.generator.Main'
 }

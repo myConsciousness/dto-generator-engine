@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Content>
+	<NodeList>
+		<Node conditionId="" 置換文字列コード="0" 置換文字列="::replacement:projectName"></Node>
+		<Node conditionId="" 置換文字列コード="1" 置換文字列="::replacement:className"></Node>
+		<Node conditionId="" 置換文字列コード="2" 置換文字列="::replacement:creationDate"></Node>
+		<Node conditionId="" 置換文字列コード="3" 置換文字列="::replacement:updateDate"></Node>
+		<Node conditionId="" 置換文字列コード="4" 置換文字列="::replacement:copyrightYear"></Node>
+		<Node conditionId="" 置換文字列コード="5" 置換文字列="::replacement:creator"></Node>
+		<Node conditionId="" 置換文字列コード="6" 置換文字列="::replacement:packageName"></Node>
+		<Node conditionId="" 置換文字列コード="7" 置換文字列="::replacement:classDescription"></Node>
+		<Node conditionId="" 置換文字列コード="8" 置換文字列="::replacement:fields"></Node>
+		<Node conditionId="" 置換文字列コード="9" 置換文字列="::replacement:constructorParameters"></Node>
+		<Node conditionId="" 置換文字列コード="10" 置換文字列="::replacement:copyingConstructorParameter"></Node>
+		<Node conditionId="" 置換文字列コード="11" 置換文字列="::replacement:paramAnotationRequiredConstructor"></Node>
+		<Node conditionId="" 置換文字列コード="12" 置換文字列="::replacement:paramAnotationCopyingConstructor"></Node>
+		<Node conditionId="" 置換文字列コード="13" 置換文字列="::replacement:constructorParameterValues"></Node>
+		<Node conditionId="" 置換文字列コード="14" 置換文字列="::replacement:copyingConstructorParameterValue"></Node>
+		<Node conditionId="" 置換文字列コード="15" 置換文字列="::replacement:requiredConstructorProcess"></Node>
+		<Node conditionId="" 置換文字列コード="16" 置換文字列="::replacement:copyingConstructorProcess"></Node>
+		<Node conditionId="" 置換文字列コード="17" 置換文字列="::replacement:variableDescription"></Node>
+		<Node conditionId="" 置換文字列コード="18" 置換文字列="::replacement:initialValue"></Node>
+		<Node conditionId="" 置換文字列コード="19" 置換文字列="::replacement:dataType"></Node>
+		<Node conditionId="" 置換文字列コード="20" 置換文字列="::replacement:variableName"></Node>
+	</NodeList>
+
+	<Conditions>
+	</Conditions>
+</Content>
