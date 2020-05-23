@@ -70,7 +70,8 @@ public final class ClassNameDefinitionManager extends AbstractRule {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private ClassNameDefinitionManager() {}
+    private ClassNameDefinitionManager() {
+    }
 
     /**
      * コンストラクタ
@@ -156,8 +157,8 @@ public final class ClassNameDefinitionManager extends AbstractRule {
         final String logicalName = definitions.get(DtoCellItem.LOGICAL_NAME);
         final String description = definitions.get(DtoCellItem.DESCRIPTION);
 
-        final ClassNameDefinition classNameDefinition
-                        = new ClassNameDefinition(projectName, packageName, physicalName, logicalName, description);
+        final ClassNameDefinition classNameDefinition = new ClassNameDefinition(projectName, packageName, physicalName,
+                logicalName, description);
 
         this.classNameDefinition = classNameDefinition;
 

@@ -65,7 +65,8 @@ public final class ClassDefinitionMatrixManager extends AbstractRule {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private ClassDefinitionMatrixManager() {}
+    private ClassDefinitionMatrixManager() {
+    }
 
     /**
      * コンストラクタ
@@ -130,8 +131,8 @@ public final class ClassDefinitionMatrixManager extends AbstractRule {
         final ExcelHandler excelHandler = new ExcelHandler.Builder().fromFile(this.filePath).build();
         final ExcelHandler.SheetHandler sheetHandler = excelHandler.sheet(SheetName.定義書.name());
 
-        final ClassCreatorDefinitionManager classCreatorDefinitionManager
-                        = new ClassCreatorDefinitionManager(sheetHandler);
+        final ClassCreatorDefinitionManager classCreatorDefinitionManager = new ClassCreatorDefinitionManager(
+                sheetHandler);
 
         if (!classCreatorDefinitionManager.execute()) {
             logger.atSevere().log("クラス作成者情報の取得処理が異常終了しました。");
@@ -147,10 +148,9 @@ public final class ClassDefinitionMatrixManager extends AbstractRule {
 
         final List<ClassDefinition> classDefinitionList = this.getClassDefinitionList(sheetHandler);
 
-        final ClassDefinitionMatrix classDefinitionMatrix
-                        = new ClassDefinitionMatrix(classNameDefinitionManager.getClassNameDefinition(),
-                                        classCreatorDefinitionManager.getClassCreatorDefinition(),
-                                        classDefinitionList);
+        final ClassDefinitionMatrix classDefinitionMatrix = new ClassDefinitionMatrix(
+                classNameDefinitionManager.getClassNameDefinition(),
+                classCreatorDefinitionManager.getClassCreatorDefinition(), classDefinitionList);
 
         this.classDefinitionMatrix = classDefinitionMatrix;
 
@@ -206,18 +206,15 @@ public final class ClassDefinitionMatrixManager extends AbstractRule {
     /**
      * 引数として指定されたマトリクスリストから再帰的にクラス定義情報群を生成します。 再帰処理は各レコードが子クラスを持っている場合に実行されます。
      *
-     * @param matrixList マトリクスリスト
-     * @param content コンテンツ
+     * @param matrixList          マトリクスリスト
+     * @param content             コンテンツ
      * @param classDefinitionList クラス定義情報群
-     * @param startIndex 開始インデックス
-     * @param baseItemLayer 基準項目層
+     * @param startIndex          開始インデックス
+     * @param baseItemLayer       基準項目層
      * @return 子クラスを生成する際に使用したレコード数
      */
-    private int getClassDefinitionRecursively(List<Map<String, String>> matrixList,
-                    List<Map<String, String>> content,
-                    List<ClassDefinition> classDefinitionList,
-                    int startIndex,
-                    int baseItemLayer) {
+    private int getClassDefinitionRecursively(List<Map<String, String>> matrixList, List<Map<String, String>> content,
+            List<ClassDefinition> classDefinitionList, int startIndex, int baseItemLayer) {
         logger.atInfo().log("開始インデックス = (%s)", startIndex);
         logger.atInfo().log("基準項目層 = (%s)", baseItemLayer);
 
@@ -261,14 +258,11 @@ public final class ClassDefinitionMatrixManager extends AbstractRule {
                     logger.atInfo().log("子クラス情報を生成するため再帰処理を開始します。");
 
                     List<ClassDefinition> childClassDefinitionList = new ArrayList<>();
-                    final int skipNumber = this.getClassDefinitionRecursively(matrixList,
-                                    content,
-                                    childClassDefinitionList,
-                                    i,
-                                    baseItemLayer + 2);
+                    final int skipNumber = this.getClassDefinitionRecursively(matrixList, content,
+                            childClassDefinitionList, i, baseItemLayer + 2);
 
                     classItemDefinitionList.get(classItemDefinitionList.size() - 1)
-                                    .setChildClassDefinitionList(childClassDefinitionList);
+                            .setChildClassDefinitionList(childClassDefinitionList);
 
                     logger.atInfo().log("レコード番号 = (%s)", i);
                     logger.atInfo().log("スキップ数 = (%s)", skipNumber);
@@ -288,13 +282,12 @@ public final class ClassDefinitionMatrixManager extends AbstractRule {
     /**
      * マトリクスから取得したレコードを基にクラス定義情報を生成します。
      *
-     * @param content コンテンツ
-     * @param record マトリクスレコード
+     * @param content         コンテンツ
+     * @param record          マトリクスレコード
      * @param classDefinition クラス定義情報
      */
-    private void createClassDefinition(final List<Map<String, String>> content,
-                    final Map<String, String> record,
-                    final ClassDefinition classDefinition) {
+    private void createClassDefinition(final List<Map<String, String>> content, final Map<String, String> record,
+            final ClassDefinition classDefinition) {
         logger.atInfo().log("START");
 
         final String itemNameClassName = this.getCellItemName(content, DtoCellItem.VARIABLE_NAME);
@@ -313,13 +306,12 @@ public final class ClassDefinitionMatrixManager extends AbstractRule {
     /**
      * マトリクスから取得した情報を基にクラス項目情報を生成します。
      *
-     * @param content コンテンツ
-     * @param record マトリクスレコード
+     * @param content                 コンテンツ
+     * @param record                  マトリクスレコード
      * @param classItemDefinitionList クラス項目情報リスト
      */
-    private void createClassItemDefinition(List<Map<String, String>> content,
-                    Map<String, String> record,
-                    List<ClassItemDefinition> classItemDefinitionList) {
+    private void createClassItemDefinition(List<Map<String, String>> content, Map<String, String> record,
+            List<ClassItemDefinition> classItemDefinitionList) {
         logger.atInfo().log("START");
 
         final String itemNameVariableName = this.getCellItemName(content, DtoCellItem.VARIABLE_NAME);
@@ -334,8 +326,8 @@ public final class ClassDefinitionMatrixManager extends AbstractRule {
         final boolean invariant = this.convertStringToBoolean(record.get(itemNameInvariant));
         final String description = record.get(itemNameDescription);
 
-        final ClassItemDefinition classItemDefinition
-                        = new ClassItemDefinition(variableName, dataType, initialValue, invariant, description);
+        final ClassItemDefinition classItemDefinition = new ClassItemDefinition(variableName, dataType, initialValue,
+                invariant, description);
 
         classItemDefinitionList.add(classItemDefinition);
 
@@ -344,8 +336,8 @@ public final class ClassDefinitionMatrixManager extends AbstractRule {
     }
 
     /**
-     * 文字列を真偽値に変換します。 真偽値へ変換する際のルールは下記の通りです。 当該メソッドでは文字列に対するトリム加工は行いません。 1, 文字列がnullの場合:
-     * {@code false}<br>
+     * 文字列を真偽値に変換します。 真偽値へ変換する際のルールは下記の通りです。 当該メソッドでは文字列に対するトリム加工は行いません。 1,
+     * 文字列がnullの場合: {@code false}<br>
      * 2, 文字列が空文字列の場合: {@code false}<br>
      * 3, 上記以外の場合: {@code true}
      *
@@ -359,7 +351,7 @@ public final class ClassDefinitionMatrixManager extends AbstractRule {
     /**
      * コンテンツリストから引数として指定されたセル項目オブジェクトのコード値と紐づくセル項目名を取得し返却します。
      *
-     * @param content コンテンツリスト
+     * @param content      コンテンツリスト
      * @param cellItemName 取得対象のセル項目コードが定義されたオブジェクト
      * @return 引数として指定されたセル項目コードに紐づくセル項目名
      * @exception IllegalArgumentException コンテンツリストが空の場合、またはセル項目オブジェクトがnullの場合
@@ -396,7 +388,7 @@ public final class ClassDefinitionMatrixManager extends AbstractRule {
     /**
      * 指定されたセル項目に紐づくコンテンツ項目を取得し返却します。
      *
-     * @param nodeList コンテンツ項目リスト
+     * @param nodeList     コンテンツ項目リスト
      * @param cellItemName 取得対象のセル項目
      * @return 取得対象のセル項目に紐づくコンテンツ項目
      */

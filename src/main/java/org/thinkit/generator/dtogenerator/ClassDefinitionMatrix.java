@@ -1,5 +1,5 @@
 /**
- * Project Name : Business Tool<br>
+ * Project Name : Generator<br>
  * File Name : ClassDefinitionMatrix.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/04/23<br>
@@ -9,6 +9,7 @@
  * This source code or any portion thereof must not be<br>
  * reproduced or used in any manner whatsoever.
  */
+
 package org.thinkit.generator.dtogenerator;
 
 import java.util.ArrayList;
@@ -50,17 +51,18 @@ public final class ClassDefinitionMatrix {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private ClassDefinitionMatrix() {}
+    private ClassDefinitionMatrix() {
+    }
 
     /**
      * コンストラクタ
      *
-     * @param classNameDefinition クラス名定義情報
+     * @param classNameDefinition    クラス名定義情報
      * @param classCreatorDefinition クラス作成者情報
-     * @param classDefinitionList クラス定義情報群
+     * @param classDefinitionList    クラス定義情報群
      */
     public ClassDefinitionMatrix(ClassNameDefinition classNameDefinition, ClassCreatorDefinition classCreatorDefinition,
-                    List<ClassDefinition> classDefinitionList) {
+            List<ClassDefinition> classDefinitionList) {
         Objects.requireNonNull(classNameDefinition);
         Objects.requireNonNull(classCreatorDefinition);
         Objects.requireNonNull(classDefinitionList);

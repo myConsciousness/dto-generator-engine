@@ -111,7 +111,7 @@ public final class DtoTemplateManager extends AbstractRule {
      * @param dtoTemplate DTO雛形区分
      * @return DTO雛形区分のコード値に紐づくレコードに定義された雛形
      * @throws RuleHandlingException カタログのコード値と紐づくレコードがコンテンツファイルに存在しない場合、<br>
-     *     または取得したレコード内の雛形がnullまたは空文字列の場合
+     *                               または取得したレコード内の雛形がnullまたは空文字列の場合
      */
     public String getTemplateByKey(DtoTemplate dtoTemplate) {
         logger.atInfo().log("START");
@@ -121,7 +121,7 @@ public final class DtoTemplateManager extends AbstractRule {
 
         if (record.isEmpty()) {
             throw new RuleHandlingException(
-                            "There is no record defined in the content file that is associated with a code value in the catalog.");
+                    "There is no record defined in the content file that is associated with a code value in the catalog.");
         }
 
         final String template = record.get(ContentAttribute.雛形.name());

@@ -1,5 +1,5 @@
 /**
- * Project Name : Business Tool<br>
+ * Project Name : Generator<br>
  * File Name : ClassDefinition.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/05/05<br>
@@ -9,6 +9,7 @@
  * This source code or any portion thereof must not be<br>
  * reproduced or used in any manner whatsoever.
  */
+
 package org.thinkit.generator.dtogenerator;
 
 import java.util.ArrayList;
@@ -51,7 +52,8 @@ public final class ClassDefinition {
     /**
      * デフォルトコンストラクタ
      */
-    public ClassDefinition() {}
+    public ClassDefinition() {
+    }
 
     /**
      * コピーコンストラクタ

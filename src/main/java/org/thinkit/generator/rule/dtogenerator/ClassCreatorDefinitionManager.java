@@ -70,7 +70,8 @@ public final class ClassCreatorDefinitionManager extends AbstractRule {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private ClassCreatorDefinitionManager() {}
+    private ClassCreatorDefinitionManager() {
+    }
 
     /**
      * コンストラクタ
@@ -155,8 +156,8 @@ public final class ClassCreatorDefinitionManager extends AbstractRule {
         final String creationDate = creatorDefinitions.get(DtoCellItem.CREATION_TIME);
         final String updateDate = creatorDefinitions.get(DtoCellItem.UPDTATE_TIME);
 
-        final ClassCreatorDefinition classCreatorDefinition
-                        = new ClassCreatorDefinition(creator, creationDate, updateDate);
+        final ClassCreatorDefinition classCreatorDefinition = new ClassCreatorDefinition(creator, creationDate,
+                updateDate);
 
         this.classCreatorDefinition = classCreatorDefinition;
 

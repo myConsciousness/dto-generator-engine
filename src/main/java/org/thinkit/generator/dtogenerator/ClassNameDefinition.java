@@ -1,5 +1,5 @@
 /**
- * Project Name : Business Tool<br>
+ * Project Name : Generator<br>
  * File Name : ClassNameDefinition.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/04/23<br>
@@ -9,6 +9,7 @@
  * This source code or any portion thereof must not be<br>
  * reproduced or used in any manner whatsoever.
  */
+
 package org.thinkit.generator.dtogenerator;
 
 import java.util.Objects;
@@ -58,19 +59,20 @@ public final class ClassNameDefinition {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private ClassNameDefinition() {}
+    private ClassNameDefinition() {
+    }
 
     /**
      * コンストラクタ
      *
-     * @param projectName プロジェクト名
-     * @param packageName パッケージ名
+     * @param projectName  プロジェクト名
+     * @param packageName  パッケージ名
      * @param physicalName 物理名
-     * @param logicalName 論理名
-     * @param description 補足
+     * @param logicalName  論理名
+     * @param description  補足
      */
     public ClassNameDefinition(final String projectName, final String packageName, String physicalName,
-                    String logicalName, String description) {
+            String logicalName, String description) {
         Objects.requireNonNull(projectName, "wrong parameter was given. Object is null.");
         Objects.requireNonNull(packageName, "wrong parameter was given. Object is null.");
         Objects.requireNonNull(physicalName, "wrong parameter was given. Object is null.");

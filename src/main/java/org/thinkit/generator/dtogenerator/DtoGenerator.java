@@ -1,5 +1,5 @@
 /**
- * Project Name : Business Tool<br>
+ * Project Name : Generator<br>
  * File Name : DtoGenerator.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/04/21<br>
@@ -9,6 +9,7 @@
  * This source code or any portion thereof must not be<br>
  * reproduced or used in any manner whatsoever.
  */
+
 package org.thinkit.generator.dtogenerator;
 
 import org.thinkit.generator.AbstractGenerator;
@@ -44,16 +45,16 @@ public final class DtoGenerator extends AbstractGenerator {
     protected boolean run() {
         logger.atInfo().log("START");
 
-        final ClassDefinitionMatrixManager classDefinitionMatrixManager
-                        = new ClassDefinitionMatrixManager(super.getFilePath());
+        final ClassDefinitionMatrixManager classDefinitionMatrixManager = new ClassDefinitionMatrixManager(
+                super.getFilePath());
 
         if (!classDefinitionMatrixManager.execute()) {
             logger.atSevere().log("クラス定義情報群の生成処理が異常終了しました。");
             return false;
         }
 
-        final ClassDefinitionFormatter classDefinitionFormatter
-                        = new ClassDefinitionFormatter(classDefinitionMatrixManager.getClassDefinitionMatrix());
+        final ClassDefinitionFormatter classDefinitionFormatter = new ClassDefinitionFormatter(
+                classDefinitionMatrixManager.getClassDefinitionMatrix());
 
         if (!classDefinitionFormatter.execute()) {
             logger.atSevere().log("クラス定義情報の整形処理が異常終了しました。");

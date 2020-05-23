@@ -63,7 +63,8 @@ public final class DtoClassTemplateManager extends AbstractRule {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private DtoClassTemplateManager() {}
+    private DtoClassTemplateManager() {
+    }
 
     /**
      * コンストラクタ

@@ -122,18 +122,18 @@ public final class DtoTemplateReplacementSequenceManager extends AbstractRule {
      * @param dtoTemplate DTO雛形置換文字列区分
      * @return DTO雛形置換文字列区分のコード値に紐づくレコードに定義された置換文字列
      * @throws RuleHandlingException カタログのコード値と紐づくレコードがコンテンツファイルに存在しない場合、<br>
-     *     または取得したレコード内の置換文字列がnullまたは空文字列の場合
+     *                               または取得したレコード内の置換文字列がnullまたは空文字列の場合
      */
     public String getTemplateByKey(DtoTemplateReplacementSequence dtoTemplateReplacementSequence) {
         logger.atInfo().log("START");
         Objects.requireNonNull(dtoTemplateReplacementSequence, "DtoTemplateReplacementSequence must not be null.");
 
-        final Map<String, String> record
-                        = super.getRecordByKey(ContentAttribute.置換文字列コード, dtoTemplateReplacementSequence);
+        final Map<String, String> record = super.getRecordByKey(ContentAttribute.置換文字列コード,
+                dtoTemplateReplacementSequence);
 
         if (record.isEmpty()) {
             throw new RuleHandlingException(
-                            "There is no record defined in the content file that is associated with a code value in the catalog.");
+                    "There is no record defined in the content file that is associated with a code value in the catalog.");
         }
 
         final String template = record.get(ContentAttribute.置換文字列.name());
