@@ -67,8 +67,7 @@ public final class Main {
         logger.atInfo().log("The file path passed as command line argument = (%s)", filePath);
         logger.atInfo().log("The generator division passed as command line argument = (%s)", generatorDivision);
 
-        final AbstractGeneratorFactory factory = new GeneratorFactory(filePath);
-        final Generator generator = factory.create(generatorDivision);
+        final Generator generator = new GeneratorFactory(filePath).create(generatorDivision);
 
         if (!generator.execute()) {
             logger.atSevere().log("An unexpected error has occurred. Please confirm the information you have entered.");
