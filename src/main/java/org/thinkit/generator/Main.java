@@ -53,8 +53,7 @@ public final class Main {
         if (args.length < 2) {
             logger.atSevere().log("It is necessary to pass command line arguments in order to execute the process.");
             throw new IllegalArgumentException(String.format(
-                            "wrong parameter was given. 2 parameter was expected but %s parameters were given.",
-                            args.length));
+                    "wrong parameter was given. 2 parameter was expected but %s parameters were given.", args.length));
         }
 
         final String filePath = args[0];
@@ -63,7 +62,7 @@ public final class Main {
         if (!Catalog.hasCode(GeneratorDivision.class, generatorCategoryCode)) {
             logger.atSevere().log("An incorrect number was passed as a code value for GeneratorCategory.");
             throw new IllegalArgumentException(
-                            "The code values passed as command line arguments are not defined in GeneratorCategory.");
+                    "The code values passed as command line arguments are not defined in GeneratorCategory.");
         }
 
         final GeneratorDivision category = Catalog.getEnum(GeneratorDivision.class, generatorCategoryCode);
@@ -79,8 +78,8 @@ public final class Main {
 
         try {
             @SuppressWarnings("unchecked")
-            final Class<? extends Generator> generatorClass
-                            = (Class<? extends Generator>) Class.forName(startGeneratorManager.getPackageName());
+            final Class<? extends Generator> generatorClass = (Class<? extends Generator>) Class
+                    .forName(startGeneratorManager.getPackageName());
 
             final Constructor<? extends Generator> constructor = generatorClass.getDeclaredConstructor(String.class);
 
@@ -88,7 +87,7 @@ public final class Main {
 
             if (!generator.execute()) {
                 logger.atSevere()
-                                .log("An unexpected error has occurred. Please confirm the information you have entered.");
+                        .log("An unexpected error has occurred. Please confirm the information you have entered.");
                 return;
             }
         } catch (ClassNotFoundException e) {
