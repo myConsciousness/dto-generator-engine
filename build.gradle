@@ -40,7 +40,7 @@ dependencies {
 	exclude group: 'stax', module: 'stax-api'
 	}
 
-    compile fileTree(dir: './src/main/resources/libs', include: '*.jar')
+    compile fileTree(dir: 'libs', include: '*.jar')
 }
 
 application {
