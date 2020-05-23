@@ -39,6 +39,15 @@ dependencies {
 }
 
 application {
-    // Define the main class for the application.
-    mainClassName = 'Generator.org.thinkit.generator.Main'
+    mainClassName = 'org.thinkit.generator.Main'
+}
+
+run {
+    if (project.hasProperty('filePath')) {
+        args project.filePath
+    }
+
+    if (project.hasProperty('generatorCategory')) {
+        args project.generatorCategory
+    }
 }
