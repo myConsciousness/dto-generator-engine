@@ -42,7 +42,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 /**
- * {@link ClassDefinitionMatrixManager}から取得したクラス定義マトリクス情報を基にJavaのDTOリソースを生成するルールクラスです。<br>
+ * {@link ClassDefinitionMatrixManager}から取得したクラス定義マトリクス情報を基に<br>
+ * JavaのDTOリソースを生成するルールクラスです。<br>
  *
  * @author Kato Shinya
  * @since 1.0
@@ -325,6 +326,7 @@ public final class ClassDefinitionFormatter extends AbstractRule {
          */
         private String replaceTemplate(final String template, final Map<String, String> replacements) {
                 logger.atInfo().log("SATRT");
+
                 Objects.requireNonNull(template, "Template must not be null");
                 Objects.requireNonNull(replacements, "Replacement map must not be null");
                 assert !template.isEmpty();
@@ -616,6 +618,7 @@ public final class ClassDefinitionFormatter extends AbstractRule {
         private String createResource(final ResourceRequiredElements resourceRequiredElements) {
                 logger.atInfo().log("START");
                 logger.atInfo().log("リソース生成時の必須要素 = (%s)", resourceRequiredElements);
+
                 Objects.requireNonNull(resourceRequiredElements, "ResourceRequiredElements must not be null.");
 
                 logger.atInfo().log("END");
