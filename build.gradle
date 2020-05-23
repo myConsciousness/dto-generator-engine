@@ -35,6 +35,11 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.12'
 	annotationProcessor 'org.projectlombok:lombok:1.18.12'
 
+    compile group: 'org.apache.poi', name : 'poi', version: '4.1.2'
+	compile(group: 'org.apache.poi', name : 'poi-ooxml', version: '4.1.2') {
+	exclude group: 'stax', module: 'stax-api'
+	}
+
     compile fileTree(dir: 'libs', include: '*.jar')
 }
 
