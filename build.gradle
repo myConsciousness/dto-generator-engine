@@ -51,8 +51,10 @@ run {
     if (project.hasProperty('filePath')) {
         args project.filePath
     }
-
+    
     if (project.hasProperty('generatorCategory')) {
         args project.generatorCategory
+    } else {
+        args "0"
     }
 }
