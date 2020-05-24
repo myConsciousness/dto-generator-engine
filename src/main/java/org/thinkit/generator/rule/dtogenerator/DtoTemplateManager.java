@@ -67,7 +67,7 @@ public final class DtoTemplateManager extends AbstractRule {
     /**
      * コンテンツ要素定数
      */
-    public enum ContentAttribute implements Attribute {
+    private enum ContentAttribute implements Attribute {
         雛形コード, 雛形;
 
         @Override

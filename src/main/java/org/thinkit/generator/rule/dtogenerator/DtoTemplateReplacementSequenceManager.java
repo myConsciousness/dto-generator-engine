@@ -75,7 +75,7 @@ public final class DtoTemplateReplacementSequenceManager extends AbstractRule {
     /**
      * コンテンツ要素定数
      */
-    public enum ContentAttribute implements Attribute {
+    private enum ContentAttribute implements Attribute {
         置換文字列コード, 置換文字列;
 
         @Override

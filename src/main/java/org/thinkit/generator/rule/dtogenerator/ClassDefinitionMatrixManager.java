@@ -12,21 +12,10 @@
 
 package org.thinkit.generator.rule.dtogenerator;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.lang3.StringUtils;
 import org.thinkit.common.rule.AbstractRule;
-import org.thinkit.common.rule.Attribute;
-import org.thinkit.common.rule.Content;
 import org.thinkit.common.util.ExcelHandler;
-import org.thinkit.common.util.ExcelHandler.QueueType;
-import org.thinkit.generator.catalog.dtogenerator.DtoCellItem;
-import org.thinkit.generator.dtogenerator.ClassDefinition;
 import org.thinkit.generator.dtogenerator.ClassDefinitionMatrix;
-import org.thinkit.generator.dtogenerator.ClassItemDefinition;
 import org.thinkit.generator.rule.Sheet;
 
 import com.google.common.flogger.FluentLogger;
@@ -36,7 +25,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 /**
- * Excelに記述された定義書シートからクラス定義情報を抽出する処理を行うルールです。
+ * Excelに記述された定義書シートからクラス定義マトリクス情報を抽出する処理を行うルールです。
  *
  * @author Kato Shinya
  * @since 1.0
@@ -85,8 +74,6 @@ public final class ClassDefinitionMatrixManager extends AbstractRule {
         }
 
         this.filePath = filePath;
-
-        super.loadContent(ContentName.クラス項目定義情報);
     }
 
     /**
@@ -94,30 +81,6 @@ public final class ClassDefinitionMatrixManager extends AbstractRule {
      */
     private enum SheetName implements Sheet {
         定義書;
-
-        @Override
-        public String getString() {
-            return this.name();
-        }
-    }
-
-    /**
-     * コンテンツ名定数
-     */
-    private enum ContentName implements Content {
-        クラス項目定義情報;
-
-        @Override
-        public String getString() {
-            return this.name();
-        }
-    }
-
-    /**
-     * コンテンツ要素定数
-     */
-    private enum ContentAttribute implements Attribute {
-        セル項目コード, セル項目名;
 
         @Override
         public String getString() {
@@ -147,268 +110,22 @@ public final class ClassDefinitionMatrixManager extends AbstractRule {
             return false;
         }
 
-        final List<ClassDefinition> classDefinitionList = this.getClassDefinitionList(sheetHandler);
+        final ClassDefinitionManager classDefinitionManager = new ClassDefinitionManager(sheetHandler);
+
+        if (!classDefinitionManager.execute()) {
+            logger.atSevere().log("クラス定義情報の取得処理が異常終了しました。");
+            return false;
+        }
 
         final ClassDefinitionMatrix classDefinitionMatrix = new ClassDefinitionMatrix(
                 classNameDefinitionManager.getClassNameDefinition(),
-                classCreatorDefinitionManager.getClassCreatorDefinition(), classDefinitionList);
+                classCreatorDefinitionManager.getClassCreatorDefinition(),
+                classDefinitionManager.getClassDefinitionList());
 
         this.classDefinitionMatrix = classDefinitionMatrix;
 
         logger.atInfo().log("クラス定義情報マトリクス = (%s)", classDefinitionMatrix);
         logger.atInfo().log("END");
         return true;
-    }
-
-    /**
-     * Excelに定義されたマトリクステーブルからクラス定義情報群を取得し返却します。
-     *
-     * @param sheetHandler SheetHandlerオブジェクト
-     * @return クラス定義情報群
-     * @see #getClassDefinitionRecursively(List, List, List, int, int)
-     */
-    private List<ClassDefinition> getClassDefinitionList(ExcelHandler.SheetHandler sheetHandler) {
-        logger.atInfo().log("START");
-
-        final List<Map<String, String>> contents = super.getContents();
-
-        final String baseCellItem = this.getContentItem(contents, DtoCellItem.LOGICAL_DELETE);
-        final EnumMap<QueueType, Integer> baseIndexes = sheetHandler.findCellIndex(baseCellItem);
-
-        final int baseColumnIndex = baseIndexes.get(QueueType.COLUMN);
-        final int baseRowIndex = baseIndexes.get(QueueType.ROW);
-        logger.atInfo().log("基準列インデックス = (%s)", baseColumnIndex);
-        logger.atInfo().log("基準行インデックス = (%s)", baseRowIndex);
-
-        final List<Map<String, String>> matrixList = sheetHandler.getMatrixList(baseColumnIndex, baseRowIndex);
-        logger.atInfo().log("マトリクスリスト = (%s)", matrixList);
-
-        final List<ClassDefinition> classDefinitionList = new ArrayList<>();
-        this.getClassDefinitionRecursively(matrixList, contents, classDefinitionList, 0, 1);
-        logger.atInfo().log("クラス定義情報群 = (%s)", classDefinitionList);
-
-        logger.atInfo().log("END");
-        return classDefinitionList;
-    }
-
-    @Override
-    protected List<Attribute> getAttributes() {
-        logger.atInfo().log("START");
-
-        final List<Attribute> attributes = new ArrayList<>(2);
-        attributes.add(ContentAttribute.セル項目コード);
-        attributes.add(ContentAttribute.セル項目名);
-
-        logger.atInfo().log("クラス項目定義情報のアトリビュート = (%s)", attributes);
-        logger.atInfo().log("END");
-        return attributes;
-    }
-
-    /**
-     * 引数として指定されたマトリクスリストから再帰的にクラス定義情報群を生成します。 再帰処理は各レコードが子クラスを持っている場合に実行されます。
-     *
-     * @param matrixList          マトリクスリスト
-     * @param content             コンテンツ
-     * @param classDefinitionList クラス定義情報群
-     * @param startIndex          開始インデックス
-     * @param baseItemLayer       基準項目層
-     * @return 子クラスを生成する際に使用したレコード数
-     */
-    private int getClassDefinitionRecursively(List<Map<String, String>> matrixList, List<Map<String, String>> content,
-            List<ClassDefinition> classDefinitionList, int startIndex, int baseItemLayer) {
-        logger.atInfo().log("開始インデックス = (%s)", startIndex);
-        logger.atInfo().log("基準項目層 = (%s)", baseItemLayer);
-
-        ClassDefinition parentClassDefinition = new ClassDefinition();
-        List<ClassItemDefinition> classItemDefinitionList = new ArrayList<>();
-
-        int recordCounter = 0;
-        for (int i = startIndex, size = matrixList.size(); i < size; i++) {
-            final Map<String, String> record = matrixList.get(i);
-
-            final String itemNameLogicalDelete = this.getCellItemName(content, DtoCellItem.LOGICAL_DELETE);
-            final boolean logicalDelete = this.convertStringToBoolean(record.get(itemNameLogicalDelete));
-
-            if (logicalDelete) {
-                logger.atInfo().log("論理削除されたレコードのためスキップします。");
-                logger.atInfo().log("スキップされたレコード = (%s)", record);
-                recordCounter++;
-                continue;
-            }
-
-            final String itemNameLayer = this.getCellItemName(content, DtoCellItem.LAYER);
-            final int layer = Integer.parseInt(record.get(itemNameLayer));
-            logger.atInfo().log("レコードから取得した項目層 = (%s)", layer);
-
-            if (layer + 1 < baseItemLayer) {
-                logger.atInfo().log("%s層の処理を終了します。", baseItemLayer);
-                logger.atInfo().log("戻り先の層 = (%s)", baseItemLayer - 2);
-                break;
-            }
-
-            if (layer == baseItemLayer - 1 && layer % 2 == 0) {
-                parentClassDefinition = new ClassDefinition();
-                classItemDefinitionList = new ArrayList<>();
-
-                parentClassDefinition.setClassItemDefinitionList(classItemDefinitionList);
-                classDefinitionList.add(parentClassDefinition);
-
-                this.createClassDefinition(content, record, parentClassDefinition);
-            } else {
-                if (layer > baseItemLayer) {
-                    logger.atInfo().log("子クラス情報を生成するため再帰処理を開始します。");
-
-                    List<ClassDefinition> childClassDefinitionList = new ArrayList<>();
-                    final int skipNumber = this.getClassDefinitionRecursively(matrixList, content,
-                            childClassDefinitionList, i, baseItemLayer + 2);
-
-                    classItemDefinitionList.get(classItemDefinitionList.size() - 1)
-                            .setChildClassDefinitionList(childClassDefinitionList);
-
-                    logger.atInfo().log("レコード番号 = (%s)", i);
-                    logger.atInfo().log("スキップ数 = (%s)", skipNumber);
-                    i += skipNumber - 1;
-                } else {
-                    this.createClassItemDefinition(content, record, classItemDefinitionList);
-                }
-            }
-
-            recordCounter++;
-        }
-
-        logger.atInfo().log("クラス定義情報（途中経過） = (%s)", classDefinitionList);
-        return recordCounter;
-    }
-
-    /**
-     * マトリクスから取得したレコードを基にクラス定義情報を生成します。
-     *
-     * @param content         コンテンツ
-     * @param record          マトリクスレコード
-     * @param classDefinition クラス定義情報
-     */
-    private void createClassDefinition(final List<Map<String, String>> content, final Map<String, String> record,
-            final ClassDefinition classDefinition) {
-        logger.atInfo().log("START");
-
-        final String itemNameClassName = this.getCellItemName(content, DtoCellItem.VARIABLE_NAME);
-        final String itemNameDescription = this.getCellItemName(content, DtoCellItem.DESCRIPTION);
-
-        final String className = record.get(itemNameClassName);
-        final String description = record.get(itemNameDescription);
-
-        classDefinition.setClassName(className);
-        classDefinition.setDescription(description);
-
-        logger.atInfo().log("クラス定義情報 = (%s)", classDefinition.toString());
-        logger.atInfo().log("END");
-    }
-
-    /**
-     * マトリクスから取得した情報を基にクラス項目情報を生成します。
-     *
-     * @param content                 コンテンツ
-     * @param record                  マトリクスレコード
-     * @param classItemDefinitionList クラス項目情報リスト
-     */
-    private void createClassItemDefinition(List<Map<String, String>> content, Map<String, String> record,
-            List<ClassItemDefinition> classItemDefinitionList) {
-        logger.atInfo().log("START");
-
-        final String itemNameVariableName = this.getCellItemName(content, DtoCellItem.VARIABLE_NAME);
-        final String itemNameDataType = this.getCellItemName(content, DtoCellItem.DATA_TYPE);
-        final String itemNameinitialValue = this.getCellItemName(content, DtoCellItem.INITIAL_VALUE);
-        final String itemNameInvariant = this.getCellItemName(content, DtoCellItem.INVARIANT);
-        final String itemNameDescription = this.getCellItemName(content, DtoCellItem.DESCRIPTION);
-
-        final String variableName = record.get(itemNameVariableName);
-        final String dataType = record.get(itemNameDataType);
-        final String initialValue = record.get(itemNameinitialValue);
-        final boolean invariant = this.convertStringToBoolean(record.get(itemNameInvariant));
-        final String description = record.get(itemNameDescription);
-
-        final ClassItemDefinition classItemDefinition = new ClassItemDefinition(variableName, dataType, initialValue,
-                invariant, description);
-
-        classItemDefinitionList.add(classItemDefinition);
-
-        logger.atInfo().log("クラス項目定義情報 = (%s)", classItemDefinition.toString());
-        logger.atInfo().log("END");
-    }
-
-    /**
-     * 文字列を真偽値に変換します。 真偽値へ変換する際のルールは下記の通りです。 当該メソッドでは文字列に対するトリム加工は行いません。 1,
-     * 文字列がnullの場合: {@code false}<br>
-     * 2, 文字列が空文字列の場合: {@code false}<br>
-     * 3, 上記以外の場合: {@code true}
-     *
-     * @param sequence 変換対象の文字列
-     * @return 文字列がnullまたは空文字列の場合は{@code false}、それ以外は{@true}
-     */
-    private boolean convertStringToBoolean(final String sequence) {
-        return !StringUtils.isEmpty(sequence);
-    }
-
-    /**
-     * コンテンツリストから引数として指定されたセル項目オブジェクトのコード値と紐づくセル項目名を取得し返却します。
-     *
-     * @param content      コンテンツリスト
-     * @param cellItemName 取得対象のセル項目コードが定義されたオブジェクト
-     * @return 引数として指定されたセル項目コードに紐づくセル項目名
-     * @exception IllegalArgumentException コンテンツリストが空の場合、またはセル項目オブジェクトがnullの場合
-     */
-    private String getCellItemName(List<Map<String, String>> content, DtoCellItem cellItemName) {
-        logger.atInfo().log("START");
-
-        if (content.isEmpty()) {
-            throw new IllegalArgumentException("wrong parameter was given. Content list is required.");
-        }
-
-        if (cellItemName == null) {
-            throw new IllegalArgumentException("wrong parameter was given. Enum object is null.");
-        }
-
-        final int cellItemCode = cellItemName.getCode();
-        logger.atInfo().log("引数として渡されたセル項目コード = (%s)", cellItemCode);
-
-        for (Map<String, String> elements : content) {
-            final int code = Integer.parseInt(elements.get(ContentAttribute.セル項目コード.name()));
-            logger.atInfo().log("コンテンツから取得したセル項目コード = (%s)", code);
-
-            if (cellItemCode == code) {
-                logger.atInfo().log("END");
-                return elements.get(ContentAttribute.セル項目名.name());
-            }
-        }
-
-        logger.atWarning().log("指定されたセル項目コードに紐づく要素がコンテンツに定義されていません。");
-        logger.atInfo().log("END");
-        return "";
-    }
-
-    /**
-     * 指定されたセル項目に紐づくコンテンツ項目を取得し返却します。
-     *
-     * @param nodeList     コンテンツ項目リスト
-     * @param cellItemName 取得対象のセル項目
-     * @return 取得対象のセル項目に紐づくコンテンツ項目
-     */
-    private String getContentItem(List<Map<String, String>> nodeList, DtoCellItem cellItemName) {
-        logger.atInfo().log("START");
-
-        for (Map<String, String> node : nodeList) {
-            final int cellItemCode = Integer.parseInt(node.get(ContentAttribute.セル項目コード.getString()));
-
-            if (cellItemName.getCode() == cellItemCode) {
-                final String contentItem = node.get(ContentAttribute.セル項目名.getString());
-                logger.atInfo().log("取得したコンテンツ項目 = (%s)", contentItem);
-                logger.atInfo().log("END");
-                return contentItem;
-            }
-        }
-
-        logger.atInfo().log("指定されたコンテンツ項目を取得できませんでした。");
-        logger.atInfo().log("END");
-        return "";
     }
 }
