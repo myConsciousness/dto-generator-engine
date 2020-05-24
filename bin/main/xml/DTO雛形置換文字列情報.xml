@@ -12,8 +12,8 @@
 		<Node conditionId="" 置換文字列コード="8" 置換文字列="::replacement:fields"></Node>
 		<Node conditionId="" 置換文字列コード="9" 置換文字列="::replacement:constructorParameters"></Node>
 		<Node conditionId="" 置換文字列コード="10" 置換文字列="::replacement:copyingConstructorParameter"></Node>
-		<Node conditionId="" 置換文字列コード="11" 置換文字列="::replacement:paramAnotationRequiredConstructor"></Node>
-		<Node conditionId="" 置換文字列コード="12" 置換文字列="::replacement:paramAnotationCopyingConstructor"></Node>
+		<Node conditionId="" 置換文字列コード="11" 置換文字列="::replacement:paramAnnotationRequiredConstructor"></Node>
+		<Node conditionId="" 置換文字列コード="12" 置換文字列="::replacement:paramAnnotationCopyingConstructor"></Node>
 		<Node conditionId="" 置換文字列コード="13" 置換文字列="::replacement:constructorParameterValues"></Node>
 		<Node conditionId="" 置換文字列コード="14" 置換文字列="::replacement:copyingConstructorParameterValue"></Node>
 		<Node conditionId="" 置換文字列コード="15" 置換文字列="::replacement:requiredConstructorProcess"></Node>
