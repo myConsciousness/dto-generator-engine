@@ -1,5 +1,5 @@
 /**
- * Project Name : generator<br>
+ * Project Name : Generator<br>
  * File Name : ClassCreatorDefinitionManager.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/05/16<br>
