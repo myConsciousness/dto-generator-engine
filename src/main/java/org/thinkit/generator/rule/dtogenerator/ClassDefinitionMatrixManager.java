@@ -20,6 +20,7 @@ import org.thinkit.generator.rule.Sheet;
 
 import com.google.common.flogger.FluentLogger;
 
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -43,6 +44,7 @@ public final class ClassDefinitionMatrixManager extends AbstractRule {
     /**
      * ファイルパス
      */
+    @Getter(AccessLevel.PRIVATE)
     private String filePath = "";
 
     /**
@@ -92,7 +94,7 @@ public final class ClassDefinitionMatrixManager extends AbstractRule {
     public boolean execute() {
         logger.atInfo().log("START");
 
-        final ExcelHandler excelHandler = new ExcelHandler.Builder().fromFile(this.filePath).build();
+        final ExcelHandler excelHandler = new ExcelHandler.Builder().fromFile(this.getFilePath()).build();
         final ExcelHandler.SheetHandler sheetHandler = excelHandler.sheet(SheetName.定義書.name());
 
         final ClassCreatorDefinitionManager classCreatorDefinitionManager = new ClassCreatorDefinitionManager(
