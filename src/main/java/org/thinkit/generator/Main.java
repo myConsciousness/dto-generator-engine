@@ -48,7 +48,7 @@ public final class Main {
         logger.atInfo().log("START");
 
         if (args.length < 2) {
-            logger.atSevere().log("It is necessary to pass command line arguments in order to execute the process.");
+            logger.atSevere().log("Necessary to pass command line arguments in order to execute the process.");
             throw new IllegalArgumentException(String.format(
                     "wrong parameter was given. 2 parameter was expected but %s parameters were given.", args.length));
         }
@@ -67,10 +67,10 @@ public final class Main {
         logger.atInfo().log("The file path passed as command line argument = (%s)", filePath);
         logger.atInfo().log("The generator division passed as command line argument = (%s)", generatorDivision);
 
-        final Generator generator = new GeneratorFactory(filePath).create(generatorDivision);
+        final Generator generator = GeneratorFactory.getInstance().create(generatorDivision, filePath);
 
         if (!generator.execute()) {
-            logger.atSevere().log("An unexpected error has occurred. Please confirm the information you have entered.");
+            logger.atSevere().log("An unexpected error has occurred.");
             return;
         }
 

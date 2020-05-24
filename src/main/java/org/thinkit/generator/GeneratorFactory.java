@@ -12,14 +12,8 @@
 
 package org.thinkit.generator;
 
-import java.util.Objects;
-
 import org.thinkit.generator.catalog.GeneratorDivision;
 import org.thinkit.generator.dtogenerator.DtoGenerator;
-
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NonNull;
 
 /**
  * 各業務に応じた生成器を生成する抽象生成器ファクトリクラスの実装クラスです。
@@ -31,36 +25,32 @@ import lombok.NonNull;
 public class GeneratorFactory extends AbstractGeneratorFactory {
 
     /**
-     * ファイルパス
+     * シングルトンインスタンス
      */
-    @NonNull
-    @Getter(AccessLevel.PRIVATE)
-    private String filePath = "";
+    private static final AbstractGeneratorFactory INSTANCE = new GeneratorFactory();
 
     /**
      * デフォルトコンストラクタ
      */
-    @SuppressWarnings("unused")
     private GeneratorFactory() {
     }
 
     /**
-     * コンストラクタ
+     * 生成器ファクトリクラスのシングルトンインスタンスを返却します。
      * 
-     * @param filePath ファイルパス
+     * @return 生成器ファクトリクラスのシングルトンインスタンス
      */
-    protected GeneratorFactory(final String filePath) {
-        this.filePath = filePath;
+    protected static AbstractGeneratorFactory getInstance() {
+        return INSTANCE;
     }
 
     @Override
-    protected Generator createGenerator(GeneratorDivision generatorDivision) {
-        Objects.requireNonNull(generatorDivision, "GeneratorDivision must not be null.");
+    protected Generator createGenerator(GeneratorDivision generatorDivision, String filePath) {
 
         Generator generator = null;
 
         if (generatorDivision == GeneratorDivision.DTO_DEFINITOON) {
-            generator = new DtoGenerator(this.getFilePath());
+            generator = new DtoGenerator(filePath);
         }
 
         return generator;
