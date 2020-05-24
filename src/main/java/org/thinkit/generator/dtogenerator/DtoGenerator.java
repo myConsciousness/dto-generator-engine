@@ -13,7 +13,7 @@
 package org.thinkit.generator.dtogenerator;
 
 import org.thinkit.generator.AbstractGenerator;
-import org.thinkit.generator.rule.dtogenerator.ClassDefinitionFormatter;
+import org.thinkit.generator.rule.dtogenerator.ClassDefinitionMatrixFormatter;
 import org.thinkit.generator.rule.dtogenerator.ClassDefinitionMatrixManager;
 
 import com.google.common.flogger.FluentLogger;
@@ -53,10 +53,10 @@ public final class DtoGenerator extends AbstractGenerator {
             return false;
         }
 
-        final ClassDefinitionFormatter classDefinitionFormatter = new ClassDefinitionFormatter(
+        final ClassDefinitionMatrixFormatter classDefinitionMatrixFormatter = new ClassDefinitionMatrixFormatter(
                 classDefinitionMatrixManager.getClassDefinitionMatrix());
 
-        if (!classDefinitionFormatter.execute()) {
+        if (!classDefinitionMatrixFormatter.execute()) {
             logger.atSevere().log("クラス定義情報の整形処理が異常終了しました。");
             return false;
         }
