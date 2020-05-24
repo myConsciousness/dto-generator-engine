@@ -1,8 +1,8 @@
 /**
  * Project Name : Generator<br>
- * File Name : ClassCreatorDefinitionManager.java<br>
+ * File Name : ClassDefinitionManager.java<br>
  * Encoding : UTF-8<br>
- * Creation Date : 2020/05/16<br>
+ * Creation Date : 2020/05/24<br>
  * <p>
  * Copyright © 2020 Kato Shinya. All rights reserved.
  * <p>
@@ -12,6 +12,7 @@
 
 package org.thinkit.generator.rule.dtogenerator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -34,6 +35,8 @@ import com.google.common.flogger.FluentLogger;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.NonNull;
 
 /**
  * Excelに記述された定義書シートからクラス定義情報を抽出する処理を行うルールです。
@@ -185,9 +188,10 @@ public class ClassDefinitionManager extends AbstractRule {
         logger.atInfo().log("マトリクスリスト = (%s)", matrixList);
 
         final List<ClassDefinition> classDefinitionList = new ArrayList<>();
-        this.getClassDefinitionRecursively(matrixList, contents, classDefinitionList, 0, 1);
-        logger.atInfo().log("クラス定義情報群 = (%s)", classDefinitionList);
+        this.craeteClassDefinitionRecursively(
+                RecursiveRequiredParameters.of(matrixList, contents, classDefinitionList, 0, 1));
 
+        logger.atInfo().log("クラス定義情報群 = (%s)", classDefinitionList);
         logger.atInfo().log("END");
         return classDefinitionList;
     }
@@ -206,17 +210,22 @@ public class ClassDefinitionManager extends AbstractRule {
     }
 
     /**
-     * 引数として指定されたマトリクスリストから再帰的にクラス定義情報群を生成します。 再帰処理は各レコードが子クラスを持っている場合に実行されます。
+     * 引数として指定されたマトリクスリストから再帰的にクラス定義情報群を生成します。<br>
+     * 再帰処理は各レコードが子クラスを持っている場合に実行されます。
      *
-     * @param matrixList          マトリクスリスト
-     * @param content             コンテンツ
-     * @param classDefinitionList クラス定義情報群
-     * @param startIndex          開始インデックス
-     * @param baseItemLayer       基準項目層
+     * @param recursiveRequiredParameters 再帰処理時に必須となる情報を格納したデータクラス
      * @return 子クラスを生成する際に使用したレコード数
+     * @see RecursiveRequiredParameters
      */
-    private int getClassDefinitionRecursively(List<Map<String, String>> matrixList, List<Map<String, String>> content,
-            List<ClassDefinition> classDefinitionList, int startIndex, int baseItemLayer) {
+    private int craeteClassDefinitionRecursively(final RecursiveRequiredParameters recursiveRequiredParameters) {
+        logger.atInfo().log("START");
+
+        final List<Map<String, String>> matrixList = recursiveRequiredParameters.getMatrixList();
+        final List<Map<String, String>> contents = recursiveRequiredParameters.getContents();
+        final List<ClassDefinition> classDefinitionList = recursiveRequiredParameters.getClassDefinitionList();
+        final int startIndex = recursiveRequiredParameters.getStartIndex();
+        final int baseItemLayer = recursiveRequiredParameters.getBaseItemLayer();
+
         logger.atInfo().log("開始インデックス = (%s)", startIndex);
         logger.atInfo().log("基準項目層 = (%s)", baseItemLayer);
 
@@ -227,7 +236,7 @@ public class ClassDefinitionManager extends AbstractRule {
         for (int i = startIndex, size = matrixList.size(); i < size; i++) {
             final Map<String, String> record = matrixList.get(i);
 
-            final String itemNameLogicalDelete = this.getCellItemName(content, DtoCellItem.LOGICAL_DELETE);
+            final String itemNameLogicalDelete = this.getCellItemName(contents, DtoCellItem.LOGICAL_DELETE);
             final boolean logicalDelete = this.convertStringToBoolean(record.get(itemNameLogicalDelete));
 
             if (logicalDelete) {
@@ -237,7 +246,7 @@ public class ClassDefinitionManager extends AbstractRule {
                 continue;
             }
 
-            final String itemNameLayer = this.getCellItemName(content, DtoCellItem.LAYER);
+            final String itemNameLayer = this.getCellItemName(contents, DtoCellItem.LAYER);
             final int layer = Integer.parseInt(record.get(itemNameLayer));
             logger.atInfo().log("レコードから取得した項目層 = (%s)", layer);
 
@@ -254,23 +263,23 @@ public class ClassDefinitionManager extends AbstractRule {
                 parentClassDefinition.setClassItemDefinitionList(classItemDefinitionList);
                 classDefinitionList.add(parentClassDefinition);
 
-                this.createClassDefinition(content, record, parentClassDefinition);
+                this.createClassDefinition(contents, record, parentClassDefinition);
             } else {
                 if (layer > baseItemLayer) {
                     logger.atInfo().log("子クラス情報を生成するため再帰処理を開始します。");
 
                     List<ClassDefinition> childClassDefinitionList = new ArrayList<>();
-                    final int skipNumber = this.getClassDefinitionRecursively(matrixList, content,
-                            childClassDefinitionList, i, baseItemLayer + 2);
+                    final int skipCounter = this.craeteClassDefinitionRecursively(RecursiveRequiredParameters
+                            .of(matrixList, contents, childClassDefinitionList, i, baseItemLayer + 2));
 
                     classItemDefinitionList.get(classItemDefinitionList.size() - 1)
                             .setChildClassDefinitionList(childClassDefinitionList);
 
                     logger.atInfo().log("レコード番号 = (%s)", i);
-                    logger.atInfo().log("スキップ数 = (%s)", skipNumber);
-                    i += skipNumber - 1;
+                    logger.atInfo().log("スキップ数 = (%s)", skipCounter);
+                    i += skipCounter - 1;
                 } else {
-                    this.createClassItemDefinition(content, record, classItemDefinitionList);
+                    this.createClassItemDefinition(contents, record, classItemDefinitionList);
                 }
             }
 
@@ -338,10 +347,13 @@ public class ClassDefinitionManager extends AbstractRule {
     }
 
     /**
-     * 文字列を真偽値に変換します。 真偽値へ変換する際のルールは下記の通りです。 当該メソッドでは文字列に対するトリム加工は行いません。 1,
-     * 文字列がnullの場合: {@code false}<br>
+     * 文字列を真偽値に変換します。 <br>
+     * 真偽値へ変換する際のルールは下記の通りです。<br>
+     * 当該メソッドでは文字列に対するトリム加工は行いません。<br>
+     * <br>
+     * 1, 文字列がnullの場合: {@code false}<br>
      * 2, 文字列が空文字列の場合: {@code false}<br>
-     * 3, 上記以外の場合: {@code true}
+     * 3, 上記以外の場合: {@code true}<br>
      *
      * @param sequence 変換対象の文字列
      * @return 文字列がnullまたは空文字列の場合は{@code false}、それ以外は{@true}
@@ -353,23 +365,19 @@ public class ClassDefinitionManager extends AbstractRule {
     /**
      * コンテンツリストから引数として指定されたセル項目オブジェクトのコード値と紐づくセル項目名を取得し返却します。
      *
-     * @param content      コンテンツリスト
-     * @param cellItemName 取得対象のセル項目コードが定義されたオブジェクト
+     * @param content     コンテンツリスト
+     * @param dtoCellItem 取得対象のセル項目コードが定義されたオブジェクト
      * @return 引数として指定されたセル項目コードに紐づくセル項目名
      * @exception IllegalArgumentException コンテンツリストが空の場合、またはセル項目オブジェクトがnullの場合
      */
-    private String getCellItemName(List<Map<String, String>> content, DtoCellItem cellItemName) {
+    private String getCellItemName(List<Map<String, String>> content, DtoCellItem dtoCellItem) {
         logger.atInfo().log("START");
 
-        if (content.isEmpty()) {
-            throw new IllegalArgumentException("wrong parameter was given. Content list is required.");
-        }
+        Objects.requireNonNull(content, "Content must not be null.");
+        Objects.requireNonNull(dtoCellItem, "DtoCellItem must not be null.");
+        assert !content.isEmpty();
 
-        if (cellItemName == null) {
-            throw new IllegalArgumentException("wrong parameter was given. Enum object is null.");
-        }
-
-        final int cellItemCode = cellItemName.getCode();
+        final int cellItemCode = dtoCellItem.getCode();
         logger.atInfo().log("引数として渡されたセル項目コード = (%s)", cellItemCode);
 
         for (Map<String, String> elements : content) {
@@ -411,5 +419,52 @@ public class ClassDefinitionManager extends AbstractRule {
         logger.atInfo().log("指定されたコンテンツ項目を取得できませんでした。");
         logger.atInfo().log("END");
         return "";
+    }
+
+    /**
+     * クラス定義情報を取得する際の再帰処理で必要となるパラメータ情報を管理するデータクラスです。
+     *
+     * @author Kato Shinya
+     * @since 1.0
+     * @version 1.0
+     */
+    @Getter
+    @ToString
+    @EqualsAndHashCode(callSuper = false)
+    @RequiredArgsConstructor(staticName = "of")
+    private static class RecursiveRequiredParameters implements Serializable {
+
+        /**
+         * シリアルバージョンUID
+         */
+        private static final long serialVersionUID = 3989477460378492335L;
+
+        /**
+         * Excelの定義書シートから取得したマトリクスの生データリスト
+         */
+        @NonNull
+        private final List<Map<String, String>> matrixList;
+
+        /**
+         * クラス項目のコンテンツ情報が格納されたマップ
+         */
+        @NonNull
+        private final List<Map<String, String>> contents;
+
+        /**
+         * クラス定義情報リスト
+         */
+        @NonNull
+        private final List<ClassDefinition> classDefinitionList;
+
+        /**
+         * 探索開始インデックス
+         */
+        private final int startIndex;
+
+        /**
+         * 基準項目層
+         */
+        private final int baseItemLayer;
     }
 }
