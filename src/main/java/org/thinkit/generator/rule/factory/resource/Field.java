@@ -2,7 +2,7 @@
  * Project Name : Generator<br>
  * File Name : Field.java<br>
  * Encoding : UTF-8<br>
- * Creation Date : 2020/05/25<br>
+ * Creation Date : 2020/05/26<br>
  * <p>
  * Copyright © 2020 Kato Shinya. All rights reserved.
  * <p>
@@ -12,15 +12,19 @@
 
 package org.thinkit.generator.rule.factory.resource;
 
-import lombok.Getter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
+import lombok.Getter;
 
 /**
- * プログラムリソースにおけるフィールドを抽象化した抽象クラスです。<br>
- * この抽象クラスではフィールド定義に必要な情報を保持します。
+ * プログラムリソースにおけるフィールドを抽象化した抽象クラスです<br>
+ * この抽象クラスではフィールドを生成するために必要な情報を保持します。
  * 
  * @author Kato Shinya
  * @since 1.0
@@ -32,53 +36,46 @@ import lombok.ToString;
 public abstract class Field extends Component {
 
     /**
-     * データ型
+     * フィールドの説明
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String dataType = "";
+    private List<Description> descriptions = new ArrayList<>(0);
 
     /**
-     * 変数名
+     * フィールドの定義
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String variableName = "";
-
-    /**
-     * 初期値
-     */
-    @NonNull
-    @Getter(AccessLevel.PROTECTED)
-    private String initialValue = "";
-
-    /**
-     * 説明
-     */
-    @NonNull
-    @Getter(AccessLevel.PROTECTED)
-    private String description = "";
+    private List<FieldDefinition> fieldDefinitions = new ArrayList<>(0);
 
     /**
      * デフォルトコンストラクタ
      */
-    @SuppressWarnings("unused")
-    private Field() {
+    public Field() {
     }
 
     /**
-     * コンストラクタ
+     * フィールドの説明を追加します。<br>
+     * 引数として{@code null}が渡された場合は実行時に必ず失敗します。
      * 
-     * @param dataType     データ型
-     * @param variableName 変数名
-     * @param initialValue 初期値
-     * @param description  説明
+     * @param description フィールドの説明
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    protected Field(String dataType, String variableName, String initialValue, String description) {
-        this.dataType = dataType;
-        this.variableName = variableName;
-        this.initialValue = initialValue;
-        this.description = description;
+    public void addDescription(Description description) {
+        Objects.requireNonNull(description);
+        this.descriptions.add(description);
+    }
+
+    /**
+     * フィールドの定義を追加します。<br>
+     * 引数として{@code null}が渡された場合は実行時に必ず失敗します。
+     * 
+     * @param fieldDefinition フィールドの定義
+     * @exception NullPointerException 引数として{@code null}が渡された場合
+     */
+    public void addFieldDefinition(FieldDefinition fieldDefinition) {
+        Objects.requireNonNull(fieldDefinition);
+        this.fieldDefinitions.add(fieldDefinition);
     }
 }
