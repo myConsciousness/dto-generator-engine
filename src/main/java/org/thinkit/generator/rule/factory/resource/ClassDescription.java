@@ -31,7 +31,7 @@ import lombok.ToString;
  * @see Description
  */
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 public abstract class ClassDescription extends Description {
 
     /**
