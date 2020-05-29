@@ -36,7 +36,7 @@ import java.util.ArrayList;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public abstract class Function extends Component {
+public abstract class Function implements Component {
 
     /**
      * 関数の説明
@@ -83,7 +83,7 @@ public abstract class Function extends Component {
      * @param parameter 関数の引数
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public void addParameter(Parameter parameter) {
+    public void add(Parameter parameter) {
         Objects.requireNonNull(parameter);
         this.parameters.add(parameter);
     }
@@ -95,7 +95,7 @@ public abstract class Function extends Component {
      * @param process 関数の処理
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public void addProcess(Process process) {
+    public void add(Process process) {
         Objects.requireNonNull(process);
         this.processes.add(process);
     }

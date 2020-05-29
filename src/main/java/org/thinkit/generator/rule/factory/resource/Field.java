@@ -33,7 +33,7 @@ import lombok.Getter;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public abstract class Field extends Component {
+public abstract class Field implements Component {
 
     /**
      * フィールドの説明
@@ -62,7 +62,7 @@ public abstract class Field extends Component {
      * @param description フィールドの説明
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public void addDescription(Description description) {
+    public void add(Description description) {
         Objects.requireNonNull(description);
         this.descriptions.add(description);
     }
@@ -74,7 +74,7 @@ public abstract class Field extends Component {
      * @param fieldDefinition フィールドの定義
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public void addFieldDefinition(FieldDefinition fieldDefinition) {
+    public void add(FieldDefinition fieldDefinition) {
         Objects.requireNonNull(fieldDefinition);
         this.fieldDefinitions.add(fieldDefinition);
     }

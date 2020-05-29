@@ -29,7 +29,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public abstract class FieldDefinition extends Component {
+public abstract class FieldDefinition implements Component {
 
     /**
      * データ型

@@ -31,7 +31,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public abstract class Description extends Component {
+public abstract class Description implements Component {
 
     /**
      * 説明

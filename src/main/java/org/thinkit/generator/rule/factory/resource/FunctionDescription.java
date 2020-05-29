@@ -43,14 +43,7 @@ public abstract class FunctionDescription extends Description {
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private List<String> parameterVariableNames = new ArrayList<>(0);
-
-    /**
-     * 引数の説明
-     */
-    @NonNull
-    @Getter(AccessLevel.PROTECTED)
-    private List<String> parameterDescriptions = new ArrayList<>(0);
+    private List<FunctionParamAnnotation> functionParamAnnotations = new ArrayList<>(0);
 
     /**
      * コンストラクタ
@@ -63,26 +56,14 @@ public abstract class FunctionDescription extends Description {
     }
 
     /**
-     * 引数の変数名を追加します。<br>
+     * 引数のアノテーション情報を追加します。<br>
      * 引数として{@code null}が渡された場合は実行時に必ず失敗します。
      * 
-     * @param parameterVariableName 引数の変数名
+     * @param parameterVariableName 引数のアノテーション情報
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public void addParameterVariableName(String parameterVariableName) {
-        Objects.requireNonNull(parameterVariableName);
-        this.parameterVariableNames.add(parameterVariableName);
-    }
-
-    /**
-     * 引数の説明を追加します。<br>
-     * 引数として{@code null}が渡された場合は実行時に必ず失敗します。
-     * 
-     * @param parameterDescription 引数の説明
-     * @exception NullPointerException 引数として{@code null}が渡された場合
-     */
-    public void addParameterDescriptions(String parameterDescription) {
-        Objects.requireNonNull(parameterDescription);
-        this.parameterDescriptions.add(parameterDescription);
+    public void add(FunctionParamAnnotation functionParamAnnotation) {
+        Objects.requireNonNull(functionParamAnnotation);
+        this.functionParamAnnotations.add(functionParamAnnotation);
     }
 }
