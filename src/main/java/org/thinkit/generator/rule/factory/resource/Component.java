@@ -12,6 +12,10 @@
 
 package org.thinkit.generator.rule.factory.resource;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 /**
  * リソースの構成要素を抽象化したインターフェースです。<br>
  * この抽象クラスよりもさらに細かい単位の部品を作成する場合は、<br>
@@ -27,6 +31,34 @@ package org.thinkit.generator.rule.factory.resource;
  * @version 1.0
  */
 public interface Component {
+
+    /**
+     * インデント定数
+     */
+    @RequiredArgsConstructor
+    public enum Indentation {
+
+        /**
+         * 半角スペース
+         */
+        SPACE(" "),
+
+        /**
+         * 水平タブ
+         */
+        TAB("¥t"),
+
+        /**
+         * 改行
+         */
+        RETURN("¥r¥n");
+
+        /**
+         * インデント文字列
+         */
+        @Getter
+        private final String character;
+    }
 
     /**
      * リソースを生成し文字列表現として返却する処理を定義するメソッドです。<br>
