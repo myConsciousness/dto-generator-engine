@@ -12,7 +12,6 @@
 
 package org.thinkit.generator.rule.factory.resource;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
