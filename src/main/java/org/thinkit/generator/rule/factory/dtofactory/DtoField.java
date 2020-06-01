@@ -47,7 +47,7 @@ public class DtoField extends Field {
             // TODO: 例外処理
         }
 
-        final String indentReturn = Indentation.RETURN.getCharacter();
+        final String indentReturn = Indentation.getReturn();
         final StringBuilder fields = new StringBuilder();
 
         for (int i = 0; i < descriptionsSize; i++) {

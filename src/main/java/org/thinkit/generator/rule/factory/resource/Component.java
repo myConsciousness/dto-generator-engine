@@ -12,6 +12,7 @@
 
 package org.thinkit.generator.rule.factory.resource;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -55,8 +56,72 @@ public interface Component {
         /**
          * インデント文字列
          */
-        @Getter
+        @Getter(AccessLevel.PRIVATE)
         private final String character;
+
+        /**
+         * 半角空白を返却します。
+         * 
+         * @return 半角空白
+         * @see #SPACE
+         */
+        public static String getSpace() {
+            return SPACE.getCharacter();
+        }
+
+        /**
+         * タブを返却します。
+         * 
+         * @return タブ
+         * @see #TAB
+         */
+        public static String getTab() {
+            return TAB.getCharacter();
+        }
+
+        /**
+         * 改行を返却します。
+         * 
+         * @return 改行
+         * @see #RETURN
+         */
+        public static String getReturn() {
+            return RETURN.getCharacter();
+        }
+
+        /**
+         * インデント用の半角空白を返却します。<br>
+         * このメソッドからは必ず半角空白4個を結合したインデント用文字列が返却されます。<br>
+         * 任意の個数のインデント用文字列を取得したい場合は{@link #getIndentSpaces(int)}を使用してください。
+         * 
+         * @return 半角空白4個のインデント用文字列
+         * @see #getIndentSpaces(int)
+         */
+        public static String getIndentSpaces() {
+            return getIndentSpaces(4);
+        }
+
+        /**
+         * 引数として指定された個数分の半角空白を返却します。<br>
+         * このメソッドからは引数として指定された任意の個数分のインデント用文字列が返却されます。<br>
+         * 半角空白4個のインデント用文字列を取得したい場合はこのメソッドを使用しても問題はありませんが、<br>
+         * 専用のメソッドを用意しているので{@link #getIndentSpaces()}を使用するようにしてください。
+         * 
+         * @param number インデント用文字列を生成する際に使用する任意の空白数
+         * @return 指定された空白数に対応したインデント用文字列
+         * @see #getIndentSpaces()
+         */
+        public static String getIndentSpaces(int number) {
+
+            final StringBuilder indentSpaces = new StringBuilder(number);
+            final String space = getSpace();
+
+            for (int i = 0; i < number; i++) {
+                indentSpaces.append(space);
+            }
+
+            return indentSpaces.toString();
+        }
     }
 
     /**
