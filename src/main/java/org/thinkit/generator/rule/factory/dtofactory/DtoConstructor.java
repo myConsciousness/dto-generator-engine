@@ -49,6 +49,26 @@ public class DtoConstructor extends Function {
     private static final String IDENTIFIER_PUBLIC = "public";
 
     /**
+     * 左括弧
+     */
+    private static final String PARENTHESIS_START = "(";
+
+    /**
+     * 右括弧
+     */
+    private static final String PARENTHESIS_END = ")";
+
+    /**
+     * 右ブレース
+     */
+    private static final String BRACE_START = "{";
+
+    /**
+     * 左ブレース
+     */
+    private static final String BRACE_END = "}";
+
+    /**
      * 処理のインデント数
      */
     private static final int PROCESS_INDENT_COUNT = 8;
@@ -76,10 +96,10 @@ public class DtoConstructor extends Function {
         constructor.append(functionDescription.createResource()).append(indentReturn);
 
         constructor.append(indentSpaces).append(IDENTIFIER_PUBLIC).append(indentSpace).append(super.getFunctionName());
-        constructor.append("(").append(this.toParameter()).append(")").append(indentSpace).append("{")
-                .append(indentReturn);
+        constructor.append(PARENTHESIS_START).append(this.toParameter()).append(PARENTHESIS_END).append(indentSpace)
+                .append(BRACE_START).append(indentReturn);
         constructor.append(this.toProcess());
-        constructor.append("}");
+        constructor.append(BRACE_END);
 
         return constructor.toString();
     }
