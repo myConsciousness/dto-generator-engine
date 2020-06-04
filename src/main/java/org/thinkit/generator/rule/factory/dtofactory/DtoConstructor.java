@@ -44,9 +44,9 @@ public class DtoConstructor extends Function {
     private static final String COMMMA = ",";
 
     /**
-     * アクセス修飾子
+     * publicのアクセス修飾子
      */
-    private static final String IDENTIFIER = "public";
+    private static final String IDENTIFIER_PUBLIC = "public";
 
     /**
      * 処理のインデント数
@@ -75,7 +75,7 @@ public class DtoConstructor extends Function {
 
         constructor.append(functionDescription.createResource()).append(indentReturn);
 
-        constructor.append(indentSpaces).append(IDENTIFIER).append(indentSpace).append(super.getFunctionName());
+        constructor.append(indentSpaces).append(IDENTIFIER_PUBLIC).append(indentSpace).append(super.getFunctionName());
         constructor.append("(").append(this.toParameter()).append(")").append(indentSpace).append("{")
                 .append(indentReturn);
         constructor.append(this.toProcess());
