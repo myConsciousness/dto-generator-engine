@@ -12,6 +12,7 @@
 
 package org.thinkit.generator.rule.factory.dtofactory;
 
+import org.thinkit.generator.catalog.PrimitiveDataType;
 import org.thinkit.generator.rule.factory.resource.FieldDefinition;
 
 import lombok.EqualsAndHashCode;
@@ -31,6 +32,11 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(callSuper = false)
 public class DtoFieldDefinition extends FieldDefinition {
+
+    /**
+     * LombokのNullチェックアノテーション
+     */
+    private static final String LOMBOK_NON_NULL = "@NonNull";
 
     /**
      * アクセス修飾子
@@ -62,9 +68,16 @@ public class DtoFieldDefinition extends FieldDefinition {
     @Override
     public String createResource() {
         final StringBuilder field = new StringBuilder();
+        field.append(Indentation.getIndentSpaces());
+
+        final String dataType = super.getDataType();
+        if (PrimitiveDataType.isPrimitive(dataType)) {
+            field.append(LOMBOK_NON_NULL).append(Indentation.getReturn());
+        }
+
         final String indentSpace = Indentation.getSpace();
 
-        field.append(IDENTIFIER).append(indentSpace).append(super.getDataType()).append(indentSpace);
+        field.append(IDENTIFIER).append(indentSpace).append(dataType).append(indentSpace);
         field.append(super.getVariableName()).append(indentSpace);
         field.append(ASSIGNMENT_OPERATOR).append(indentSpace).append(super.getInitialValue()).append(SEMI_COLON);
 

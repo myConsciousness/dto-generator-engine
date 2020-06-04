@@ -18,8 +18,6 @@ import org.thinkit.generator.rule.factory.resource.Description;
 import org.thinkit.generator.rule.factory.resource.Field;
 import org.thinkit.generator.rule.factory.resource.FieldDefinition;
 
-import org.thinkit.common.exception.LogicException;
-
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -40,22 +38,15 @@ public class DtoField extends Field {
 
     @Override
     public String createResource() {
+        super.validate();
+
         final List<Description> descriptions = super.getDescriptions();
         final List<FieldDefinition> fieldDefinitions = super.getFieldDefinitions();
 
-        final int descriptionsSize = descriptions.size();
-        final int fieldDefinitionsSize = fieldDefinitions.size();
-
-        if (descriptionsSize != fieldDefinitionsSize) {
-            throw new LogicException("detected an inconsistency in the number of descriptions and field definitions."
-                    + String.format("%s descriptions but %s field definitions were setteled.", descriptionsSize,
-                            fieldDefinitionsSize));
-        }
-
-        final String indentReturn = Indentation.getReturn();
         final StringBuilder fields = new StringBuilder();
+        final String indentReturn = Indentation.getReturn();
 
-        for (int i = 0; i < descriptionsSize; i++) {
+        for (int i = 0; i < descriptions.size(); i++) {
             final StringBuilder field = new StringBuilder();
             final Description description = descriptions.get(i);
             final FieldDefinition fieldDefinition = fieldDefinitions.get(i);

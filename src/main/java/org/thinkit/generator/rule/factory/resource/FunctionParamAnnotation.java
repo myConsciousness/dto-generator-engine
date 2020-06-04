@@ -58,7 +58,7 @@ public abstract class FunctionParamAnnotation implements Component {
      * コンストラクタ
      * 
      * @param variableName 変数名
-     * @param description 説明
+     * @param description  説明
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
     public FunctionParamAnnotation(String variableName, String description) {

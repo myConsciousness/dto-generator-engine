@@ -22,6 +22,8 @@ import lombok.NonNull;
 import lombok.ToString;
 import lombok.Getter;
 
+import org.thinkit.common.exception.LogicException;
+
 /**
  * プログラムリソースにおけるフィールドを抽象化した抽象クラスです<br>
  * この抽象クラスではフィールドを生成するために必要な情報を保持します。
@@ -77,5 +79,22 @@ public abstract class Field implements Component {
     public void add(FieldDefinition fieldDefinition) {
         Objects.requireNonNull(fieldDefinition);
         this.fieldDefinitions.add(fieldDefinition);
+    }
+
+    /**
+     * 説明とフィール定義の整合性を確認します。<br>
+     * 設定された説明とフィールド定義の個数に不整合が検知された場合は実行時に必ず失敗します。
+     * 
+     * @throws LogicException 設定された説明とフィールド定義の個数に不整合が存在する場合
+     */
+    protected void validate() {
+        final int descriptionsSize = descriptions.size();
+        final int fieldDefinitionsSize = fieldDefinitions.size();
+
+        if (descriptionsSize != fieldDefinitionsSize) {
+            throw new LogicException("detected an inconsistency in the number of descriptions and field definitions."
+                    + String.format("%s descriptions but %s field definitions were setteled.", descriptionsSize,
+                            fieldDefinitionsSize));
+        }
     }
 }

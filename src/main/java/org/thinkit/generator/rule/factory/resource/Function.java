@@ -38,6 +38,10 @@ import java.util.ArrayList;
 @EqualsAndHashCode(callSuper = false)
 public abstract class Function implements Component {
 
+    @NonNull
+    @Getter(AccessLevel.PROTECTED)
+    private String functionName = "";
+
     /**
      * 関数の説明
      */
@@ -69,10 +73,12 @@ public abstract class Function implements Component {
     /**
      * コンストラクタ
      * 
+     * @param functionName        機能名
      * @param functionDescription 関数の説明
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public Function(FunctionDescription functionDescription) {
+    public Function(String functionName, FunctionDescription functionDescription) {
+        this.functionName = functionName;
         this.functionDescription = functionDescription;
     }
 
