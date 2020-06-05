@@ -14,6 +14,8 @@ package org.thinkit.generator.rule.factory.resource;
 
 import java.util.List;
 
+import java.util.ArrayList;
+
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -48,11 +50,16 @@ public abstract class Resource {
     private Field field = null;
 
     /**
-     * 関数リスト
+     * コンストラクタリスト
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private List<Function> functions = null;
+    private List<Constructor> constructors = new ArrayList<>(0);
+
+    /**
+     * メソッドリスト
+     */
+    @Getter(AccessLevel.PROTECTED)
+    private List<Method> methods = new ArrayList<>(0);
 
     /**
      * リソースを生成し文字列表現として返却する処理を定義するメソッドです。<br>
@@ -66,4 +73,22 @@ public abstract class Resource {
      * @return 各要素を管理する部品で生成されたJavaリソース
      */
     public abstract String makeResource();
+
+    /**
+     * コンストラクタ定義を追加します。
+     * 
+     * @param constructor コンストラクタ定義
+     */
+    public void add(Constructor constructor) {
+        this.constructors.add(constructor);
+    }
+
+    /**
+     * メソッド定義を追加します。
+     * 
+     * @param method メソッド定義
+     */
+    public void add(Method method) {
+        this.methods.add(method);
+    }
 }

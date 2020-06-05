@@ -20,7 +20,7 @@ import lombok.ToString;
 
 /**
  * プログラムリソースにおける処理を抽象化した抽象クラスです。<br>
- * この抽象クラスでは処定義に必要な情報を保持します。<br>
+ * この抽象クラスでは処理定義に必要な情報を保持します。<br>
  * この抽象クラスを継承する具象クラスは必ず{@link Component#createResource()}を実装してください。
  * 
  * @author Kato Shinya

@@ -23,7 +23,7 @@ import org.thinkit.common.catalog.Indentation;
 
 import org.thinkit.common.catalog.Brace;
 import org.thinkit.common.catalog.Delimiter;
-import org.thinkit.generator.rule.factory.resource.Function;
+import org.thinkit.generator.rule.factory.resource.Constructor;
 import org.thinkit.generator.rule.factory.resource.FunctionDescription;
 
 import org.thinkit.common.catalog.Identifier;
@@ -38,11 +38,11 @@ import org.thinkit.common.catalog.Parenthesis;
  * @version 1.0
  * @see Component
  * @see Component#createResource()
- * @see Function
+ * @see Constructor
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class DtoConstructor extends Function {
+public class DtoConstructor extends Constructor {
 
     /**
      * 処理のインデント数
