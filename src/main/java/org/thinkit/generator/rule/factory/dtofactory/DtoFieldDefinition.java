@@ -12,8 +12,11 @@
 
 package org.thinkit.generator.rule.factory.dtofactory;
 
-import org.thinkit.generator.catalog.PrimitiveDataType;
 import org.thinkit.generator.rule.factory.resource.FieldDefinition;
+import org.thinkit.common.catalog.PrimitiveDataType;
+import org.thinkit.common.catalog.Delimiter;
+import org.thinkit.common.catalog.Identifier;
+import org.thinkit.common.catalog.Indentation;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -39,19 +42,9 @@ public class DtoFieldDefinition extends FieldDefinition {
     private static final String LOMBOK_NON_NULL = "@NonNull";
 
     /**
-     * アクセス修飾子
-     */
-    private static final String IDENTIFIER = "private";
-
-    /**
      * 代入演算子
      */
     private static final String ASSIGNMENT_OPERATOR = "=";
-
-    /**
-     * セミコロン
-     */
-    private static final String SEMI_COLON = ";";
 
     /**
      * コンストラクタ
@@ -72,14 +65,14 @@ public class DtoFieldDefinition extends FieldDefinition {
 
         final String dataType = super.getDataType();
         if (PrimitiveDataType.isPrimitive(dataType)) {
-            field.append(LOMBOK_NON_NULL).append(Indentation.getReturn());
+            field.append(LOMBOK_NON_NULL).append(Indentation.returnCode());
         }
 
-        final String indentSpace = Indentation.getSpace();
+        final String space = Indentation.space();
 
-        field.append(IDENTIFIER).append(indentSpace).append(dataType).append(indentSpace);
-        field.append(super.getVariableName()).append(indentSpace);
-        field.append(ASSIGNMENT_OPERATOR).append(indentSpace).append(super.getInitialValue()).append(SEMI_COLON);
+        field.append(Identifier.PRIVATE.toIdentifier()).append(space).append(dataType).append(space);
+        field.append(super.getVariableName()).append(space);
+        field.append(ASSIGNMENT_OPERATOR).append(space).append(super.getInitialValue()).append(Delimiter.semicolon());
 
         return field.toString();
     }

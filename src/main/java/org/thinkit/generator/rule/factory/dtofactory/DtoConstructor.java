@@ -9,7 +9,6 @@
  * This source code or any portion thereof must not be<br>
  * reproduced or used in any manner whatsoever.
  */
-
 package org.thinkit.generator.rule.factory.dtofactory;
 
 import java.util.List;
@@ -20,8 +19,15 @@ import org.thinkit.generator.rule.factory.resource.Process;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import org.thinkit.common.catalog.Indentation;
+
+import org.thinkit.common.catalog.Brace;
+import org.thinkit.common.catalog.Delimiter;
 import org.thinkit.generator.rule.factory.resource.Function;
 import org.thinkit.generator.rule.factory.resource.FunctionDescription;
+
+import org.thinkit.common.catalog.Identifier;
+import org.thinkit.common.catalog.Parenthesis;
 
 /**
  * DTOクラスのコンストラクタを生成する具象クラスです。<br>
@@ -37,36 +43,6 @@ import org.thinkit.generator.rule.factory.resource.FunctionDescription;
 @ToString
 @EqualsAndHashCode(callSuper = false)
 public class DtoConstructor extends Function {
-
-    /**
-     * カンマ
-     */
-    private static final String COMMMA = ",";
-
-    /**
-     * publicのアクセス修飾子
-     */
-    private static final String IDENTIFIER_PUBLIC = "public";
-
-    /**
-     * 左括弧
-     */
-    private static final String PARENTHESIS_START = "(";
-
-    /**
-     * 右括弧
-     */
-    private static final String PARENTHESIS_END = ")";
-
-    /**
-     * 右ブレース
-     */
-    private static final String BRACE_START = "{";
-
-    /**
-     * 左ブレース
-     */
-    private static final String BRACE_END = "}";
 
     /**
      * 処理のインデント数
@@ -86,20 +62,19 @@ public class DtoConstructor extends Function {
 
     @Override
     public String createResource() {
-        final FunctionDescription functionDescription = super.getFunctionDescription();
+        final String indentSpaces = Indentation.getIndentSpaces();
+        final String space = Indentation.space();
+        final String returnCode = Indentation.returnCode();
 
         final StringBuilder constructor = new StringBuilder();
-        final String indentSpaces = Indentation.getIndentSpaces();
-        final String indentSpace = Indentation.getSpace();
-        final String indentReturn = Indentation.getReturn();
 
-        constructor.append(functionDescription.createResource()).append(indentReturn);
-
-        constructor.append(indentSpaces).append(IDENTIFIER_PUBLIC).append(indentSpace).append(super.getFunctionName());
-        constructor.append(PARENTHESIS_START).append(this.toParameter()).append(PARENTHESIS_END).append(indentSpace)
-                .append(BRACE_START).append(indentReturn);
+        constructor.append(super.getFunctionDescription().createResource()).append(returnCode);
+        constructor.append(indentSpaces).append(Identifier.PUBLIC.toIdentifier()).append(space)
+                .append(super.getFunctionName());
+        constructor.append(Parenthesis.start()).append(this.toParameter()).append(Parenthesis.end()).append(space)
+                .append(Brace.start()).append(returnCode);
         constructor.append(this.toProcess());
-        constructor.append(BRACE_END);
+        constructor.append(Brace.end());
 
         return constructor.toString();
     }
@@ -118,8 +93,10 @@ public class DtoConstructor extends Function {
         }
 
         final StringBuilder sb = new StringBuilder();
+        final String space = Indentation.space();
+
         for (Parameter parameter : parameters) {
-            sb.append(parameter.createResource()).append(COMMMA).append(Indentation.getSpace());
+            sb.append(parameter.createResource()).append(Delimiter.commma()).append(space);
         }
 
         sb.setLength(sb.length() - 1);
@@ -141,13 +118,13 @@ public class DtoConstructor extends Function {
 
         final StringBuilder sb = new StringBuilder();
         final String indentSpaces = Indentation.getIndentSpaces(PROCESS_INDENT_COUNT);
-        final String indentReturn = Indentation.getReturn();
+        final String returnCode = Indentation.returnCode();
 
         for (Process process : processes) {
-            sb.append(indentSpaces).append(process.createResource()).append(indentReturn);
+            sb.append(indentSpaces).append(process.createResource()).append(returnCode);
         }
 
-        sb.setLength(sb.length() - indentReturn.length());
+        sb.setLength(sb.length() - returnCode.length());
         return sb.toString();
     }
 }

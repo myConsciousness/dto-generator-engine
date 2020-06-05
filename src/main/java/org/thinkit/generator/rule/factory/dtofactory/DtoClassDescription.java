@@ -13,6 +13,7 @@
 package org.thinkit.generator.rule.factory.dtofactory;
 
 import org.thinkit.generator.rule.factory.resource.ClassDescription;
+import org.thinkit.common.catalog.Indentation;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -66,19 +67,19 @@ public class DtoClassDescription extends ClassDescription {
 
     @Override
     public String createResource() {
-        final StringBuilder classDescription = new StringBuilder();
-        final String indentSpace = Indentation.getSpace();
-        final String indentReturn = Indentation.getReturn();
+        final String space = Indentation.space();
+        final String returnCode = Indentation.returnCode();
 
-        classDescription.append("/**").append(indentReturn);
-        classDescription.append(" * ").append(super.getDescription()).append(indentReturn);
-        classDescription.append(" *").append(indentReturn).append(indentReturn);
-        classDescription.append(" * ").append(ANNOTATION_AUTHOR).append(indentSpace).append(super.getCreator())
-                .append(indentReturn);
-        classDescription.append(" * ").append(ANNOTATION_SINCE).append(indentSpace).append(INITIAL_VERSION)
-                .append(indentReturn);
-        classDescription.append(" * ").append(ANNOTATION_VERSION).append(indentSpace).append(super.getVersion())
-                .append(indentReturn);
+        final StringBuilder classDescription = new StringBuilder();
+        classDescription.append("/**").append(returnCode);
+        classDescription.append(" * ").append(super.getDescription()).append(returnCode);
+        classDescription.append(" *").append(returnCode).append(returnCode);
+        classDescription.append(" * ").append(ANNOTATION_AUTHOR).append(space).append(super.getCreator())
+                .append(returnCode);
+        classDescription.append(" * ").append(ANNOTATION_SINCE).append(space).append(INITIAL_VERSION)
+                .append(returnCode);
+        classDescription.append(" * ").append(ANNOTATION_VERSION).append(space).append(super.getVersion())
+                .append(returnCode);
         classDescription.append(" */");
 
         return classDescription.toString();

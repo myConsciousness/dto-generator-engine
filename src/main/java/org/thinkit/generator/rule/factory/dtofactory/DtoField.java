@@ -17,6 +17,7 @@ import java.util.List;
 import org.thinkit.generator.rule.factory.resource.Description;
 import org.thinkit.generator.rule.factory.resource.Field;
 import org.thinkit.generator.rule.factory.resource.FieldDefinition;
+import org.thinkit.common.catalog.Indentation;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -44,15 +45,15 @@ public class DtoField extends Field {
         final List<FieldDefinition> fieldDefinitions = super.getFieldDefinitions();
 
         final StringBuilder fields = new StringBuilder();
-        final String indentReturn = Indentation.getReturn();
+        final String returnCode = Indentation.returnCode();
 
         for (int i = 0; i < descriptions.size(); i++) {
             final StringBuilder field = new StringBuilder();
             final Description description = descriptions.get(i);
             final FieldDefinition fieldDefinition = fieldDefinitions.get(i);
 
-            field.append(description.createResource()).append(indentReturn).append(fieldDefinition.createResource())
-                    .append(indentReturn).append(indentReturn);
+            field.append(description.createResource()).append(returnCode).append(fieldDefinition.createResource())
+                    .append(returnCode).append(returnCode);
 
             fields.append(field.toString());
         }
