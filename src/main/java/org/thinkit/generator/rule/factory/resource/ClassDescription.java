@@ -56,7 +56,7 @@ public abstract class ClassDescription extends Description {
      * @param version     クラスのバージョン
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public ClassDescription(String description, String creator, String version) {
+    protected ClassDescription(String description, String creator, String version) {
         super(description);
         this.creator = creator;
         this.version = version;

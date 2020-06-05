@@ -61,7 +61,7 @@ public abstract class Parameter implements Component {
      * @param variableName 変数名
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public Parameter(String dataType, String variableName) {
+    protected Parameter(String dataType, String variableName) {
         this.dataType = dataType;
         this.variableName = variableName;
     }

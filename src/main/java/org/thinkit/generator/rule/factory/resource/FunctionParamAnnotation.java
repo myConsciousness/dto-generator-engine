@@ -61,7 +61,7 @@ public abstract class FunctionParamAnnotation implements Component {
      * @param description  説明
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public FunctionParamAnnotation(String variableName, String description) {
+    protected FunctionParamAnnotation(String variableName, String description) {
         this.variableName = variableName;
         this.description = description;
     }

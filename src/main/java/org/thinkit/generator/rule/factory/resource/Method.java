@@ -37,7 +37,7 @@ public abstract class Method extends Function {
      * @param functionDescription 関数の説明
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public Method(String functionName, FunctionDescription functionDescription) {
+    protected Method(String functionName, FunctionDescription functionDescription) {
         super(functionName, functionDescription);
     }
 }

@@ -54,7 +54,7 @@ public abstract class Field implements Component {
     /**
      * デフォルトコンストラクタ
      */
-    public Field() {
+    protected Field() {
     }
 
     /**

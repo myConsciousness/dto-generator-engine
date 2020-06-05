@@ -53,7 +53,7 @@ public abstract class Process implements Component {
      * @param variableName 変数名
      * @exception NulLPointerException 引数として{@code null}が渡された場合
      */
-    public Process(String variableName) {
+    protected Process(String variableName) {
         this.variableName = variableName;
     }
 }

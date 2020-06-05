@@ -62,6 +62,19 @@ public abstract class Resource {
     private List<Method> methods = new ArrayList<>(0);
 
     /**
+     * コンストラクタ
+     * 
+     * @param resourceName リソース名
+     * @param field        フィールド定義
+     * 
+     * @exception NullPointerException 引数として{@code null}が渡された場合
+     */
+    protected Resource(String resourceName, Field field) {
+        this.resourceName = resourceName;
+        this.field = field;
+    }
+
+    /**
      * リソースを生成し文字列表現として返却する処理を定義するメソッドです。<br>
      * このメソッドを定義している{@link Component}を継承した具象サブクラスは<br>
      * 必ずこのメソッドを実装する必要があります。 <br>
@@ -72,7 +85,7 @@ public abstract class Resource {
      * 
      * @return 各要素を管理する部品で生成されたJavaリソース
      */
-    public abstract String makeResource();
+    public abstract String createResource();
 
     /**
      * コンストラクタ定義を追加します。

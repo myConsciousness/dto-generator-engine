@@ -77,7 +77,7 @@ public abstract class Function implements Component {
      * @param functionDescription 関数の説明
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public Function(String functionName, FunctionDescription functionDescription) {
+    protected Function(String functionName, FunctionDescription functionDescription) {
         this.functionName = functionName;
         this.functionDescription = functionDescription;
     }

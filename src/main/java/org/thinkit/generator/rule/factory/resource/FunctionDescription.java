@@ -51,7 +51,7 @@ public abstract class FunctionDescription extends Description {
      * @param description 説明
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public FunctionDescription(String description) {
+    protected FunctionDescription(String description) {
         super(description);
     }
 

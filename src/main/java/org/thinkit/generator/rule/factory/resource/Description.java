@@ -53,7 +53,7 @@ public abstract class Description implements Component {
      * @param description 説明
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public Description(String description) {
+    protected Description(String description) {
         this.description = description;
     }
 }
