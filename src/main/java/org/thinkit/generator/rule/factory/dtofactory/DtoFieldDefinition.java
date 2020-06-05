@@ -18,6 +18,7 @@ import org.thinkit.common.catalog.PrimitiveDataType;
 import org.thinkit.common.catalog.Delimiter;
 import org.thinkit.common.catalog.Identifier;
 import org.thinkit.common.catalog.Indentation;
+import org.thinkit.common.catalog.Operand;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -36,11 +37,6 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(callSuper = false)
 public class DtoFieldDefinition extends FieldDefinition {
-
-    /**
-     * 代入演算子
-     */
-    private static final String ASSIGNMENT_OPERATOR = "=";
 
     /**
      * コンストラクタ
@@ -68,7 +64,7 @@ public class DtoFieldDefinition extends FieldDefinition {
 
         field.append(Identifier.PRIVATE.toIdentifier()).append(space).append(dataType).append(space);
         field.append(super.getVariableName()).append(space);
-        field.append(ASSIGNMENT_OPERATOR).append(space).append(super.getInitialValue()).append(Delimiter.semicolon());
+        field.append(Operand.assignment()).append(space).append(super.getInitialValue()).append(Delimiter.semicolon());
 
         return field.toString();
     }
