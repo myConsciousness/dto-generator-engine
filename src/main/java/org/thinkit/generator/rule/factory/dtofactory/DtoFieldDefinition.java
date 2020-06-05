@@ -12,6 +12,7 @@
 
 package org.thinkit.generator.rule.factory.dtofactory;
 
+import org.thinkit.generator.catalog.dtogenerator.DtoAnnotation;
 import org.thinkit.generator.rule.factory.resource.FieldDefinition;
 import org.thinkit.common.catalog.PrimitiveDataType;
 import org.thinkit.common.catalog.Delimiter;
@@ -37,11 +38,6 @@ import lombok.ToString;
 public class DtoFieldDefinition extends FieldDefinition {
 
     /**
-     * LombokのNullチェックアノテーション
-     */
-    private static final String LOMBOK_NON_NULL = "@NonNull";
-
-    /**
      * 代入演算子
      */
     private static final String ASSIGNMENT_OPERATOR = "=";
@@ -65,7 +61,7 @@ public class DtoFieldDefinition extends FieldDefinition {
 
         final String dataType = super.getDataType();
         if (PrimitiveDataType.isPrimitive(dataType)) {
-            field.append(LOMBOK_NON_NULL).append(Indentation.returnCode());
+            field.append(DtoAnnotation.lombokNonNull()).append(Indentation.returnCode());
         }
 
         final String space = Indentation.space();

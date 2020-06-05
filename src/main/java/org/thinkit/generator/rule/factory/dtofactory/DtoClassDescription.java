@@ -12,6 +12,7 @@
 
 package org.thinkit.generator.rule.factory.dtofactory;
 
+import org.thinkit.generator.catalog.dtogenerator.DtoAnnotation;
 import org.thinkit.generator.rule.factory.resource.ClassDescription;
 import org.thinkit.common.catalog.Indentation;
 
@@ -32,21 +33,6 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(callSuper = false)
 public class DtoClassDescription extends ClassDescription {
-
-    /**
-     * 作成者のアノテーション
-     */
-    private static final String ANNOTATION_AUTHOR = "@author";
-
-    /**
-     * 作成時バージョンのアノテーション
-     */
-    private static final String ANNOTATION_SINCE = "@since";
-
-    /**
-     * 現行バージョンのアノテーション
-     */
-    private static final String ANNOTATION_VERSION = "@version";
 
     /**
      * 初期バージョン
@@ -74,11 +60,11 @@ public class DtoClassDescription extends ClassDescription {
         classDescription.append("/**").append(returnCode);
         classDescription.append(" * ").append(super.getDescription()).append(returnCode);
         classDescription.append(" *").append(returnCode).append(returnCode);
-        classDescription.append(" * ").append(ANNOTATION_AUTHOR).append(space).append(super.getCreator())
+        classDescription.append(" * ").append(DtoAnnotation.author()).append(space).append(super.getCreator())
                 .append(returnCode);
-        classDescription.append(" * ").append(ANNOTATION_SINCE).append(space).append(INITIAL_VERSION)
+        classDescription.append(" * ").append(DtoAnnotation.since()).append(space).append(INITIAL_VERSION)
                 .append(returnCode);
-        classDescription.append(" * ").append(ANNOTATION_VERSION).append(space).append(super.getVersion())
+        classDescription.append(" * ").append(DtoAnnotation.version()).append(space).append(super.getVersion())
                 .append(returnCode);
         classDescription.append(" */");
 
