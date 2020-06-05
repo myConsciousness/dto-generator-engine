@@ -17,7 +17,12 @@ import org.thinkit.generator.rule.factory.resource.Resource;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.util.List;
+import org.thinkit.generator.rule.factory.resource.Constructor;
+
+import org.thinkit.generator.rule.factory.resource.ClassDescription;
 import org.thinkit.generator.rule.factory.resource.Field;
+import org.thinkit.generator.rule.factory.resource.Method;
 
 /**
  * DTOクラスのリソースを生成する具象クラスです。<br>
@@ -48,6 +53,14 @@ public class DtoResource extends Resource {
 
     @Override
     public String createResource() {
-        return "";
+        final StringBuilder resource = new StringBuilder();
+
+        final String resourceName = super.getResourceName();
+        final ClassDescription classDescription = super.getClassDescription();
+        final Field field = super.getField();
+        final List<Constructor> constructors = super.getConstructors();
+        final List<Method> methods = super.getMethods();
+
+        return resource.toString();
     }
 }

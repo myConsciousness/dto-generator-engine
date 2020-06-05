@@ -43,6 +43,13 @@ public abstract class Resource {
     private String resourceName = "";
 
     /**
+     * クラスの説明
+     */
+    @NonNull
+    @Getter(AccessLevel.PROTECTED)
+    private ClassDescription classDescription = null;
+
+    /**
      * フィールド
      */
     @NonNull
