@@ -51,9 +51,19 @@ public enum DtoAnnotation implements Catalog<DtoAnnotation> {
     VERSION(2, "@version"),
 
     /**
-     * NonNull(Lombok)
+     * NonNull (Lombok)
      */
-    LOMBOK_NON_NULL(3, "@NonNull");
+    LOMBOK_NON_NULL(3, "@NonNull"),
+
+    /**
+     * ToString (Lombok)
+     */
+    LOMBOK_TO_STRING(4, "@ToString"),
+
+    /**
+     * Equals and Hash code (Lombok)
+     */
+    LOMBOK_EQUALS_AND_HASH_CODE(5, "@EqualsAndHashCode");
 
     /**
      * コード値
@@ -103,5 +113,25 @@ public enum DtoAnnotation implements Catalog<DtoAnnotation> {
      */
     public static String lombokNonNull() {
         return LOMBOK_NON_NULL.getAnnotation();
+    }
+
+    /**
+     * LombokのToStringアノテーションを返却します。
+     * 
+     * @return LombokのToStringアノテーションを返却します。
+     * @see #LOMBOK_TO_STRING
+     */
+    public static String lombokToString() {
+        return LOMBOK_TO_STRING.getAnnotation();
+    }
+
+    /**
+     * LombokのEqualsAndHashCodeアノテーションを返却します。
+     * 
+     * @return LombokのEqualsAndHashCodeアノテーションを返却します。
+     * @see #EqualsAndHashCode
+     */
+    public static String lombokEqualsAndHashCode() {
+        return LOMBOK_EQUALS_AND_HASH_CODE.getAnnotation();
     }
 }

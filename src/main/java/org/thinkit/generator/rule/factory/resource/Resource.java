@@ -36,6 +36,13 @@ import lombok.ToString;
 public abstract class Resource {
 
     /**
+     * パッケージ名
+     */
+    @NonNull
+    @Getter(AccessLevel.PROTECTED)
+    private String packageName = "";
+
+    /**
      * リソース名
      */
     @NonNull
@@ -71,28 +78,17 @@ public abstract class Resource {
     /**
      * コンストラクタ
      * 
+     * @param packageName  パッケージ名
      * @param resourceName リソース名
      * @param field        フィールド定義
      * 
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    protected Resource(String resourceName, Field field) {
+    protected Resource(String packageName, String resourceName, Field field) {
+        this.packageName = packageName;
         this.resourceName = resourceName;
         this.field = field;
     }
-
-    /**
-     * リソースを生成し文字列表現として返却する処理を定義するメソッドです。<br>
-     * このメソッドを定義している{@link Component}を継承した具象サブクラスは<br>
-     * 必ずこのメソッドを実装する必要があります。 <br>
-     * <br>
-     * この抽象メソッドはこの抽象クラスを継承する部品の特性に応じて実装してください。<br>
-     * 例えば、この抽象クラスをJavaリソースにおけるフィールド定義を管理する部品が継承した場合、<br>
-     * その部品クラスはフィールド定義を文字列として生成する処理を実装する必要があります。
-     * 
-     * @return 各要素を管理する部品で生成されたJavaリソース
-     */
-    public abstract String createResource();
 
     /**
      * コンストラクタ定義を追加します。
@@ -111,4 +107,17 @@ public abstract class Resource {
     public void add(Method method) {
         this.methods.add(method);
     }
+
+    /**
+     * リソースを生成し文字列表現として返却する処理を定義するメソッドです。<br>
+     * このメソッドを定義している{@link Component}を継承した具象サブクラスは<br>
+     * 必ずこのメソッドを実装する必要があります。 <br>
+     * <br>
+     * この抽象メソッドはこの抽象クラスを継承する部品の特性に応じて実装してください。<br>
+     * 例えば、この抽象クラスをJavaリソースにおけるフィールド定義を管理する部品が継承した場合、<br>
+     * その部品クラスはフィールド定義を文字列として生成する処理を実装する必要があります。
+     * 
+     * @return 各要素を管理する部品で生成されたJavaリソース
+     */
+    public abstract String createResource();
 }
