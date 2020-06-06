@@ -16,7 +16,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import org.thinkit.common.rule.AbstractRule;
 import org.thinkit.generator.dtogenerator.ClassCreatorDefinition;
@@ -24,6 +23,9 @@ import org.thinkit.generator.dtogenerator.ClassDefinition;
 import org.thinkit.generator.dtogenerator.ClassDefinitionMatrix;
 import org.thinkit.generator.dtogenerator.ClassItemDefinition;
 import org.thinkit.generator.dtogenerator.ClassNameDefinition;
+import org.thinkit.generator.rule.factory.dtofactory.DtoResourceFactory;
+import org.thinkit.generator.rule.factory.resource.Resource;
+import org.thinkit.generator.rule.factory.resource.ResourceFactory;
 
 import com.google.common.flogger.FluentLogger;
 
@@ -109,7 +111,7 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
      * @return 整形処理が正常終了した場合は{@code true}、それ以外は{@code false}
      * @see RecursiveRequiredParameters
      */
-    private boolean formatClassDefinitionRecursively(final RecursiveRequiredParameters parameters) {
+    private boolean formatClassDefinitionRecursively(@NonNull final RecursiveRequiredParameters parameters) {
         logger.atInfo().log("START");
         logger.atInfo().log("再帰処理に使用するパラメータ情報 = (%s)", parameters);
 
@@ -120,19 +122,18 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
 
         for (ClassDefinition classDefinition : classDefinitionList) {
 
-            final List<ClassItemDefinition> classItemDefinitionList = classDefinition.getClassItemDefinitionList();
             final String className = classDefinition.getClassName();
+            final List<ClassItemDefinition> classItemDefinitionList = classDefinition.getClassItemDefinitionList();
 
-            final boolean success = this.formatClassItemDefinition(classItemDefinitionList, classNameDefinition,
-                    classCreatorDefinition, formattedResources);
+            final Resource resource = this.formatClassItemDefinition(className, classItemDefinitionList,
+                    classNameDefinition, classCreatorDefinition, formattedResources);
 
-            if (!success) {
+            if (resource == null) {
                 logger.atSevere().log("クラス項目定義情報の整形処理が異常終了しました。");
                 return false;
             }
 
-            String resource = "";
-            formattedResources.put(className, resource);
+            formattedResources.put(className, resource.createResource());
         }
 
         logger.atInfo().log("整形されたJavaリソース = (%s)", formattedResources);
@@ -144,25 +145,25 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
      * 引数として渡された情報を基にクラス項目定義に紐づく情報を構築します。<br>
      * 各項目に子クラスが存在する場合は再帰処理({@link #formatClassDefinitionRecursively(RecursiveRequiredParameters)})を行います。<br>
      * <br>
-     * 再帰処理中に想定外のエラーが発生した場合は必ず{@code <code>null</code>}を返却します。
+     * 再帰処理中に想定外のエラーが発生した場合は必ず{@code null}を返却します。
      *
+     * @param className               クラス名
      * @param classItemDefinitionList クラス項目定義情報リスト
      * @param classNameDefinition     クラス名定義情報
      * @param classCreatorDefinition  クラス作成者情報
      * @param formattedResources      整形されたJavaリソース情報
-     * @return #see
-     *         {@link #formatClassDefinitionRecursively(RecursiveRequiredParameters)}
+     * @return #see {@link Resource}
      */
-    private boolean formatClassItemDefinition(final List<ClassItemDefinition> classItemDefinitionList,
-            final ClassNameDefinition classNameDefinition, final ClassCreatorDefinition classCreatorDefinition,
-            final Map<String, String> formattedResources) {
+    private Resource formatClassItemDefinition(@NonNull final String className,
+            @NonNull final List<ClassItemDefinition> classItemDefinitionList,
+            @NonNull final ClassNameDefinition classNameDefinition,
+            @NonNull final ClassCreatorDefinition classCreatorDefinition,
+            @NonNull final Map<String, String> formattedResources) {
         logger.atInfo().log("START");
-
-        Objects.requireNonNull(classItemDefinitionList, "ClassItemDefinitionList must not be null.");
-        Objects.requireNonNull(classNameDefinition, "ClassNameDefinition must not be null.");
-        Objects.requireNonNull(classCreatorDefinition, "ClassCreatorDefinition must not be null.");
-        Objects.requireNonNull(formattedResources, "FormattedResources must not be null.");
+        assert className.length() > 0;
         assert !classItemDefinitionList.isEmpty();
+
+        final ResourceFactory resourceFactory = DtoResourceFactory.getInstance();
 
         for (ClassItemDefinition classItemDefinition : classItemDefinitionList) {
 
@@ -180,13 +181,13 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
 
                 if (!this.formatClassDefinitionRecursively(newRequiredParameters)) {
                     logger.atSevere().log("子クラス定義情報を生成するための再起処理が異常終了しました。");
-                    return false;
+                    return null;
                 }
             }
         }
 
         logger.atInfo().log("END");
-        return true;
+        return resourceFactory.createResource(classNameDefinition.getPackageName(), className, null);
     }
 
     /**
