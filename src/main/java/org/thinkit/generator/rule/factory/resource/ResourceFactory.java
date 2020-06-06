@@ -17,13 +17,13 @@ package org.thinkit.generator.rule.factory.resource;
  * {#link ResourceFactory}を継承した具象クラスは必ず各抽象メソッドを実装してください。<br>
  * <br>
  * 以下のファクトリメソッドが正しく実装されることが期待されます。<br>
- * {@link #createClassDescription()} <br>
- * {@link #createDescription()} <br>
+ * {@link #createClassDescription(String, String, String)} <br>
+ * {@link #createDescription(String)} <br>
  * {@link #createField()} <br>
- * {@link #createFieldDefinition()} <br>
- * {@link #createConstructor()} <br>
- * {@link #createParameter()} <br>
- * {@link #createProcess()} <br>
+ * {@link #createFieldDefinition(String, String, String)} <br>
+ * {@link #createConstructor(String, FunctionDescription)} <br>
+ * {@link #createParameter(String, String)} <br>
+ * {@link #createProcess(String)} <br>
  * {@link #createResource()} <br>
  * 
  * @author Kato Shinya
@@ -36,17 +36,25 @@ public abstract class ResourceFactory {
      * {@link ClassDescription}のインスタンスを生成し返却する抽象メソッドです。<br>
      * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createClassDescription()}を実装してください。
      * 
+     * @param description 説明
+     * @param creator     作成者
+     * @param version     現行バージョン
      * @return {@link ClassDescription}のインスタンス
+     * 
+     * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public abstract ClassDescription createClassDescription();
+    public abstract ClassDescription createClassDescription(String description, String creator, String version);
 
     /**
      * {@link Description}のインスタンスを生成し返却する抽象メソッドです。<br>
      * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createDescription()}を実装してください。
      * 
+     * @param description 説明
      * @return {@link Description}のインスタンス
+     * 
+     * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public abstract Description createDescription();
+    public abstract Description createDescription(String description);
 
     /**
      * {@link Field}のインスタンスを生成し返却する抽象メソッドです。<br>
@@ -60,39 +68,60 @@ public abstract class ResourceFactory {
      * {@link FieldDefinition}のインスタンスを生成し返却する抽象メソッドです。<br>
      * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createFieldDefinition()}を実装してください。
      * 
+     * @param dataType     データ型
+     * @param variableName 変数名
+     * @param initialValue 初期値
      * @return {@link FieldDefinition}のインスタンス
+     * 
+     * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public abstract FieldDefinition createFieldDefinition();
+    public abstract FieldDefinition createFieldDefinition(String dataType, String variableName, String initialValue);
 
     /**
      * {@link Constructor}のインスタンスを生成し返却する抽象メソッドです。<br>
      * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createConstructor()}を実装してください。
      * 
+     * @param functionName        機能名
+     * @param functionDescription 機能の説明
      * @return {@link Constructor}のインスタンス
+     * 
+     * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public abstract Constructor createConstructor();
+    public abstract Constructor createConstructor(String functionName, FunctionDescription functionDescription);
 
     /**
      * {@link Parameter}のインスタンスを生成し返却する抽象メソッドです。<br>
      * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createParameter()}を実装してください。
      * 
+     * @param dataType     データ型
+     * @param variableName 変数名
      * @return {@link Parameter}のインスタンス
+     * 
+     * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public abstract Parameter createParameter();
+    public abstract Parameter createParameter(String dataType, String variableName);
 
     /**
      * {@link Process}のインスタンスを生成し返却する抽象メソッドです。<br>
      * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createProcess()}を実装してください。
      * 
+     * @param variableName 変数名
      * @return {@link Process}のインスタンス
+     * 
+     * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public abstract Process createProcess();
+    public abstract Process createProcess(String variableName);
 
     /**
      * {@link Resource}のインスタンスを生成し返却する抽象メソッドです。<br>
      * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createResource()}を実装してください。
      * 
+     * @param packageName  パッケージ名
+     * @param resourceName リソース名
+     * @param field        フィールドオブジェクト
      * @return {@link Resource}のインスタンス
+     * 
+     * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public abstract Resource createResource();
+    public abstract Resource createResource(String packageName, String resourceName, Field field);
 }
