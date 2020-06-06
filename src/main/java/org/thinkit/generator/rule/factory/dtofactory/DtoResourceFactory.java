@@ -18,6 +18,7 @@ import org.thinkit.generator.rule.factory.resource.Description;
 import org.thinkit.generator.rule.factory.resource.Field;
 import org.thinkit.generator.rule.factory.resource.FieldDefinition;
 import org.thinkit.generator.rule.factory.resource.FunctionDescription;
+import org.thinkit.generator.rule.factory.resource.FunctionParamAnnotation;
 import org.thinkit.generator.rule.factory.resource.Parameter;
 import org.thinkit.generator.rule.factory.resource.Process;
 import org.thinkit.generator.rule.factory.resource.Resource;
@@ -33,6 +34,8 @@ import lombok.ToString;
  * {@link #createDescription(String)} <br>
  * {@link #createField()} <br>
  * {@link #createFieldDefinition(String, String, String)} <br>
+ * {@link #createFunctionDescription(String)} <br>
+ * {@link #createFunctionParamAnnotation(String, String)} <br>
  * {@link #createConstructor(String, FunctionDescription)} <br>
  * {@link #createParameter(String, String)} <br>
  * {@link #createProcess(String)} <br>
@@ -91,6 +94,16 @@ public final class DtoResourceFactory extends ResourceFactory {
     @Override
     public FieldDefinition createFieldDefinition(String dataType, String variableName, String initialValue) {
         return new DtoFieldDefinition(dataType, variableName, initialValue);
+    }
+
+    @Override
+    public FunctionDescription createFunctionDescription(String description) {
+        return new DtoMethodDescription(description);
+    }
+
+    @Override
+    public FunctionParamAnnotation createFunctionParamAnnotation(String variableName, String description) {
+        return new DtoMethodParamAnnotation(variableName, description);
     }
 
     @Override

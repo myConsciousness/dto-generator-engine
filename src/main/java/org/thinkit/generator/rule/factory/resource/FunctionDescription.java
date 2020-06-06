@@ -66,4 +66,14 @@ public abstract class FunctionDescription extends Description {
         Objects.requireNonNull(functionParamAnnotation);
         this.functionParamAnnotations.add(functionParamAnnotation);
     }
+
+    /**
+     * 関数の引数アノテーションが存在するか判定します。<br>
+     * 関数の引数アノテーションが存在する場合は{@code true}、それ以外は{@false}を返却します。
+     * 
+     * @return 関数の引数アノテーションが存在する場合は{@code true}、それ以外は{@false}
+     */
+    protected boolean hasParamAnnotation() {
+        return !this.functionParamAnnotations.isEmpty();
+    }
 }
