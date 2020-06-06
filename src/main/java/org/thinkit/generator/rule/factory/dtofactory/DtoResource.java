@@ -18,6 +18,7 @@ import lombok.ToString;
 
 import java.util.List;
 
+import org.thinkit.generator.rule.factory.resource.ClassDescription;
 import org.thinkit.generator.rule.factory.resource.Constructor;
 import org.thinkit.common.catalog.Brace;
 import org.thinkit.common.catalog.Identifier;
@@ -48,14 +49,15 @@ public final class DtoResource extends Resource {
     /**
      * コンストラクタ
      * 
-     * @param packageName  パッケージ名
-     * @param resourceName リソース名
-     * @param field        フィールド定義
+     * @param packageName      パッケージ名
+     * @param classDescription クラスの説明
+     * @param resourceName     リソース名
+     * @param field            フィールド定義
      * 
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public DtoResource(String packageName, String resourceName, Field field) {
-        super(packageName, resourceName, field);
+    public DtoResource(String packageName, ClassDescription classDescription, String resourceName, Field field) {
+        super(packageName, classDescription, resourceName, field);
     }
 
     @Override

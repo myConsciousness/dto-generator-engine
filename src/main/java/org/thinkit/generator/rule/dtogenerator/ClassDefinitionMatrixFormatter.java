@@ -24,6 +24,9 @@ import org.thinkit.generator.dtogenerator.ClassDefinitionMatrix;
 import org.thinkit.generator.dtogenerator.ClassItemDefinition;
 import org.thinkit.generator.dtogenerator.ClassNameDefinition;
 import org.thinkit.generator.rule.factory.dtofactory.DtoResourceFactory;
+import org.thinkit.generator.rule.factory.resource.ClassDescription;
+import org.thinkit.generator.rule.factory.resource.Constructor;
+import org.thinkit.generator.rule.factory.resource.Field;
 import org.thinkit.generator.rule.factory.resource.Resource;
 import org.thinkit.generator.rule.factory.resource.ResourceFactory;
 
@@ -123,9 +126,7 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
         for (ClassDefinition classDefinition : classDefinitionList) {
 
             final String className = classDefinition.getClassName();
-            final List<ClassItemDefinition> classItemDefinitionList = classDefinition.getClassItemDefinitionList();
-
-            final Resource resource = this.formatClassItemDefinition(className, classItemDefinitionList,
+            final Resource resource = this.formatResource(className, classDefinition.getClassItemDefinitionList(),
                     classNameDefinition, classCreatorDefinition, formattedResources);
 
             if (resource == null) {
@@ -142,7 +143,7 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
     }
 
     /**
-     * 引数として渡された情報を基にクラス項目定義に紐づく情報を構築します。<br>
+     * 引数として渡された情報を基にリソース情報を構築します。<br>
      * 各項目に子クラスが存在する場合は再帰処理({@link #formatClassDefinitionRecursively(RecursiveRequiredParameters)})を行います。<br>
      * <br>
      * 再帰処理中に想定外のエラーが発生した場合は必ず{@code null}を返却します。
@@ -154,7 +155,7 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
      * @param formattedResources      整形されたJavaリソース情報
      * @return #see {@link Resource}
      */
-    private Resource formatClassItemDefinition(@NonNull final String className,
+    private Resource formatResource(@NonNull final String className,
             @NonNull final List<ClassItemDefinition> classItemDefinitionList,
             @NonNull final ClassNameDefinition classNameDefinition,
             @NonNull final ClassCreatorDefinition classCreatorDefinition,
@@ -164,11 +165,27 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
         assert !classItemDefinitionList.isEmpty();
 
         final ResourceFactory resourceFactory = DtoResourceFactory.getInstance();
+        final Field field = resourceFactory.createField();
+        final ClassDescription classDescription = resourceFactory.createClassDescription(
+                classNameDefinition.getDescription(), classCreatorDefinition.getCreator(), "1.0");
+
+        final Resource resource = resourceFactory.createResource(classNameDefinition.getPackageName(), classDescription,
+                className, field);
+
+        final Constructor constructor = resourceFactory.createConstructor(className,
+                resourceFactory.createFunctionDescription("コンストラクタ"));
 
         for (ClassItemDefinition classItemDefinition : classItemDefinitionList) {
+            final String dataType = classItemDefinition.getDataType();
+
+            field.add(resourceFactory.createDescription(classItemDefinition.getDescription()));
+            field.add(resourceFactory.createFieldDefinition(dataType, classItemDefinition.getVariableName(),
+                    classItemDefinition.getInitialValue()));
 
             if (classItemDefinition.isInvariant()) {
-                // 不変フィールド
+                final String variableName = classItemDefinition.getVariableName();
+                constructor.add(resourceFactory.createParameter(dataType, variableName));
+                constructor.add(resourceFactory.createProcess(variableName));
             }
 
             final List<ClassDefinition> childClassDefinitionList = classItemDefinition.getChildClassDefinitionList();
@@ -186,8 +203,10 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
             }
         }
 
+        resource.add(constructor);
+
         logger.atInfo().log("END");
-        return resourceFactory.createResource(classNameDefinition.getPackageName(), className, null);
+        return resource;
     }
 
     /**

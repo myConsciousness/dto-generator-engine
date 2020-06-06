@@ -78,14 +78,16 @@ public abstract class Resource {
     /**
      * コンストラクタ
      * 
-     * @param packageName  パッケージ名
-     * @param resourceName リソース名
-     * @param field        フィールド定義
+     * @param packageName      パッケージ名
+     * @param classDescription クラスの説明
+     * @param resourceName     リソース名
+     * @param field            フィールド定義
      * 
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    protected Resource(String packageName, String resourceName, Field field) {
+    protected Resource(String packageName, ClassDescription classDescription, String resourceName, Field field) {
         this.packageName = packageName;
+        this.classDescription = classDescription;
         this.resourceName = resourceName;
         this.field = field;
     }
