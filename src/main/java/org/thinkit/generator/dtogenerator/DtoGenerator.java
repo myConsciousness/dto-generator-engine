@@ -16,6 +16,8 @@ import org.thinkit.generator.AbstractGenerator;
 import org.thinkit.generator.rule.dtogenerator.ClassDefinitionMatrixFormatter;
 import org.thinkit.generator.rule.dtogenerator.ClassDefinitionMatrixManager;
 
+import java.util.Map;
+
 import com.google.common.flogger.FluentLogger;
 
 /**
@@ -60,6 +62,8 @@ public final class DtoGenerator extends AbstractGenerator {
             logger.atSevere().log("クラス定義情報の整形処理が異常終了しました。");
             return false;
         }
+
+        final Map<String, String> formattedResources = classDefinitionMatrixFormatter.getFormattedResources();
 
         logger.atInfo().log("END");
         return true;
