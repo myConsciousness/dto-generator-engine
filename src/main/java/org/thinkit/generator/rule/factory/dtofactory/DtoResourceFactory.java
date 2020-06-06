@@ -44,7 +44,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class DtoResourceFactory extends ResourceFactory {
+public final class DtoResourceFactory extends ResourceFactory {
 
     /**
      * {@link DtoResourceFactory}のシングルトンインスタンスを保持するインナークラスです。<br>

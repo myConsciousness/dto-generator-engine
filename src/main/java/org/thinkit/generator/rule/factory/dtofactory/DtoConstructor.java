@@ -42,7 +42,7 @@ import org.thinkit.common.catalog.Parenthesis;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class DtoConstructor extends Constructor {
+public final class DtoConstructor extends Constructor {
 
     /**
      * 処理のインデント数

@@ -35,7 +35,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class DtoField extends Field {
+public final class DtoField extends Field {
 
     @Override
     public String createResource() {

@@ -33,7 +33,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class DtoProcess extends Process {
+public final class DtoProcess extends Process {
 
     /**
      * カレントオブジェクト
