@@ -63,7 +63,12 @@ public enum DtoAnnotation implements Catalog<DtoAnnotation> {
     /**
      * Equals and Hash code (Lombok)
      */
-    LOMBOK_EQUALS_AND_HASH_CODE(5, "@EqualsAndHashCode");
+    LOMBOK_EQUALS_AND_HASH_CODE(5, "@EqualsAndHashCode"),
+
+    /**
+     * 引数情報
+     */
+    PARAM(6, "@param");
 
     /**
      * コード値
@@ -133,5 +138,15 @@ public enum DtoAnnotation implements Catalog<DtoAnnotation> {
      */
     public static String lombokEqualsAndHashCode() {
         return LOMBOK_EQUALS_AND_HASH_CODE.getAnnotation();
+    }
+
+    /**
+     * 引数情報のアノテーションを返却します。
+     * 
+     * @return 引数情報のアノテーションを返却します。
+     * @see #PARAM
+     */
+    public static String param() {
+        return PARAM.getAnnotation();
     }
 }
