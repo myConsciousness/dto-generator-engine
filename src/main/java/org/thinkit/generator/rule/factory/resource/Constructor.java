@@ -1,3 +1,15 @@
+/**
+ * Project Name : Generator<br>
+ * File Name : Constructor.java<br>
+ * Encoding : UTF-8<br>
+ * Creation Date : 2020/06/03<br>
+ * <p>
+ * Copyright © 2020 Kato Shinya. All rights reserved.
+ * <p>
+ * This source code or any portion thereof must not be<br>
+ * reproduced or used in any manner whatsoever.
+ */
+
 package org.thinkit.generator.rule.factory.resource;
 
 import lombok.EqualsAndHashCode;
