@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.thinkit.common.catalog.Extension;
 import org.thinkit.common.rule.AbstractRule;
 import org.thinkit.generator.dtogenerator.ClassCreatorDefinition;
 import org.thinkit.generator.dtogenerator.ClassDefinition;
@@ -170,7 +171,7 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
         final String creator = classCreatorDefinition.getCreator();
 
         final Copyright copyright = resourceFactory.createCopyright(classNameDefinition.getProjectName(),
-                className + ".java", "UTF-8", creator, classCreatorDefinition.getCreationDate());
+                className + Extension.java(), "UTF-8", creator, classCreatorDefinition.getCreationDate());
 
         final Field field = resourceFactory.createField();
         final ClassDescription classDescription = resourceFactory

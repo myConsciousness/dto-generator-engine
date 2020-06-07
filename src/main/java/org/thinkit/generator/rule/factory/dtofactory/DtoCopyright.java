@@ -15,6 +15,8 @@ package org.thinkit.generator.rule.factory.dtofactory;
 import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.rule.factory.resource.Copyright;
 
+import org.thinkit.common.catalog.HtmlTag;
+
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -34,16 +36,6 @@ import lombok.ToString;
 public class DtoCopyright extends Copyright {
 
     /**
-     * HTNLの改行タグ
-     */
-    private static final String HTML_TAG_RETURN = "<br>";
-
-    /**
-     * HTMLのパラグラフタグ
-     */
-    private static final String HTML_TAG_PARAGRAPH = "<p>";
-
-    /**
      * コンストラクタ
      * 
      * @param projectName  プロジェクト名
@@ -61,24 +53,26 @@ public class DtoCopyright extends Copyright {
     @Override
     public String createResource() {
         final String returnCode = Indentation.returnCode();
+        final String htmlTagBreak = HtmlTag.br();
+        final String htmlTagParagraph = HtmlTag.p();
 
         final StringBuilder copyright = new StringBuilder();
         copyright.append("/**").append(returnCode);
-        copyright.append(" * ").append("Project Name : ").append(super.getProjectName()).append(HTML_TAG_RETURN)
+        copyright.append(" * ").append("Project Name : ").append(super.getProjectName()).append(htmlTagBreak)
                 .append(returnCode);
-        copyright.append(" * ").append("File Name : ").append(super.getFileName()).append(HTML_TAG_RETURN)
+        copyright.append(" * ").append("File Name : ").append(super.getFileName()).append(htmlTagBreak)
                 .append(returnCode);
-        copyright.append(" * ").append("Encoding : ").append(super.getEncoding()).append(HTML_TAG_RETURN)
+        copyright.append(" * ").append("Encoding : ").append(super.getEncoding()).append(htmlTagBreak)
                 .append(returnCode);
-        copyright.append(" * ").append("Creation Date : ").append(super.getCreationDate()).append(HTML_TAG_RETURN)
+        copyright.append(" * ").append("Creation Date : ").append(super.getCreationDate()).append(htmlTagBreak)
                 .append(returnCode);
 
-        copyright.append(" * ").append(HTML_TAG_PARAGRAPH).append(returnCode);
+        copyright.append(" * ").append(htmlTagParagraph).append(returnCode);
         copyright.append(" * ").append("Copyright © ").append(super.getCreationYear()).append(Indentation.space())
                 .append(super.getCreator()).append(". All rights reserved.").append(returnCode);
-        copyright.append(" * ").append(HTML_TAG_PARAGRAPH).append(returnCode);
+        copyright.append(" * ").append(htmlTagParagraph).append(returnCode);
 
-        copyright.append(" * ").append("This source code or any portion thereof must not be").append(HTML_TAG_RETURN)
+        copyright.append(" * ").append("This source code or any portion thereof must not be").append(htmlTagBreak)
                 .append(returnCode);
         copyright.append(" * ").append("reproduced or used in any manner whatsoever.").append(returnCode);
         copyright.append(" */");

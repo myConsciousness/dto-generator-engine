@@ -12,6 +12,7 @@
 
 package org.thinkit.generator.dtogenerator;
 
+import org.thinkit.common.catalog.Extension;
 import org.thinkit.common.util.FileHandler;
 import org.thinkit.generator.AbstractGenerator;
 import org.thinkit.generator.rule.dtogenerator.ClassDefinitionMatrixFormatter;
@@ -36,11 +37,6 @@ public final class DtoGenerator extends AbstractGenerator {
      * ログ出力オブジェクト
      */
     private static final FluentLogger logger = FluentLogger.forEnclosingClass();
-
-    /**
-     * Javaファイルの拡張子名
-     */
-    private static final String EXTENSION_JAVA = "java";
 
     /**
      * コンストラクタ
@@ -77,7 +73,7 @@ public final class DtoGenerator extends AbstractGenerator {
         final Set<Entry<String, String>> entrySet = formattedResources.entrySet();
 
         for (Entry<String, String> entry : entrySet) {
-            if (!fileHandler.write(entry.getKey(), EXTENSION_JAVA, entry.getValue())) {
+            if (!fileHandler.write(entry.getKey(), Extension.java(), entry.getValue())) {
                 logger.atSevere().log("リソース情報の書き込み処理が異常終了しました。");
                 return false;
             }
