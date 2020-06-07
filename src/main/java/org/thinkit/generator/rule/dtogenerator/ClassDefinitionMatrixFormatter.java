@@ -26,6 +26,7 @@ import org.thinkit.generator.dtogenerator.ClassNameDefinition;
 import org.thinkit.generator.rule.factory.dtofactory.DtoResourceFactory;
 import org.thinkit.generator.rule.factory.resource.ClassDescription;
 import org.thinkit.generator.rule.factory.resource.Constructor;
+import org.thinkit.generator.rule.factory.resource.Copyright;
 import org.thinkit.generator.rule.factory.resource.Field;
 import org.thinkit.generator.rule.factory.resource.FunctionDescription;
 import org.thinkit.generator.rule.factory.resource.Resource;
@@ -166,12 +167,17 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
         assert !classItemDefinitionList.isEmpty();
 
         final ResourceFactory resourceFactory = DtoResourceFactory.getInstance();
-        final Field field = resourceFactory.createField();
-        final ClassDescription classDescription = resourceFactory.createClassDescription(
-                classNameDefinition.getDescription(), classCreatorDefinition.getCreator(), "1.0");
+        final String creator = classCreatorDefinition.getCreator();
 
-        final Resource resource = resourceFactory.createResource(classNameDefinition.getPackageName(), classDescription,
-                className, field);
+        final Copyright copyright = resourceFactory.createCopyright(classNameDefinition.getProjectName(),
+                className + ".java", "UTF-8", creator, classCreatorDefinition.getCreationDate());
+
+        final Field field = resourceFactory.createField();
+        final ClassDescription classDescription = resourceFactory
+                .createClassDescription(classNameDefinition.getDescription(), creator, "1.0");
+
+        final Resource resource = resourceFactory.createResource(copyright, classNameDefinition.getPackageName(),
+                classDescription, className, field);
 
         final FunctionDescription functionDescription = resourceFactory.createFunctionDescription("コンストラクタ");
         final Constructor constructor = resourceFactory.createConstructor(className, functionDescription);
@@ -185,6 +191,7 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
 
             if (classItemDefinition.isInvariant()) {
                 final String variableName = classItemDefinition.getVariableName();
+
                 functionDescription.add(resourceFactory.createFunctionParamAnnotation(variableName,
                         classItemDefinition.getDescription()));
                 constructor.add(resourceFactory.createParameter(dataType, variableName));

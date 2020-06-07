@@ -49,13 +49,13 @@ public class DtoCopyright extends Copyright {
      * @param projectName  プロジェクト名
      * @param fileName     ファイル名
      * @param encoding     エンコード
-     * @param creationDate 作成日付
      * @param creator      作成者
+     * @param creationDate 作成日付
      * 
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public DtoCopyright(String projectName, String fileName, String encoding, String creationDate, String creator) {
-        super(projectName, fileName, encoding, creationDate, creator);
+    public DtoCopyright(String projectName, String fileName, String encoding, String creator, String creationDate) {
+        super(projectName, fileName, encoding, creator, creationDate);
     }
 
     @Override
@@ -78,7 +78,8 @@ public class DtoCopyright extends Copyright {
                 .append(super.getCreator()).append(". All rights reserved.").append(returnCode);
         copyright.append(" * ").append(HTML_TAG_PARAGRAPH).append(returnCode);
 
-        copyright.append(" * ").append("This source code or any portion thereof must not be").append(HTML_TAG_RETURN);
+        copyright.append(" * ").append("This source code or any portion thereof must not be").append(HTML_TAG_RETURN)
+                .append(returnCode);
         copyright.append(" * ").append("reproduced or used in any manner whatsoever.").append(returnCode);
         copyright.append(" */");
 

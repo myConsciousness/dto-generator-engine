@@ -41,14 +41,14 @@ public abstract class ResourceFactory {
      * @param projectName  プロジェクト名
      * @param fileName     ファイル名
      * @param encoding     エンコード
-     * @param creationDate 作成日付
      * @param creator      作成者
+     * @param creationDate 作成日付
      * @return {@link Copyright}のインスタンス
      * 
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public abstract Copyright createCopyright(String projectName, String fileName, String encoding, String creationDate,
-            String creator);
+    public abstract Copyright createCopyright(String projectName, String fileName, String encoding, String creator,
+            String creationDate);
 
     /**
      * {@link ClassDescription}のインスタンスを生成し返却する抽象メソッドです。<br>
