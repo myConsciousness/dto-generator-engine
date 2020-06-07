@@ -73,8 +73,8 @@ public final class DtoConstructor extends Constructor {
                 .append(super.getFunctionName());
         constructor.append(Parenthesis.start()).append(this.toParameter()).append(Parenthesis.end()).append(space)
                 .append(Brace.start()).append(returnCode);
-        constructor.append(this.toProcess());
-        constructor.append(Brace.end());
+        constructor.append(this.toProcess()).append(returnCode);
+        constructor.append(Indentation.getIndentSpaces()).append(Brace.end());
 
         return constructor.toString();
     }
@@ -94,12 +94,14 @@ public final class DtoConstructor extends Constructor {
 
         final StringBuilder sb = new StringBuilder();
         final String space = Indentation.space();
+        final String commma = Delimiter.commma();
 
         for (Parameter parameter : parameters) {
-            sb.append(parameter.createResource()).append(Delimiter.commma()).append(space);
+            sb.append(parameter.createResource()).append(commma).append(space);
         }
 
-        sb.setLength(sb.length() - 1);
+        sb.setLength(sb.length() - (commma.length() + space.length()));
+
         return sb.toString();
     }
 

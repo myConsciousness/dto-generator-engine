@@ -93,8 +93,9 @@ public final class DtoResource extends Resource {
         resource.append(super.getClassDescription().createResource()).append(returnCode);
         resource.append(DtoAnnotation.lombokToString()).append(returnCode);
         resource.append(DtoAnnotation.lombokEqualsAndHashCode()).append(returnCode);
-        resource.append(Identifier.PUBLIC.toIdentifier()).append(space).append("class").append(space)
-                .append(super.getResourceName()).append(space).append(Brace.start()).append(returnCode);
+        resource.append(Identifier.PUBLIC.toIdentifier()).append(space).append("final").append(space).append("class")
+                .append(space).append(super.getResourceName()).append(space);
+        resource.append(Brace.start()).append(returnCode);
 
         this.createResource(resource.toString());
     }
@@ -104,9 +105,7 @@ public final class DtoResource extends Resource {
      * このメソッドではフィールド定義までを生成します。<br>
      */
     private void createFieldResource() {
-        final StringBuilder resource = new StringBuilder();
-        resource.append(super.getField().createResource()).append(Indentation.returnCode());
-        this.createResource(resource.toString());
+        this.createResource(super.getField().createResource());
     }
 
     /**

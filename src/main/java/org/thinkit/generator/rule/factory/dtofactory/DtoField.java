@@ -58,6 +58,8 @@ public final class DtoField extends Field {
             fields.append(field.toString());
         }
 
+        fields.setLength(fields.length() - returnCode.length());
+
         return fields.toString();
     }
 }

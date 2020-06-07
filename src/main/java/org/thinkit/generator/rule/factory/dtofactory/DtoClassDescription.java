@@ -59,7 +59,7 @@ public final class DtoClassDescription extends ClassDescription {
         final StringBuilder classDescription = new StringBuilder();
         classDescription.append("/**").append(returnCode);
         classDescription.append(" * ").append(super.getDescription()).append(returnCode);
-        classDescription.append(" *").append(returnCode).append(returnCode);
+        classDescription.append(" *").append(returnCode);
         classDescription.append(" * ").append(DtoAnnotation.author()).append(space).append(super.getCreator())
                 .append(returnCode);
         classDescription.append(" * ").append(DtoAnnotation.since()).append(space).append(INITIAL_VERSION)

@@ -65,7 +65,7 @@ public class DtoMethodDescription extends FunctionDescription {
             }
         }
 
-        methodDescription.append(indentSpaces).append("*/");
+        methodDescription.append(indentSpaces).append(" */");
 
         return methodDescription.toString();
     }
