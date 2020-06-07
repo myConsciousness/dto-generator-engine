@@ -13,6 +13,7 @@
 package org.thinkit.generator.rule.dtogenerator;
 
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -171,11 +172,12 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
         final String creator = classCreatorDefinition.getCreator();
 
         final Copyright copyright = resourceFactory.createCopyright(classNameDefinition.getProjectName(),
-                className + Extension.java(), "UTF-8", creator, classCreatorDefinition.getCreationDate());
+                className + Extension.java(), StandardCharsets.UTF_8.name(), creator,
+                classCreatorDefinition.getCreationDate());
 
         final Field field = resourceFactory.createField();
-        final ClassDescription classDescription = resourceFactory
-                .createClassDescription(classNameDefinition.getDescription(), creator, "1.0");
+        final ClassDescription classDescription = resourceFactory.createClassDescription(
+                classNameDefinition.getDescription(), creator, classNameDefinition.getVersion());
 
         final Resource resource = resourceFactory.createResource(copyright, classNameDefinition.getPackageName(),
                 classDescription, className, field);

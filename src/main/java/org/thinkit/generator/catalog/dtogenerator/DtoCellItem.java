@@ -96,7 +96,12 @@ public enum DtoCellItem implements Catalog<DtoCellItem> {
     /**
      * プロジェクト名
      */
-    PROJECT_NAME(13);
+    PROJECT_NAME(13),
+
+    /**
+     * バージョン
+     */
+    VERSION(14);
 
     /**
      * コード値

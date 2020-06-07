@@ -16,6 +16,7 @@ import java.util.Objects;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -31,28 +32,39 @@ import lombok.ToString;
 public final class ClassNameDefinition {
 
     /**
+     * バージョン
+     */
+    @NonNull
+    private String version = "";
+
+    /**
      * プロジェクト名
      */
+    @NonNull
     private String projectName = "";
 
     /**
      * パッケージ名
      */
+    @NonNull
     private String packageName = "";
 
     /**
      * クラスの物理名
      */
+    @NonNull
     private String physicalName = "";
 
     /**
      * クラスの論理名
      */
+    @NonNull
     private String logicalName = "";
 
     /**
      * クラスの補足
      */
+    @NonNull
     private String description = "";
 
     /**
@@ -65,20 +77,16 @@ public final class ClassNameDefinition {
     /**
      * コンストラクタ
      *
+     * @param version      バージョン
      * @param projectName  プロジェクト名
      * @param packageName  パッケージ名
      * @param physicalName 物理名
      * @param logicalName  論理名
      * @param description  補足
      */
-    public ClassNameDefinition(final String projectName, final String packageName, String physicalName,
-            String logicalName, String description) {
-        Objects.requireNonNull(projectName, "wrong parameter was given. Object is null.");
-        Objects.requireNonNull(packageName, "wrong parameter was given. Object is null.");
-        Objects.requireNonNull(physicalName, "wrong parameter was given. Object is null.");
-        Objects.requireNonNull(logicalName, "wrong parameter was given. Object is null.");
-        Objects.requireNonNull(description, "wrong parameter was given. Object is null.");
-
+    public ClassNameDefinition(final String version, final String projectName, final String packageName,
+            String physicalName, String logicalName, String description) {
+        this.version = version;
         this.projectName = projectName;
         this.packageName = packageName;
         this.logicalName = logicalName;
@@ -91,9 +99,8 @@ public final class ClassNameDefinition {
      *
      * @param classNameDefinition クラス名定義情報
      */
-    public ClassNameDefinition(ClassNameDefinition classNameDefinition) {
-        Objects.requireNonNull(classNameDefinition, "wrong parameter was given. Object is null.");
-
+    public ClassNameDefinition(@NonNull ClassNameDefinition classNameDefinition) {
+        this.version = classNameDefinition.getVersion();
         this.projectName = classNameDefinition.getProjectName();
         this.packageName = classNameDefinition.getPackageName();
         this.logicalName = classNameDefinition.getLogicalName();

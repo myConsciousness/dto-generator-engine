@@ -152,14 +152,15 @@ public final class ClassNameDefinitionManager extends AbstractRule {
         }
 
         final Map<DtoCellItem, String> definitions = this.getNameDefinitions(sheetHandler);
+        final String version = definitions.get(DtoCellItem.VERSION);
         final String projectName = definitions.get(DtoCellItem.PROJECT_NAME);
         final String packageName = definitions.get(DtoCellItem.PACKAGE_NAME);
         final String physicalName = definitions.get(DtoCellItem.PHYSICAL_NAME);
         final String logicalName = definitions.get(DtoCellItem.LOGICAL_NAME);
         final String description = definitions.get(DtoCellItem.DESCRIPTION);
 
-        final ClassNameDefinition classNameDefinition = new ClassNameDefinition(projectName, packageName, physicalName,
-                logicalName, description);
+        final ClassNameDefinition classNameDefinition = new ClassNameDefinition(version, projectName, packageName,
+                physicalName, logicalName, description);
 
         this.classNameDefinition = classNameDefinition;
 
@@ -179,7 +180,7 @@ public final class ClassNameDefinitionManager extends AbstractRule {
 
         final List<Map<String, String>> contents = super.getContents();
 
-        final EnumMap<DtoCellItem, String> creatorDefinitions = new EnumMap<>(DtoCellItem.class);
+        final EnumMap<DtoCellItem, String> classNameDefinitions = new EnumMap<>(DtoCellItem.class);
 
         for (Map<String, String> elements : contents) {
             final String cellItemName = elements.get(ContentAttribute.セル項目名.name());
@@ -194,12 +195,12 @@ public final class ClassNameDefinitionManager extends AbstractRule {
             logger.atInfo().log("取得した領域内の値 = (%s)", sequence);
 
             final int itemCode = Integer.parseInt(elements.get(ContentAttribute.セル項目コード.name()));
-            creatorDefinitions.put(Catalog.getEnum(DtoCellItem.class, itemCode), sequence);
+            classNameDefinitions.put(Catalog.getEnum(DtoCellItem.class, itemCode), sequence);
         }
 
-        logger.atInfo().log("コンテンツ情報 = (%s)", creatorDefinitions);
+        logger.atInfo().log("コンテンツ情報 = (%s)", classNameDefinitions);
         logger.atInfo().log("END");
-        return creatorDefinitions;
+        return classNameDefinitions;
     }
 
     @Override
