@@ -27,6 +27,7 @@ import org.thinkit.generator.rule.factory.dtofactory.DtoResourceFactory;
 import org.thinkit.generator.rule.factory.resource.ClassDescription;
 import org.thinkit.generator.rule.factory.resource.Constructor;
 import org.thinkit.generator.rule.factory.resource.Field;
+import org.thinkit.generator.rule.factory.resource.FunctionDescription;
 import org.thinkit.generator.rule.factory.resource.Resource;
 import org.thinkit.generator.rule.factory.resource.ResourceFactory;
 
@@ -172,8 +173,8 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
         final Resource resource = resourceFactory.createResource(classNameDefinition.getPackageName(), classDescription,
                 className, field);
 
-        final Constructor constructor = resourceFactory.createConstructor(className,
-                resourceFactory.createFunctionDescription("コンストラクタ"));
+        final FunctionDescription functionDescription = resourceFactory.createFunctionDescription("コンストラクタ");
+        final Constructor constructor = resourceFactory.createConstructor(className, functionDescription);
 
         for (ClassItemDefinition classItemDefinition : classItemDefinitionList) {
             final String dataType = classItemDefinition.getDataType();
@@ -184,6 +185,8 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
 
             if (classItemDefinition.isInvariant()) {
                 final String variableName = classItemDefinition.getVariableName();
+                functionDescription.add(resourceFactory.createFunctionParamAnnotation(variableName,
+                        classItemDefinition.getDescription()));
                 constructor.add(resourceFactory.createParameter(dataType, variableName));
                 constructor.add(resourceFactory.createProcess(variableName));
             }

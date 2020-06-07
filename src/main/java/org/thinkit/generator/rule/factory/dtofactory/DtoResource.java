@@ -72,6 +72,7 @@ public final class DtoResource extends Resource {
 
         this.createConstructorResource();
         this.createResource(Brace.end());
+        this.createResource(returnCode);
 
         return this.getResource();
     }

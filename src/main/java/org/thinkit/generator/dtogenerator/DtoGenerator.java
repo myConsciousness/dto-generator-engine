@@ -12,11 +12,14 @@
 
 package org.thinkit.generator.dtogenerator;
 
+import org.thinkit.common.util.FileHandler;
 import org.thinkit.generator.AbstractGenerator;
 import org.thinkit.generator.rule.dtogenerator.ClassDefinitionMatrixFormatter;
 import org.thinkit.generator.rule.dtogenerator.ClassDefinitionMatrixManager;
 
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import com.google.common.flogger.FluentLogger;
 
@@ -33,6 +36,11 @@ public final class DtoGenerator extends AbstractGenerator {
      * ログ出力オブジェクト
      */
     private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+
+    /**
+     * Javaファイルの拡張子名
+     */
+    private static final String EXTENSION_JAVA = "java";
 
     /**
      * コンストラクタ
@@ -64,6 +72,16 @@ public final class DtoGenerator extends AbstractGenerator {
         }
 
         final Map<String, String> formattedResources = classDefinitionMatrixFormatter.getFormattedResources();
+
+        final FileHandler fileHandler = new FileHandler("C:\\Users\\yourd\\Desktop");
+        final Set<Entry<String, String>> entrySet = formattedResources.entrySet();
+
+        for (Entry<String, String> entry : entrySet) {
+            if (!fileHandler.write(entry.getKey(), EXTENSION_JAVA, entry.getValue())) {
+                logger.atSevere().log("リソース情報の書き込み処理が異常終了しました。");
+                return false;
+            }
+        }
 
         logger.atInfo().log("END");
         return true;
