@@ -25,7 +25,8 @@ package org.thinkit.generator.rule.factory.resource;
  * {@link #createConstructor(String, FunctionDescription)} <br>
  * {@link #createParameter(String, String)} <br>
  * {@link #createProcess(String)} <br>
- * {@link #createResource(String, ClassDescription, String, Field)} <br>
+ * {@link #createResource(Copyright, String, ClassDescription, String, Field)}
+ * <br>
  * 
  * @author Kato Shinya
  * @since 1.0
@@ -154,8 +155,9 @@ public abstract class ResourceFactory {
 
     /**
      * {@link Resource}のインスタンスを生成し返却する抽象メソッドです。<br>
-     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createResource(String, ClassDescription, String, Field)}を実装してください。
+     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createResource(Copyright, String, ClassDescription, String, Field)}を実装してください。
      * 
+     * @param copyright        著作権
      * @param packageName      パッケージ名
      * @param classDescription クラスの説明
      * @param resourceName     リソース名
@@ -164,6 +166,6 @@ public abstract class ResourceFactory {
      * 
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public abstract Resource createResource(String packageName, ClassDescription classDescription, String resourceName,
-            Field field);
+    public abstract Resource createResource(Copyright copyright, String packageName, ClassDescription classDescription,
+            String resourceName, Field field);
 }

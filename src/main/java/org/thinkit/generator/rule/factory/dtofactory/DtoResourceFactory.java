@@ -41,7 +41,8 @@ import lombok.ToString;
  * {@link #createConstructor(String, FunctionDescription)} <br>
  * {@link #createParameter(String, String)} <br>
  * {@link #createProcess(String)} <br>
- * {@link #createResource(String, ClassDescription, String, Field)} <br>
+ * {@link #createResource(Copyright, String, ClassDescription, String, Field)}
+ * <br>
  * 
  * @author Kato Shinya
  * @since 1.0
@@ -130,8 +131,8 @@ public final class DtoResourceFactory extends ResourceFactory {
     }
 
     @Override
-    public Resource createResource(String packageName, ClassDescription classDescription, String resourceName,
-            Field field) {
-        return new DtoResource(packageName, classDescription, resourceName, field);
+    public Resource createResource(Copyright copyright, String packageName, ClassDescription classDescription,
+            String resourceName, Field field) {
+        return new DtoResource(copyright, packageName, classDescription, resourceName, field);
     }
 }

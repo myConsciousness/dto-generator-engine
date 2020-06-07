@@ -36,6 +36,13 @@ import lombok.ToString;
 public abstract class Resource {
 
     /**
+     * 著作権
+     */
+    @NonNull
+    @Getter(AccessLevel.PROTECTED)
+    private Copyright copyright = null;
+
+    /**
      * パッケージ名
      */
     @NonNull
@@ -78,6 +85,7 @@ public abstract class Resource {
     /**
      * コンストラクタ
      * 
+     * @param copyright        著作権
      * @param packageName      パッケージ名
      * @param classDescription クラスの説明
      * @param resourceName     リソース名
@@ -85,7 +93,9 @@ public abstract class Resource {
      * 
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    protected Resource(String packageName, ClassDescription classDescription, String resourceName, Field field) {
+    protected Resource(Copyright copyright, String packageName, ClassDescription classDescription, String resourceName,
+            Field field) {
+        this.copyright = copyright;
         this.packageName = packageName;
         this.classDescription = classDescription;
         this.resourceName = resourceName;

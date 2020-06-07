@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.thinkit.generator.rule.factory.resource.ClassDescription;
 import org.thinkit.generator.rule.factory.resource.Constructor;
+import org.thinkit.generator.rule.factory.resource.Copyright;
 import org.thinkit.common.catalog.Brace;
 import org.thinkit.common.catalog.Identifier;
 import org.thinkit.common.catalog.Indentation;
@@ -49,6 +50,7 @@ public final class DtoResource extends Resource {
     /**
      * コンストラクタ
      * 
+     * @param copyright        著作権
      * @param packageName      パッケージ名
      * @param classDescription クラスの説明
      * @param resourceName     リソース名
@@ -56,13 +58,18 @@ public final class DtoResource extends Resource {
      * 
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public DtoResource(String packageName, ClassDescription classDescription, String resourceName, Field field) {
-        super(packageName, classDescription, resourceName, field);
+    public DtoResource(Copyright copyright, String packageName, ClassDescription classDescription, String resourceName,
+            Field field) {
+        super(copyright, packageName, classDescription, resourceName, field);
     }
 
     @Override
     public String createResource() {
         final String returnCode = Indentation.returnCode();
+
+        this.createResource(super.getCopyright().createResource());
+        this.createResource(returnCode);
+        this.createResource(returnCode);
 
         this.createClassNameResource();
         this.createResource(returnCode);
