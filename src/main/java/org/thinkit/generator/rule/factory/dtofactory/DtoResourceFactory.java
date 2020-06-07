@@ -14,6 +14,7 @@ package org.thinkit.generator.rule.factory.dtofactory;
 
 import org.thinkit.generator.rule.factory.resource.ClassDescription;
 import org.thinkit.generator.rule.factory.resource.Constructor;
+import org.thinkit.generator.rule.factory.resource.Copyright;
 import org.thinkit.generator.rule.factory.resource.Description;
 import org.thinkit.generator.rule.factory.resource.Field;
 import org.thinkit.generator.rule.factory.resource.FieldDefinition;
@@ -30,6 +31,7 @@ import lombok.ToString;
 /**
  * {#link ResourceFactory}を実装する具象ファクトリクラスです。<br>
  * 以下のメソッドを使用することで各リソースの部品オブジェクトを取得することができます。<br>
+ * {@link #createCopyright(String, String, String, String, String)} <br>
  * {@link #createClassDescription(String, String, String)} <br>
  * {@link #createDescription(String)} <br>
  * {@link #createField()} <br>
@@ -74,6 +76,12 @@ public final class DtoResourceFactory extends ResourceFactory {
      */
     public static ResourceFactory getInstance() {
         return InstanceHolder.INSTANCE;
+    }
+
+    @Override
+    public Copyright createCopyright(String projectName, String fileName, String encoding, String creationDate,
+            String creator) {
+        return new DtoCopyright(projectName, fileName, encoding, creationDate, creator);
     }
 
     @Override

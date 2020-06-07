@@ -17,6 +17,7 @@ package org.thinkit.generator.rule.factory.resource;
  * {#link ResourceFactory}を継承した具象クラスは必ず各抽象メソッドを実装してください。<br>
  * <br>
  * 以下のファクトリメソッドが正しく実装されることが期待されます。<br>
+ * {@link #createCopyright(String, String, String, String, String)} <br>
  * {@link #createClassDescription(String, String, String)} <br>
  * {@link #createDescription(String)} <br>
  * {@link #createField()} <br>
@@ -33,8 +34,24 @@ package org.thinkit.generator.rule.factory.resource;
 public abstract class ResourceFactory {
 
     /**
+     * {@link Copyright}のインスタンスを生成し返却する抽象メソッドです。<br>
+     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createCopyright(String, String, String, String, String)}を実装してください。
+     * 
+     * @param projectName  プロジェクト名
+     * @param fileName     ファイル名
+     * @param encoding     エンコード
+     * @param creationDate 作成日付
+     * @param creator      作成者
+     * @return {@link Copyright}のインスタンス
+     * 
+     * @exception NullPointerException 引数として{@code null}が渡された場合
+     */
+    public abstract Copyright createCopyright(String projectName, String fileName, String encoding, String creationDate,
+            String creator);
+
+    /**
      * {@link ClassDescription}のインスタンスを生成し返却する抽象メソッドです。<br>
-     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createClassDescription()}を実装してください。
+     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createClassDescription(String, String, String)}を実装してください。
      * 
      * @param description 説明
      * @param creator     作成者
@@ -47,7 +64,7 @@ public abstract class ResourceFactory {
 
     /**
      * {@link Description}のインスタンスを生成し返却する抽象メソッドです。<br>
-     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createDescription()}を実装してください。
+     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createDescription(String)}を実装してください。
      * 
      * @param description 説明
      * @return {@link Description}のインスタンス
@@ -66,7 +83,7 @@ public abstract class ResourceFactory {
 
     /**
      * {@link FieldDefinition}のインスタンスを生成し返却する抽象メソッドです。<br>
-     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createFieldDefinition()}を実装してください。
+     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createFieldDefinition(String, String, String)}を実装してください。
      * 
      * @param dataType     データ型
      * @param variableName 変数名
@@ -79,7 +96,7 @@ public abstract class ResourceFactory {
 
     /**
      * {@link FunctionDescription}のインスタンスを生成し返却する抽象メソッドです。<br>
-     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createConstructor()}を実装してください。
+     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createFunctionDescription(String)}を実装してください。
      * 
      * @param description 説明
      * @return {@link FunctionDescription}のインスタンス
@@ -90,7 +107,7 @@ public abstract class ResourceFactory {
 
     /**
      * {@link FunctionParamAnnotation}のインスタンスを生成し返却する抽象メソッドです。<br>
-     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createConstructor()}を実装してください。
+     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createFunctionParamAnnotation(String, String)}を実装してください。
      * 
      * @param variableName 変数名
      * @param description  説明
@@ -102,7 +119,7 @@ public abstract class ResourceFactory {
 
     /**
      * {@link Constructor}のインスタンスを生成し返却する抽象メソッドです。<br>
-     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createConstructor()}を実装してください。
+     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createConstructor(String, FunctionDescription)}を実装してください。
      * 
      * @param functionName        機能名
      * @param functionDescription 機能の説明
@@ -114,7 +131,7 @@ public abstract class ResourceFactory {
 
     /**
      * {@link Parameter}のインスタンスを生成し返却する抽象メソッドです。<br>
-     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createParameter()}を実装してください。
+     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createParameter(String, String)}を実装してください。
      * 
      * @param dataType     データ型
      * @param variableName 変数名
@@ -126,7 +143,7 @@ public abstract class ResourceFactory {
 
     /**
      * {@link Process}のインスタンスを生成し返却する抽象メソッドです。<br>
-     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createProcess()}を実装してください。
+     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createProcess(String)}を実装してください。
      * 
      * @param variableName 変数名
      * @return {@link Process}のインスタンス
@@ -137,7 +154,7 @@ public abstract class ResourceFactory {
 
     /**
      * {@link Resource}のインスタンスを生成し返却する抽象メソッドです。<br>
-     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createResource()}を実装してください。
+     * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createResource(String, ClassDescription, String, Field)}を実装してください。
      * 
      * @param packageName      パッケージ名
      * @param classDescription クラスの説明
