@@ -80,9 +80,9 @@ public final class DtoResourceFactory extends ResourceFactory {
     }
 
     @Override
-    public Copyright createCopyright(String projectName, String fileName, String encoding, String creationDate,
-            String creator) {
-        return new DtoCopyright(projectName, fileName, encoding, creationDate, creator);
+    public Copyright createCopyright(String projectName, String fileName, String encoding, String creator,
+            String creationDate) {
+        return new DtoCopyright(projectName, fileName, encoding, creator, creationDate);
     }
 
     @Override
