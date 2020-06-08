@@ -26,6 +26,11 @@ import lombok.RequiredArgsConstructor;
  * {@link #since()}<br>
  * {@link #version()}<br>
  * {@link #lombokNonNull()}<br>
+ * {@link #lombokToString()}<br>
+ * {@link #lombokEqualsAndHashCode()}<br>
+ * {@link #param()}<br>
+ * {@link #lombokSetter()}<br>
+ * {@link #lombokGetter()}<br>
  * 
  * @author Kato Shinya
  * @since 1.0
@@ -68,7 +73,17 @@ public enum DtoAnnotation implements Catalog<DtoAnnotation> {
     /**
      * 引数情報
      */
-    PARAM(6, "@param");
+    PARAM(6, "@param"),
+
+    /**
+     * Setter (Lombok)
+     */
+    LOMBOK_SETTER(7, "@Setter"),
+
+    /**
+     * Getter (Lombok)
+     */
+    LOMBOK_GETTER(8, "@Getter");
 
     /**
      * コード値
@@ -148,5 +163,25 @@ public enum DtoAnnotation implements Catalog<DtoAnnotation> {
      */
     public static String param() {
         return PARAM.getAnnotation();
+    }
+
+    /**
+     * LombokのSetterアノテーションを返却します。
+     * 
+     * @return LombokのSetterアノテーションを返却します。
+     * @see #LOMBOK_SETTER
+     */
+    public static String lombokSetter() {
+        return LOMBOK_SETTER.getAnnotation();
+    }
+
+    /**
+     * LombokのGetterアノテーションを返却します。
+     * 
+     * @return LombokのGetterアノテーションを返却します。
+     * @see #LOMBOK_GETTER
+     */
+    public static String lombokGetter() {
+        return LOMBOK_GETTER.getAnnotation();
     }
 }

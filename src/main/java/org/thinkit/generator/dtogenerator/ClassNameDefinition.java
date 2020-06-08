@@ -12,8 +12,6 @@
 
 package org.thinkit.generator.dtogenerator;
 
-import java.util.Objects;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
