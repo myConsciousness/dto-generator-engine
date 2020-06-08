@@ -199,7 +199,7 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
                 requiredConstructorDescription.add(resourceFactory.createFunctionParamAnnotation(variableName,
                         classItemDefinition.getDescription()));
                 requiredConstructor.add(resourceFactory.createParameter(dataType, variableName));
-                requiredConstructor.add(resourceFactory.createProcess(variableName));
+                requiredConstructor.add(resourceFactory.createConstructorProcess(variableName).toRequired());
             }
 
             final List<ClassDefinition> childClassDefinitionList = classItemDefinition.getChildClassDefinitionList();

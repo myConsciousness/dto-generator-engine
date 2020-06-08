@@ -14,6 +14,7 @@ package org.thinkit.generator.rule.factory.dtofactory;
 
 import org.thinkit.generator.rule.factory.resource.ClassDescription;
 import org.thinkit.generator.rule.factory.resource.Constructor;
+import org.thinkit.generator.rule.factory.resource.ConstructorProcess;
 import org.thinkit.generator.rule.factory.resource.Copyright;
 import org.thinkit.generator.rule.factory.resource.Description;
 import org.thinkit.generator.rule.factory.resource.Field;
@@ -21,7 +22,6 @@ import org.thinkit.generator.rule.factory.resource.FieldDefinition;
 import org.thinkit.generator.rule.factory.resource.FunctionDescription;
 import org.thinkit.generator.rule.factory.resource.FunctionParamAnnotation;
 import org.thinkit.generator.rule.factory.resource.Parameter;
-import org.thinkit.generator.rule.factory.resource.Process;
 import org.thinkit.generator.rule.factory.resource.Resource;
 import org.thinkit.generator.rule.factory.resource.ResourceFactory;
 
@@ -40,7 +40,7 @@ import lombok.ToString;
  * {@link #createFunctionParamAnnotation(String, String)} <br>
  * {@link #createConstructor(String, FunctionDescription)} <br>
  * {@link #createParameter(String, String)} <br>
- * {@link #createProcess(String)} <br>
+ * {@link #createConstructorProcess(String)} <br>
  * {@link #createResource(Copyright, String, ClassDescription, String, Field)}
  * <br>
  * 
@@ -126,8 +126,8 @@ public final class DtoResourceFactory extends ResourceFactory {
     }
 
     @Override
-    public Process createProcess(String variableName) {
-        return new DtoProcess(variableName);
+    public ConstructorProcess createConstructorProcess(String variableName) {
+        return new DtoConstructorProcess(variableName);
     }
 
     @Override

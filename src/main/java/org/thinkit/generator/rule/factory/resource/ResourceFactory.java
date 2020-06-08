@@ -24,7 +24,7 @@ package org.thinkit.generator.rule.factory.resource;
  * {@link #createFieldDefinition(String, String, String)} <br>
  * {@link #createConstructor(String, FunctionDescription)} <br>
  * {@link #createParameter(String, String)} <br>
- * {@link #createProcess(String)} <br>
+ * {@link #createConstructorProcess(String)} <br>
  * {@link #createResource(Copyright, String, ClassDescription, String, Field)}
  * <br>
  * 
@@ -144,15 +144,15 @@ public abstract class ResourceFactory {
         public abstract Parameter createParameter(String dataType, String variableName);
 
         /**
-         * {@link Process}のインスタンスを生成し返却する抽象メソッドです。<br>
-         * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createProcess(String)}を実装してください。
+         * {@link ConstructorProcess}のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createConstructorProcess(String)}を実装してください。
          * 
          * @param variableName 変数名
-         * @return {@link Process}のインスタンス
+         * @return {@link ConstructorProcess}のインスタンス
          * 
          * @exception NullPointerException 引数として{@code null}が渡された場合
          */
-        public abstract Process createProcess(String variableName);
+        public abstract ConstructorProcess createConstructorProcess(String variableName);
 
         /**
          * {@link Resource}のインスタンスを生成し返却する抽象メソッドです。<br>
