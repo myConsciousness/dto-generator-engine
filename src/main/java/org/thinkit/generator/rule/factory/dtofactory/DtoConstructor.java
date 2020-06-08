@@ -67,9 +67,9 @@ public final class DtoConstructor extends Constructor {
             case REQUIRED:
                 return this.createRequiredConstructor();
             case COPYING:
-                return "";
+                return this.createCopyingConstructor();
             default:
-                return "";
+                return this.createDefaultConstructor();
         }
     }
 
@@ -93,6 +93,24 @@ public final class DtoConstructor extends Constructor {
         constructor.append(Indentation.getIndentSpaces()).append(Brace.end());
 
         return constructor.toString();
+    }
+
+    /**
+     * コピーコンストラクタを生成し返却します。
+     * 
+     * @return コピーコンストラクタ
+     */
+    private String createCopyingConstructor() {
+        return "";
+    }
+
+    /**
+     * デフォルトコンストラクタを生成し返却します。
+     * 
+     * @return デフォルトコンストラクタ
+     */
+    private String createDefaultConstructor() {
+        return "";
     }
 
     /**
