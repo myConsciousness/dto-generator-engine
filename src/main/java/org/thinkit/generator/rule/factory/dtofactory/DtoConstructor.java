@@ -16,16 +16,13 @@ import java.util.List;
 import org.thinkit.generator.rule.factory.resource.Parameter;
 import org.thinkit.generator.rule.factory.resource.Process;
 
-import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
 
 import org.thinkit.common.catalog.Indentation;
 
 import org.thinkit.common.catalog.Brace;
 import org.thinkit.common.catalog.Delimiter;
-import org.thinkit.generator.catalog.ConstructorState;
 import org.thinkit.generator.rule.factory.resource.Constructor;
 import org.thinkit.generator.rule.factory.resource.FunctionDescription;
 
