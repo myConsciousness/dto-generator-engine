@@ -12,6 +12,8 @@
 
 package org.thinkit.generator.rule.factory.strategy.resource;
 
+import java.util.List;
+
 import org.thinkit.generator.rule.factory.resource.Parameter;
 import org.thinkit.generator.rule.factory.resource.Process;
 
@@ -24,15 +26,15 @@ import lombok.ToString;
  * それぞれ異なるコンストラクタ定義を生成する際に{@link ConstructorStrategy}を継承した具象クラスを定義してください。<br>
  * <br>
  * {@link ConstructorStrategy}を継承した場合は以下の抽象メソッドを必ず実装する必要があります。<br>
- * {@link #toParameter(Parameter)}<br>
- * {@link #toProcess(Process)}
+ * {@link #toParameter(List)}<br>
+ * {@link #toProcess(List)}<br>
  * 
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
  * 
- * @see #toParameter(Parameter)
- * @see #toProcess(Process)
+ * @see #toParameter(List)
+ * @see #toProcess(List)
  */
 @ToString
 @EqualsAndHashCode
@@ -47,7 +49,7 @@ public abstract class ConstructorStrategy {
      * 
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public abstract String toParameter(@NonNull Parameter parameter);
+    public abstract String toParameter(@NonNull List<Parameter> parameters);
 
     /**
      * 引数として渡された{@link Process}に格納された情報を基に<br>
@@ -58,5 +60,5 @@ public abstract class ConstructorStrategy {
      * 
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public abstract String toProcess(@NonNull Process process);
+    public abstract String toProcess(@NonNull List<Process> processes);
 }

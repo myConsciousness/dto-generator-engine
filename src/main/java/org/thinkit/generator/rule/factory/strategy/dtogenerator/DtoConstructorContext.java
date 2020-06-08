@@ -12,6 +12,8 @@
 
 package org.thinkit.generator.rule.factory.strategy.dtogenerator;
 
+import java.util.List;
+
 import org.thinkit.generator.rule.factory.resource.Parameter;
 import org.thinkit.generator.rule.factory.resource.Process;
 import org.thinkit.generator.rule.factory.strategy.resource.ConstructorContext;
@@ -26,15 +28,15 @@ import lombok.ToString;
  * {@link ConstructorContext}を実装し、{@link ConstructorStrategy}の処理を委譲しています。<br>
  * <br>
  * 以下の機能を提供しています。<br>
- * {@link #toParameter(Parameter)}<br>
- * {@link #toProcess(Process)}<br>
+ * {@link #toParameter(List)}<br>
+ * {@link #toProcess(List)}<br>
  * 
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
  * 
- * @see #toParameter(Parameter)
- * @see #toProcess(Process)
+ * @see #toParameter(List)
+ * @see #toProcess(List)
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
@@ -47,17 +49,17 @@ public class DtoConstructorContext extends ConstructorContext {
      * 
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    protected DtoConstructorContext(@NonNull ConstructorStrategy constructorStrategy) {
+    public DtoConstructorContext(@NonNull ConstructorStrategy constructorStrategy) {
         super(constructorStrategy);
     }
 
     @Override
-    public String toParameter(@NonNull Parameter parameter) {
-        return super.getConstructorStrategy().toParameter(parameter);
+    public String toParameter(@NonNull List<Parameter> parameters) {
+        return super.getConstructorStrategy().toParameter(parameters);
     }
 
     @Override
-    public String toProcess(@NonNull Process process) {
-        return super.getConstructorStrategy().toProcess(process);
+    public String toProcess(@NonNull List<Process> processes) {
+        return super.getConstructorStrategy().toProcess(processes);
     }
 }
