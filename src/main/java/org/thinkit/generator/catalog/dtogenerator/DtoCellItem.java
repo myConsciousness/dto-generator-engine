@@ -24,7 +24,6 @@ import lombok.RequiredArgsConstructor;
  * @since 1.0
  * @version 1.0
  */
-@Getter
 @RequiredArgsConstructor
 public enum DtoCellItem implements Catalog<DtoCellItem> {
 
@@ -106,5 +105,6 @@ public enum DtoCellItem implements Catalog<DtoCellItem> {
     /**
      * コード値
      */
+    @Getter
     private final int code;
 }

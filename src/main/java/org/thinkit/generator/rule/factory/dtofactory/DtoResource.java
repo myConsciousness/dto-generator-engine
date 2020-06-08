@@ -99,6 +99,7 @@ public final class DtoResource extends Resource {
         resource.append("import lombok.*;").append(returnCode);
         resource.append(returnCode);
         resource.append(super.getClassDescription().createResource()).append(returnCode);
+        resource.append(DtoAnnotation.lombokGetter()).append(returnCode);
         resource.append(DtoAnnotation.lombokToString()).append(returnCode);
         resource.append(DtoAnnotation.lombokEqualsAndHashCode()).append(returnCode);
         resource.append(Identifier.PUBLIC.toIdentifier()).append(space).append("final").append(space).append("class")
