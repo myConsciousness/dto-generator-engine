@@ -32,7 +32,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public final class DtoClassDescription extends ClassDescription {
+final class DtoClassDescription extends ClassDescription {
 
     /**
      * 初期バージョン

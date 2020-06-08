@@ -32,7 +32,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class DtoMethodParamAnnotation extends FunctionParamAnnotation {
+final class DtoMethodParamAnnotation extends FunctionParamAnnotation {
 
     /**
      * コンストラクタ

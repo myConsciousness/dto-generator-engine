@@ -33,7 +33,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class DtoCopyright extends Copyright {
+final class DtoCopyright extends Copyright {
 
         /**
          * コンストラクタ

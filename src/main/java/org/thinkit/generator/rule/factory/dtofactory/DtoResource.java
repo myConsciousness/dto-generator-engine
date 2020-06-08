@@ -40,7 +40,7 @@ import org.thinkit.generator.rule.factory.resource.Field;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public final class DtoResource extends Resource {
+final class DtoResource extends Resource {
 
     /**
      * リソース

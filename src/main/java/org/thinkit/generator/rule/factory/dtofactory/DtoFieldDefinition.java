@@ -36,7 +36,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public final class DtoFieldDefinition extends FieldDefinition {
+final class DtoFieldDefinition extends FieldDefinition {
 
     /**
      * コンストラクタ

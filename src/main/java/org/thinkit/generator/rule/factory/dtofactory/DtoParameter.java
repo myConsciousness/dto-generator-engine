@@ -31,7 +31,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public final class DtoParameter extends Parameter {
+final class DtoParameter extends Parameter {
 
     /**
      * コンストラクタ

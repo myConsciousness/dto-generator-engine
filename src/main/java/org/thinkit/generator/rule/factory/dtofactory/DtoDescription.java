@@ -31,7 +31,7 @@ import lombok.EqualsAndHashCode;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public final class DtoDescription extends Description {
+final class DtoDescription extends Description {
 
     /**
      * コンストラクタ

@@ -33,7 +33,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class DtoMethodDescription extends FunctionDescription {
+class DtoMethodDescription extends FunctionDescription {
 
     /**
      * コンストラクタ

@@ -41,7 +41,7 @@ import org.thinkit.common.catalog.Parenthesis;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public final class DtoConstructor extends Constructor {
+final class DtoConstructor extends Constructor {
 
     /**
      * コンストラクタ
