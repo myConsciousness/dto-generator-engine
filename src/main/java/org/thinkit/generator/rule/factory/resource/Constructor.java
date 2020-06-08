@@ -28,6 +28,9 @@ import lombok.ToString;
  * {@link #toDefault()}<br>
  * {@link #toRequired()}<br>
  * {@link #toCopying()}<br>
+ * <br>
+ * コンストラクタの状態は以下のメソッドで取得できます。<br>
+ * {@link #getConstructorState()}
  * 
  * @author Kato Shinya
  * @since 1.0
