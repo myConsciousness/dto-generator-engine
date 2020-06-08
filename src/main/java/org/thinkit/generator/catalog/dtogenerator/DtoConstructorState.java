@@ -1,0 +1,50 @@
+/**
+ * Project Name : Generator<br>
+ * File Name : DtoConstructorState.java<br>
+ * Encoding : UTF-8<br>
+ * Creation Date : 2020/06/08<br>
+ * <p>
+ * Copyright © 2020 Kato Shinya. All rights reserved.
+ * <p>
+ * This source code or any portion thereof must not be<br>
+ * reproduced or used in any manner whatsoever.
+ */
+
+package org.thinkit.generator.catalog.dtogenerator;
+
+import org.thinkit.common.catalog.Catalog;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+/**
+ * DTOのコンストラクタ状態を管理するカタログです。
+ *
+ * @author Kato Shinya
+ * @since 1.0
+ * @version 1.0
+ */
+@RequiredArgsConstructor
+public enum DtoConstructorState implements Catalog<DtoConstructorState> {
+
+    /**
+     * デフォルトコンストラクタ
+     */
+    DEFAULT(0),
+
+    /**
+     * 必須引数有りコンストラクタ
+     */
+    REQUIRED(1),
+
+    /**
+     * コピーコンストラクタ
+     */
+    COPYING(2);
+
+    /**
+     * コード値
+     */
+    @Getter
+    private final int code;
+}
