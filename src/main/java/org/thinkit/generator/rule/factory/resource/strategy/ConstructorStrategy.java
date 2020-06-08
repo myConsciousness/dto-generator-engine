@@ -47,7 +47,7 @@ public abstract class ConstructorStrategy {
      * 
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    protected abstract String toParameter(@NonNull Parameter parameter);
+    public abstract String toParameter(@NonNull Parameter parameter);
 
     /**
      * 引数として渡された{@link Process}に格納された情報を基に<br>
@@ -58,5 +58,5 @@ public abstract class ConstructorStrategy {
      * 
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    protected abstract String toProcess(@NonNull Process process);
+    public abstract String toProcess(@NonNull Process process);
 }
