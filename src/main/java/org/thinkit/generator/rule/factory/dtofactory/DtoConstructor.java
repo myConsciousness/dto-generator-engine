@@ -16,13 +16,16 @@ import java.util.List;
 import org.thinkit.generator.rule.factory.resource.Parameter;
 import org.thinkit.generator.rule.factory.resource.Process;
 
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 import org.thinkit.common.catalog.Indentation;
 
 import org.thinkit.common.catalog.Brace;
 import org.thinkit.common.catalog.Delimiter;
+import org.thinkit.generator.catalog.ConstructorState;
 import org.thinkit.generator.rule.factory.resource.Constructor;
 import org.thinkit.generator.rule.factory.resource.FunctionDescription;
 
@@ -62,12 +65,28 @@ public final class DtoConstructor extends Constructor {
 
     @Override
     public String createResource() {
+
+        switch (super.getConstructorState()) {
+            case REQUIRED:
+                return this.createRequiredConstructor();
+            case COPYING:
+                return "";
+            default:
+                return "";
+        }
+    }
+
+    /**
+     * 必須引数ありのコンストラクタを生成し返却します。
+     * 
+     * @return 必須引数ありのコンストラクタ
+     */
+    private String createRequiredConstructor() {
         final String indentSpaces = Indentation.getIndentSpaces();
         final String space = Indentation.space();
         final String returnCode = Indentation.returnCode();
 
         final StringBuilder constructor = new StringBuilder();
-
         constructor.append(super.getFunctionDescription().createResource()).append(returnCode);
         constructor.append(indentSpaces).append(Identifier.PUBLIC.toIdentifier()).append(space)
                 .append(super.getFunctionName());

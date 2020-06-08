@@ -65,22 +65,31 @@ public abstract class Constructor extends Function {
      * {@link Constructor}のインスタンス生成時では、<br>
      * 初期値として{@link ConstructorState#DEFAULT}が設定されているため、<br>
      * {@link #toDefault()}の呼び出しは必要ありません。
+     * 
+     * @return 当オブジェクトのインスタンス
      */
-    public void toDefault() {
+    public Constructor toDefault() {
         this.constructorState = ConstructorState.DEFAULT;
+        return this;
     }
 
     /**
      * コンストラクタ状態を必須引数有りのコンストラクタに変更します。
+     * 
+     * @return 当オブジェクトのインスタンス
      */
-    public void toRequired() {
+    public Constructor toRequired() {
         this.constructorState = ConstructorState.REQUIRED;
+        return this;
     }
 
     /**
      * コンストラクタ状態をコピーコンストラクタに変更します。
+     * 
+     * @return 当オブジェクトのインスタンス
      */
-    public void toCopying() {
+    public Constructor toCopying() {
         this.constructorState = ConstructorState.COPYING;
+        return this;
     }
 }

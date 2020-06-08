@@ -182,8 +182,9 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
         final Resource resource = resourceFactory.createResource(copyright, classNameDefinition.getPackageName(),
                 classDescription, className, field);
 
-        final FunctionDescription functionDescription = resourceFactory.createFunctionDescription("コンストラクタ");
-        final Constructor constructor = resourceFactory.createConstructor(className, functionDescription);
+        final FunctionDescription requiredConstructorDescription = resourceFactory.createFunctionDescription("コンストラクタ");
+        final Constructor requiredConstructor = resourceFactory
+                .createConstructor(className, requiredConstructorDescription).toRequired();
 
         for (ClassItemDefinition classItemDefinition : classItemDefinitionList) {
             final String dataType = classItemDefinition.getDataType();
@@ -195,10 +196,10 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
             if (classItemDefinition.isInvariant()) {
                 final String variableName = classItemDefinition.getVariableName();
 
-                functionDescription.add(resourceFactory.createFunctionParamAnnotation(variableName,
+                requiredConstructorDescription.add(resourceFactory.createFunctionParamAnnotation(variableName,
                         classItemDefinition.getDescription()));
-                constructor.add(resourceFactory.createParameter(dataType, variableName));
-                constructor.add(resourceFactory.createProcess(variableName));
+                requiredConstructor.add(resourceFactory.createParameter(dataType, variableName));
+                requiredConstructor.add(resourceFactory.createProcess(variableName));
             }
 
             final List<ClassDefinition> childClassDefinitionList = classItemDefinition.getChildClassDefinitionList();
@@ -216,7 +217,7 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
             }
         }
 
-        resource.add(constructor);
+        resource.add(requiredConstructor);
 
         logger.atInfo().log("END");
         return resource;
