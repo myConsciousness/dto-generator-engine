@@ -11,21 +11,22 @@
  */
 package org.thinkit.generator.rule.factory.dtofactory;
 
-import org.thinkit.generator.rule.factory.strategy.dtogenerator.DtoConstructorContext;
-import org.thinkit.generator.rule.factory.strategy.dtogenerator.DtoCopyingConstructorStrategy;
-import org.thinkit.generator.rule.factory.strategy.dtogenerator.DtoDefaultConstructorStrategy;
-import org.thinkit.generator.rule.factory.strategy.dtogenerator.DtoRequiredConstructorStrategy;
-import org.thinkit.generator.rule.factory.strategy.resource.ConstructorContext;
+import java.util.List;
+
+import org.thinkit.generator.rule.factory.resource.Parameter;
+import org.thinkit.generator.rule.factory.resource.Process;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import org.thinkit.common.catalog.Indentation;
+
 import org.thinkit.common.catalog.Brace;
+import org.thinkit.common.catalog.Delimiter;
 import org.thinkit.generator.rule.factory.resource.Constructor;
 import org.thinkit.generator.rule.factory.resource.FunctionDescription;
 
 import org.thinkit.common.catalog.Identifier;
-import org.thinkit.common.catalog.Indentation;
 import org.thinkit.common.catalog.Parenthesis;
 
 /**
@@ -41,7 +42,12 @@ import org.thinkit.common.catalog.Parenthesis;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-final class DtoConstructor extends Constructor {
+public final class DtoConstructor extends Constructor {
+
+    /**
+     * 処理のインデント数
+     */
+    private static final int PROCESS_INDENT_COUNT = 8;
 
     /**
      * コンストラクタ
@@ -60,40 +66,67 @@ final class DtoConstructor extends Constructor {
         final String space = Indentation.space();
         final String returnCode = Indentation.returnCode();
 
-        final ConstructorContext constructorContext = this.getConstructorContext();
         final StringBuilder constructor = new StringBuilder();
 
         constructor.append(super.getFunctionDescription().createResource()).append(returnCode);
         constructor.append(indentSpaces).append(Identifier.PUBLIC.toIdentifier()).append(space)
                 .append(super.getFunctionName());
-
-        constructor.append(Parenthesis.start()).append(constructorContext.toParameter(super.getParameters()))
-                .append(Parenthesis.end()).append(space).append(Brace.start()).append(returnCode);
-        constructor.append(constructorContext.toProcess(super.getProcesses())).append(returnCode);
-
+        constructor.append(Parenthesis.start()).append(this.toParameter()).append(Parenthesis.end()).append(space)
+                .append(Brace.start()).append(returnCode);
+        constructor.append(this.toProcess()).append(returnCode);
         constructor.append(Indentation.getIndentSpaces()).append(Brace.end());
 
         return constructor.toString();
     }
 
     /**
-     * 設定された{@link ConstructorState}の値を基にコンストラクタ定義を生成する際のコンテキストを取得し返却します。<br>
-     * 以下のストラテジーを使用します。<br>
-     * {@link DtoDefaultConstructorStrategy}<br>
-     * {@link DtoRequiredConstructorStrategy}<br>
-     * {@link DtoCopyingConstructorStrategy}<br>
+     * {@link Parameter}で設定された引数情報を文字列表現として返却します。<br>
+     * 引数情報が存在しない場合は必ず空文字列を返却します。
      * 
-     * @return コンストラクタ定義を生成する際に使用するコンテキスト
+     * @return 引数の文字列表現
      */
-    private ConstructorContext getConstructorContext() {
+    private String toParameter() {
+        final List<Parameter> parameters = super.getParameters();
 
-        switch (super.getConstructorState()) {
-            case REQUIRED:
-                return new DtoConstructorContext(new DtoRequiredConstructorStrategy());
-            case COPYING:
-                return new DtoConstructorContext(new DtoCopyingConstructorStrategy());
-            default:
-                return new DtoConstructorContext(new DtoDefaultConstructorStrategy());
+        if (parameters.isEmpty()) {
+            return "";
         }
+
+        final StringBuilder sb = new StringBuilder();
+        final String space = Indentation.space();
+        final String commma = Delimiter.commma();
+
+        for (Parameter parameter : parameters) {
+            sb.append(parameter.createResource()).append(commma).append(space);
+        }
+
+        sb.setLength(sb.length() - (commma.length() + space.length()));
+
+        return sb.toString();
+    }
+
+    /**
+     * {@link Process}で設定された処理情報を文字列表現として返却します。<br>
+     * 処理情報が存在しない場合は必ず空文字列を返却します。
+     * 
+     * @return 処理の文字列表現
+     */
+    private String toProcess() {
+        List<Process> processes = super.getProcesses();
+
+        if (processes.isEmpty()) {
+            return "";
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        final String indentSpaces = Indentation.getIndentSpaces(PROCESS_INDENT_COUNT);
+        final String returnCode = Indentation.returnCode();
+
+        for (Process process : processes) {
+            sb.append(indentSpaces).append(process.createResource()).append(returnCode);
+        }
+
+        sb.setLength(sb.length() - returnCode.length());
+        return sb.toString();
     }
 }

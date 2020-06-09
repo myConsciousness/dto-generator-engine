@@ -12,25 +12,13 @@
 
 package org.thinkit.generator.rule.factory.resource;
 
-import org.thinkit.generator.catalog.ConstructorState;
-
-import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
 
 /**
  * プログラムリソースにおけるコンストラクタを抽象化した抽象クラスです。<br>
  * この抽象クラスではコンストラクタ定義に必要な情報を保持します。<br>
  * この抽象クラスを継承する具象クラスは必ず{@link Component#createResource()}を実装してください。<br>
- * <br>
- * 以下のメソッドを使用することによりコンストラクタの状態を変更することができます。<br>
- * {@link #toDefault()}<br>
- * {@link #toRequired()}<br>
- * {@link #toCopying()}<br>
- * <br>
- * コンストラクタの状態は以下のメソッドで取得できます。<br>
- * {@link #getConstructorState()}
  * 
  * @author Kato Shinya
  * @since 1.0
@@ -43,13 +31,6 @@ import lombok.ToString;
 public abstract class Constructor extends Function {
 
     /**
-     * コンストラクタ状態。<br>
-     * 初期値は{@link ConstructorState#DEFAULT}が設定されています。
-     */
-    @Getter(AccessLevel.PROTECTED)
-    private ConstructorState constructorState = ConstructorState.DEFAULT;
-
-    /**
      * コンストラクタ
      * 
      * @param functionName        機能名
@@ -58,38 +39,5 @@ public abstract class Constructor extends Function {
      */
     protected Constructor(String functionName, FunctionDescription functionDescription) {
         super(functionName, functionDescription);
-    }
-
-    /**
-     * コンストラクタ状態をデフォルトコンストラクタに変更します。<br>
-     * {@link Constructor}のインスタンス生成時では、<br>
-     * 初期値として{@link ConstructorState#DEFAULT}が設定されているため、<br>
-     * {@link #toDefault()}の呼び出しは必要ありません。
-     * 
-     * @return 当オブジェクトのインスタンス
-     */
-    public Constructor toDefault() {
-        this.constructorState = ConstructorState.DEFAULT;
-        return this;
-    }
-
-    /**
-     * コンストラクタ状態を必須引数有りのコンストラクタに変更します。
-     * 
-     * @return 当オブジェクトのインスタンス
-     */
-    public Constructor toRequired() {
-        this.constructorState = ConstructorState.REQUIRED;
-        return this;
-    }
-
-    /**
-     * コンストラクタ状態をコピーコンストラクタに変更します。
-     * 
-     * @return 当オブジェクトのインスタンス
-     */
-    public Constructor toCopying() {
-        this.constructorState = ConstructorState.COPYING;
-        return this;
     }
 }

@@ -183,8 +183,8 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
                 classDescription, className, field);
 
         final FunctionDescription requiredConstructorDescription = resourceFactory.createFunctionDescription("コンストラクタ");
-        final Constructor requiredConstructor = resourceFactory
-                .createConstructor(className, requiredConstructorDescription).toRequired();
+        final Constructor requiredConstructor = resourceFactory.createConstructor(className,
+                requiredConstructorDescription);
 
         for (ClassItemDefinition classItemDefinition : classItemDefinitionList) {
             final String dataType = classItemDefinition.getDataType();
