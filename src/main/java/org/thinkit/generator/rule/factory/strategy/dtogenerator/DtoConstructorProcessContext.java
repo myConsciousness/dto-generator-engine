@@ -12,8 +12,6 @@
 
 package org.thinkit.generator.rule.factory.strategy.dtogenerator;
 
-import java.util.List;
-
 import org.thinkit.generator.rule.factory.strategy.resource.ConstructorProcessContext;
 import org.thinkit.generator.rule.factory.strategy.resource.ConstructorProcessStrategy;
 
@@ -26,13 +24,13 @@ import lombok.ToString;
  * {@link ConstructorProcessContext}を実装し、{@link ConstructorProcessStrategy}の処理を委譲しています。<br>
  * <br>
  * 以下の機能を提供しています。<br>
- * {@link #toConstructorProcess(String, List)}<br>
+ * {@link #toConstructorProcess(String, String)}<br>
  * 
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
  * 
- * @see #toConstructorProcess(String, List)
+ * @see #toConstructorProcess(String, String)
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
@@ -50,7 +48,7 @@ public class DtoConstructorProcessContext extends ConstructorProcessContext {
     }
 
     @Override
-    public String toConstructorProcess(@NonNull String variableName, @NonNull List<String> variableNames) {
-        return super.getConstructorProcessStrategy().toConstructorProcess(variableName, variableNames);
+    public String toConstructorProcess(@NonNull String variableName, @NonNull String getterName) {
+        return super.getConstructorProcessStrategy().toConstructorProcess(variableName, getterName);
     }
 }

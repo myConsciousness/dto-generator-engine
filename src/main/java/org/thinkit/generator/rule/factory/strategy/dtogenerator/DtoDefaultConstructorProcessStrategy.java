@@ -12,8 +12,6 @@
 
 package org.thinkit.generator.rule.factory.strategy.dtogenerator;
 
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.thinkit.generator.rule.factory.strategy.resource.ConstructorProcessStrategy;
 
@@ -25,7 +23,7 @@ import lombok.ToString;
  * デフォルトコンストラクタの処理定義を生成する際に使用するストラテジーを実装した具象クラスです。<br>
  * <br>
  * 以下の機能を提供しています。<br>
- * {@link #toConstructorProcess(String, List)}<br>
+ * {@link #toConstructorProcess(String, String)}<br>
  * <br>
  * デフォルトコンストラクタでは処理情報が存在しないため各機能は必ず空文字列を返却します。
  * 
@@ -33,14 +31,14 @@ import lombok.ToString;
  * @since 1.0
  * @version 1.0
  * 
- * @see #toConstructorProcess(String, List)
+ * @see #toConstructorProcess(String, String)
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
 public class DtoDefaultConstructorProcessStrategy extends ConstructorProcessStrategy {
 
     @Override
-    public String toConstructorProcess(@NonNull String variableName, @NonNull List<String> variableNames) {
+    public String toConstructorProcess(@NonNull String variableName, @NonNull String getterName) {
         return StringUtils.EMPTY;
     }
 }

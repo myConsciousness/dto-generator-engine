@@ -41,6 +41,7 @@ import lombok.ToString;
  * {@link #createConstructor(String, FunctionDescription)} <br>
  * {@link #createParameter(String, String)} <br>
  * {@link #createConstructorProcess(String)} <br>
+ * {@link #createConstructorProcess(String, String)} <br>
  * {@link #createResource(Copyright, String, ClassDescription, String, Field)}
  * <br>
  * 
@@ -128,6 +129,11 @@ public final class DtoResourceFactory extends ResourceFactory {
     @Override
     public ConstructorProcess createConstructorProcess(String variableName) {
         return new DtoConstructorProcess(variableName);
+    }
+
+    @Override
+    public ConstructorProcess createConstructorProcess(String variableName, String getterName) {
+        return new DtoConstructorProcess(variableName, getterName);
     }
 
     @Override

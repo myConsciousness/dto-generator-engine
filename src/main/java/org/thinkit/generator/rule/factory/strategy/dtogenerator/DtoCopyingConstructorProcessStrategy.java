@@ -12,8 +12,6 @@
 
 package org.thinkit.generator.rule.factory.strategy.dtogenerator;
 
-import java.util.List;
-
 import org.thinkit.common.catalog.Delimiter;
 import org.thinkit.common.catalog.Indentation;
 import org.thinkit.common.catalog.Operand;
@@ -27,13 +25,13 @@ import lombok.ToString;
  * コピーコンストラクタの処理定義を生成する際に使用するストラテジーを実装した具象クラスです。<br>
  * <br>
  * 以下の機能を提供しています。<br>
- * {@link #toConstructorProcess(String, List)}<br>
+ * {@link #toConstructorProcess(String, String)}<br>
  * 
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
  * 
- * @see #toConstructorProcess(String, List)
+ * @see #toConstructorProcess(String, String)
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
@@ -45,19 +43,16 @@ public class DtoCopyingConstructorProcessStrategy extends ConstructorProcessStra
     private static final String CURRENT_OBJECT = "this";
 
     @Override
-    public String toConstructorProcess(@NonNull String variableName, @NonNull List<String> variableNames) {
+    public String toConstructorProcess(@NonNull String variableName, @NonNull String getterName) {
         final String space = Indentation.space();
         final String returnCode = Indentation.returnCode();
         final String period = Delimiter.period();
-        final String equal = Operand.equal();
+        final String assignment = Operand.assignment();
 
         final StringBuilder process = new StringBuilder();
-
-        for (String variable : variableNames) {
-            process.append(CURRENT_OBJECT).append(period).append(variable).append(space).append(equal).append(space);
-            process.append(variableName).append(".get").append(this.toInitialUpperCase(variable)).append("();")
-                    .append(returnCode);
-        }
+        process.append(CURRENT_OBJECT).append(period).append(getterName).append(space).append(assignment).append(space);
+        process.append(variableName).append(".get").append(this.toInitialUpperCase(getterName)).append("();")
+                .append(returnCode);
 
         process.setLength(process.length() - returnCode.length());
 

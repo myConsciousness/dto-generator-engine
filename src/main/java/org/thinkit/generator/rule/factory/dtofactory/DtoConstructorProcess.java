@@ -47,10 +47,20 @@ final class DtoConstructorProcess extends ConstructorProcess {
         super(variableName);
     }
 
+    /**
+     * コンストラクタ
+     * 
+     * @param variableName 変数名
+     * @param getterName   ゲッター名
+     * @exception NullPointerException 引数として{@code null}が渡された場合
+     */
+    public DtoConstructorProcess(String variableName, String getterName) {
+        super(variableName, getterName);
+    }
+
     @Override
     public String createResource() {
-        return this.getConstructorProcessContext().toConstructorProcess(super.getVariableName(),
-                super.getVariableNames());
+        return this.getConstructorProcessContext().toConstructorProcess(super.getVariableName(), super.getGetterName());
     }
 
     /**

@@ -182,25 +182,34 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
         final Resource resource = resourceFactory.createResource(copyright, classNameDefinition.getPackageName(),
                 classDescription, className, field);
 
-        final FunctionDescription requiredConstructorDescription = resourceFactory.createFunctionDescription("コンストラクタ");
+        final FunctionDescription requiredConstructorDescription = resourceFactory
+                .createFunctionDescription("Constructor");
         final Constructor requiredConstructor = resourceFactory.createConstructor(className,
                 requiredConstructorDescription);
 
+        final FunctionDescription copyingConstructorDescription = resourceFactory
+                .createFunctionDescription("Copying constructor");
+        final Constructor copyingConstructor = resourceFactory.createConstructor(className,
+                copyingConstructorDescription);
+
+        copyingConstructor.add(resourceFactory.createParameter(className, this.toInitialLowerCase(className)));
+
         for (ClassItemDefinition classItemDefinition : classItemDefinitionList) {
             final String dataType = classItemDefinition.getDataType();
+            final String variableName = classItemDefinition.getVariableName();
 
             field.add(resourceFactory.createDescription(classItemDefinition.getDescription()));
-            field.add(resourceFactory.createFieldDefinition(dataType, classItemDefinition.getVariableName(),
+            field.add(resourceFactory.createFieldDefinition(dataType, variableName,
                     classItemDefinition.getInitialValue()));
 
             if (classItemDefinition.isInvariant()) {
-                final String variableName = classItemDefinition.getVariableName();
-
                 requiredConstructorDescription.add(resourceFactory.createFunctionParamAnnotation(variableName,
                         classItemDefinition.getDescription()));
                 requiredConstructor.add(resourceFactory.createParameter(dataType, variableName));
                 requiredConstructor.add(resourceFactory.createConstructorProcess(variableName).toRequired());
             }
+
+            copyingConstructor.add(resourceFactory.createConstructorProcess(className, variableName).toCopying());
 
             final List<ClassDefinition> childClassDefinitionList = classItemDefinition.getChildClassDefinitionList();
 
@@ -218,9 +227,22 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
         }
 
         resource.add(requiredConstructor);
+        resource.add(copyingConstructor);
 
         logger.atInfo().log("END");
         return resource;
+    }
+
+    /**
+     * 文字列の上1桁目を小文字に変換して返却します。
+     * 
+     * @param sequence 文字列
+     * @return 上1桁目が小文字に変換された文字列
+     * 
+     * @exception NullPointerException 引数として{@code null}が渡された場合
+     */
+    private String toInitialLowerCase(@NonNull String sequence) {
+        return sequence.substring(0, 1).toLowerCase() + sequence.substring(1);
     }
 
     /**

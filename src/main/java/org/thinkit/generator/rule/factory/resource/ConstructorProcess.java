@@ -12,9 +12,6 @@
 
 package org.thinkit.generator.rule.factory.resource;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.thinkit.generator.catalog.ConstructorState;
 
 import lombok.AccessLevel;
@@ -54,10 +51,10 @@ public abstract class ConstructorProcess extends Process {
     private ConstructorState constructorState = ConstructorState.DEFAULT;
 
     /**
-     * 変数リスト
+     * ゲッター名
      */
     @Getter(AccessLevel.PROTECTED)
-    private List<String> variableNames = new ArrayList<>(0);
+    private String getterName = "";
 
     /**
      * コンストラクタ
@@ -65,17 +62,20 @@ public abstract class ConstructorProcess extends Process {
      * @param variableName 変数名
      * @exception NulLPointerException 引数として{@code null}が渡された場合
      */
-    protected ConstructorProcess(String variableName) {
+    protected ConstructorProcess(@NonNull String variableName) {
         super(variableName);
     }
 
     /**
-     * 変数名を追加します。
+     * コンストラクタ
      * 
-     * @param variable 変数名
+     * @param variableName 変数名
+     * @param getterName   ゲッター名
+     * @exception NulLPointerException 引数として{@code null}が渡された場合
      */
-    public void add(@NonNull String variableName) {
-        this.variableNames.add(variableName);
+    protected ConstructorProcess(@NonNull String variableName, @NonNull String getterName) {
+        super(variableName);
+        this.getterName = getterName;
     }
 
     /**
