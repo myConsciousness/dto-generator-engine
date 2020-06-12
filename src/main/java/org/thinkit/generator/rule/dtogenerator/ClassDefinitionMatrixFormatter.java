@@ -171,14 +171,7 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
         final ResourceFactory resourceFactory = DtoResourceFactory.getInstance();
         final String creator = classCreatorDefinition.getCreator();
 
-        final Copyright copyright = this.createCopyright(className, classNameDefinition, classCreatorDefinition);
-
-        final Field field = resourceFactory.createField();
-        final ClassDescription classDescription = resourceFactory.createClassDescription(
-                classNameDefinition.getDescription(), creator, classNameDefinition.getVersion());
-
-        final Resource resource = resourceFactory.createResource(copyright, classNameDefinition.getPackageName(),
-                classDescription, className, field);
+        final Resource resource = this.createResource(className, classNameDefinition, classCreatorDefinition);
 
         final FunctionDescription requiredConstructorDescription = resourceFactory
                 .createFunctionDescription("Constructor");
@@ -247,6 +240,32 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
         return DtoResourceFactory.getInstance().createCopyright(classNameDefinition.getProjectName(),
                 className + Extension.java(), StandardCharsets.UTF_8.name(), classCreatorDefinition.getCreator(),
                 classCreatorDefinition.getCreationDate());
+    }
+
+    /**
+     * 引数として渡された情報を基にリソース定義オブジェクトを生成し返却します。<br>
+     * 引数として{@code null}が渡された場合は実行時に必ず失敗します。<br>
+     * 
+     * @param className              クラス名
+     * @param classNameDefinition    クラス名定義情報
+     * @param classCreatorDefinition クラス作成者情報
+     * @return リソース定義オブジェクト
+     * 
+     * @exception NullPointerException 引数として{@code null}が渡された場合
+     */
+    private Resource createResource(@NonNull String className, @NonNull ClassNameDefinition classNameDefinition,
+            @NonNull ClassCreatorDefinition classCreatorDefinition) {
+
+        final ResourceFactory resourceFactory = DtoResourceFactory.getInstance();
+
+        final Copyright copyright = this.createCopyright(className, classNameDefinition, classCreatorDefinition);
+        final Field field = resourceFactory.createField();
+        final ClassDescription classDescription = resourceFactory.createClassDescription(
+                classNameDefinition.getDescription(), classCreatorDefinition.getCreator(),
+                classNameDefinition.getVersion());
+
+        return resourceFactory.createResource(copyright, classNameDefinition.getPackageName(), classDescription,
+                className, field);
     }
 
     /**
