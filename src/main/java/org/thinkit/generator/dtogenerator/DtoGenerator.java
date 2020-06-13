@@ -52,6 +52,11 @@ public final class DtoGenerator extends AbstractGenerator {
 
         final Map<String, String> resources = DtoClassResourceFacade.createResource(super.getFilePath());
 
+        if (resources == null) {
+            logger.atSevere().log("DTOクラスのリソース作成処理が異常終了しました。");
+            return false;
+        }
+
         final FileHandler fileHandler = new FileHandler("C:\\Users\\yourd\\Desktop");
         final Set<Entry<String, String>> entrySet = resources.entrySet();
 
