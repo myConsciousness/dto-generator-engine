@@ -50,7 +50,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public final class ClassDefinitionMatrixFormatter extends AbstractRule {
+final class ClassDefinitionMatrixFormatter extends AbstractRule {
 
     /**
      * ログ出力オブジェクト
