@@ -31,7 +31,6 @@ import org.thinkit.generator.rule.factory.dtofactory.DtoResourceFactory;
 import org.thinkit.generator.rule.factory.resource.ClassDescription;
 import org.thinkit.generator.rule.factory.resource.Constructor;
 import org.thinkit.generator.rule.factory.resource.Copyright;
-import org.thinkit.generator.rule.factory.resource.Field;
 import org.thinkit.generator.rule.factory.resource.Resource;
 import org.thinkit.generator.rule.factory.resource.ResourceFactory;
 
@@ -127,7 +126,6 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
         final Map<String, String> formattedResources = parameters.getFormattedResources();
 
         for (ClassDefinition classDefinition : classDefinitionList) {
-
             final String className = classDefinition.getClassName();
             final Resource resource = this.formatResource(className, classDefinition.getClassItemDefinitionList(),
                     classNameDefinition, classCreatorDefinition, formattedResources);
@@ -246,15 +244,13 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
             @NonNull ClassCreatorDefinition classCreatorDefinition) {
 
         final ResourceFactory resourceFactory = DtoResourceFactory.getInstance();
-
         final Copyright copyright = this.createCopyright(className, classNameDefinition, classCreatorDefinition);
-        final Field field = resourceFactory.createField();
         final ClassDescription classDescription = resourceFactory.createClassDescription(
                 classNameDefinition.getDescription(), classCreatorDefinition.getCreator(),
                 classNameDefinition.getVersion());
 
         return resourceFactory.createResource(copyright, classNameDefinition.getPackageName(), classDescription,
-                className, field);
+                className, resourceFactory.createField());
     }
 
     /**
