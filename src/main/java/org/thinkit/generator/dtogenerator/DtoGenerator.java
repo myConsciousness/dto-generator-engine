@@ -12,17 +12,17 @@
 
 package org.thinkit.generator.dtogenerator;
 
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.google.common.flogger.FluentLogger;
+
 import org.thinkit.common.catalog.Extension;
 import org.thinkit.common.util.FileHandler;
 import org.thinkit.generator.AbstractGenerator;
 import org.thinkit.generator.rule.dtogenerator.ClassDefinitionMatrixFormatter;
 import org.thinkit.generator.rule.dtogenerator.ClassDefinitionMatrixManager;
-
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
-
-import com.google.common.flogger.FluentLogger;
 
 /**
  * DTO定義書を解析してDTOクラスを生成する処理を定義したクラスです。

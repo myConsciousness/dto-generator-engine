@@ -12,10 +12,10 @@
 
 package org.thinkit.generator;
 
+import com.google.common.flogger.FluentLogger;
+
 import org.thinkit.common.catalog.Catalog;
 import org.thinkit.generator.catalog.GeneratorDivision;
-
-import com.google.common.flogger.FluentLogger;
 
 /**
  * Generatorプロジェクトのエントリーポイントクラスです。<br>

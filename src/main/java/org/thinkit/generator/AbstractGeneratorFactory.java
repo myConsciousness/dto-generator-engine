@@ -12,10 +12,10 @@
 
 package org.thinkit.generator;
 
-import java.util.Objects;
-
 import org.apache.commons.lang3.StringUtils;
 import org.thinkit.generator.catalog.GeneratorDivision;
+
+import lombok.NonNull;
 
 /**
  * 各業務に対応した生成器を生成する抽象ファクトリクラスです。<br>
@@ -53,8 +53,7 @@ public abstract class AbstractGeneratorFactory {
      * @exception NullPointerException     生成器区分がnullの場合
      * @exception IllegalArgumentException ファイルパスがnullまたは空文字列の場合
      */
-    public final Generator create(final GeneratorDivision generatorDivision, final String filePath) {
-        Objects.requireNonNull(generatorDivision, "Generator division must not be null.");
+    public final Generator create(@NonNull final GeneratorDivision generatorDivision, final String filePath) {
 
         if (StringUtils.isEmpty(filePath)) {
             throw new IllegalArgumentException(String.format("File path is required. %s was given.", filePath));

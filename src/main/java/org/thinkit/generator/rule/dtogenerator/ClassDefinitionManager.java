@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import com.google.common.flogger.FluentLogger;
+
 import org.apache.commons.lang3.StringUtils;
 import org.thinkit.common.rule.AbstractRule;
 import org.thinkit.common.rule.Attribute;
@@ -26,17 +28,15 @@ import org.thinkit.common.rule.Content;
 import org.thinkit.common.util.ExcelHandler;
 import org.thinkit.common.util.ExcelHandler.QueueType;
 import org.thinkit.generator.catalog.dtogenerator.DtoCellItem;
+import org.thinkit.generator.dtogenerator.ClassDefinition;
 import org.thinkit.generator.dtogenerator.ClassItemDefinition;
 import org.thinkit.generator.rule.Sheet;
 
-import org.thinkit.generator.dtogenerator.ClassDefinition;
-import com.google.common.flogger.FluentLogger;
-
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 /**
  * Excelに記述された定義書シートからクラス定義情報を抽出する処理を行うルールです。
@@ -53,6 +53,16 @@ public final class ClassDefinitionManager extends AbstractRule {
      * ログ出力オブジェクト
      */
     private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+
+    /**
+     * 再帰処理開始時のインデックス
+     */
+    private static final int RECURSIVE_START_INDEX = 0;
+
+    /**
+     * 再帰処理開始時の基準層
+     */
+    private static final int RECURSIVE_BASE_LAYER = 1;
 
     /**
      * SheetHandlerオブジェクト
@@ -188,25 +198,12 @@ public final class ClassDefinitionManager extends AbstractRule {
         logger.atInfo().log("マトリクスリスト = (%s)", matrixList);
 
         final List<ClassDefinition> classDefinitionList = new ArrayList<>();
-        this.craeteClassDefinitionRecursively(
-                RecursiveRequiredParameters.of(matrixList, contents, classDefinitionList, 0, 1));
+        this.craeteClassDefinitionRecursively(RecursiveRequiredParameters.of(matrixList, contents, classDefinitionList,
+                RECURSIVE_START_INDEX, RECURSIVE_BASE_LAYER));
 
         logger.atInfo().log("クラス定義情報群 = (%s)", classDefinitionList);
         logger.atInfo().log("END");
         return classDefinitionList;
-    }
-
-    @Override
-    protected List<Attribute> getAttributes() {
-        logger.atInfo().log("START");
-
-        final List<Attribute> attributes = new ArrayList<>(2);
-        attributes.add(ContentAttribute.セル項目コード);
-        attributes.add(ContentAttribute.セル項目名);
-
-        logger.atInfo().log("クラス項目定義情報のアトリビュート = (%s)", attributes);
-        logger.atInfo().log("END");
-        return attributes;
     }
 
     /**
@@ -217,7 +214,8 @@ public final class ClassDefinitionManager extends AbstractRule {
      * @return 子クラスを生成する際に使用したレコード数
      * @see RecursiveRequiredParameters
      */
-    private int craeteClassDefinitionRecursively(final RecursiveRequiredParameters recursiveRequiredParameters) {
+    private int craeteClassDefinitionRecursively(
+            @NonNull final RecursiveRequiredParameters recursiveRequiredParameters) {
         logger.atInfo().log("START");
 
         final List<Map<String, String>> matrixList = recursiveRequiredParameters.getMatrixList();
@@ -301,11 +299,8 @@ public final class ClassDefinitionManager extends AbstractRule {
             final ClassDefinition classDefinition) {
         logger.atInfo().log("START");
 
-        final String itemNameClassName = this.getCellItemName(content, DtoCellItem.VARIABLE_NAME);
-        final String itemNameDescription = this.getCellItemName(content, DtoCellItem.DESCRIPTION);
-
-        final String className = record.get(itemNameClassName);
-        final String description = record.get(itemNameDescription);
+        final String className = record.get(this.getCellItemName(content, DtoCellItem.VARIABLE_NAME));
+        final String description = record.get(this.getCellItemName(content, DtoCellItem.DESCRIPTION));
 
         classDefinition.setClassName(className);
         classDefinition.setDescription(description);
@@ -325,17 +320,12 @@ public final class ClassDefinitionManager extends AbstractRule {
             List<ClassItemDefinition> classItemDefinitionList) {
         logger.atInfo().log("START");
 
-        final String itemNameVariableName = this.getCellItemName(content, DtoCellItem.VARIABLE_NAME);
-        final String itemNameDataType = this.getCellItemName(content, DtoCellItem.DATA_TYPE);
-        final String itemNameinitialValue = this.getCellItemName(content, DtoCellItem.INITIAL_VALUE);
-        final String itemNameInvariant = this.getCellItemName(content, DtoCellItem.INVARIANT);
-        final String itemNameDescription = this.getCellItemName(content, DtoCellItem.DESCRIPTION);
-
-        final String variableName = record.get(itemNameVariableName);
-        final String dataType = record.get(itemNameDataType);
-        final String initialValue = record.get(itemNameinitialValue);
-        final boolean invariant = this.convertStringToBoolean(record.get(itemNameInvariant));
-        final String description = record.get(itemNameDescription);
+        final String variableName = record.get(this.getCellItemName(content, DtoCellItem.VARIABLE_NAME));
+        final String dataType = record.get(this.getCellItemName(content, DtoCellItem.DATA_TYPE));
+        final String initialValue = record.get(this.getCellItemName(content, DtoCellItem.INITIAL_VALUE));
+        final boolean invariant = this
+                .convertStringToBoolean(record.get(this.getCellItemName(content, DtoCellItem.INVARIANT)));
+        final String description = record.get(this.getCellItemName(content, DtoCellItem.DESCRIPTION));
 
         final ClassItemDefinition classItemDefinition = new ClassItemDefinition(variableName, dataType, initialValue,
                 invariant, description);
@@ -419,6 +409,19 @@ public final class ClassDefinitionManager extends AbstractRule {
         logger.atInfo().log("指定されたコンテンツ項目を取得できませんでした。");
         logger.atInfo().log("END");
         return "";
+    }
+
+    @Override
+    protected List<Attribute> getAttributes() {
+        logger.atInfo().log("START");
+
+        final List<Attribute> attributes = new ArrayList<>(2);
+        attributes.add(ContentAttribute.セル項目コード);
+        attributes.add(ContentAttribute.セル項目名);
+
+        logger.atInfo().log("クラス項目定義情報のアトリビュート = (%s)", attributes);
+        logger.atInfo().log("END");
+        return attributes;
     }
 
     /**

@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import com.google.common.flogger.FluentLogger;
+
 import org.apache.commons.lang3.StringUtils;
 import org.thinkit.common.catalog.Catalog;
 import org.thinkit.common.rule.AbstractRule;
@@ -28,8 +30,6 @@ import org.thinkit.common.util.ExcelHandler.QueueType;
 import org.thinkit.generator.catalog.dtogenerator.DtoCellItem;
 import org.thinkit.generator.dtogenerator.ClassNameDefinition;
 import org.thinkit.generator.rule.Sheet;
-
-import com.google.common.flogger.FluentLogger;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -152,15 +152,10 @@ public final class ClassNameDefinitionManager extends AbstractRule {
         }
 
         final Map<DtoCellItem, String> definitions = this.getNameDefinitions(sheetHandler);
-        final String version = definitions.get(DtoCellItem.VERSION);
-        final String projectName = definitions.get(DtoCellItem.PROJECT_NAME);
-        final String packageName = definitions.get(DtoCellItem.PACKAGE_NAME);
-        final String physicalName = definitions.get(DtoCellItem.PHYSICAL_NAME);
-        final String logicalName = definitions.get(DtoCellItem.LOGICAL_NAME);
-        final String description = definitions.get(DtoCellItem.DESCRIPTION);
-
-        final ClassNameDefinition classNameDefinition = new ClassNameDefinition(version, projectName, packageName,
-                physicalName, logicalName, description);
+        final ClassNameDefinition classNameDefinition = new ClassNameDefinition(definitions.get(DtoCellItem.VERSION),
+                definitions.get(DtoCellItem.PROJECT_NAME), definitions.get(DtoCellItem.PACKAGE_NAME),
+                definitions.get(DtoCellItem.PHYSICAL_NAME), definitions.get(DtoCellItem.LOGICAL_NAME),
+                definitions.get(DtoCellItem.DESCRIPTION));
 
         this.classNameDefinition = classNameDefinition;
 
@@ -179,7 +174,6 @@ public final class ClassNameDefinitionManager extends AbstractRule {
         logger.atInfo().log("START");
 
         final List<Map<String, String>> contents = super.getContents();
-
         final EnumMap<DtoCellItem, String> classNameDefinitions = new EnumMap<>(DtoCellItem.class);
 
         for (Map<String, String> elements : contents) {

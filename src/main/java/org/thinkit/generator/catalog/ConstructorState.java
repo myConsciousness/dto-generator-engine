@@ -18,7 +18,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * DTOのコンストラクタ状態を管理するカタログです。
+ * コンストラクタ状態を管理するカタログです。
  *
  * @author Kato Shinya
  * @since 1.0

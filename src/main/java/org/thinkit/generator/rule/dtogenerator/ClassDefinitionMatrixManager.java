@@ -12,13 +12,13 @@
 
 package org.thinkit.generator.rule.dtogenerator;
 
+import com.google.common.flogger.FluentLogger;
+
 import org.apache.commons.lang3.StringUtils;
 import org.thinkit.common.rule.AbstractRule;
 import org.thinkit.common.util.ExcelHandler;
 import org.thinkit.generator.dtogenerator.ClassDefinitionMatrix;
 import org.thinkit.generator.rule.Sheet;
-
-import com.google.common.flogger.FluentLogger;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;

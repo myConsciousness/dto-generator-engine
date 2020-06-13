@@ -12,9 +12,9 @@
 
 package org.thinkit.generator;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.flogger.FluentLogger;
+
+import org.apache.commons.lang3.StringUtils;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;

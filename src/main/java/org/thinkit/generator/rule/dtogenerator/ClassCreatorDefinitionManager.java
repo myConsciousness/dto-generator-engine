@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import com.google.common.flogger.FluentLogger;
+
 import org.apache.commons.lang3.StringUtils;
 import org.thinkit.common.catalog.Catalog;
 import org.thinkit.common.rule.AbstractRule;
@@ -28,8 +30,6 @@ import org.thinkit.common.util.ExcelHandler.QueueType;
 import org.thinkit.generator.catalog.dtogenerator.DtoCellItem;
 import org.thinkit.generator.dtogenerator.ClassCreatorDefinition;
 import org.thinkit.generator.rule.Sheet;
-
-import com.google.common.flogger.FluentLogger;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -149,13 +149,9 @@ public final class ClassCreatorDefinitionManager extends AbstractRule {
         }
 
         final EnumMap<DtoCellItem, String> creatorDefinitions = this.getCreatorDefinitions(this.sheetHandler);
-
-        final String creator = creatorDefinitions.get(DtoCellItem.CREATOR);
-        final String creationDate = creatorDefinitions.get(DtoCellItem.CREATION_TIME);
-        final String updateDate = creatorDefinitions.get(DtoCellItem.UPDTATE_TIME);
-
-        final ClassCreatorDefinition classCreatorDefinition = new ClassCreatorDefinition(creator, creationDate,
-                updateDate);
+        final ClassCreatorDefinition classCreatorDefinition = new ClassCreatorDefinition(
+                creatorDefinitions.get(DtoCellItem.CREATOR), creatorDefinitions.get(DtoCellItem.CREATION_TIME),
+                creatorDefinitions.get(DtoCellItem.UPDTATE_TIME));
 
         this.classCreatorDefinition = classCreatorDefinition;
 
@@ -174,7 +170,6 @@ public final class ClassCreatorDefinitionManager extends AbstractRule {
         logger.atInfo().log("START");
 
         final List<Map<String, String>> contents = super.getContents();
-
         final EnumMap<DtoCellItem, String> creatorDefinitions = new EnumMap<>(DtoCellItem.class);
 
         for (Map<String, String> elements : contents) {
