@@ -24,6 +24,8 @@ import org.thinkit.generator.catalog.GeneratorDivision;
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
+ * 
+ * @see #main()
  */
 final class Main {
 
@@ -37,7 +39,7 @@ final class Main {
      * <br>
      * 各生成器が処理を開始するために以下のコマンドライン引数が必要になります。<br>
      * 1. ファイルパス 各生成器が解析する対象の情報が記述されたファイルへのパスです。<br>
-     * 2. 生成器区分 起動する対象の生成器区分です。<br>
+     * 2. 生成器区分 {@link GeneratorDivision} 起動する対象の生成器区分です。<br>
      * <br>
      * 各生成器の実行に必要なコマンドライン引数が渡されなかった場合は当メイン処理の実行時に必ず失敗します。
      *
@@ -54,15 +56,15 @@ final class Main {
         }
 
         final String filePath = args[0];
-        final int generatorCategoryCode = Integer.parseInt(args[1]);
+        final int generatorDivisionCode = Integer.parseInt(args[1]);
 
-        if (!Catalog.hasCode(GeneratorDivision.class, generatorCategoryCode)) {
-            logger.atSevere().log("An incorrect number was passed as a code value for GeneratorCategory.");
+        if (!Catalog.hasCode(GeneratorDivision.class, generatorDivisionCode)) {
+            logger.atSevere().log("An incorrect number was passed as a code value for GeneratorDivision.");
             throw new IllegalArgumentException(
-                    "The code values passed as command line arguments are not defined in GeneratorCategory.");
+                    "The code values passed as command line arguments are not defined in GeneratorDivision.");
         }
 
-        final GeneratorDivision generatorDivision = Catalog.getEnum(GeneratorDivision.class, generatorCategoryCode);
+        final GeneratorDivision generatorDivision = Catalog.getEnum(GeneratorDivision.class, generatorDivisionCode);
 
         logger.atInfo().log("The file path passed as command line argument = (%s)", filePath);
         logger.atInfo().log("The generator division passed as command line argument = (%s)", generatorDivision);

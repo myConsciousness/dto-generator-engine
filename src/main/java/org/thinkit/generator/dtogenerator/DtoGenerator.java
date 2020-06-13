@@ -21,8 +21,7 @@ import com.google.common.flogger.FluentLogger;
 import org.thinkit.common.catalog.Extension;
 import org.thinkit.common.util.FileHandler;
 import org.thinkit.generator.AbstractGenerator;
-import org.thinkit.generator.rule.dtogenerator.ClassDefinitionMatrixFormatter;
-import org.thinkit.generator.rule.dtogenerator.ClassDefinitionMatrixManager;
+import org.thinkit.generator.rule.dtogenerator.DtoClassResourceFacade;
 
 /**
  * DTO定義書を解析してDTOクラスを生成する処理を定義したクラスです。
@@ -51,26 +50,10 @@ public final class DtoGenerator extends AbstractGenerator {
     protected boolean run() {
         logger.atInfo().log("START");
 
-        final ClassDefinitionMatrixManager classDefinitionMatrixManager = new ClassDefinitionMatrixManager(
-                super.getFilePath());
-
-        if (!classDefinitionMatrixManager.execute()) {
-            logger.atSevere().log("クラス定義情報群の生成処理が異常終了しました。");
-            return false;
-        }
-
-        final ClassDefinitionMatrixFormatter classDefinitionMatrixFormatter = new ClassDefinitionMatrixFormatter(
-                classDefinitionMatrixManager.getClassDefinitionMatrix());
-
-        if (!classDefinitionMatrixFormatter.execute()) {
-            logger.atSevere().log("クラス定義情報の整形処理が異常終了しました。");
-            return false;
-        }
-
-        final Map<String, String> formattedResources = classDefinitionMatrixFormatter.getFormattedResources();
+        final Map<String, String> resources = DtoClassResourceFacade.createResource(super.getFilePath());
 
         final FileHandler fileHandler = new FileHandler("C:\\Users\\yourd\\Desktop");
-        final Set<Entry<String, String>> entrySet = formattedResources.entrySet();
+        final Set<Entry<String, String>> entrySet = resources.entrySet();
 
         for (Entry<String, String> entry : entrySet) {
             if (!fileHandler.write(entry.getKey(), Extension.java(), entry.getValue())) {
