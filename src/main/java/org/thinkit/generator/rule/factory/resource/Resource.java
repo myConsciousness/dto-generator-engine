@@ -12,9 +12,8 @@
 
 package org.thinkit.generator.rule.factory.resource;
 
-import java.util.List;
-
 import java.util.ArrayList;
+import java.util.List;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
