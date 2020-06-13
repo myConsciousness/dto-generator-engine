@@ -103,6 +103,28 @@ public abstract class Resource {
     }
 
     /**
+     * 説明定義をフィールドへ追加します。
+     * 
+     * @param description 説明定義
+     * 
+     * @exception NullPointerException 引数として{@code null}が渡された場合
+     */
+    public void add(@NonNull Description description) {
+        this.field.add(description);
+    }
+
+    /**
+     * フィールド定義をフィールドへ追加します。
+     * 
+     * @param fieldDefinition フィールド定義
+     * 
+     * @exception NullPointerException 引数として{@code null}が渡された場合
+     */
+    public void add(@NonNull FieldDefinition fieldDefinition) {
+        this.field.add(fieldDefinition);
+    }
+
+    /**
      * コンストラクタ定義を追加します。
      * 
      * @param constructor コンストラクタ定義

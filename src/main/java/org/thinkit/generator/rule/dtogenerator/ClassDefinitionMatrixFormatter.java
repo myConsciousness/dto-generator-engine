@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.flogger.FluentLogger;
+
 import org.thinkit.common.catalog.Extension;
 import org.thinkit.common.rule.AbstractRule;
 import org.thinkit.generator.dtogenerator.ClassCreatorDefinition;
@@ -30,11 +32,8 @@ import org.thinkit.generator.rule.factory.resource.ClassDescription;
 import org.thinkit.generator.rule.factory.resource.Constructor;
 import org.thinkit.generator.rule.factory.resource.Copyright;
 import org.thinkit.generator.rule.factory.resource.Field;
-import org.thinkit.generator.rule.factory.resource.FunctionDescription;
 import org.thinkit.generator.rule.factory.resource.Resource;
 import org.thinkit.generator.rule.factory.resource.ResourceFactory;
-
-import com.google.common.flogger.FluentLogger;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -169,19 +168,9 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
         assert !classItemDefinitionList.isEmpty();
 
         final ResourceFactory resourceFactory = DtoResourceFactory.getInstance();
-        final String creator = classCreatorDefinition.getCreator();
-
         final Resource resource = this.createResource(className, classNameDefinition, classCreatorDefinition);
-
-        final FunctionDescription requiredConstructorDescription = resourceFactory
-                .createFunctionDescription("Constructor");
-        final Constructor requiredConstructor = resourceFactory.createConstructor(className,
-                requiredConstructorDescription);
-
-        final FunctionDescription copyingConstructorDescription = resourceFactory
-                .createFunctionDescription("Copying constructor");
-        final Constructor copyingConstructor = resourceFactory.createConstructor(className,
-                copyingConstructorDescription);
+        final Constructor requiredConstructor = this.createConstructor(className, "Constructor");
+        final Constructor copyingConstructor = this.createConstructor(className, "Copying constructor");
 
         copyingConstructor.add(resourceFactory.createParameter(className, this.toInitialLowerCase(className)));
 
@@ -189,12 +178,12 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
             final String dataType = classItemDefinition.getDataType();
             final String variableName = classItemDefinition.getVariableName();
 
-            field.add(resourceFactory.createDescription(classItemDefinition.getDescription()));
-            field.add(resourceFactory.createFieldDefinition(dataType, variableName,
+            resource.add(resourceFactory.createDescription(classItemDefinition.getDescription()));
+            resource.add(resourceFactory.createFieldDefinition(dataType, variableName,
                     classItemDefinition.getInitialValue()));
 
             if (classItemDefinition.isInvariant()) {
-                requiredConstructorDescription.add(resourceFactory.createFunctionParamAnnotation(variableName,
+                requiredConstructor.add(resourceFactory.createFunctionParamAnnotation(variableName,
                         classItemDefinition.getDescription()));
                 requiredConstructor.add(resourceFactory.createParameter(dataType, variableName));
                 requiredConstructor.add(resourceFactory.createConstructorProcess(variableName).toRequired());
@@ -266,6 +255,21 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
 
         return resourceFactory.createResource(copyright, classNameDefinition.getPackageName(), classDescription,
                 className, field);
+    }
+
+    /**
+     * 引数として渡された情報を基にコンストラクタ定義オブジェクトを生成し返却します。<br>
+     * 引数として{@code null}が渡された場合は実行時に必ず失敗します。<br>
+     * 
+     * @param className   クラス名
+     * @param description 説明
+     * @return コンストラクタ定義オブジェクト
+     * 
+     * @exception NullPointerException 引数として{@code null}が渡された場合
+     */
+    private Constructor createConstructor(@NonNull String className, @NonNull String description) {
+        final ResourceFactory resourceFactory = DtoResourceFactory.getInstance();
+        return resourceFactory.createConstructor(className, resourceFactory.createFunctionDescription(description));
     }
 
     /**

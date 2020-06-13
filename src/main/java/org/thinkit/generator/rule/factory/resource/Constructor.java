@@ -13,6 +13,7 @@
 package org.thinkit.generator.rule.factory.resource;
 
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -39,5 +40,14 @@ public abstract class Constructor extends Function {
      */
     protected Constructor(String functionName, FunctionDescription functionDescription) {
         super(functionName, functionDescription);
+    }
+
+    /**
+     * コンストラクタの説明定義に引数アノテーション定義を追加します。
+     * 
+     * @param functionParamAnnotation 関数の引数アノテーション定義
+     */
+    public void add(@NonNull FunctionParamAnnotation functionParamAnnotation) {
+        super.getFunctionDescription().add(functionParamAnnotation);
     }
 }
