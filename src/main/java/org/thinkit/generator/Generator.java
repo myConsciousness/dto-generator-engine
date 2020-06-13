@@ -19,7 +19,7 @@ package org.thinkit.generator;
  * @since 1.0
  * @version 1.0
  */
-public interface Generator {
+interface Generator {
 
     /**
      * 生成処理を開始する処理を定義するメソッドです。

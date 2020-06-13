@@ -12,9 +12,9 @@
 
 package org.thinkit.generator.rule.factory.resource;
 
-import lombok.Getter;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 

@@ -11,21 +11,19 @@
  */
 package org.thinkit.generator.rule.factory.dtofactory;
 
-import org.thinkit.generator.rule.factory.resource.Resource;
-
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-
 import java.util.List;
 
-import org.thinkit.generator.rule.factory.resource.ClassDescription;
-import org.thinkit.generator.rule.factory.resource.Constructor;
-import org.thinkit.generator.rule.factory.resource.Copyright;
 import org.thinkit.common.catalog.Brace;
 import org.thinkit.common.catalog.Identifier;
 import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.catalog.dtogenerator.DtoAnnotation;
-import org.thinkit.generator.rule.factory.resource.Field;
+import org.thinkit.generator.rule.factory.resource.ClassDescription;
+import org.thinkit.generator.rule.factory.resource.Constructor;
+import org.thinkit.generator.rule.factory.resource.Copyright;
+import org.thinkit.generator.rule.factory.resource.Resource;
+
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * DTOクラスのリソースを生成する具象クラスです。<br>
@@ -54,13 +52,12 @@ final class DtoResource extends Resource {
      * @param packageName      パッケージ名
      * @param classDescription クラスの説明
      * @param resourceName     リソース名
-     * @param field            フィールド定義
      * 
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public DtoResource(Copyright copyright, String packageName, ClassDescription classDescription, String resourceName,
-            Field field) {
-        super(copyright, packageName, classDescription, resourceName, field);
+    public DtoResource(Copyright copyright, String packageName, ClassDescription classDescription,
+            String resourceName) {
+        super(copyright, packageName, classDescription, resourceName, new DtoField());
     }
 
     @Override

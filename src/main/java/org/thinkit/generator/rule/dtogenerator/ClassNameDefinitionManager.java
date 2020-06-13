@@ -44,7 +44,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public final class ClassNameDefinitionManager extends AbstractRule {
+final class ClassNameDefinitionManager extends AbstractRule {
 
     /**
      * ログ出力オブジェクト

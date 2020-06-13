@@ -30,7 +30,7 @@ import lombok.NonNull;
  * @since 1.0
  * @version 1.0
  */
-public abstract class AbstractGeneratorFactory {
+abstract class AbstractGeneratorFactory {
 
     /**
      * 引数として指定された生成器区分から各業務処理に対応する生成器を取得し返却します。<br>

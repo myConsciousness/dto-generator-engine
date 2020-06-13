@@ -250,7 +250,7 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
                 classNameDefinition.getVersion());
 
         return resourceFactory.createResource(copyright, classNameDefinition.getPackageName(), classDescription,
-                className, resourceFactory.createField());
+                className);
     }
 
     /**

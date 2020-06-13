@@ -25,7 +25,7 @@ import org.thinkit.generator.catalog.GeneratorDivision;
  * @since 1.0
  * @version 1.0
  */
-public final class Main {
+final class Main {
 
     /**
      * ログ出力オブジェクト

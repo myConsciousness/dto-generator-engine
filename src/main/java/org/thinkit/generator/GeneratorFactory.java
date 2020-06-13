@@ -22,7 +22,7 @@ import org.thinkit.generator.dtogenerator.DtoGenerator;
  * @since 1.0
  * @version 1.0
  */
-public final class GeneratorFactory extends AbstractGeneratorFactory {
+final class GeneratorFactory extends AbstractGeneratorFactory {
 
     /**
      * シングルトンインスタンス

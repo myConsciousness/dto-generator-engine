@@ -20,14 +20,12 @@ package org.thinkit.generator.rule.factory.resource;
  * {@link #createCopyright(String, String, String, String, String)} <br>
  * {@link #createClassDescription(String, String, String)} <br>
  * {@link #createDescription(String)} <br>
- * {@link #createField()} <br>
  * {@link #createFieldDefinition(String, String, String)} <br>
  * {@link #createConstructor(String, FunctionDescription)} <br>
  * {@link #createConstructorProcess(String, String)} <br>
  * {@link #createParameter(String, String)} <br>
  * {@link #createConstructorProcess(String)} <br>
- * {@link #createResource(Copyright, String, ClassDescription, String, Field)}
- * <br>
+ * {@link #createResource(Copyright, String, ClassDescription, String)} <br>
  * 
  * @author Kato Shinya
  * @since 1.0
@@ -74,14 +72,6 @@ public abstract class ResourceFactory {
          * @exception NullPointerException 引数として{@code null}が渡された場合
          */
         public abstract Description createDescription(String description);
-
-        /**
-         * {@link Field}のインスタンスを生成し返却する抽象メソッドです。<br>
-         * {@link ResourceFactory}を継承した具象クラスは必ず{@link #createField()}を実装してください。
-         * 
-         * @return {@link Field}のインスタンス
-         */
-        public abstract Field createField();
 
         /**
          * {@link FieldDefinition}のインスタンスを生成し返却する抽象メソッドです。<br>
@@ -175,11 +165,10 @@ public abstract class ResourceFactory {
          * @param packageName      パッケージ名
          * @param classDescription クラスの説明
          * @param resourceName     リソース名
-         * @param field            フィールドオブジェクト
          * @return {@link Resource}のインスタンス
          * 
          * @exception NullPointerException 引数として{@code null}が渡された場合
          */
         public abstract Resource createResource(Copyright copyright, String packageName,
-                        ClassDescription classDescription, String resourceName, Field field);
+                        ClassDescription classDescription, String resourceName);
 }

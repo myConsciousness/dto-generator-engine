@@ -17,7 +17,6 @@ import org.thinkit.generator.rule.factory.resource.Constructor;
 import org.thinkit.generator.rule.factory.resource.ConstructorProcess;
 import org.thinkit.generator.rule.factory.resource.Copyright;
 import org.thinkit.generator.rule.factory.resource.Description;
-import org.thinkit.generator.rule.factory.resource.Field;
 import org.thinkit.generator.rule.factory.resource.FieldDefinition;
 import org.thinkit.generator.rule.factory.resource.FunctionDescription;
 import org.thinkit.generator.rule.factory.resource.FunctionParamAnnotation;
@@ -34,7 +33,6 @@ import lombok.ToString;
  * {@link #createCopyright(String, String, String, String, String)} <br>
  * {@link #createClassDescription(String, String, String)} <br>
  * {@link #createDescription(String)} <br>
- * {@link #createField()} <br>
  * {@link #createFieldDefinition(String, String, String)} <br>
  * {@link #createFunctionDescription(String)} <br>
  * {@link #createFunctionParamAnnotation(String, String)} <br>
@@ -42,8 +40,7 @@ import lombok.ToString;
  * {@link #createParameter(String, String)} <br>
  * {@link #createConstructorProcess(String)} <br>
  * {@link #createConstructorProcess(String, String)} <br>
- * {@link #createResource(Copyright, String, ClassDescription, String, Field)}
- * <br>
+ * {@link #createResource(Copyright, String, ClassDescription, String)} <br>
  * 
  * @author Kato Shinya
  * @since 1.0
@@ -97,11 +94,6 @@ public final class DtoResourceFactory extends ResourceFactory {
     }
 
     @Override
-    public Field createField() {
-        return new DtoField();
-    }
-
-    @Override
     public FieldDefinition createFieldDefinition(String dataType, String variableName, String initialValue) {
         return new DtoFieldDefinition(dataType, variableName, initialValue);
     }
@@ -138,7 +130,7 @@ public final class DtoResourceFactory extends ResourceFactory {
 
     @Override
     public Resource createResource(Copyright copyright, String packageName, ClassDescription classDescription,
-            String resourceName, Field field) {
-        return new DtoResource(copyright, packageName, classDescription, resourceName, field);
+            String resourceName) {
+        return new DtoResource(copyright, packageName, classDescription, resourceName);
     }
 }

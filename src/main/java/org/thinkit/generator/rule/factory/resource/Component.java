@@ -26,7 +26,7 @@ package org.thinkit.generator.rule.factory.resource;
  * @since 1.0
  * @version 1.0
  */
-public interface Component {
+interface Component {
 
     /**
      * リソースを生成し文字列表現として返却する処理を定義するメソッドです。<br>
