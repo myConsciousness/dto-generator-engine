@@ -38,9 +38,9 @@ final class Main {
      * Generatorプロジェクトで使用する各生成器をコマンドライン引数から判定し起動します。<br>
      * <br>
      * 各生成器が処理を開始するために以下のコマンドライン引数が必要になります。<br>
-     * 1. ファイルパス 各生成器が解析する対象の情報が記述されたファイルへのパスです。<br>
-     * 2, 出力先パス 生成された情報を出力する領域のパスです。<br>
-     * 3. 生成器区分 {@link GeneratorDivision} 起動する対象の生成器区分です。<br>
+     * 1. 生成器区分 {@link GeneratorDivision} 起動する対象の生成器区分です。<br>
+     * 2. ファイルパス 各生成器が解析する対象の情報が記述されたファイルへのパスです。<br>
+     * 3, 出力先パス 生成された情報を出力する領域のパスです。<br>
      * <br>
      * 各生成器の実行に必要なコマンドライン引数が渡されなかった場合は当メイン処理の実行時に必ず失敗します。
      *
@@ -56,9 +56,9 @@ final class Main {
                     "wrong parameter was given. 3 parameter was expected but %s parameters were given.", args.length));
         }
 
-        final String filePath = args[0];
-        final String outputPath = args[1];
-        final int generatorDivisionCode = Integer.parseInt(args[2]);
+        final int generatorDivisionCode = Integer.parseInt(args[0]);
+        final String filePath = args[1];
+        final String outputPath = args[2];
 
         if (!Catalog.hasCode(GeneratorDivision.class, generatorDivisionCode)) {
             logger.atSevere().log("An incorrect number was passed as a code value for GeneratorDivision.");
