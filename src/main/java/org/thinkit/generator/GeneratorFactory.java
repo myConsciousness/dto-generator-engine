@@ -25,9 +25,16 @@ import org.thinkit.generator.dtogenerator.DtoGenerator;
 final class GeneratorFactory extends AbstractGeneratorFactory {
 
     /**
-     * シングルトンインスタンス
+     * {@link GeneratorFactory}のシングルトンインスタンスを保持するインナークラスです。<br>
+     * {@link GeneratorFactory}シングルトンインスタンスは初回参照時にメモリに読み込まれます。
      */
-    private static final AbstractGeneratorFactory INSTANCE = new GeneratorFactory();
+    private static class InstanceHolder {
+
+        /**
+         * シングルトンインスタンス
+         */
+        private static final GeneratorFactory ISNTANCE = new GeneratorFactory();
+    }
 
     /**
      * デフォルトコンストラクタ
@@ -41,16 +48,16 @@ final class GeneratorFactory extends AbstractGeneratorFactory {
      * @return 生成器ファクトリクラスのシングルトンインスタンス
      */
     protected static AbstractGeneratorFactory getInstance() {
-        return INSTANCE;
+        return InstanceHolder.ISNTANCE;
     }
 
     @Override
-    protected Generator createGenerator(GeneratorDivision generatorDivision, String filePath) {
+    protected Generator createGenerator(GeneratorDivision generatorDivision, String filePath, String outputPath) {
 
         Generator generator = null;
 
         if (generatorDivision == GeneratorDivision.DTO_DEFINITOON) {
-            generator = new DtoGenerator(filePath);
+            generator = new DtoGenerator(filePath, outputPath);
         }
 
         return generator;

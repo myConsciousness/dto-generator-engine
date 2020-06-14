@@ -44,6 +44,12 @@ public abstract class AbstractGenerator implements Generator {
     private String filePath = "";
 
     /**
+     * 生成された情報の出力先パス
+     */
+    @Getter(AccessLevel.PROTECTED)
+    private String outputPath = "";
+
+    /**
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
@@ -53,11 +59,11 @@ public abstract class AbstractGenerator implements Generator {
     /**
      * コンストラクタ。
      *
-     * @param filePath 操作する定義書までのファイルパス
+     * @param filePath   操作する定義書までのファイルパス
+     * @param outputPath 生成された情報の出力先パス
      * @exception IllegalArumentException 引数として指定された文字列がnullまたは空文字列の場合
      */
-    protected AbstractGenerator(final String filePath) {
-        logger.atInfo().log("START");
+    protected AbstractGenerator(final String filePath, final String outputPath) {
 
         if (StringUtils.isEmpty(filePath)) {
             logger.atSevere().log("無効なファイルパスが渡されました。 ファイルパス = (%s)", filePath);
@@ -65,9 +71,14 @@ public abstract class AbstractGenerator implements Generator {
             throw new IllegalArgumentException("wrong parameter was given. File path is required to initialize.");
         }
 
-        this.filePath = filePath;
+        if (StringUtils.isEmpty(outputPath)) {
+            logger.atSevere().log("無効な出力先のパスが渡されました。 出力先のパス = (%s)", outputPath);
+            logger.atSevere().log("初期化を行うためには出力先のパスが必須になります。");
+            throw new IllegalArgumentException("wrong parameter was given. Output path is required to initialize.");
+        }
 
-        logger.atInfo().log("END");
+        this.filePath = filePath;
+        this.outputPath = outputPath;
     }
 
     /**

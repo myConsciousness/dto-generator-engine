@@ -47,19 +47,25 @@ abstract class AbstractGeneratorFactory {
      * 
      * @param generatorDivision 生成器区分
      * @param filePath          ファイルパス
+     * @param outputPath        出力先のパス
      * @return 生成器
      * @see {@link #createGenerator(GeneratorDivision, String)}
      * 
      * @exception NullPointerException     生成器区分がnullの場合
      * @exception IllegalArgumentException ファイルパスがnullまたは空文字列の場合
      */
-    public final Generator create(@NonNull final GeneratorDivision generatorDivision, final String filePath) {
+    public final Generator create(@NonNull final GeneratorDivision generatorDivision, final String filePath,
+            final String outputPath) {
 
         if (StringUtils.isEmpty(filePath)) {
             throw new IllegalArgumentException(String.format("File path is required. %s was given.", filePath));
         }
 
-        return this.createGenerator(generatorDivision, filePath);
+        if (StringUtils.isEmpty(outputPath)) {
+            throw new IllegalArgumentException(String.format("Output path is required. %s was given.", outputPath));
+        }
+
+        return this.createGenerator(generatorDivision, filePath, outputPath);
     }
 
     /**
@@ -76,11 +82,13 @@ abstract class AbstractGeneratorFactory {
      * 
      * @param generatorDivision 生成器区分
      * @param filePath          ファイルパス
+     * @param outputPath        出力先のパス
      * @return 生成器
      * @see {@link #create(GeneratorDivision, String)}
      * 
      * @exception NullPointerException     生成器区分がnullの場合
      * @exception IllegalArgumentException ファイルパスがnullまたは空文字列の場合
      */
-    protected abstract Generator createGenerator(GeneratorDivision generatorDivision, String filePath);
+    protected abstract Generator createGenerator(@NonNull GeneratorDivision generatorDivision, @NonNull String filePath,
+            @NonNull String outputPath);
 }

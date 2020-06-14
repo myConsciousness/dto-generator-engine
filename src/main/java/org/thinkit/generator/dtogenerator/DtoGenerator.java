@@ -40,10 +40,11 @@ public final class DtoGenerator extends AbstractGenerator {
     /**
      * コンストラクタ
      *
-     * @param filePath Excelで定義されたDTO定義書までのファイルパス
+     * @param filePath   Excelで定義されたDTO定義書までのファイルパス
+     * @param outputPath 出力先のパス
      */
-    public DtoGenerator(final String filePath) {
-        super(filePath);
+    public DtoGenerator(final String filePath, final String outputPath) {
+        super(filePath, outputPath);
     }
 
     @Override
@@ -57,7 +58,7 @@ public final class DtoGenerator extends AbstractGenerator {
             return false;
         }
 
-        final FileHandler fileHandler = new FileHandler("C:\\Users\\yourd\\Desktop");
+        final FileHandler fileHandler = new FileHandler(super.getOutputPath());
         final Set<Entry<String, String>> entrySet = resources.entrySet();
 
         for (Entry<String, String> entry : entrySet) {
