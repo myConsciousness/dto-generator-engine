@@ -76,7 +76,7 @@ public final class DefaultOutputPathManager extends AbstractRule {
      * 出力先ディレクトリ
      */
     @Getter
-    private String outputDirectory = "";
+    private final String outputDirectory = "";
 
     /**
      * 既定出力先パス
@@ -87,6 +87,7 @@ public final class DefaultOutputPathManager extends AbstractRule {
     /**
      * デフォルトコンストラクタ
      */
+    @SuppressWarnings("unused")
     private DefaultOutputPathManager() {
     }
 
@@ -98,6 +99,7 @@ public final class DefaultOutputPathManager extends AbstractRule {
      */
     public DefaultOutputPathManager(@NonNull Platform platform) {
         this.platform = platform;
+        
         super.loadContent(ContentName.既定出力先情報);
     }
 
