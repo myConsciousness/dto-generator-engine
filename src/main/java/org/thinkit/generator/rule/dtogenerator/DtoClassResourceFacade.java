@@ -12,9 +12,9 @@
 
 package org.thinkit.generator.rule.dtogenerator;
 
-import java.util.Map;
-
 import com.google.common.flogger.FluentLogger;
+
+import org.thinkit.generator.dtogenerator.DtoClassResource;
 
 import lombok.NonNull;
 
@@ -47,16 +47,17 @@ public class DtoClassResourceFacade {
      * 指定されたファイルパスに定義された情報を基にDTOクラスのリソースを生成します。<br>
      * 引数に{@code null}が指定された場合は実行時に必ず失敗します。<br>
      * <br>
-     * 返却する連想配列は以下の情報を格納しています。<br>
+     * {@link ClassDefinitionMatrixFormatter#getDtoClassResource()}で取得する連想配列は<br>
+     * 以下の情報を格納しています。<br>
      * 1, Key ・・・ クラス名<br>
      * 2, Value ・・・ クラス名に紐づくDTOクラスのリソース<br>
      * 
-     * @param filePath
-     * @return 生成されたDTOクラスのリソースを格納した連想配列
+     * @param filePath 定義書のファイルパス
+     * @return 生成されたDTOクラスのリソース情報
      * 
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    public static Map<String, String> createResource(@NonNull String filePath) {
+    public static DtoClassResource createResource(@NonNull String filePath) {
         logger.atInfo().log("START");
 
         final ClassDefinitionMatrixManager classDefinitionMatrixManager = new ClassDefinitionMatrixManager(filePath);
@@ -75,6 +76,6 @@ public class DtoClassResourceFacade {
         }
 
         logger.atInfo().log("END");
-        return classDefinitionMatrixFormatter.getFormattedResources();
+        return classDefinitionMatrixFormatter.getDtoClassResource();
     }
 }

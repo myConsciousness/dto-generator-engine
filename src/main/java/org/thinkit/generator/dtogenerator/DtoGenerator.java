@@ -12,7 +12,6 @@
 
 package org.thinkit.generator.dtogenerator;
 
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -53,15 +52,15 @@ public final class DtoGenerator extends AbstractGenerator {
     protected boolean run() {
         logger.atInfo().log("START");
 
-        final Map<String, String> resources = DtoClassResourceFacade.createResource(super.getFilePath());
+        final DtoClassResource dtoClassResource = DtoClassResourceFacade.createResource(super.getFilePath());
 
-        if (resources == null) {
+        if (dtoClassResource == null) {
             logger.atSevere().log("DTOクラスのリソース作成処理が異常終了しました。");
             return false;
         }
 
         final FileHandler fileHandler = new FileHandler(super.getOutputPath());
-        final Set<Entry<String, String>> entrySet = resources.entrySet();
+        final Set<Entry<String, String>> entrySet = dtoClassResource.getResources().entrySet();
 
         for (Entry<String, String> entry : entrySet) {
             if (!fileHandler.write(entry.getKey(), Extension.java(), entry.getValue())) {

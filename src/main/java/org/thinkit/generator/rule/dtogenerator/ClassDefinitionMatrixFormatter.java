@@ -27,6 +27,7 @@ import org.thinkit.generator.dtogenerator.ClassDefinition;
 import org.thinkit.generator.dtogenerator.ClassDefinitionMatrix;
 import org.thinkit.generator.dtogenerator.ClassItemDefinition;
 import org.thinkit.generator.dtogenerator.ClassNameDefinition;
+import org.thinkit.generator.dtogenerator.DtoClassResource;
 import org.thinkit.generator.rule.factory.dtofactory.DtoResourceFactory;
 import org.thinkit.generator.rule.factory.resource.ClassDescription;
 import org.thinkit.generator.rule.factory.resource.Constructor;
@@ -64,10 +65,10 @@ final class ClassDefinitionMatrixFormatter extends AbstractRule {
     private ClassDefinitionMatrix classDefinitionMatrix = null;
 
     /**
-     * 整形されたJavaリソースリスト
+     * DTOクラスリソース
      */
     @Getter
-    private Map<String, String> formattedResources = new HashMap<>(0);
+    private DtoClassResource dtoClassResource = null;
 
     /**
      * デフォルトコンストラクタ
@@ -91,20 +92,20 @@ final class ClassDefinitionMatrixFormatter extends AbstractRule {
         logger.atInfo().log("START");
 
         final ClassDefinitionMatrix classDefinitionMatrix = this.classDefinitionMatrix;
+        final ClassNameDefinition classNameDefinition = classDefinitionMatrix.getClassNameDefinition();
         final Map<String, String> formattedResources = new HashMap<>();
 
-        final RecursiveRequiredParameters parameters = RecursiveRequiredParameters.of(
-                classDefinitionMatrix.getClassNameDefinition(), classDefinitionMatrix.getClassCreatorDefinition(),
-                classDefinitionMatrix.getClassDefinitionList(), formattedResources);
+        final RecursiveRequiredParameters parameters = RecursiveRequiredParameters.of(classNameDefinition,
+                classDefinitionMatrix.getClassCreatorDefinition(), classDefinitionMatrix.getClassDefinitionList(),
+                formattedResources);
 
         if (!this.formatClassDefinitionRecursively(parameters)) {
             logger.atSevere().log("クラス定義情報の整形処理が異常終了しました。");
             return false;
         }
 
-        this.formattedResources = formattedResources;
+        this.dtoClassResource = new DtoClassResource(classNameDefinition.getPackageName(), formattedResources);
 
-        logger.atInfo().log("整形されたJavaリソースマップ = (%s)", formattedResources);
         logger.atInfo().log("END");
         return true;
     }
