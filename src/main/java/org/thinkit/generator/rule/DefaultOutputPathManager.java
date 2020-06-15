@@ -37,7 +37,7 @@ import lombok.ToString;
  * 既定の出力先を生成する際に必要な情報を取得します。<br>
  * <br>
  * 実行の前提としてプログラム実行時のプラットフォームに対応した既定の出力先情報が<br>
- * 「既定出力先情報」に定義されている必要があります。<br>
+ * コンテンツ「既定出力先情報」に定義されている必要があります。<br>
  * <br>
  * コンテンツから取得した情報は以下のメソッドを使用することで取得できます。<br>
  * {@link #getEnvironmentVariableName()}<br>
@@ -99,7 +99,7 @@ public final class DefaultOutputPathManager extends AbstractRule {
      */
     public DefaultOutputPathManager(@NonNull Platform platform) {
         this.platform = platform;
-        
+
         super.loadContent(ContentName.既定出力先情報);
     }
 
