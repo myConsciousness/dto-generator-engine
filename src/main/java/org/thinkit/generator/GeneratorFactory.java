@@ -15,6 +15,8 @@ package org.thinkit.generator;
 import org.thinkit.generator.catalog.GeneratorDivision;
 import org.thinkit.generator.dtogenerator.DtoGenerator;
 
+import lombok.NonNull;
+
 /**
  * 各業務に応じた生成器を生成する抽象生成器ファクトリクラスの実装クラスです。
  * 
@@ -52,12 +54,13 @@ final class GeneratorFactory extends AbstractGeneratorFactory {
     }
 
     @Override
-    protected Generator createGenerator(GeneratorDivision generatorDivision, String filePath, String outputPath) {
+    protected Generator createGenerator(@NonNull GeneratorDivision generatorDivision,
+            @NonNull DefinitionPath definitionPath) {
 
         Generator generator = null;
 
         if (generatorDivision == GeneratorDivision.DTO_DEFINITOON) {
-            generator = new DtoGenerator(filePath, outputPath);
+            generator = new DtoGenerator(definitionPath);
         }
 
         return generator;

@@ -14,11 +14,10 @@ package org.thinkit.generator;
 
 import com.google.common.flogger.FluentLogger;
 
-import org.apache.commons.lang3.StringUtils;
-
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -38,16 +37,10 @@ public abstract class AbstractGenerator implements Generator {
     private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
     /**
-     * 操作する定義書までのファイルパス
+     * 生成する定義のパスを管理するオブジェクト
      */
-    @Getter(AccessLevel.PROTECTED)
-    private String filePath = "";
-
-    /**
-     * 生成された情報の出力先パス
-     */
-    @Getter(AccessLevel.PROTECTED)
-    private String outputPath = "";
+    @Getter(AccessLevel.PRIVATE)
+    private DefinitionPath definitionPath = null;
 
     /**
      * デフォルトコンストラクタ
@@ -57,28 +50,13 @@ public abstract class AbstractGenerator implements Generator {
     }
 
     /**
-     * コンストラクタ。
+     * コンストラクタ
      *
-     * @param filePath   操作する定義書までのファイルパス
-     * @param outputPath 生成された情報の出力先パス
-     * @exception IllegalArumentException 引数として指定された文字列がnullまたは空文字列の場合
+     * @param definitionPath 生成する定義のパスを管理するオブジェクト
+     * @exception NullPointerException 引数として{@code null}が渡された場合
      */
-    protected AbstractGenerator(final String filePath, final String outputPath) {
-
-        if (StringUtils.isEmpty(filePath)) {
-            logger.atSevere().log("無効なファイルパスが渡されました。 ファイルパス = (%s)", filePath);
-            logger.atSevere().log("初期化を行うためにはファイルパスが必須になります。");
-            throw new IllegalArgumentException("wrong parameter was given. File path is required to initialize.");
-        }
-
-        if (StringUtils.isEmpty(outputPath)) {
-            logger.atSevere().log("無効な出力先のパスが渡されました。 出力先のパス = (%s)", outputPath);
-            logger.atSevere().log("初期化を行うためには出力先のパスが必須になります。");
-            throw new IllegalArgumentException("wrong parameter was given. Output path is required to initialize.");
-        }
-
-        this.filePath = filePath;
-        this.outputPath = outputPath;
+    protected AbstractGenerator(@NonNull DefinitionPath definitionPath) {
+        this.definitionPath = definitionPath;
     }
 
     /**
@@ -105,5 +83,23 @@ public abstract class AbstractGenerator implements Generator {
 
         logger.atInfo().log("END");
         return true;
+    }
+
+    /**
+     * 定義書へのファイルパスを返却します。
+     * 
+     * @return 定義書へのファイルパス
+     */
+    protected String getFilePath() {
+        return this.definitionPath.getFilePath();
+    }
+
+    /**
+     * 出力先のパスを返却します。
+     * 
+     * @return 出力先へのパス
+     */
+    protected String getOutputPath() {
+        return this.definitionPath.getOutputPath();
     }
 }

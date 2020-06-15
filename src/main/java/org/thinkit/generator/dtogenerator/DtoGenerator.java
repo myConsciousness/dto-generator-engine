@@ -21,7 +21,10 @@ import com.google.common.flogger.FluentLogger;
 import org.thinkit.common.catalog.Extension;
 import org.thinkit.common.util.FileHandler;
 import org.thinkit.generator.AbstractGenerator;
+import org.thinkit.generator.DefinitionPath;
 import org.thinkit.generator.rule.dtogenerator.DtoClassResourceFacade;
+
+import lombok.NonNull;
 
 /**
  * DTO定義書を解析してDTOクラスを生成する処理を定義したクラスです。
@@ -40,11 +43,10 @@ public final class DtoGenerator extends AbstractGenerator {
     /**
      * コンストラクタ
      *
-     * @param filePath   Excelで定義されたDTO定義書までのファイルパス
-     * @param outputPath 出力先のパス
+     * @param definitionPath 生成するパスを管理するオブジェクト
      */
-    public DtoGenerator(final String filePath, final String outputPath) {
-        super(filePath, outputPath);
+    public DtoGenerator(@NonNull DefinitionPath definitionPath) {
+        super(definitionPath);
     }
 
     @Override
