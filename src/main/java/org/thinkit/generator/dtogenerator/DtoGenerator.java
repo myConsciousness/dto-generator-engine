@@ -59,7 +59,7 @@ public final class DtoGenerator extends AbstractGenerator {
             return false;
         }
 
-        final FileHandler fileHandler = new FileHandler(super.getOutputPath());
+        final FileHandler fileHandler = new FileHandler(super.getOutputPath(dtoClassResource.getPackageName()));
         final Set<Entry<String, String>> entrySet = dtoClassResource.getResources().entrySet();
 
         for (Entry<String, String> entry : entrySet) {

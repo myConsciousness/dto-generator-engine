@@ -14,6 +14,10 @@ package org.thinkit.generator;
 
 import com.google.common.flogger.FluentLogger;
 
+import org.apache.commons.lang3.StringUtils;
+import org.thinkit.common.catalog.Delimiter;
+import org.thinkit.common.util.FileHandler;
+
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -101,5 +105,35 @@ public abstract class AbstractGenerator implements Generator {
      */
     protected String getOutputPath() {
         return this.definitionPath.getOutputPath();
+    }
+
+    /**
+     * パッケージ情報を付与した出力先のパスを返却します。<br>
+     * パッケージ情報はカンマ区切りの文字列として渡してください。<br>
+     * 例えば、以下のような形式で渡してください。<br>
+     * 渡されたパッケージ情報はカンマの区切り文字をプラットフォームに応じたファイルセパレータに変換し出力先パスに付与します。<br>
+     * <br>
+     * {@code "org.thinkit.generator"}<br>
+     * <br>
+     * 引数として{@code null}が指定された場合は実行時に必ず失敗します。
+     * 
+     * @param packageName カンマ区切りで表現されたパッケージ名
+     * @return 出力先へのパス
+     * 
+     * @exception NullPointerException 引数として{@code null}が渡された場合
+     */
+    protected String getOutputPath(@NonNull String packageName) {
+
+        if (packageName.length() <= 0) {
+            return this.definitionPath.getOutputPath();
+        }
+
+        final StringBuilder outputPath = new StringBuilder();
+        final String fileSeparator = FileHandler.getFileSeparator();
+
+        outputPath.append(this.definitionPath.getOutputPath()).append(fileSeparator)
+                .append(StringUtils.replace(packageName, Delimiter.commma(), fileSeparator));
+
+        return outputPath.toString();
     }
 }
