@@ -1,0 +1,35 @@
+{
+    "metadata": {
+        "author": "Kato Shinya",
+        "since": "1.0",
+        "version": "1.0",
+        "description": ""
+    },
+
+    "selectionNodes": [{
+            "node": {
+                "conditionId": "",
+                "セル項目コード": "3",
+                "セル項目名": "作成者"
+            }
+        },
+
+        {
+            "node": {
+                "conditionId": "",
+                "セル項目コード": "4",
+                "セル項目名": "作成日付"
+            }
+        },
+
+        {
+            "node": {
+                "conditionId": "",
+                "セル項目コード": "5",
+                "セル項目名": "更新日付"
+            }
+        }
+    ],
+
+    "conditionNodes": []
+}
