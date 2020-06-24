@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Content>
 	<NodeList>
-		<Node conditionId="0" 環境変数名="HOMEPATH" 出力先ディレクトリ="desktop"></Node>
+		<Node conditionId="0" 環境変数名="USERPROFILE" 出力先ディレクトリ="desktop"></Node>
 		<Node conditionId="1" 環境変数名="HOME" 出力先ディレクトリ="desktop"></Node>
 		<Node conditionId="2" 環境変数名="HOME" 出力先ディレクトリ="desktop"></Node>
 	</NodeList>

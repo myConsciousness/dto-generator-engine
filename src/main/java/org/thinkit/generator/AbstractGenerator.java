@@ -132,7 +132,7 @@ public abstract class AbstractGenerator implements Generator {
         final String fileSeparator = FileHandler.getFileSeparator();
 
         outputPath.append(this.definitionPath.getOutputPath()).append(fileSeparator)
-                .append(StringUtils.replace(packageName, Delimiter.commma(), fileSeparator));
+                .append(StringUtils.replace(packageName, Delimiter.period(), fileSeparator));
 
         return outputPath.toString();
     }

@@ -76,13 +76,7 @@ public final class DefaultOutputPathManager extends AbstractRule {
      * 出力先ディレクトリ
      */
     @Getter
-    private final String outputDirectory = "";
-
-    /**
-     * 既定出力先パス
-     */
-    @Getter
-    private String defaultOutputPath = "";
+    private String outputDirectory = "";
 
     /**
      * デフォルトコンストラクタ
@@ -145,8 +139,10 @@ public final class DefaultOutputPathManager extends AbstractRule {
 
         final Map<String, String> content = super.getContents().get(0);
         this.environmentVariableName = content.get(ContentAttribute.環境変数名.getString());
-        this.defaultOutputPath = content.get(ContentAttribute.出力先ディレクトリ.getString());
+        this.outputDirectory = content.get(ContentAttribute.出力先ディレクトリ.getString());
 
+        logger.atInfo().log("環境変数名 = (%s)", this.getEnvironmentVariableName());
+        logger.atInfo().log("出力先ディレクトリ = (%s)", this.getOutputDirectory());
         logger.atInfo().log("END");
         return true;
     }
