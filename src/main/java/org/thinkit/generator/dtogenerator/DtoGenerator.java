@@ -17,6 +17,7 @@ import java.util.Set;
 
 import com.google.common.flogger.FluentLogger;
 
+import org.apache.commons.lang3.StringUtils;
 import org.thinkit.common.catalog.Extension;
 import org.thinkit.common.util.FileHandler;
 import org.thinkit.generator.AbstractGenerator;
@@ -59,7 +60,14 @@ public final class DtoGenerator extends AbstractGenerator {
             return false;
         }
 
-        final FileHandler fileHandler = new FileHandler(super.getOutputPath(dtoClassResource.getPackageName()));
+        final String outputPath = super.getOutputPath(dtoClassResource.getPackageName());
+
+        if (StringUtils.isEmpty(outputPath)) {
+            logger.atSevere().log("出力先パスの取得処理が異常終了しました。");
+            return false;
+        }
+
+        final FileHandler fileHandler = new FileHandler(outputPath);
         final Set<Entry<String, String>> entrySet = dtoClassResource.getResources().entrySet();
 
         for (Entry<String, String> entry : entrySet) {

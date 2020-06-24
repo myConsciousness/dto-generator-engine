@@ -106,7 +106,12 @@ public final class DefinitionPath {
         }
 
         this.filePath = filePath;
-        this.outputPath = outputPath;
+
+        if (StringUtils.isEmpty(outputPath)) {
+            this.outputPath = this.getDefaultOutputPath();
+        } else {
+            this.outputPath = outputPath;
+        }
     }
 
     /**
@@ -151,14 +156,7 @@ public final class DefinitionPath {
      * @return 出力先のパス
      */
     public String getOutputPath() {
-        logger.atInfo().log("START");
-
-        if (StringUtils.isEmpty(this.outputPath)) {
-            this.outputPath = this.getDefaultOutputPath();
-        }
-
         logger.atInfo().log("出力先のパス = (%s)", this.outputPath);
-        logger.atInfo().log("END");
         return this.outputPath;
     }
 
