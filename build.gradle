@@ -36,6 +36,10 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.12'
 	annotationProcessor 'org.projectlombok:lombok:1.18.12'
 
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.0'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.11.0'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.11.0'
+
     compile group: 'org.apache.poi', name : 'poi', version: '4.1.2'
 	compile(group: 'org.apache.poi', name : 'poi-ooxml', version: '4.1.2') {
 	exclude group: 'stax', module: 'stax-api'
