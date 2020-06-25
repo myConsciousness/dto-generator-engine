@@ -39,7 +39,8 @@
                 "conditions": [{
                     "keyName": "プラットフォームコード",
                     "operand": "=",
-                    "value": "0"
+                    "dataType": "int",
+                    "value": 0
                 }]
             }
         },
@@ -51,7 +52,8 @@
                 "conditions": [{
                     "keyName": "プラットフォームコード",
                     "operand": "=",
-                    "value": "1"
+                    "dataType": "int",
+                    "value": 1
                 }]
             }
         },
@@ -63,7 +65,8 @@
                 "conditions": [{
                     "keyName": "プラットフォームコード",
                     "operand": "=",
-                    "value": "2"
+                    "dataType": "int",
+                    "value": 2
                 }]
             }
         }
