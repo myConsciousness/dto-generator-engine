@@ -59,7 +59,7 @@ public abstract class FunctionDescription extends Description {
      * 引数のアノテーション情報を追加します。<br>
      * 引数として{@code null}が渡された場合は実行時に必ず失敗します。
      * 
-     * @param parameterVariableName 引数のアノテーション情報
+     * @param functionParamAnnotation 引数のアノテーション情報
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
     public void add(FunctionParamAnnotation functionParamAnnotation) {

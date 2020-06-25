@@ -34,7 +34,7 @@ public abstract class FunctionProcess extends Process {
      * コンストラクタ
      * 
      * @param variableName 変数名
-     * @exception NulLPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として{@code null}が渡された場合
      */
     protected FunctionProcess(String variableName) {
         super(variableName);

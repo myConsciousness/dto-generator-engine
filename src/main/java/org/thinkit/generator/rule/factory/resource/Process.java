@@ -51,7 +51,7 @@ public abstract class Process implements Component {
      * コンストラクタ
      * 
      * @param variableName 変数名
-     * @exception NulLPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として{@code null}が渡された場合
      */
     protected Process(String variableName) {
         this.variableName = variableName;
