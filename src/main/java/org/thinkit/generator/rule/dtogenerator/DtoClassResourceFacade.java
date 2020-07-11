@@ -23,11 +23,11 @@ import lombok.NonNull;
  * DTOクラスのリソースを生成する際には{@link #createResource(String)}を呼び出してください。<br>
  * {@link #createResource(String)}を呼び出す際には、<br>
  * 第1引数としてDTOクラスの定義情報が記載されたExcelファイルのパスを指定してください。<br>
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
- * 
+ *
  * @see #createResource(String)
  */
 public class DtoClassResourceFacade {
@@ -51,10 +51,10 @@ public class DtoClassResourceFacade {
      * 以下の情報を格納しています。<br>
      * 1, Key ・・・ クラス名<br>
      * 2, Value ・・・ クラス名に紐づくDTOクラスのリソース<br>
-     * 
+     *
      * @param filePath 定義書のファイルパス
      * @return 生成されたDTOクラスのリソース情報
-     * 
+     *
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
     public static DtoClassResource createResource(@NonNull String filePath) {

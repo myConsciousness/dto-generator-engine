@@ -19,7 +19,7 @@ import lombok.ToString;
  * プログラムリソースにおける機能の処理を抽象化した抽象クラスです。<br>
  * この抽象クラスでは機能の処理定義に必要な情報を保持します。<br>
  * この抽象クラスを継承する具象クラスは必ず{@link Component#createResource()}を実装してください。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -32,7 +32,7 @@ public abstract class FunctionProcess extends Process {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param variableName 変数名
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */

@@ -26,11 +26,11 @@ import lombok.ToString;
  * {@link #toConstructorProcess(String, String)}<br>
  * <br>
  * デフォルトコンストラクタでは処理情報が存在しないため各機能は必ず空文字列を返却します。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
- * 
+ *
  * @see #toConstructorProcess(String, String)
  */
 @ToString

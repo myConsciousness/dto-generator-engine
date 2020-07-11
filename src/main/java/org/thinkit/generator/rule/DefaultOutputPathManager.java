@@ -42,11 +42,11 @@ import lombok.ToString;
  * コンテンツから取得した情報は以下のメソッドを使用することで取得できます。<br>
  * {@link #getEnvironmentVariableName()}<br>
  * {@link #getOutputDirectory()}<br>
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
- * 
+ *
  * @see #execute()
  * @see #getEnvironmentVariableName()
  * @see #getOutputDirectory()
@@ -87,7 +87,7 @@ public final class DefaultOutputPathManager extends AbstractRule {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param platform プログラム実行時のプラットフォーム要素
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */

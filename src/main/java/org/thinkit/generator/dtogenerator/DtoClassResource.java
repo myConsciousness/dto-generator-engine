@@ -22,7 +22,7 @@ import lombok.ToString;
 
 /**
  * DTOクラスのリソース情報を管理するデータクラスです。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -53,7 +53,7 @@ public final class DtoClassResource {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param packageName パッケージ名
      * @param resources   リソースマップ
      */

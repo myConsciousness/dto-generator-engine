@@ -12,9 +12,9 @@
 
 package org.thinkit.generator.rule.factory.dtofactory;
 
+import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.catalog.dtogenerator.DtoAnnotation;
 import org.thinkit.generator.rule.factory.resource.ClassDescription;
-import org.thinkit.common.catalog.Indentation;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -22,7 +22,7 @@ import lombok.ToString;
 /**
  * DTOクラスのクラスに関する説明を生成する具象クラスです。<br>
  * DTOに必要なクラスに関する説明を生成する処理を{@link Component#createResource()}に実装します。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -41,7 +41,7 @@ final class DtoClassDescription extends ClassDescription {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param description クラスの説明
      * @param creator     クラスの作成者
      * @param version     クラスのバージョン

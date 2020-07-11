@@ -43,11 +43,11 @@ import lombok.ToString;
  * {@link DefinitionPath}のインスタンス生成時に出力先パスが設定されない状態で{@link #getOutputPath()}が呼び出された場合は、<br>
  * {@link DefaultOutputPathManager#execute()}を呼び出しプラットフォームに対応した既定出力先のパスを生成し返却します。<br>
  * この既定出力先のパスを生成する際にエラーが発生した場合は{@link #getOutputPath()}は必ず空文字列を返却します。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
- * 
+ *
  * @see #getFilePath()
  * @see #getOutputPath()
  */
@@ -79,9 +79,9 @@ public final class DefinitionPath {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param filePath 生成する情報が定義されたファイルへのパス
-     * 
+     *
      * @exception NullPointerException 引数として{@code null}が渡された場合
      * @throws IllegalArgumentException ファイルパスが空文字列の場合
      */
@@ -91,10 +91,10 @@ public final class DefinitionPath {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param filePath   生成する情報が定義されたファイルへのパス(必須)
      * @param outputParh 生成された情報の出力先（任意）
-     * 
+     *
      * @exception NullPointerException 引数として{@code null}が渡された場合
      * @throws IllegalArgumentException ファイルパスが空文字列の場合
      */
@@ -116,9 +116,9 @@ public final class DefinitionPath {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param filePath 生成する情報が定義されたファイルへのパス
-     * 
+     *
      * @exception NullPointerException 引数として{@code null}が渡された場合
      * @throws IllegalArgumentException ファイルパスが空文字列の場合
      */
@@ -128,10 +128,10 @@ public final class DefinitionPath {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param filePath   生成する情報が定義されたファイルへのパス(必須)
      * @param outputParh 生成された情報の出力先（任意）
-     * 
+     *
      * @exception NullPointerException 引数として{@code null}が渡された場合
      * @throws IllegalArgumentException ファイルパスが空文字列の場合
      */
@@ -152,7 +152,7 @@ public final class DefinitionPath {
      * 1, {@link Platform#getPlatform()}実行時に未対応のプラットフォームでプログラムが実行されたことを検知された場合<br>
      * <br>
      * 2, {@link DefaultOutputPathManager#execute()}実行時にエラーが発生した場合
-     * 
+     *
      * @return 出力先のパス
      */
     public String getOutputPath() {
@@ -163,7 +163,7 @@ public final class DefinitionPath {
     /**
      * 既定の出力先パスを取得し返却します。<br>
      * 既定の出力パスを取得する際にエラーが発生した場合は空文字列を返却します。
-     * 
+     *
      * @return 既定の出力先パス
      */
     private String getDefaultOutputPath() {

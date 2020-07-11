@@ -28,7 +28,7 @@ import lombok.ToString;
 /**
  * DTOクラスのリソースを生成する具象クラスです。<br>
  * DTOのリソースを生成する処理を{@link Component#createResource()}に実装します。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -47,12 +47,12 @@ final class DtoResource extends Resource {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param copyright        著作権
      * @param packageName      パッケージ名
      * @param classDescription クラスの説明
      * @param resourceName     リソース名
-     * 
+     *
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
     public DtoResource(Copyright copyright, String packageName, ClassDescription classDescription,
@@ -135,7 +135,7 @@ final class DtoResource extends Resource {
 
     /**
      * 引数として指定された文字列を基にリソースを生成します。
-     * 
+     *
      * @param resource リソース
      */
     private void createResource(String resource) {
@@ -145,7 +145,7 @@ final class DtoResource extends Resource {
 
     /**
      * 生成されたリソースを返却します。
-     * 
+     *
      * @return 生成されたリソース
      */
     private String getResource() {

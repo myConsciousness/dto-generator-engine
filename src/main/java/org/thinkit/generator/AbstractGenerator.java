@@ -91,7 +91,7 @@ public abstract class AbstractGenerator implements Generator {
 
     /**
      * 定義書へのファイルパスを返却します。
-     * 
+     *
      * @return 定義書へのファイルパス
      */
     protected String getFilePath() {
@@ -100,7 +100,7 @@ public abstract class AbstractGenerator implements Generator {
 
     /**
      * 出力先のパスを返却します。
-     * 
+     *
      * @return 出力先へのパス
      */
     protected String getOutputPath() {
@@ -116,10 +116,10 @@ public abstract class AbstractGenerator implements Generator {
      * {@code "org.thinkit.generator"}<br>
      * <br>
      * 引数として{@code null}が指定された場合は実行時に必ず失敗します。
-     * 
+     *
      * @param packageName カンマ区切りで表現されたパッケージ名
      * @return 出力先へのパス
-     * 
+     *
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
     protected String getOutputPath(@NonNull String packageName) {

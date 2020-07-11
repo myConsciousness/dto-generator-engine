@@ -25,7 +25,7 @@ import lombok.ToString;
  * プログラムリソースを抽象化した抽象クラスです。<br>
  * この抽象クラスではプログラムリソース定義に必要な情報を保持します。<br>
  * この抽象クラスを継承する具象クラスは必ず{@link #createResource()}を実装してください。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -83,13 +83,13 @@ public abstract class Resource {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param copyright        著作権
      * @param packageName      パッケージ名
      * @param classDescription クラスの説明
      * @param resourceName     リソース名
      * @param field            フィールド定義
-     * 
+     *
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
     protected Resource(Copyright copyright, String packageName, ClassDescription classDescription, String resourceName,
@@ -103,9 +103,9 @@ public abstract class Resource {
 
     /**
      * 説明定義をフィールドへ追加します。
-     * 
+     *
      * @param description 説明定義
-     * 
+     *
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
     public void add(@NonNull Description description) {
@@ -114,9 +114,9 @@ public abstract class Resource {
 
     /**
      * フィールド定義をフィールドへ追加します。
-     * 
+     *
      * @param fieldDefinition フィールド定義
-     * 
+     *
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
     public void add(@NonNull FieldDefinition fieldDefinition) {
@@ -125,7 +125,7 @@ public abstract class Resource {
 
     /**
      * コンストラクタ定義を追加します。
-     * 
+     *
      * @param constructor コンストラクタ定義
      */
     public void add(Constructor constructor) {
@@ -134,7 +134,7 @@ public abstract class Resource {
 
     /**
      * メソッド定義を追加します。
-     * 
+     *
      * @param method メソッド定義
      */
     public void add(Method method) {
@@ -149,7 +149,7 @@ public abstract class Resource {
      * この抽象メソッドはこの抽象クラスを継承する部品の特性に応じて実装してください。<br>
      * 例えば、この抽象クラスをJavaリソースにおけるフィールド定義を管理する部品が継承した場合、<br>
      * その部品クラスはフィールド定義を文字列として生成する処理を実装する必要があります。
-     * 
+     *
      * @return 各要素を管理する部品で生成されたJavaリソース
      */
     public abstract String createResource();

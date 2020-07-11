@@ -41,7 +41,7 @@ import lombok.ToString;
  * {@link #createConstructorProcess(String)} <br>
  * {@link #createConstructorProcess(String, String)} <br>
  * {@link #createResource(Copyright, String, ClassDescription, String)} <br>
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -70,7 +70,7 @@ public final class DtoResourceFactory extends ResourceFactory {
 
     /**
      * {@link DtoResourceFactory}のシングルトンインスタンスを返却します。
-     * 
+     *
      * @return {@link DtoResourceFactory}のシングルトンインスタンス
      */
     public static ResourceFactory getInstance() {

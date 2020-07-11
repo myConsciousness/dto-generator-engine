@@ -21,7 +21,7 @@ import lombok.ToString;
 /**
  * プログラムリソースにおけるフィールド定義を抽象化した抽象クラスです。<br>
  * この抽象クラスではフィールド定義に必要な情報を保持します。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -61,7 +61,7 @@ public abstract class FieldDefinition implements Component {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param dataType     データ型
      * @param variableName 変数名
      * @param initialValue 初期値

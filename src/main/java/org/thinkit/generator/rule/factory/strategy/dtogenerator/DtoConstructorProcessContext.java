@@ -25,11 +25,11 @@ import lombok.ToString;
  * <br>
  * 以下の機能を提供しています。<br>
  * {@link #toConstructorProcess(String, String)}<br>
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
- * 
+ *
  * @see #toConstructorProcess(String, String)
  */
 @ToString
@@ -38,9 +38,9 @@ public class DtoConstructorProcessContext extends ConstructorProcessContext {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param constructorProcessStrategy コンストラクタ処理ストラテジー
-     * 
+     *
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
     public DtoConstructorProcessContext(@NonNull ConstructorProcessStrategy constructorProcessStrategy) {

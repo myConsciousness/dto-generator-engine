@@ -22,7 +22,7 @@ import lombok.ToString;
  * プログラムリソースにおける引数のアノテーション情報を抽象化した抽象クラスです。<br>
  * この抽象クラスでは引数のアノテーション定義に必要な情報を保持します。<br>
  * この抽象クラスを継承する具象クラスは必ず{@link Component#createResource()}を実装してください。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -56,7 +56,7 @@ public abstract class FunctionParamAnnotation implements Component {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param variableName 変数名
      * @param description  説明
      * @exception NullPointerException 引数として{@code null}が渡された場合

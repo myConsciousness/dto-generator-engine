@@ -32,7 +32,7 @@ import lombok.ToString;
  * <br>
  * コンストラクタの状態は以下のメソッドで取得できます。<br>
  * {@link #getConstructorState()}
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -58,7 +58,7 @@ public abstract class ConstructorProcess extends Process {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param variableName 変数名
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
@@ -68,7 +68,7 @@ public abstract class ConstructorProcess extends Process {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param variableName 変数名
      * @param getterName   ゲッター名
      * @exception NullPointerException 引数として{@code null}が渡された場合
@@ -83,7 +83,7 @@ public abstract class ConstructorProcess extends Process {
      * {@link Constructor}のインスタンス生成時では、<br>
      * 初期値として{@link ConstructorState#DEFAULT}が設定されているため、<br>
      * {@link #toDefault()}の呼び出しは必要ありません。
-     * 
+     *
      * @return 当オブジェクトのインスタンス
      */
     public ConstructorProcess toDefault() {
@@ -93,7 +93,7 @@ public abstract class ConstructorProcess extends Process {
 
     /**
      * コンストラクタ状態を必須引数有りのコンストラクタに変更します。
-     * 
+     *
      * @return 当オブジェクトのインスタンス
      */
     public ConstructorProcess toRequired() {
@@ -103,7 +103,7 @@ public abstract class ConstructorProcess extends Process {
 
     /**
      * コンストラクタ状態をコピーコンストラクタに変更します。
-     * 
+     *
      * @return 当オブジェクトのインスタンス
      */
     public ConstructorProcess toCopying() {

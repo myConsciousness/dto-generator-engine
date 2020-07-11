@@ -21,7 +21,7 @@ package org.thinkit.generator.rule.factory.resource;
  * <br>
  * {@link #createResource()}メソッドでは各部品が担当するリソースを生成し、<br>
  * 文字列型として返却する処理を実装してください。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -36,7 +36,7 @@ interface Component {
      * この抽象メソッドはこの抽象クラスを継承する部品の特性に応じて実装してください。<br>
      * 例えば、この抽象クラスをJavaリソースにおけるフィールド定義を管理する部品が継承した場合、<br>
      * その部品クラスはフィールド定義を文字列として生成する処理を実装する必要があります。
-     * 
+     *
      * @return 各要素を管理する部品で生成されたJavaリソース
      */
     public String createResource();

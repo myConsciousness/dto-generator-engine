@@ -215,12 +215,12 @@ final class ClassDefinitionMatrixFormatter extends AbstractRule {
     /**
      * 引数として渡された情報を基に著作権定義オブジェクトを生成し返却します。<br>
      * 引数として{@code null}が渡された場合は実行時に必ず失敗します。<br>
-     * 
+     *
      * @param className              クラス名
      * @param classNameDefinition    クラス名定義情報
      * @param classCreatorDefinition クラス作成者情報
      * @return 著作権定義オブジェクト
-     * 
+     *
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
     private Copyright createCopyright(@NonNull String className, @NonNull ClassNameDefinition classNameDefinition,
@@ -233,12 +233,12 @@ final class ClassDefinitionMatrixFormatter extends AbstractRule {
     /**
      * 引数として渡された情報を基にリソース定義オブジェクトを生成し返却します。<br>
      * 引数として{@code null}が渡された場合は実行時に必ず失敗します。<br>
-     * 
+     *
      * @param className              クラス名
      * @param classNameDefinition    クラス名定義情報
      * @param classCreatorDefinition クラス作成者情報
      * @return リソース定義オブジェクト
-     * 
+     *
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
     private Resource createResource(@NonNull String className, @NonNull ClassNameDefinition classNameDefinition,
@@ -257,11 +257,11 @@ final class ClassDefinitionMatrixFormatter extends AbstractRule {
     /**
      * 引数として渡された情報を基にコンストラクタ定義オブジェクトを生成し返却します。<br>
      * 引数として{@code null}が渡された場合は実行時に必ず失敗します。<br>
-     * 
+     *
      * @param className   クラス名
      * @param description 説明
      * @return コンストラクタ定義オブジェクト
-     * 
+     *
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
     private Constructor createConstructor(@NonNull String className, @NonNull String description) {
@@ -271,10 +271,10 @@ final class ClassDefinitionMatrixFormatter extends AbstractRule {
 
     /**
      * 文字列の上1桁目を小文字に変換して返却します。
-     * 
+     *
      * @param sequence 文字列
      * @return 上1桁目が小文字に変換された文字列
-     * 
+     *
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
     private String toInitialLowerCase(@NonNull String sequence) {

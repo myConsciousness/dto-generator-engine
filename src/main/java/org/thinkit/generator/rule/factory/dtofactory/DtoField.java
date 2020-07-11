@@ -14,10 +14,10 @@ package org.thinkit.generator.rule.factory.dtofactory;
 
 import java.util.List;
 
+import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.rule.factory.resource.Description;
 import org.thinkit.generator.rule.factory.resource.Field;
 import org.thinkit.generator.rule.factory.resource.FieldDefinition;
-import org.thinkit.common.catalog.Indentation;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -25,7 +25,7 @@ import lombok.ToString;
 /**
  * DTOクラスのフィールドを生成する具象クラスです。<br>
  * DTOに必要なフィールドを生成する処理を{@link Component#createResource()}に実装します。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0

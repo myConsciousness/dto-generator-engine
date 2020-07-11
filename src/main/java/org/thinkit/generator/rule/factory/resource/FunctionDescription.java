@@ -26,7 +26,7 @@ import lombok.ToString;
  * プログラムリソースにおける関数の説明を抽象化した抽象クラスです。<br>
  * この抽象クラスでは関数の説明定義に必要な情報を保持します。<br>
  * この抽象クラスを継承する具象クラスは必ず{@link Component#createResource()}を実装してください。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -47,7 +47,7 @@ public abstract class FunctionDescription extends Description {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param description 説明
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
@@ -58,7 +58,7 @@ public abstract class FunctionDescription extends Description {
     /**
      * 引数のアノテーション情報を追加します。<br>
      * 引数として{@code null}が渡された場合は実行時に必ず失敗します。
-     * 
+     *
      * @param functionParamAnnotation 引数のアノテーション情報
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
@@ -70,7 +70,7 @@ public abstract class FunctionDescription extends Description {
     /**
      * 関数の引数アノテーションが存在するか判定します。<br>
      * 関数の引数アノテーションが存在する場合は{@code true}、それ以外は{@false}を返却します。
-     * 
+     *
      * @return 関数の引数アノテーションが存在する場合は{@code true}、それ以外は{@false}
      */
     protected boolean hasParamAnnotation() {

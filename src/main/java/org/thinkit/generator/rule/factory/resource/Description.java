@@ -22,7 +22,7 @@ import lombok.ToString;
  * プログラムリソースにおける説明を抽象化した抽象クラスです。<br>
  * この抽象クラスでは説明定義に必要な情報を定義します。<br>
  * この抽象クラスを継承する具象クラスは必ず{@link Component#createResource()}を実装してください。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -49,7 +49,7 @@ public abstract class Description implements Component {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param description 説明
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */

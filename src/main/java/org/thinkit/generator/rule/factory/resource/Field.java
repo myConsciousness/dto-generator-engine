@@ -16,18 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.thinkit.common.exception.LogicException;
+
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
-import lombok.Getter;
-
-import org.thinkit.common.exception.LogicException;
 
 /**
  * プログラムリソースにおけるフィールドを抽象化した抽象クラスです<br>
  * この抽象クラスではフィールドを生成するために必要な情報を保持します。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -60,7 +60,7 @@ public abstract class Field implements Component {
     /**
      * フィールドの説明を追加します。<br>
      * 引数として{@code null}が渡された場合は実行時に必ず失敗します。
-     * 
+     *
      * @param description フィールドの説明
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
@@ -72,7 +72,7 @@ public abstract class Field implements Component {
     /**
      * フィールドの定義を追加します。<br>
      * 引数として{@code null}が渡された場合は実行時に必ず失敗します。
-     * 
+     *
      * @param fieldDefinition フィールドの定義
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
@@ -84,7 +84,7 @@ public abstract class Field implements Component {
     /**
      * 説明とフィール定義の整合性を確認します。<br>
      * 設定された説明とフィールド定義の個数に不整合が検知された場合は実行時に必ず失敗します。
-     * 
+     *
      * @throws LogicException 設定された説明とフィールド定義の個数に不整合が存在する場合
      */
     protected void validate() {

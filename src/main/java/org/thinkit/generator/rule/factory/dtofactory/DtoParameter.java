@@ -21,7 +21,7 @@ import lombok.ToString;
 /**
  * DTOクラスの引数定義を生成する具象クラスです。<br>
  * DTOに必要な引数定義定義を生成する処理を{@link Component#createResource()}に実装します。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -35,7 +35,7 @@ final class DtoParameter extends Parameter {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param dataType     データ型
      * @param variableName 変数名
      * @exception NullPointerException 引数として{@code null}が渡された場合

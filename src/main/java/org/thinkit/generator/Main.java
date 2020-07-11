@@ -25,7 +25,7 @@ import org.thinkit.generator.catalog.GeneratorDivision;
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
- * 
+ *
  * @see #main()
  */
 final class Main {
@@ -90,7 +90,7 @@ final class Main {
     /**
      * 指定されたインデックスと紐づく値が存在する場合はインデックスと紐づくコマンドライン引数の値を返却します。<br>
      * 指定されたインデックスと紐づく値が存在しない場合は必ず空文字列を返却します。<br>
-     * 
+     *
      * @param args  コマンドライン引数
      * @param index コマンドライン引数のインデックス
      * @return 指定されたインデックスと紐づくコマンドライン引数の値、または、<br>

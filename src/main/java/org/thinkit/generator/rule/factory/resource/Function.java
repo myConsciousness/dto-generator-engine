@@ -12,6 +12,7 @@
 
 package org.thinkit.generator.rule.factory.resource;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,13 +22,11 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 
-import java.util.ArrayList;
-
 /**
  * プログラムリソースにおける関数を抽象化した抽象クラスです。<br>
  * この抽象クラスでは関数の定義に必要な情報を保持します。<br>
  * この抽象クラスを継承する具象クラスは必ず{@link Component#createResource()}を実装してください。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -72,7 +71,7 @@ public abstract class Function implements Component {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param functionName        機能名
      * @param functionDescription 関数の説明
      * @exception NullPointerException 引数として{@code null}が渡された場合
@@ -85,7 +84,7 @@ public abstract class Function implements Component {
     /**
      * 関数の引数を追加します。<br>
      * 引数として{@code null}が渡された場合は実行時に必ず失敗します。
-     * 
+     *
      * @param parameter 関数の引数
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
@@ -97,7 +96,7 @@ public abstract class Function implements Component {
     /**
      * 関数の処理を追加します。<br>
      * 引数として{@code null}が渡された場合は実行時に必ず失敗します。
-     * 
+     *
      * @param process 関数の処理
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */

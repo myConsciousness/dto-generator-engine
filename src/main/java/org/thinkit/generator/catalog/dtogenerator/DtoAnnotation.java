@@ -31,7 +31,7 @@ import lombok.RequiredArgsConstructor;
  * {@link #param()}<br>
  * {@link #lombokSetter()}<br>
  * {@link #lombokGetter()}<br>
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -97,7 +97,7 @@ public enum DtoAnnotation implements Catalog<DtoAnnotation> {
 
     /**
      * 作成者のアノテーションを返却します。
-     * 
+     *
      * @return 作成者のアノテーション
      * @see #AUTHOR
      */
@@ -107,7 +107,7 @@ public enum DtoAnnotation implements Catalog<DtoAnnotation> {
 
     /**
      * 作成時バージョンのアノテーションを返却します。
-     * 
+     *
      * @return 作成時バージョンのアノテーションを返却します。
      * @see #SINCE
      */
@@ -117,7 +117,7 @@ public enum DtoAnnotation implements Catalog<DtoAnnotation> {
 
     /**
      * 現行バージョンのアノテーションを返却します。
-     * 
+     *
      * @return 現行バージョンのアノテーションを返却します。
      * @see #VERSION
      */
@@ -127,7 +127,7 @@ public enum DtoAnnotation implements Catalog<DtoAnnotation> {
 
     /**
      * LombokのNonNullアノテーションを返却します。
-     * 
+     *
      * @return LombokのNonNullアノテーションを返却します。
      * @see #LOMBOK_NON_NULL
      */
@@ -137,7 +137,7 @@ public enum DtoAnnotation implements Catalog<DtoAnnotation> {
 
     /**
      * LombokのToStringアノテーションを返却します。
-     * 
+     *
      * @return LombokのToStringアノテーションを返却します。
      * @see #LOMBOK_TO_STRING
      */
@@ -147,7 +147,7 @@ public enum DtoAnnotation implements Catalog<DtoAnnotation> {
 
     /**
      * LombokのEqualsAndHashCodeアノテーションを返却します。
-     * 
+     *
      * @return LombokのEqualsAndHashCodeアノテーションを返却します。
      * @see #EqualsAndHashCode
      */
@@ -157,7 +157,7 @@ public enum DtoAnnotation implements Catalog<DtoAnnotation> {
 
     /**
      * 引数情報のアノテーションを返却します。
-     * 
+     *
      * @return 引数情報のアノテーションを返却します。
      * @see #PARAM
      */
@@ -167,7 +167,7 @@ public enum DtoAnnotation implements Catalog<DtoAnnotation> {
 
     /**
      * LombokのSetterアノテーションを返却します。
-     * 
+     *
      * @return LombokのSetterアノテーションを返却します。
      * @see #LOMBOK_SETTER
      */
@@ -177,7 +177,7 @@ public enum DtoAnnotation implements Catalog<DtoAnnotation> {
 
     /**
      * LombokのGetterアノテーションを返却します。
-     * 
+     *
      * @return LombokのGetterアノテーションを返却します。
      * @see #LOMBOK_GETTER
      */

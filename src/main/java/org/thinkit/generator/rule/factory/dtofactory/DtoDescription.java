@@ -21,7 +21,7 @@ import lombok.EqualsAndHashCode;
 /**
  * DTOクラスの説明を生成する具象クラスです。<br>
  * DTOに必要な説明を生成する処理を{@link Component#createResource()}に実装します。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -35,7 +35,7 @@ final class DtoDescription extends Description {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param description 説明
      */
     public DtoDescription(String description) {

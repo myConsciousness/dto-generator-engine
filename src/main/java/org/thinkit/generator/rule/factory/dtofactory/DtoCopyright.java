@@ -12,10 +12,9 @@
 
 package org.thinkit.generator.rule.factory.dtofactory;
 
+import org.thinkit.common.catalog.HtmlTag;
 import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.rule.factory.resource.Copyright;
-
-import org.thinkit.common.catalog.HtmlTag;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -23,7 +22,7 @@ import lombok.ToString;
 /**
  * DTOクラスの著作権を生成する具象クラスです。<br>
  * DTOに必要な著作権を生成する処理を{@link Component#createResource()}に実装します。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -37,13 +36,13 @@ final class DtoCopyright extends Copyright {
 
         /**
          * コンストラクタ
-         * 
+         *
          * @param projectName  プロジェクト名
          * @param fileName     ファイル名
          * @param encoding     エンコード
          * @param creator      作成者
          * @param creationDate 作成日付
-         * 
+         *
          * @exception NullPointerException 引数として{@code null}が渡された場合
          */
         public DtoCopyright(String projectName, String fileName, String encoding, String creator, String creationDate) {

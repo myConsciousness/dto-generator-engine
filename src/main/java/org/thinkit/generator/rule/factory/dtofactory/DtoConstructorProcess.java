@@ -12,6 +12,7 @@
 
 package org.thinkit.generator.rule.factory.dtofactory;
 
+import org.thinkit.generator.catalog.ConstructorState;
 import org.thinkit.generator.rule.factory.resource.ConstructorProcess;
 import org.thinkit.generator.rule.factory.strategy.dtogenerator.DtoConstructorProcessContext;
 import org.thinkit.generator.rule.factory.strategy.dtogenerator.DtoCopyingConstructorProcessStrategy;
@@ -25,7 +26,7 @@ import lombok.ToString;
 /**
  * DTOクラスのコンストラクタ処理を生成する具象クラスです。<br>
  * DTOに必要なコンストラクタ処理を生成する処理を{@link Component#createResource()}に実装します。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -39,7 +40,7 @@ final class DtoConstructorProcess extends ConstructorProcess {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param variableName 変数名
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
@@ -49,7 +50,7 @@ final class DtoConstructorProcess extends ConstructorProcess {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param variableName 変数名
      * @param getterName   ゲッター名
      * @exception NullPointerException 引数として{@code null}が渡された場合
@@ -69,7 +70,7 @@ final class DtoConstructorProcess extends ConstructorProcess {
      * {@link DtoDefaultConstructorProcessStrategy}<br>
      * {@link DtoRequiredConstructorProcessStrategy}<br>
      * {@link DtoCopyingConstructorProcessStrategy}<br>
-     * 
+     *
      * @return コンストラクタ定義を生成する際に使用するコンテキスト
      */
     private ConstructorProcessContext getConstructorProcessContext() {

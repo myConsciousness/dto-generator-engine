@@ -26,11 +26,11 @@ import lombok.ToString;
  * <br>
  * 以下の機能を提供しています。<br>
  * {@link #toConstructorProcess(String, String)}<br>
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
- * 
+ *
  * @see #toConstructorProcess(String, String)
  */
 @ToString
@@ -61,10 +61,10 @@ public class DtoCopyingConstructorProcessStrategy extends ConstructorProcessStra
 
     /**
      * 文字列の上1桁目を大文字に変換して返却します。
-     * 
+     *
      * @param sequence 文字列
      * @return 上1桁目が大文字に変換された文字列
-     * 
+     *
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */
     private String toInitialUpperCase(@NonNull String sequence) {

@@ -12,13 +12,13 @@
 
 package org.thinkit.generator.rule.factory.dtofactory;
 
-import org.thinkit.generator.catalog.dtogenerator.DtoAnnotation;
-import org.thinkit.generator.rule.factory.resource.FieldDefinition;
-import org.thinkit.common.catalog.PrimitiveDataType;
 import org.thinkit.common.catalog.Delimiter;
 import org.thinkit.common.catalog.Identifier;
 import org.thinkit.common.catalog.Indentation;
 import org.thinkit.common.catalog.Operand;
+import org.thinkit.common.catalog.PrimitiveDataType;
+import org.thinkit.generator.catalog.dtogenerator.DtoAnnotation;
+import org.thinkit.generator.rule.factory.resource.FieldDefinition;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -26,7 +26,7 @@ import lombok.ToString;
 /**
  * DTOクラスのフィールド定義を生成する具象クラスです。<br>
  * DTOに必要なフィールド定義を生成する処理を{@link Component#createResource()}に実装します。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -40,7 +40,7 @@ final class DtoFieldDefinition extends FieldDefinition {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param dataType     データ型
      * @param variableName 変数名
      * @param initialValue 初期値

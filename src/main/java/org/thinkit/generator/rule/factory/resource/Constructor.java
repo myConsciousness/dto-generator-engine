@@ -20,7 +20,7 @@ import lombok.ToString;
  * プログラムリソースにおけるコンストラクタを抽象化した抽象クラスです。<br>
  * この抽象クラスではコンストラクタ定義に必要な情報を保持します。<br>
  * この抽象クラスを継承する具象クラスは必ず{@link Component#createResource()}を実装してください。<br>
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -33,7 +33,7 @@ public abstract class Constructor extends Function {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param functionName        機能名
      * @param functionDescription 関数の説明
      * @exception NullPointerException 引数として{@code null}が渡された場合
@@ -44,7 +44,7 @@ public abstract class Constructor extends Function {
 
     /**
      * コンストラクタの説明定義に引数アノテーション定義を追加します。
-     * 
+     *
      * @param functionParamAnnotation 関数の引数アノテーション定義
      */
     public void add(@NonNull FunctionParamAnnotation functionParamAnnotation) {

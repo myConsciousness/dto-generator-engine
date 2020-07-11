@@ -12,18 +12,19 @@
 
 package org.thinkit.generator.rule.factory.dtofactory;
 
+import java.util.List;
+
 import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.rule.factory.resource.FunctionDescription;
-
 import org.thinkit.generator.rule.factory.resource.FunctionParamAnnotation;
-import java.util.List;
+
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
  * DTOクラスのメソッドの説明定義を生成する具象クラスです。<br>
  * DTOに必要なメソッドの説明定義を生成する処理を{@link Component#createResource()}に実装します。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -37,7 +38,7 @@ class DtoMethodDescription extends FunctionDescription {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param description 説明
      * @exception NullPointerException 引数として{@code null}が渡された場合
      */

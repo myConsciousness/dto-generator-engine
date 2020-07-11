@@ -24,7 +24,7 @@ import lombok.NonNull;
  * 各業務に必要な生成器が返却されます。<br>
  * <br>
  * 当抽象クラスを継承する全ての具象サブクラスは必ず{@link #createGenerator(GeneratorDivision, DefinitionPath)}を実装する必要があります。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -43,12 +43,12 @@ abstract class AbstractGeneratorFactory {
      * <br>
      * 業務に応じた生成器を取得する際にはサブクラスで実装された{@link #createGenerator(GeneratorDivision, DefinitionPath)}ではなく、<br>
      * {@link #create(GeneratorDivision, DefinitionPath)}を呼び出してください。
-     * 
+     *
      * @param generatorDivision 生成器区分
      * @param definitionPath    生成する定義を管理するオブジェクト
      * @return 生成器
      * @see {@link #createGenerator(GeneratorDivision, String)}
-     * 
+     *
      * @exception NullPointerException 生成器区分がnullの場合
      */
     public final Generator create(@NonNull final GeneratorDivision generatorDivision,
@@ -67,12 +67,12 @@ abstract class AbstractGeneratorFactory {
      * <br>
      * 1, 引数として指定された生成器区分に応じたファクトリクラスを呼び出すこと。<br>
      * 2, 返却する生成器は必ず生成器区分に応じたクラスであること。<br>
-     * 
+     *
      * @param generatorDivision 生成器区分
      * @param definitionPath    生成する定義を管理するオブジェクト
      * @return 生成器
      * @see {@link #create(GeneratorDivision, DefinitionPath)}
-     * 
+     *
      * @exception NullPointerException 生成器区分がnullの場合
      */
     protected abstract Generator createGenerator(@NonNull GeneratorDivision generatorDivision,

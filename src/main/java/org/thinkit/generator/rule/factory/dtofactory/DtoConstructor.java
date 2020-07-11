@@ -13,26 +13,23 @@ package org.thinkit.generator.rule.factory.dtofactory;
 
 import java.util.List;
 
+import org.thinkit.common.catalog.Brace;
+import org.thinkit.common.catalog.Delimiter;
+import org.thinkit.common.catalog.Identifier;
+import org.thinkit.common.catalog.Indentation;
+import org.thinkit.common.catalog.Parenthesis;
+import org.thinkit.generator.rule.factory.resource.Constructor;
+import org.thinkit.generator.rule.factory.resource.FunctionDescription;
 import org.thinkit.generator.rule.factory.resource.Parameter;
 import org.thinkit.generator.rule.factory.resource.Process;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import org.thinkit.common.catalog.Indentation;
-
-import org.thinkit.common.catalog.Brace;
-import org.thinkit.common.catalog.Delimiter;
-import org.thinkit.generator.rule.factory.resource.Constructor;
-import org.thinkit.generator.rule.factory.resource.FunctionDescription;
-
-import org.thinkit.common.catalog.Identifier;
-import org.thinkit.common.catalog.Parenthesis;
-
 /**
  * DTOクラスのコンストラクタを生成する具象クラスです。<br>
  * DTOに必要なコンストラクタを生成する処理を{@link Component#createResource()}に実装します。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -51,7 +48,7 @@ public final class DtoConstructor extends Constructor {
 
     /**
      * コンストラクタ
-     * 
+     *
      * @param constructorName     コンストラクタ名
      * @param functionDescription 関数の説明
      * @exception NullPointerException 引数として{@code null}が渡された場合
@@ -82,7 +79,7 @@ public final class DtoConstructor extends Constructor {
     /**
      * {@link Parameter}で設定された引数情報を文字列表現として返却します。<br>
      * 引数情報が存在しない場合は必ず空文字列を返却します。
-     * 
+     *
      * @return 引数の文字列表現
      */
     private String toParameter() {
@@ -108,7 +105,7 @@ public final class DtoConstructor extends Constructor {
     /**
      * {@link Process}で設定された処理情報を文字列表現として返却します。<br>
      * 処理情報が存在しない場合は必ず空文字列を返却します。
-     * 
+     *
      * @return 処理の文字列表現
      */
     private String toProcess() {

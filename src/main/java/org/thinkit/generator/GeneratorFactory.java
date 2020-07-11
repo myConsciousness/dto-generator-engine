@@ -19,7 +19,7 @@ import lombok.NonNull;
 
 /**
  * 各業務に応じた生成器を生成する抽象生成器ファクトリクラスの実装クラスです。
- * 
+ *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
@@ -46,7 +46,7 @@ final class GeneratorFactory extends AbstractGeneratorFactory {
 
     /**
      * 生成器ファクトリクラスのシングルトンインスタンスを返却します。
-     * 
+     *
      * @return 生成器ファクトリクラスのシングルトンインスタンス
      */
     protected static AbstractGeneratorFactory getInstance() {
