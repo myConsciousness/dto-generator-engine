@@ -12,9 +12,6 @@
 
 package org.thinkit.generator.dtogenerator;
 
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.google.common.flogger.FluentLogger;
 
 import org.apache.commons.lang3.StringUtils;
@@ -68,14 +65,10 @@ public final class DtoGenerator extends AbstractGenerator {
         }
 
         final FileHandler fileHandler = new FileHandler(outputPath);
-        final Set<Entry<String, String>> entrySet = dtoClassResource.getResources().entrySet();
 
-        for (Entry<String, String> entry : entrySet) {
-            if (!fileHandler.write(entry.getKey(), Extension.java(), entry.getValue())) {
-                logger.atSevere().log("リソース情報の書き込み処理が異常終了しました。");
-                return false;
-            }
-        }
+        dtoClassResource.getResources().forEach((key, value) -> {
+            fileHandler.write(key, Extension.java(), value);
+        });
 
         logger.atInfo().log("END");
         return true;
