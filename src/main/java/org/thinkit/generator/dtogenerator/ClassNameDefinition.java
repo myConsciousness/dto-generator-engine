@@ -32,37 +32,31 @@ public final class ClassNameDefinition {
     /**
      * バージョン
      */
-    @NonNull
     private String version = "";
 
     /**
      * プロジェクト名
      */
-    @NonNull
     private String projectName = "";
 
     /**
      * パッケージ名
      */
-    @NonNull
     private String packageName = "";
 
     /**
      * クラスの物理名
      */
-    @NonNull
     private String physicalName = "";
 
     /**
      * クラスの論理名
      */
-    @NonNull
     private String logicalName = "";
 
     /**
      * クラスの補足
      */
-    @NonNull
     private String description = "";
 
     /**
@@ -82,8 +76,9 @@ public final class ClassNameDefinition {
      * @param logicalName  論理名
      * @param description  補足
      */
-    public ClassNameDefinition(final String version, final String projectName, final String packageName,
-            String physicalName, String logicalName, String description) {
+    public ClassNameDefinition(@NonNull final String version, @NonNull final String projectName,
+            @NonNull final String packageName, @NonNull String physicalName, @NonNull String logicalName,
+            @NonNull String description) {
         this.version = version;
         this.projectName = projectName;
         this.packageName = packageName;

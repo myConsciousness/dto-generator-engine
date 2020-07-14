@@ -14,10 +14,10 @@ package org.thinkit.generator.dtogenerator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -60,9 +60,7 @@ public final class ClassDefinition {
      *
      * @param classDefinition クラス定義情報
      */
-    public ClassDefinition(ClassDefinition classDefinition) {
-        Objects.requireNonNull(classDefinition, "wrong parameter was given. Object is null.");
-
+    public ClassDefinition(@NonNull ClassDefinition classDefinition) {
         this.className = classDefinition.getClassName();
         this.description = classDefinition.getDescription();
         this.classItemDefinitionList = new ArrayList<>(classDefinition.getClassItemDefinitionList());

@@ -14,10 +14,10 @@ package org.thinkit.generator.dtogenerator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -61,12 +61,9 @@ public final class ClassDefinitionMatrix {
      * @param classCreatorDefinition クラス作成者情報
      * @param classDefinitionList    クラス定義情報群
      */
-    public ClassDefinitionMatrix(ClassNameDefinition classNameDefinition, ClassCreatorDefinition classCreatorDefinition,
-            List<ClassDefinition> classDefinitionList) {
-        Objects.requireNonNull(classNameDefinition);
-        Objects.requireNonNull(classCreatorDefinition);
-        Objects.requireNonNull(classDefinitionList);
-
+    public ClassDefinitionMatrix(@NonNull ClassNameDefinition classNameDefinition,
+            @NonNull ClassCreatorDefinition classCreatorDefinition,
+            @NonNull List<ClassDefinition> classDefinitionList) {
         this.classNameDefinition = new ClassNameDefinition(classNameDefinition);
         this.classCreatorDefinition = new ClassCreatorDefinition(classCreatorDefinition);
         this.classDefinitionList = new ArrayList<>(classDefinitionList);
@@ -77,9 +74,7 @@ public final class ClassDefinitionMatrix {
      *
      * @param classNameDefinition クラス定義情報群
      */
-    public ClassDefinitionMatrix(ClassDefinitionMatrix classDefinitionMatrix) {
-        Objects.requireNonNull(classDefinitionMatrix);
-
+    public ClassDefinitionMatrix(@NonNull ClassDefinitionMatrix classDefinitionMatrix) {
         this.classNameDefinition = new ClassNameDefinition(classDefinitionMatrix.getClassNameDefinition());
         this.classCreatorDefinition = new ClassCreatorDefinition(classDefinitionMatrix.getClassCreatorDefinition());
         this.classDefinitionList = new ArrayList<>(classDefinitionMatrix.getClassDefinitionList());

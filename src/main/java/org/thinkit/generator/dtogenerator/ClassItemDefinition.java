@@ -14,10 +14,10 @@ package org.thinkit.generator.dtogenerator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -80,13 +80,8 @@ public final class ClassItemDefinition {
      * @param invariant    不変
      * @param description  説明
      */
-    public ClassItemDefinition(String variableName, String dataType, String initialValue, boolean invariant,
-            String description) {
-        Objects.requireNonNull(variableName, "wrong parameter was given. Object is null.");
-        Objects.requireNonNull(dataType, "wrong parameter was given. Object is null.");
-        Objects.requireNonNull(initialValue, "wrong parameter was given. Object is null.");
-        Objects.requireNonNull(description, "wrong parameter was given. Object is null.");
-
+    public ClassItemDefinition(@NonNull String variableName, @NonNull String dataType, @NonNull String initialValue,
+            boolean invariant, @NonNull String description) {
         this.variableName = variableName;
         this.dataType = dataType;
         this.initialValue = initialValue;
@@ -99,9 +94,7 @@ public final class ClassItemDefinition {
      *
      * @param classItemDefinition クラス項目定義情報
      */
-    public ClassItemDefinition(ClassItemDefinition classItemDefinition) {
-        Objects.requireNonNull(classItemDefinition, "wrong parameter was given. Object is null.");
-
+    public ClassItemDefinition(@NonNull ClassItemDefinition classItemDefinition) {
         this.variableName = classItemDefinition.getVariableName();
         this.dataType = classItemDefinition.getDataType();
         this.initialValue = classItemDefinition.getInitialValue();

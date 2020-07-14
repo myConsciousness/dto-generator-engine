@@ -35,13 +35,11 @@ public final class DtoClassResource {
     /**
      * パッケージ名
      */
-    @NonNull
     private String packageName = "";
 
     /**
      * リソースマップ
      */
-    @NonNull
     private Map<String, String> resources = new HashMap<>(0);
 
     /**
@@ -57,7 +55,7 @@ public final class DtoClassResource {
      * @param packageName パッケージ名
      * @param resources   リソースマップ
      */
-    public DtoClassResource(String packageName, Map<String, String> resources) {
+    public DtoClassResource(@NonNull String packageName, @NonNull Map<String, String> resources) {
         this.packageName = packageName;
         this.resources = resources;
     }

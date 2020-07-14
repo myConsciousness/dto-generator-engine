@@ -12,10 +12,9 @@
 
 package org.thinkit.generator.dtogenerator;
 
-import java.util.Objects;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -59,11 +58,7 @@ public final class ClassCreatorDefinition {
      * @param creationDate 作成日付
      * @param updateDate   更新日付
      */
-    public ClassCreatorDefinition(String creator, String creationDate, String updateDate) {
-        Objects.requireNonNull(creator, "wrong parameters were given. Object is null.");
-        Objects.requireNonNull(creationDate, "wrong parameters were given. Object is null.");
-        Objects.requireNonNull(updateDate, "wrong parameters were given. Object is null.");
-
+    public ClassCreatorDefinition(@NonNull String creator, @NonNull String creationDate, @NonNull String updateDate) {
         this.creator = creator;
         this.creationDate = creationDate;
         this.updateDate = updateDate;
@@ -74,9 +69,7 @@ public final class ClassCreatorDefinition {
      *
      * @param classCreatorDefinition クラス作成者定義情報
      */
-    public ClassCreatorDefinition(ClassCreatorDefinition classCreatorDefinition) {
-        Objects.requireNonNull(classCreatorDefinition, "wrong parameters were given. Object is null.");
-
+    public ClassCreatorDefinition(@NonNull ClassCreatorDefinition classCreatorDefinition) {
         this.creator = classCreatorDefinition.getCreator();
         this.creationDate = classCreatorDefinition.getCreationDate();
         this.updateDate = classCreatorDefinition.getUpdateDate();
