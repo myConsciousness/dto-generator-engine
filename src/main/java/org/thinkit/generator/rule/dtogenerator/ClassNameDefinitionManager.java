@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import com.google.common.flogger.FluentLogger;
 
@@ -25,14 +24,16 @@ import org.thinkit.common.catalog.Catalog;
 import org.thinkit.common.rule.AbstractRule;
 import org.thinkit.common.rule.Attribute;
 import org.thinkit.common.rule.Content;
-import org.thinkit.common.util.ExcelHandler;
-import org.thinkit.common.util.ExcelHandler.QueueType;
+import org.thinkit.common.util.FluentSheet;
+import org.thinkit.common.util.FluentWorkbook;
+import org.thinkit.common.util.Matrix;
 import org.thinkit.generator.catalog.dtogenerator.DtoCellItem;
 import org.thinkit.generator.dtogenerator.ClassNameDefinition;
 import org.thinkit.generator.rule.Sheet;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -52,9 +53,9 @@ final class ClassNameDefinitionManager extends AbstractRule {
     private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
     /**
-     * SheetHandlerオブジェクト
+     * Sheetオブジェクト
      */
-    private ExcelHandler.SheetHandler sheetHandler = null;
+    private FluentSheet sheet = null;
 
     /**
      * ファイルパス
@@ -97,12 +98,10 @@ final class ClassNameDefinitionManager extends AbstractRule {
     /**
      * コンストラクタ
      *
-     * @param sheetHandler DTO定義書の情報を持つSheetHandlerオブジェクト
+     * @param sheet DTO定義書の情報を持つSheetオブジェクト
      */
-    public ClassNameDefinitionManager(ExcelHandler.SheetHandler sheetHandler) {
-        Objects.requireNonNull(sheetHandler, "wrong parameter was given. Object is null.");
-        this.sheetHandler = sheetHandler;
-
+    public ClassNameDefinitionManager(@NonNull FluentSheet sheet) {
+        this.sheet = sheet;
         super.loadContent(ContentName.クラス名定義情報);
     }
 
@@ -146,12 +145,12 @@ final class ClassNameDefinitionManager extends AbstractRule {
     public boolean execute() {
         logger.atInfo().log("START");
 
-        if (this.sheetHandler == null) {
-            final ExcelHandler excelHandler = new ExcelHandler.Builder().fromFile(this.filePath).build();
-            this.sheetHandler = excelHandler.sheet(SheetName.定義書.name());
+        if (this.sheet == null) {
+            final FluentWorkbook workbook = new FluentWorkbook.Builder().fromFile(this.filePath).build();
+            this.sheet = workbook.sheet(SheetName.定義書.name());
         }
 
-        final Map<DtoCellItem, String> definitions = this.getNameDefinitions(sheetHandler);
+        final Map<DtoCellItem, String> definitions = this.getNameDefinitions(sheet);
         final ClassNameDefinition classNameDefinition = new ClassNameDefinition(definitions.get(DtoCellItem.VERSION),
                 definitions.get(DtoCellItem.PROJECT_NAME), definitions.get(DtoCellItem.PACKAGE_NAME),
                 definitions.get(DtoCellItem.PHYSICAL_NAME), definitions.get(DtoCellItem.LOGICAL_NAME),
@@ -167,10 +166,10 @@ final class ClassNameDefinitionManager extends AbstractRule {
     /**
      * セル内に定義された作成者情報を取得し返却します。
      *
-     * @param sheetHandler SheetHandlerオブジェクト
+     * @param sheet Sheetオブジェクト
      * @return セルに定義されたクラス名情報
      */
-    private EnumMap<DtoCellItem, String> getNameDefinitions(ExcelHandler.SheetHandler sheetHandler) {
+    private EnumMap<DtoCellItem, String> getNameDefinitions(FluentSheet sheet) {
         logger.atInfo().log("START");
 
         final List<Map<String, String>> contents = super.getContents();
@@ -178,14 +177,14 @@ final class ClassNameDefinitionManager extends AbstractRule {
 
         for (Map<String, String> elements : contents) {
             final String cellItemName = elements.get(ContentAttribute.セル項目名.name());
-            final Map<QueueType, Integer> baseIndexes = sheetHandler.findCellIndex(cellItemName);
+            final Matrix baseIndexes = sheet.findCellIndex(cellItemName);
 
-            final int baseStartColumnIndex = baseIndexes.get(QueueType.COLUMN);
-            final int baseStartRowIndex = baseIndexes.get(QueueType.ROW);
+            final int baseStartColumnIndex = baseIndexes.getColumn();
+            final int baseStartRowIndex = baseIndexes.getRow();
             logger.atInfo().log("基準開始列インデックス = (%s)", baseStartColumnIndex);
             logger.atInfo().log("基準開始行インデックス = (%s)", baseStartRowIndex);
 
-            final String sequence = sheetHandler.getRegionSequence(baseStartColumnIndex, baseStartRowIndex);
+            final String sequence = sheet.getRegionSequence(baseStartColumnIndex, baseStartRowIndex);
             logger.atInfo().log("取得した領域内の値 = (%s)", sequence);
 
             final int itemCode = Integer.parseInt(elements.get(ContentAttribute.セル項目コード.name()));

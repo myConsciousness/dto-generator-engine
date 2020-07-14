@@ -16,7 +16,8 @@ import com.google.common.flogger.FluentLogger;
 
 import org.apache.commons.lang3.StringUtils;
 import org.thinkit.common.rule.AbstractRule;
-import org.thinkit.common.util.ExcelHandler;
+import org.thinkit.common.util.FluentSheet;
+import org.thinkit.common.util.FluentWorkbook;
 import org.thinkit.generator.dtogenerator.ClassDefinitionMatrix;
 import org.thinkit.generator.rule.Sheet;
 
@@ -94,25 +95,24 @@ final class ClassDefinitionMatrixManager extends AbstractRule {
     public boolean execute() {
         logger.atInfo().log("START");
 
-        final ExcelHandler excelHandler = new ExcelHandler.Builder().fromFile(this.getFilePath()).build();
-        final ExcelHandler.SheetHandler sheetHandler = excelHandler.sheet(SheetName.定義書.name());
+        final FluentWorkbook workbook = new FluentWorkbook.Builder().fromFile(this.getFilePath()).build();
+        final FluentSheet sheet = workbook.sheet(SheetName.定義書.name());
 
-        final ClassCreatorDefinitionManager classCreatorDefinitionManager = new ClassCreatorDefinitionManager(
-                sheetHandler);
+        final ClassCreatorDefinitionManager classCreatorDefinitionManager = new ClassCreatorDefinitionManager(sheet);
 
         if (!classCreatorDefinitionManager.execute()) {
             logger.atSevere().log("クラス作成者情報の取得処理が異常終了しました。");
             return false;
         }
 
-        final ClassNameDefinitionManager classNameDefinitionManager = new ClassNameDefinitionManager(sheetHandler);
+        final ClassNameDefinitionManager classNameDefinitionManager = new ClassNameDefinitionManager(sheet);
 
         if (!classNameDefinitionManager.execute()) {
             logger.atSevere().log("クラス名定義情報の取得処理が異常終了しました。");
             return false;
         }
 
-        final ClassDefinitionManager classDefinitionManager = new ClassDefinitionManager(sheetHandler);
+        final ClassDefinitionManager classDefinitionManager = new ClassDefinitionManager(sheet);
 
         if (!classDefinitionManager.execute()) {
             logger.atSevere().log("クラス定義情報の取得処理が異常終了しました。");

@@ -14,7 +14,6 @@ package org.thinkit.generator.rule.dtogenerator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -25,8 +24,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.thinkit.common.rule.AbstractRule;
 import org.thinkit.common.rule.Attribute;
 import org.thinkit.common.rule.Content;
-import org.thinkit.common.util.ExcelHandler;
-import org.thinkit.common.util.ExcelHandler.QueueType;
+import org.thinkit.common.util.FluentSheet;
+import org.thinkit.common.util.FluentWorkbook;
+import org.thinkit.common.util.Matrix;
 import org.thinkit.generator.catalog.dtogenerator.DtoCellItem;
 import org.thinkit.generator.dtogenerator.ClassDefinition;
 import org.thinkit.generator.dtogenerator.ClassItemDefinition;
@@ -65,9 +65,9 @@ final class ClassDefinitionManager extends AbstractRule {
     private static final int RECURSIVE_BASE_LAYER = 1;
 
     /**
-     * SheetHandlerオブジェクト
+     * Sheetオブジェクト
      */
-    private ExcelHandler.SheetHandler sheetHandler = null;
+    private FluentSheet sheet = null;
 
     /**
      * ファイルパス
@@ -107,12 +107,10 @@ final class ClassDefinitionManager extends AbstractRule {
     /**
      * コンストラクタ
      *
-     * @param sheetHandler DTO定義書の情報を持つSheetHandlerオブジェクト
+     * @param sheet DTO定義書の情報を持つSheetオブジェクト
      */
-    public ClassDefinitionManager(ExcelHandler.SheetHandler sheetHandler) {
-        Objects.requireNonNull(sheetHandler, "wrong parameter was given. Object is null.");
-        this.sheetHandler = sheetHandler;
-
+    public ClassDefinitionManager(@NonNull FluentSheet sheet) {
+        this.sheet = sheet;
         super.loadContent(ContentName.クラス項目定義情報);
     }
 
@@ -156,12 +154,12 @@ final class ClassDefinitionManager extends AbstractRule {
     public boolean execute() {
         logger.atInfo().log("START");
 
-        if (this.sheetHandler == null) {
-            final ExcelHandler excelHandler = new ExcelHandler.Builder().fromFile(this.filePath).build();
-            this.sheetHandler = excelHandler.sheet(SheetName.定義書.name());
+        if (this.sheet == null) {
+            final FluentWorkbook workbook = new FluentWorkbook.Builder().fromFile(this.filePath).build();
+            this.sheet = workbook.sheet(SheetName.定義書.name());
         }
 
-        final List<ClassDefinition> classDefinitionList = this.getClassDefinitionList(sheetHandler);
+        final List<ClassDefinition> classDefinitionList = this.getClassDefinitionList(sheet);
 
         if (classDefinitionList.isEmpty()) {
             logger.atSevere().log("クラス定義情報を取得できませんでした。");
@@ -177,24 +175,24 @@ final class ClassDefinitionManager extends AbstractRule {
     /**
      * Excelに定義されたマトリクステーブルからクラス定義情報群を取得し返却します。
      *
-     * @param sheetHandler SheetHandlerオブジェクト
+     * @param sheet Sheetオブジェクト
      * @return クラス定義情報群
      * @see #getClassDefinitionRecursively(List, List, List, int, int)
      */
-    private List<ClassDefinition> getClassDefinitionList(ExcelHandler.SheetHandler sheetHandler) {
+    private List<ClassDefinition> getClassDefinitionList(FluentSheet sheet) {
         logger.atInfo().log("START");
 
         final List<Map<String, String>> contents = super.getContents();
 
         final String baseCellItem = this.getContentItem(contents, DtoCellItem.LOGICAL_DELETE);
-        final EnumMap<QueueType, Integer> baseIndexes = sheetHandler.findCellIndex(baseCellItem);
+        final Matrix baseIndexes = sheet.findCellIndex(baseCellItem);
 
-        final int baseColumnIndex = baseIndexes.get(QueueType.COLUMN);
-        final int baseRowIndex = baseIndexes.get(QueueType.ROW);
+        final int baseColumnIndex = baseIndexes.getColumn();
+        final int baseRowIndex = baseIndexes.getRow();
         logger.atInfo().log("基準列インデックス = (%s)", baseColumnIndex);
         logger.atInfo().log("基準行インデックス = (%s)", baseRowIndex);
 
-        final List<Map<String, String>> matrixList = sheetHandler.getMatrixList(baseColumnIndex, baseRowIndex);
+        final List<Map<String, String>> matrixList = sheet.getMatrixList(baseColumnIndex, baseRowIndex);
         logger.atInfo().log("マトリクスリスト = (%s)", matrixList);
 
         final List<ClassDefinition> classDefinitionList = new ArrayList<>();
