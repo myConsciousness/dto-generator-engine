@@ -187,12 +187,7 @@ final class ClassDefinitionManager extends AbstractRule {
         final String baseCellItem = this.getContentItem(contents, DtoCellItem.LOGICAL_DELETE);
         final Matrix baseIndexes = sheet.findCellIndex(baseCellItem);
 
-        final int baseColumnIndex = baseIndexes.getColumn();
-        final int baseRowIndex = baseIndexes.getRow();
-        logger.atInfo().log("基準列インデックス = (%s)", baseColumnIndex);
-        logger.atInfo().log("基準行インデックス = (%s)", baseRowIndex);
-
-        final List<Map<String, String>> matrixList = sheet.getMatrixList(baseColumnIndex, baseRowIndex);
+        final List<Map<String, String>> matrixList = sheet.getMatrixList(baseIndexes.getColumn(), baseIndexes.getRow());
         logger.atInfo().log("マトリクスリスト = (%s)", matrixList);
 
         final List<ClassDefinition> classDefinitionList = new ArrayList<>();

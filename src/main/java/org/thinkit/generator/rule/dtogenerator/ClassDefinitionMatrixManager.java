@@ -71,8 +71,6 @@ final class ClassDefinitionMatrixManager extends AbstractRule {
         logger.atInfo().log("ファイルパス = (%s)", filePath);
 
         if (StringUtils.isEmpty(filePath)) {
-            logger.atInfo().log("初期化処理でエラーが発生しました。");
-            logger.atInfo().log("ファイルパスがnullまたは空文字列です。");
             throw new IllegalArgumentException("wrong parameter was given. File path is required.");
         }
 

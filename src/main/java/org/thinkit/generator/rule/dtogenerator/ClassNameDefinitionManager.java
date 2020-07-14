@@ -85,8 +85,6 @@ final class ClassNameDefinitionManager extends AbstractRule {
         logger.atInfo().log("ファイルパス = (%s)", filePath);
 
         if (StringUtils.isEmpty(filePath)) {
-            logger.atInfo().log("初期化処理でエラーが発生しました。");
-            logger.atInfo().log("ファイルパスがnullまたは空文字列です。");
             throw new IllegalArgumentException("wrong parameter was given. File path is required.");
         }
 
@@ -179,12 +177,7 @@ final class ClassNameDefinitionManager extends AbstractRule {
             final String cellItemName = elements.get(ContentAttribute.セル項目名.name());
             final Matrix baseIndexes = sheet.findCellIndex(cellItemName);
 
-            final int baseStartColumnIndex = baseIndexes.getColumn();
-            final int baseStartRowIndex = baseIndexes.getRow();
-            logger.atInfo().log("基準開始列インデックス = (%s)", baseStartColumnIndex);
-            logger.atInfo().log("基準開始行インデックス = (%s)", baseStartRowIndex);
-
-            final String sequence = sheet.getRegionSequence(baseStartColumnIndex, baseStartRowIndex);
+            final String sequence = sheet.getRegionSequence(baseIndexes.getColumn(), baseIndexes.getRow());
             logger.atInfo().log("取得した領域内の値 = (%s)", sequence);
 
             final int itemCode = Integer.parseInt(elements.get(ContentAttribute.セル項目コード.name()));
