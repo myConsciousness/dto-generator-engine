@@ -17,7 +17,7 @@ import com.google.common.flogger.FluentLogger;
 
 import org.apache.commons.lang3.StringUtils;
 import org.thinkit.common.catalog.Platform;
-import org.thinkit.common.util.FileHandler;
+import org.thinkit.common.util.file.FluentFile;
 import org.thinkit.generator.rule.DefaultOutputPathManager;
 
 import lombok.EqualsAndHashCode;
@@ -186,7 +186,7 @@ public final class DefinitionPath {
 
         final StringBuilder outputPath = new StringBuilder();
         outputPath.append(System.getenv(defaultOutputPathManager.getEnvironmentVariableName()))
-                .append(FileHandler.getFileSeparator()).append(defaultOutputPathManager.getOutputDirectory());
+                .append(FluentFile.getFileSeparator()).append(defaultOutputPathManager.getOutputDirectory());
 
         logger.atInfo().log("END");
         return outputPath.toString();

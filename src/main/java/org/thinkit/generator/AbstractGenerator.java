@@ -16,7 +16,7 @@ import com.google.common.flogger.FluentLogger;
 
 import org.apache.commons.lang3.StringUtils;
 import org.thinkit.common.catalog.Delimiter;
-import org.thinkit.common.util.FileHandler;
+import org.thinkit.common.util.file.FluentFile;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -129,7 +129,7 @@ public abstract class AbstractGenerator implements Generator {
         }
 
         final StringBuilder outputPath = new StringBuilder();
-        final String fileSeparator = FileHandler.getFileSeparator();
+        final String fileSeparator = FluentFile.getFileSeparator();
 
         outputPath.append(this.definitionPath.getOutputPath()).append(fileSeparator)
                 .append(StringUtils.replace(packageName, Delimiter.period(), fileSeparator));

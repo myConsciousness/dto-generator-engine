@@ -16,7 +16,7 @@ import com.google.common.flogger.FluentLogger;
 
 import org.apache.commons.lang3.StringUtils;
 import org.thinkit.common.catalog.Extension;
-import org.thinkit.common.util.FileHandler;
+import org.thinkit.common.util.file.FluentFile;
 import org.thinkit.generator.AbstractGenerator;
 import org.thinkit.generator.DefinitionPath;
 import org.thinkit.generator.rule.dtogenerator.DtoClassResourceFacade;
@@ -64,10 +64,8 @@ public final class DtoGenerator extends AbstractGenerator {
             return false;
         }
 
-        final FileHandler fileHandler = new FileHandler(outputPath);
-
         dtoClassResource.getResources().forEach((key, value) -> {
-            fileHandler.write(key, Extension.java(), value);
+            FluentFile.writerOf(outputPath).write(key, Extension.java(), value);
         });
 
         logger.atInfo().log("END");

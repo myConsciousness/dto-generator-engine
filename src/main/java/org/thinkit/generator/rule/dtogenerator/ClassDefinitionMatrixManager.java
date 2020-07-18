@@ -16,8 +16,8 @@ import com.google.common.flogger.FluentLogger;
 
 import org.apache.commons.lang3.StringUtils;
 import org.thinkit.common.rule.AbstractRule;
-import org.thinkit.common.util.FluentSheet;
-import org.thinkit.common.util.FluentWorkbook;
+import org.thinkit.common.util.workbook.FluentSheet;
+import org.thinkit.common.util.workbook.FluentWorkbook;
 import org.thinkit.generator.dtogenerator.ClassDefinitionMatrix;
 import org.thinkit.generator.rule.Sheet;
 
