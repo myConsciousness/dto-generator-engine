@@ -1,6 +1,6 @@
 /**
  * Project Name : Generator<br>
- * File Name : ClassDefinitionManager.java<br>
+ * File Name : ClassDefinitionReader.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/05/24<br>
  * <p>
@@ -47,7 +47,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-final class ClassDefinitionManager extends AbstractRule {
+final class ClassDefinitionReader extends AbstractRule {
 
     /**
      * ログ出力オブジェクト
@@ -84,7 +84,7 @@ final class ClassDefinitionManager extends AbstractRule {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private ClassDefinitionManager() {
+    private ClassDefinitionReader() {
     }
 
     /**
@@ -93,7 +93,7 @@ final class ClassDefinitionManager extends AbstractRule {
      * @param filePath DTO定義書のファイルパス
      * @exception IllegalArgumentException ファイルパスがnullまたは空文字列の場合
      */
-    public ClassDefinitionManager(String filePath) {
+    public ClassDefinitionReader(String filePath) {
 
         if (StringUtils.isEmpty(filePath)) {
             throw new IllegalArgumentException("wrong parameter was given. File path is required.");
@@ -109,7 +109,7 @@ final class ClassDefinitionManager extends AbstractRule {
      *
      * @param sheet DTO定義書の情報を持つSheetオブジェクト
      */
-    public ClassDefinitionManager(@NonNull FluentSheet sheet) {
+    public ClassDefinitionReader(@NonNull FluentSheet sheet) {
         this.sheet = sheet;
         super.loadContent(ContentName.クラス項目定義情報);
     }

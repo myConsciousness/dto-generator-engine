@@ -1,6 +1,6 @@
 /**
  * Project Name :Generator<br>
- * File Name : ClassDefinitionMatrixManager.java<br>
+ * File Name : ClassDefinitionMatrixReader.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/04/23<br>
  * <p>
@@ -35,7 +35,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-final class ClassDefinitionMatrixManager extends AbstractRule {
+final class ClassDefinitionMatrixReader extends AbstractRule {
 
     /**
      * ログ出力オブジェクト
@@ -58,7 +58,7 @@ final class ClassDefinitionMatrixManager extends AbstractRule {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private ClassDefinitionMatrixManager() {
+    private ClassDefinitionMatrixReader() {
     }
 
     /**
@@ -67,7 +67,7 @@ final class ClassDefinitionMatrixManager extends AbstractRule {
      * @param filePath DTO定義書のファイルパス
      * @exception IllegalArgumentException ファイルパスがnullまたは空文字列の場合
      */
-    public ClassDefinitionMatrixManager(String filePath) {
+    public ClassDefinitionMatrixReader(String filePath) {
         logger.atInfo().log("ファイルパス = (%s)", filePath);
 
         if (StringUtils.isEmpty(filePath)) {
@@ -96,31 +96,31 @@ final class ClassDefinitionMatrixManager extends AbstractRule {
         final FluentWorkbook workbook = new FluentWorkbook.Builder().fromFile(this.getFilePath()).build();
         final FluentSheet sheet = workbook.sheet(SheetName.定義書.name());
 
-        final ClassCreatorDefinitionManager classCreatorDefinitionManager = new ClassCreatorDefinitionManager(sheet);
+        final ClassCreatorDefinitionReader classCreatorDefinitionReader = new ClassCreatorDefinitionReader(sheet);
 
-        if (!classCreatorDefinitionManager.execute()) {
+        if (!classCreatorDefinitionReader.execute()) {
             logger.atSevere().log("クラス作成者情報の取得処理が異常終了しました。");
             return false;
         }
 
-        final ClassNameDefinitionManager classNameDefinitionManager = new ClassNameDefinitionManager(sheet);
+        final ClassNameDefinitionReader classNameDefinitionReader = new ClassNameDefinitionReader(sheet);
 
-        if (!classNameDefinitionManager.execute()) {
+        if (!classNameDefinitionReader.execute()) {
             logger.atSevere().log("クラス名定義情報の取得処理が異常終了しました。");
             return false;
         }
 
-        final ClassDefinitionManager classDefinitionManager = new ClassDefinitionManager(sheet);
+        final ClassDefinitionReader classDefinitionReader = new ClassDefinitionReader(sheet);
 
-        if (!classDefinitionManager.execute()) {
+        if (!classDefinitionReader.execute()) {
             logger.atSevere().log("クラス定義情報の取得処理が異常終了しました。");
             return false;
         }
 
         final ClassDefinitionMatrix classDefinitionMatrix = new ClassDefinitionMatrix(
-                classNameDefinitionManager.getClassNameDefinition(),
-                classCreatorDefinitionManager.getClassCreatorDefinition(),
-                classDefinitionManager.getClassDefinitionList());
+                classNameDefinitionReader.getClassNameDefinition(),
+                classCreatorDefinitionReader.getClassCreatorDefinition(),
+                classDefinitionReader.getClassDefinitionList());
 
         this.classDefinitionMatrix = classDefinitionMatrix;
 
