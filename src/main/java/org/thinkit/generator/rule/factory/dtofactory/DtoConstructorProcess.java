@@ -15,9 +15,9 @@ package org.thinkit.generator.rule.factory.dtofactory;
 import org.thinkit.generator.catalog.ConstructorState;
 import org.thinkit.generator.rule.factory.resource.ConstructorProcess;
 import org.thinkit.generator.rule.factory.strategy.dtogenerator.DtoConstructorProcessContext;
-import org.thinkit.generator.rule.factory.strategy.dtogenerator.DtoCopyingConstructorProcessStrategy;
-import org.thinkit.generator.rule.factory.strategy.dtogenerator.DtoDefaultConstructorProcessStrategy;
-import org.thinkit.generator.rule.factory.strategy.dtogenerator.DtoRequiredConstructorProcessStrategy;
+import org.thinkit.generator.rule.factory.strategy.dtogenerator.CopyingConstructorProcessStrategy;
+import org.thinkit.generator.rule.factory.strategy.dtogenerator.DefaultConstructorProcessStrategy;
+import org.thinkit.generator.rule.factory.strategy.dtogenerator.RequiredConstructorProcessStrategy;
 import org.thinkit.generator.rule.factory.strategy.resource.ConstructorProcessContext;
 
 import lombok.EqualsAndHashCode;
@@ -67,21 +67,21 @@ final class DtoConstructorProcess extends ConstructorProcess {
     /**
      * 設定された{@link ConstructorState}の値を基にコンストラクタの処理定義を生成する際のコンテキストを取得し返却します。<br>
      * 以下のストラテジーを使用します。<br>
-     * {@link DtoDefaultConstructorProcessStrategy}<br>
-     * {@link DtoRequiredConstructorProcessStrategy}<br>
-     * {@link DtoCopyingConstructorProcessStrategy}<br>
+     * {@link DefaultConstructorProcessStrategy}<br>
+     * {@link RequiredConstructorProcessStrategy}<br>
+     * {@link CopyingConstructorProcessStrategy}<br>
      *
      * @return コンストラクタ定義を生成する際に使用するコンテキスト
      */
-    private ConstructorProcessContext getConstructorProcessContext() {
+    private DtoConstructorProcessContext getConstructorProcessContext() {
 
         switch (super.getConstructorState()) {
             case REQUIRED:
-                return new DtoConstructorProcessContext(new DtoRequiredConstructorProcessStrategy());
+                return new DtoConstructorProcessContext(new RequiredConstructorProcessStrategy());
             case COPYING:
-                return new DtoConstructorProcessContext(new DtoCopyingConstructorProcessStrategy());
+                return new DtoConstructorProcessContext(new CopyingConstructorProcessStrategy());
             default:
-                return new DtoConstructorProcessContext(new DtoDefaultConstructorProcessStrategy());
+                return new DtoConstructorProcessContext(new DefaultConstructorProcessStrategy());
         }
     }
 }

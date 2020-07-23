@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : DtoRequiredConstructorProcessStrategy.java<br>
+ * File Name : RequiredConstructorProcessStrategy.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/06/09<br>
  * <p>
@@ -35,7 +35,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class DtoRequiredConstructorProcessStrategy extends ConstructorProcessStrategy {
+public class RequiredConstructorProcessStrategy extends ConstructorProcessStrategy {
 
     /**
      * カレントオブジェクト

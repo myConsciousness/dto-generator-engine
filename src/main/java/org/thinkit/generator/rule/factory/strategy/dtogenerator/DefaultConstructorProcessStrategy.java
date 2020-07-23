@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : DtoDefaultConstructorProcessStrategy.java<br>
+ * File Name : DefaultConstructorProcessStrategy.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/06/09<br>
  * <p>
@@ -35,7 +35,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class DtoDefaultConstructorProcessStrategy extends ConstructorProcessStrategy {
+public class DefaultConstructorProcessStrategy extends ConstructorProcessStrategy {
 
     @Override
     public String toConstructorProcess(@NonNull String variableName, @NonNull String getterName) {
