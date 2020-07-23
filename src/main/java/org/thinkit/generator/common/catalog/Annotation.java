@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : DtoAnnotation.java<br>
+ * File Name : Annotation.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/06/05<br>
  * <p>
@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.common.catalog.dtogenerator;
+package org.thinkit.generator.common.catalog;
 
 import org.thinkit.common.catalog.Catalog;
 
@@ -18,7 +18,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * DTOクラスで使用するアノテーションを管理するカタログです。<br>
+ * クラスで使用するアノテーションを管理するカタログです。<br>
  * {@link #getAnnotation()}を使用することで各要素のアノテーションを取得することができます。<br>
  * <br>
  * 以下の静的メソッドを使用することでも各アノテーションを取得することができます。<br>
@@ -38,7 +38,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Getter
 @RequiredArgsConstructor
-public enum DtoAnnotation implements Catalog<DtoAnnotation> {
+public enum Annotation implements Catalog<Annotation> {
 
     /**
      * 作成者
