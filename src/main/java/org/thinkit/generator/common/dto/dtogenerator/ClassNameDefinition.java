@@ -18,7 +18,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * クラス名の定義情報を管理するデータクラスです。 当該クラスはイミュータブルです。
+ * クラス名の定義情報を管理するデータクラスです。
  *
  * @author Kato Shinya
  * @since 1.0

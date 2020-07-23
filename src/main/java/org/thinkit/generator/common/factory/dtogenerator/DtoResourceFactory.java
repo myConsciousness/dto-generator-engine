@@ -28,7 +28,8 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * {#link ResourceFactory}を実装する具象ファクトリクラスです。<br>
+ * {#link ResourceFactory} を実装する具象ファクトリクラスです。
+ * <p>
  * 以下のメソッドを使用することで各リソースの部品オブジェクトを取得することができます。<br>
  * {@link #createCopyright(String, String, String, String, String)} <br>
  * {@link #createClassDescription(String, String, String)} <br>
@@ -51,8 +52,8 @@ import lombok.ToString;
 public final class DtoResourceFactory extends ResourceFactory {
 
     /**
-     * {@link DtoResourceFactory}のシングルトンインスタンスを保持するインナークラスです。<br>
-     * {@link DtoResourceFactory}シングルトンインスタンスは初回参照時にメモリに読み込まれます。
+     * {@link DtoResourceFactory} のシングルトンインスタンスを保持するインナークラスです。<br>
+     * {@link DtoResourceFactory} シングルトンインスタンスは初回参照時にメモリに読み込まれます。
      */
     private static class InstanceHolder {
 
@@ -69,9 +70,9 @@ public final class DtoResourceFactory extends ResourceFactory {
     }
 
     /**
-     * {@link DtoResourceFactory}のシングルトンインスタンスを返却します。
+     * {@link DtoResourceFactory} のシングルトンインスタンスを返却します。
      *
-     * @return {@link DtoResourceFactory}のシングルトンインスタンス
+     * @return {@link DtoResourceFactory} のシングルトンインスタンス
      */
     public static ResourceFactory getInstance() {
         return InstanceHolder.INSTANCE;

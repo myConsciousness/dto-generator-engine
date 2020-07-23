@@ -65,7 +65,7 @@ public abstract class FieldDefinition implements Component {
      * @param dataType     データ型
      * @param variableName 変数名
      * @param initialValue 初期値
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     protected FieldDefinition(String dataType, String variableName, String initialValue) {
         this.dataType = dataType;

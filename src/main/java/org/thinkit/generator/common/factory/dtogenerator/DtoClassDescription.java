@@ -21,11 +21,12 @@ import lombok.ToString;
 
 /**
  * DTOクラスのクラスに関する説明を生成する具象クラスです。<br>
- * DTOに必要なクラスに関する説明を生成する処理を{@link Component#createResource()}に実装します。
+ * DTOに必要なクラスに関する説明を生成する処理を {@link Component#createResource()} に実装します。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
+ *
  * @see Component
  * @see Component#createResource()
  * @see ClassDescription
@@ -45,7 +46,7 @@ final class DtoClassDescription extends ClassDescription {
      * @param description クラスの説明
      * @param creator     クラスの作成者
      * @param version     クラスのバージョン
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     public DtoClassDescription(String description, String creator, String version) {
         super(description, creator, version);

@@ -22,8 +22,8 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * コピーコンストラクタの処理定義を生成する際に使用するストラテジーを実装した具象クラスです。<br>
- * <br>
+ * コピーコンストラクタの処理定義を生成する際に使用するストラテジーを実装した具象クラスです。
+ * <p>
  * 以下の機能を提供しています。<br>
  * {@link #toConstructorProcess(String, String)}<br>
  *
@@ -65,7 +65,7 @@ public class CopyingConstructorProcess extends ConstructorProcessStrategy {
      * @param sequence 文字列
      * @return 上1桁目が大文字に変換された文字列
      *
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     private String toInitialUpperCase(@NonNull String sequence) {
         return sequence.substring(0, 1).toUpperCase() + sequence.substring(1);

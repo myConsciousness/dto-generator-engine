@@ -24,11 +24,12 @@ import lombok.ToString;
 
 /**
  * DTOクラスのフィールドを生成する具象クラスです。<br>
- * DTOに必要なフィールドを生成する処理を{@link Component#createResource()}に実装します。
+ * DTOに必要なフィールドを生成する処理を {@link Component#createResource()} に実装します。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
+ *
  * @see Component
  * @see Component#createResource()
  * @see Field

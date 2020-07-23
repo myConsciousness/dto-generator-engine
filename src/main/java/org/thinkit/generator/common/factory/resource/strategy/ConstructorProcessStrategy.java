@@ -18,10 +18,10 @@ import lombok.ToString;
 
 /**
  * コンストラクタの処理定義を生成する際のストラテジーを抽象化したクラスです。<br>
- * それぞれ異なるコンストラクタの処理定義を生成する際に{@link ConstructorProcessStrategy}を継承した具象クラスを定義してください。<br>
- * <br>
- * {@link ConstructorProcessStrategy}を継承した場合は以下の抽象メソッドを必ず実装する必要があります。<br>
- * {@link #toConstructorProcess(String, String)}<br>
+ * それぞれ異なるコンストラクタの処理定義を生成する際に {@link ConstructorProcessStrategy} を継承した具象クラスを定義してください。
+ * <p>
+ * {@link ConstructorProcessStrategy} を継承した場合は以下の抽象メソッドを必ず実装する必要があります。<br>
+ * {@link #toConstructorProcess(String, String)} <br>
  *
  * @author Kato Shinya
  * @since 1.0
@@ -40,7 +40,7 @@ public abstract class ConstructorProcessStrategy {
      * @param getterName   ゲッター名
      * @return 渡された引数情報を基に生成されたコンストラクタ処理定義
      *
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     public abstract String toConstructorProcess(@NonNull String variableName, @NonNull String getterName);
 }

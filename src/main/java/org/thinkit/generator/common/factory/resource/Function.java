@@ -25,11 +25,12 @@ import lombok.ToString;
 /**
  * プログラムリソースにおける関数を抽象化した抽象クラスです。<br>
  * この抽象クラスでは関数の定義に必要な情報を保持します。<br>
- * この抽象クラスを継承する具象クラスは必ず{@link Component#createResource()}を実装してください。
+ * この抽象クラスを継承する具象クラスは必ず {@link Component#createResource()} を実装してください。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
+ *
  * @see Component
  * @see Component#createResource()
  */
@@ -74,7 +75,7 @@ public abstract class Function implements Component {
      *
      * @param functionName        機能名
      * @param functionDescription 関数の説明
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     protected Function(String functionName, FunctionDescription functionDescription) {
         this.functionName = functionName;
@@ -83,10 +84,10 @@ public abstract class Function implements Component {
 
     /**
      * 関数の引数を追加します。<br>
-     * 引数として{@code null}が渡された場合は実行時に必ず失敗します。
+     * 引数として {@code null} が渡された場合は実行時に必ず失敗します。
      *
      * @param parameter 関数の引数
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     public void add(Parameter parameter) {
         Objects.requireNonNull(parameter);
@@ -95,10 +96,10 @@ public abstract class Function implements Component {
 
     /**
      * 関数の処理を追加します。<br>
-     * 引数として{@code null}が渡された場合は実行時に必ず失敗します。
+     * 引数として {@code null} が渡された場合は実行時に必ず失敗します。
      *
      * @param process 関数の処理
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     public void add(Process process) {
         Objects.requireNonNull(process);

@@ -28,11 +28,12 @@ import lombok.ToString;
 
 /**
  * DTOクラスのリソースを生成する具象クラスです。<br>
- * DTOのリソースを生成する処理を{@link Component#createResource()}に実装します。
+ * DTOのリソースを生成する処理を {@link Component#createResource()} に実装します。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
+ *
  * @see Component
  * @see Component#createResource()
  * @see Resource
@@ -54,7 +55,7 @@ final class DtoResource extends Resource {
      * @param classDescription クラスの説明
      * @param resourceName     リソース名
      *
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     public DtoResource(Copyright copyright, String packageName, ClassDescription classDescription,
             String resourceName) {
@@ -83,7 +84,7 @@ final class DtoResource extends Resource {
     }
 
     /**
-     * {@link Resource}に設定された定義情報を基にクラス名リソースを生成します。<br>
+     * {@link Resource} に設定された定義情報を基にクラス名リソースを生成します。<br>
      * このメソッドではパッケージ名からクラス定義の開始ブレースまでを生成します。<br>
      */
     private void createClassNameResource() {
@@ -108,7 +109,7 @@ final class DtoResource extends Resource {
     }
 
     /**
-     * {@link Resource}に設定された定義情報を基にフィールドリソースを生成します。<br>
+     * {@link Resource} に設定された定義情報を基にフィールドリソースを生成します。<br>
      * このメソッドではフィールド定義までを生成します。<br>
      */
     private void createFieldResource() {
@@ -116,7 +117,7 @@ final class DtoResource extends Resource {
     }
 
     /**
-     * {@link Resource}に設定された定義情報を基にコンストラクタリソースを生成します。<br>
+     * {@link Resource} に設定された定義情報を基にコンストラクタリソースを生成します。<br>
      * このメソッドではコンストラクタ定義までを生成します。<br>
      */
     private void createConstructorResource() {

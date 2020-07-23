@@ -20,8 +20,8 @@ import lombok.ToString;
 
 /**
  * コンストラクタの処理定義をする際のストラテジーを判断するコンテキストを抽象化したクラスです。<br>
- * {#link ConstructorProcessContext}を継承した具象クラスは以下の抽象メソッドを実装する必要があります。<br>
- * {@link #toConstructorProcess(String, String)}<br>
+ * {#link ConstructorProcessContext} を継承した具象クラスは以下の抽象メソッドを実装する必要があります。<br>
+ * {@link #toConstructorProcess(String, String)} <br>
  *
  * @author 1.0
  * @since 1.0
@@ -51,7 +51,7 @@ public abstract class ConstructorProcessContext {
      *
      * @param constructorProcessStrategy コンストラクタ処理ストラテジー
      *
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     protected ConstructorProcessContext(@NonNull ConstructorProcessStrategy constructorProcessStrategy) {
         this.constructorProcessStrategy = constructorProcessStrategy;
@@ -64,7 +64,7 @@ public abstract class ConstructorProcessContext {
      * @param getterName   ゲッター名
      * @return 渡された引数情報を基に生成されたコンストラクタ処理定義
      *
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     public abstract String toConstructorProcess(@NonNull String variableName, @NonNull String getterName);
 }

@@ -20,11 +20,11 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * デフォルトコンストラクタの処理定義を生成する際に使用するストラテジーを実装した具象クラスです。<br>
- * <br>
+ * デフォルトコンストラクタの処理定義を生成する際に使用するストラテジーを実装した具象クラスです。
+ * <p>
  * 以下の機能を提供しています。<br>
  * {@link #toConstructorProcess(String, String)}<br>
- * <br>
+ * <p>
  * デフォルトコンストラクタでは処理情報が存在しないため各機能は必ず空文字列を返却します。
  *
  * @author Kato Shinya

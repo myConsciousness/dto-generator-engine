@@ -21,11 +21,12 @@ import lombok.ToString;
 
 /**
  * DTOクラスの著作権を生成する具象クラスです。<br>
- * DTOに必要な著作権を生成する処理を{@link Component#createResource()}に実装します。
+ * DTOに必要な著作権を生成する処理を {@link Component#createResource()} に実装します。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
+ *
  * @see Component
  * @see Component#createResource()
  * @see Copyright
@@ -43,7 +44,7 @@ final class DtoCopyright extends Copyright {
          * @param creator      作成者
          * @param creationDate 作成日付
          *
-         * @exception NullPointerException 引数として{@code null}が渡された場合
+         * @exception NullPointerException 引数として {@code null} が渡された場合
          */
         public DtoCopyright(String projectName, String fileName, String encoding, String creator, String creationDate) {
                 super(projectName, fileName, encoding, creator, creationDate);

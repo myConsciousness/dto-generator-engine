@@ -23,11 +23,12 @@ import lombok.ToString;
 
 /**
  * DTOクラスのメソッドの説明定義を生成する具象クラスです。<br>
- * DTOに必要なメソッドの説明定義を生成する処理を{@link Component#createResource()}に実装します。
+ * DTOに必要なメソッドの説明定義を生成する処理を {@link Component#createResource()} に実装します。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
+ *
  * @see Component
  * @see Component#createResource()
  * @see FunctionDescription
@@ -40,7 +41,7 @@ class DtoMethodDescription extends FunctionDescription {
      * コンストラクタ
      *
      * @param description 説明
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     protected DtoMethodDescription(String description) {
         super(description);

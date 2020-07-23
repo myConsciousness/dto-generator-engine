@@ -21,11 +21,12 @@ import lombok.ToString;
 
 /**
  * DTOクラスのメソッドの引数アノテーションを生成する具象クラスです。<br>
- * DTOに必要なメソッドの引数アノテーションを生成する処理を{@link Component#createResource()}に実装します。
+ * DTOに必要なメソッドの引数アノテーションを生成する処理を {@link Component#createResource()} に実装します。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
+ *
  * @see Component
  * @see Component#createResource()
  * @see FunctionParamAnnotation
@@ -39,7 +40,7 @@ final class DtoMethodParamAnnotation extends FunctionParamAnnotation {
      *
      * @param variableName 変数名
      * @param description  説明
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     protected DtoMethodParamAnnotation(String variableName, String description) {
         super(variableName, description);

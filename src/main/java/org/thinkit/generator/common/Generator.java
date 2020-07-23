@@ -24,7 +24,7 @@ public interface Generator {
     /**
      * 生成処理を開始する処理を定義するメソッドです。
      *
-     * @return 処理が正常終了した場合は{@code true}、それ以外は{@code false}
+     * @return 処理が正常終了した場合は {@code true}、それ以外は {@code false}
      */
     public boolean execute();
 }

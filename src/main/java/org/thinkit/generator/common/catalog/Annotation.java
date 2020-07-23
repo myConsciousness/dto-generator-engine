@@ -19,8 +19,8 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * クラスで使用するアノテーションを管理するカタログです。<br>
- * {@link #getAnnotation()}を使用することで各要素のアノテーションを取得することができます。<br>
- * <br>
+ * {@link #getAnnotation()}を使用することで各要素のアノテーションを取得することができます。
+ * <p>
  * 以下の静的メソッドを使用することでも各アノテーションを取得することができます。<br>
  * {@link #author()}<br>
  * {@link #since()}<br>

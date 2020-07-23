@@ -31,6 +31,7 @@ import lombok.ToString;
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
+ *
  * @see Component
  */
 @ToString
@@ -59,10 +60,10 @@ public abstract class Field implements Component {
 
     /**
      * フィールドの説明を追加します。<br>
-     * 引数として{@code null}が渡された場合は実行時に必ず失敗します。
+     * 引数として {@code null} が渡された場合は実行時に必ず失敗します。
      *
      * @param description フィールドの説明
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     public void add(Description description) {
         Objects.requireNonNull(description);
@@ -71,10 +72,10 @@ public abstract class Field implements Component {
 
     /**
      * フィールドの定義を追加します。<br>
-     * 引数として{@code null}が渡された場合は実行時に必ず失敗します。
+     * 引数として {@code null} が渡された場合は実行時に必ず失敗します。
      *
      * @param fieldDefinition フィールドの定義
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     public void add(FieldDefinition fieldDefinition) {
         Objects.requireNonNull(fieldDefinition);

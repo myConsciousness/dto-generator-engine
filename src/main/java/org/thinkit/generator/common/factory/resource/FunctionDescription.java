@@ -25,11 +25,12 @@ import lombok.ToString;
 /**
  * プログラムリソースにおける関数の説明を抽象化した抽象クラスです。<br>
  * この抽象クラスでは関数の説明定義に必要な情報を保持します。<br>
- * この抽象クラスを継承する具象クラスは必ず{@link Component#createResource()}を実装してください。
+ * この抽象クラスを継承する具象クラスは必ず {@link Component#createResource()} を実装してください。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
+ *
  * @see Component
  * @see Description
  * @see Component#createResource()
@@ -49,7 +50,7 @@ public abstract class FunctionDescription extends Description {
      * コンストラクタ
      *
      * @param description 説明
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     protected FunctionDescription(String description) {
         super(description);
@@ -57,10 +58,10 @@ public abstract class FunctionDescription extends Description {
 
     /**
      * 引数のアノテーション情報を追加します。<br>
-     * 引数として{@code null}が渡された場合は実行時に必ず失敗します。
+     * 引数として {@code null} が渡された場合は実行時に必ず失敗します。
      *
      * @param functionParamAnnotation 引数のアノテーション情報
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     public void add(FunctionParamAnnotation functionParamAnnotation) {
         Objects.requireNonNull(functionParamAnnotation);
@@ -69,9 +70,9 @@ public abstract class FunctionDescription extends Description {
 
     /**
      * 関数の引数アノテーションが存在するか判定します。<br>
-     * 関数の引数アノテーションが存在する場合は{@code true}、それ以外は{@false}を返却します。
+     * 関数の引数アノテーションが存在する場合は {@code true} 、それ以外は {@code false} を返却します。
      *
-     * @return 関数の引数アノテーションが存在する場合は{@code true}、それ以外は{@false}
+     * @return 関数の引数アノテーションが存在する場合は {@code true} 、それ以外は {@code false}
      */
     protected boolean hasParamAnnotation() {
         return !this.functionParamAnnotations.isEmpty();

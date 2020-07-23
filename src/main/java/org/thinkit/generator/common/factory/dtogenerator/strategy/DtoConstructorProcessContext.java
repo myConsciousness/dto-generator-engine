@@ -21,8 +21,8 @@ import lombok.ToString;
 
 /**
  * DTOのコンストラクタ処理定義を生成する際のストラテジーを判断するコンテキストを実装した具象クラスです。<br>
- * {@link ConstructorProcessContext}を実装し、{@link ConstructorProcessStrategy}の処理を委譲しています。<br>
- * <br>
+ * {@link ConstructorProcessContext} を実装し、{@link ConstructorProcessStrategy} の処理を委譲しています。
+ * <p>
  * 以下の機能を提供しています。<br>
  * {@link #toConstructorProcess(String, String)}<br>
  *
@@ -41,7 +41,7 @@ public class DtoConstructorProcessContext extends ConstructorProcessContext {
      *
      * @param constructorProcessStrategy コンストラクタ処理ストラテジー
      *
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     public DtoConstructorProcessContext(@NonNull ConstructorProcessStrategy constructorProcessStrategy) {
         super(constructorProcessStrategy);

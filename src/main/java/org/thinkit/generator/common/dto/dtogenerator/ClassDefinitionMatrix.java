@@ -21,7 +21,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * クラスの定義情報群を管理するデータクラスです。 当該クラスはイミュータブルです。
+ * クラスの定義情報群を管理するデータクラスです。
  *
  * @author Kato Shinya
  * @since 1.0

@@ -24,7 +24,7 @@ import lombok.ToString;
 /**
  * プログラムリソースを抽象化した抽象クラスです。<br>
  * この抽象クラスではプログラムリソース定義に必要な情報を保持します。<br>
- * この抽象クラスを継承する具象クラスは必ず{@link #createResource()}を実装してください。
+ * この抽象クラスを継承する具象クラスは必ず {@link #createResource()} を実装してください。
  *
  * @author Kato Shinya
  * @since 1.0
@@ -90,7 +90,7 @@ public abstract class Resource {
      * @param resourceName     リソース名
      * @param field            フィールド定義
      *
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     protected Resource(Copyright copyright, String packageName, ClassDescription classDescription, String resourceName,
             Field field) {
@@ -106,7 +106,7 @@ public abstract class Resource {
      *
      * @param description 説明定義
      *
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     public void add(@NonNull Description description) {
         this.field.add(description);
@@ -117,7 +117,7 @@ public abstract class Resource {
      *
      * @param fieldDefinition フィールド定義
      *
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     public void add(@NonNull FieldDefinition fieldDefinition) {
         this.field.add(fieldDefinition);
@@ -143,9 +143,9 @@ public abstract class Resource {
 
     /**
      * リソースを生成し文字列表現として返却する処理を定義するメソッドです。<br>
-     * このメソッドを定義している{@link Component}を継承した具象サブクラスは<br>
-     * 必ずこのメソッドを実装する必要があります。 <br>
-     * <br>
+     * このメソッドを定義している {@link Component} を継承した具象サブクラスは<br>
+     * 必ずこのメソッドを実装する必要があります。
+     * <p>
      * この抽象メソッドはこの抽象クラスを継承する部品の特性に応じて実装してください。<br>
      * 例えば、この抽象クラスをJavaリソースにおけるフィールド定義を管理する部品が継承した場合、<br>
      * その部品クラスはフィールド定義を文字列として生成する処理を実装する必要があります。

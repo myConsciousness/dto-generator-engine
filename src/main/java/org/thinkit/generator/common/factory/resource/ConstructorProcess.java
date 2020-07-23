@@ -23,13 +23,13 @@ import lombok.ToString;
 /**
  * プログラムリソースにおけるコンストラクタ処理を抽象化した抽象クラスです。<br>
  * この抽象クラスではコンストラクタ処理の定義に必要な情報を保持します。<br>
- * この抽象クラスを継承する具象クラスは必ず{@link Component#createResource()}を実装してください。 <br>
- * <br>
+ * この抽象クラスを継承する具象クラスは必ず {@link Component#createResource()} を実装してください。
+ * <p>
  * 以下のメソッドを使用することによりコンストラクタの状態を変更することができます。<br>
- * {@link #toDefault()}<br>
- * {@link #toRequired()}<br>
- * {@link #toCopying()}<br>
- * <br>
+ * {@link #toDefault()} <br>
+ * {@link #toRequired()} <br>
+ * {@link #toCopying()} <br>
+ * <p>
  * コンストラクタの状態は以下のメソッドで取得できます。<br>
  * {@link #getConstructorState()}
  *
@@ -45,7 +45,7 @@ public abstract class ConstructorProcess extends Process {
 
     /**
      * コンストラクタ状態。<br>
-     * 初期値は{@link ConstructorState#DEFAULT}が設定されています。
+     * 初期値は {@link ConstructorState#DEFAULT} が設定されています。
      */
     @Getter(AccessLevel.PROTECTED)
     private ConstructorState constructorState = ConstructorState.DEFAULT;
@@ -60,7 +60,7 @@ public abstract class ConstructorProcess extends Process {
      * コンストラクタ
      *
      * @param variableName 変数名
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     protected ConstructorProcess(@NonNull String variableName) {
         super(variableName);
@@ -71,7 +71,7 @@ public abstract class ConstructorProcess extends Process {
      *
      * @param variableName 変数名
      * @param getterName   ゲッター名
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     protected ConstructorProcess(@NonNull String variableName, @NonNull String getterName) {
         super(variableName);
@@ -80,9 +80,9 @@ public abstract class ConstructorProcess extends Process {
 
     /**
      * コンストラクタ状態をデフォルトコンストラクタに変更します。<br>
-     * {@link Constructor}のインスタンス生成時では、<br>
-     * 初期値として{@link ConstructorState#DEFAULT}が設定されているため、<br>
-     * {@link #toDefault()}の呼び出しは必要ありません。
+     * {@link Constructor} のインスタンス生成時では、<br>
+     * 初期値として {@link ConstructorState#DEFAULT} が設定されているため、<br>
+     * {@link #toDefault()} の呼び出しは必要ありません。
      *
      * @return 当オブジェクトのインスタンス
      */

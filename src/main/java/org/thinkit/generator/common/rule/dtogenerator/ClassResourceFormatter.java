@@ -42,7 +42,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 /**
- * クラス定義マトリクス情報を基にJavaのDTOリソースを生成する処理を定義したルールクラスです。<br>
+ * クラス定義マトリクス情報を基にJavaのDTOリソースを生成する処理を定義したルールクラスです。
  *
  * @author Kato Shinya
  * @since 1.0
@@ -111,7 +111,8 @@ public final class ClassResourceFormatter extends AbstractRule {
      * 再帰的にクラス定義情報をJavaファイルへ出力する形式へ整形します。
      *
      * @param parameters 再帰処理に必要な情報を格納したデータクラス
-     * @return 整形処理が正常終了した場合は{@code true}、それ以外は{@code false}
+     * @return 整形処理が正常終了した場合は {@code true}、それ以外は {@code false}
+     *
      * @see RecursiveRequiredParameters
      */
     private boolean formatClassDefinitionRecursively(@NonNull final RecursiveRequiredParameters parameters) {
@@ -141,15 +142,16 @@ public final class ClassResourceFormatter extends AbstractRule {
 
     /**
      * 引数として渡された情報を基にリソース情報を構築します。<br>
-     * 各項目に子クラスが存在する場合は再帰処理({@link #formatClassDefinitionRecursively(RecursiveRequiredParameters)})を行います。<br>
-     * <br>
-     * 再帰処理中に想定外のエラーが発生した場合は必ず{@code null}を返却します。
+     * 各項目に子クラスが存在する場合は再帰処理( {@link #formatClassDefinitionRecursively(RecursiveRequiredParameters)} )を行います。
+     * <p>
+     * 再帰処理中に想定外のエラーが発生した場合は必ず {@code null} を返却します。
      *
      * @param className               クラス名
      * @param classItemDefinitionList クラス項目定義情報リスト
      * @param classNameDefinition     クラス名定義情報
      * @param classCreatorDefinition  クラス作成者情報
      * @param formattedResources      整形されたJavaリソース情報
+     *
      * @return #see {@link Resource}
      */
     private Resource formatResource(@NonNull final String className,
@@ -208,14 +210,14 @@ public final class ClassResourceFormatter extends AbstractRule {
 
     /**
      * 引数として渡された情報を基に著作権定義オブジェクトを生成し返却します。<br>
-     * 引数として{@code null}が渡された場合は実行時に必ず失敗します。<br>
+     * 引数として {@code null} が渡された場合は実行時に必ず失敗します。<br>
      *
      * @param className              クラス名
      * @param classNameDefinition    クラス名定義情報
      * @param classCreatorDefinition クラス作成者情報
      * @return 著作権定義オブジェクト
      *
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     private Copyright createCopyright(@NonNull String className, @NonNull ClassNameDefinition classNameDefinition,
             @NonNull ClassCreatorDefinition classCreatorDefinition) {
@@ -226,14 +228,14 @@ public final class ClassResourceFormatter extends AbstractRule {
 
     /**
      * 引数として渡された情報を基にリソース定義オブジェクトを生成し返却します。<br>
-     * 引数として{@code null}が渡された場合は実行時に必ず失敗します。<br>
+     * 引数として {@code null} が渡された場合は実行時に必ず失敗します。<br>
      *
      * @param className              クラス名
      * @param classNameDefinition    クラス名定義情報
      * @param classCreatorDefinition クラス作成者情報
      * @return リソース定義オブジェクト
      *
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     private Resource createResource(@NonNull String className, @NonNull ClassNameDefinition classNameDefinition,
             @NonNull ClassCreatorDefinition classCreatorDefinition) {
@@ -250,13 +252,13 @@ public final class ClassResourceFormatter extends AbstractRule {
 
     /**
      * 引数として渡された情報を基にコンストラクタ定義オブジェクトを生成し返却します。<br>
-     * 引数として{@code null}が渡された場合は実行時に必ず失敗します。<br>
+     * 引数として {@code null} が渡された場合は実行時に必ず失敗します。<br>
      *
      * @param className   クラス名
      * @param description 説明
      * @return コンストラクタ定義オブジェクト
      *
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     private Constructor createConstructor(@NonNull String className, @NonNull String description) {
         final ResourceFactory resourceFactory = DtoResourceFactory.getInstance();
@@ -269,7 +271,7 @@ public final class ClassResourceFormatter extends AbstractRule {
      * @param sequence 文字列
      * @return 上1桁目が小文字に変換された文字列
      *
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     private String toInitialLowerCase(@NonNull String sequence) {
         return sequence.substring(0, 1).toLowerCase() + sequence.substring(1);
@@ -277,7 +279,7 @@ public final class ClassResourceFormatter extends AbstractRule {
 
     /**
      * 整形時の再帰処理で使用する情報を管理するデータクラスです。 <br>
-     * インスタンス成時に各フィールドへnullが設定された場合は必ず例外が発生します。
+     * インスタンス成時に各フィールドへ {@code null} が設定された場合は必ず例外が発生します。
      *
      * @author Kato Shinya
      * @since 1.0

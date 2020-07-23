@@ -23,11 +23,12 @@ import lombok.ToString;
 /**
  * プログラムリソースにおける著作権を抽象化した抽象クラスです。<br>
  * この抽象クラスでは著作権定義に必要な情報を保持します。<br>
- * この抽象クラスを継承する具象クラスは必ず{@link Component#createResource()}を実装してください。
+ * この抽象クラスを継承する具象クラスは必ず {@link Component#createResource()} を実装してください。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
+ *
  * @see Component
  * @see Component#createResource()
  */
@@ -86,7 +87,7 @@ public abstract class Copyright implements Component {
      * @param creator      作成者
      * @param creationDate 作成日付
      *
-     * @exception NullPointerException 引数として{@code null}が渡された場合
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     protected Copyright(String projectName, String fileName, String encoding, String creator, String creationDate) {
         this.projectName = projectName;
@@ -99,8 +100,8 @@ public abstract class Copyright implements Component {
     /**
      * {@link #creationDate}から上4桁（yyyy）を抽出して返却します。
      *
-     * @return {@link #creationDate}から抽出した上4桁（yyyy）
-     * @throws LogicException {@link #creationDate}が4桁未満の場合
+     * @return {@link #creationDate} から抽出した上4桁（yyyy）
+     * @throws LogicException {@link #creationDate} が4桁未満の場合
      */
     protected String getCreationYear() {
 

@@ -22,8 +22,8 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * 必須引数有りのコンストラクタの処理定義を生成する際に使用するストラテジーを実装した具象クラスです。<br>
- * <br>
+ * 必須引数有りのコンストラクタの処理定義を生成する際に使用するストラテジーを実装した具象クラスです。
+ * <p>
  * 以下の機能を提供しています。<br>
  * {@link #toConstructorProcess(String, String)}<br>
  *

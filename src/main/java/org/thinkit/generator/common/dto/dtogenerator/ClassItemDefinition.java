@@ -22,7 +22,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * クラス項目定義の情報を管理するデータクラスです。 当該クラスはイミュータブルです。
+ * クラス項目定義の情報を管理するデータクラスです。
  *
  * @author Kato Shinya
  * @since 1.0
