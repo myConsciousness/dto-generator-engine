@@ -1,5 +1,5 @@
 /**
- * Project Name : Generator<br>
+ * Project Name : generator-commons<br>
  * File Name : DtoCopyright.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/06/07<br>
