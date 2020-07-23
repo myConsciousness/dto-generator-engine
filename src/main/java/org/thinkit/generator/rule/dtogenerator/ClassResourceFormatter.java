@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : ClassDefinitionMatrixFormatter.java<br>
+ * File Name : ClassResourceFormatter.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/05/11<br>
  * <p>
@@ -42,8 +42,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 /**
- * {@link ClassDefinitionMatrixManager}から取得したクラス定義マトリクス情報を基に<br>
- * JavaのDTOリソースを生成する処理を定義したルールクラスです。<br>
+ * クラス定義マトリクス情報を基にJavaのDTOリソースを生成する処理を定義したルールクラスです。<br>
  *
  * @author Kato Shinya
  * @since 1.0
@@ -51,7 +50,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public final class ClassDefinitionMatrixFormatter extends AbstractRule {
+public final class ClassResourceFormatter extends AbstractRule {
 
     /**
      * ログ出力オブジェクト
@@ -74,7 +73,7 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private ClassDefinitionMatrixFormatter() {
+    private ClassResourceFormatter() {
     }
 
     /**
@@ -82,14 +81,13 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
      *
      * @param classDefinitionMatrix クラス定義情報群
      */
-    public ClassDefinitionMatrixFormatter(final ClassDefinitionMatrix classDefinitionMatrix) {
+    public ClassResourceFormatter(final ClassDefinitionMatrix classDefinitionMatrix) {
         super();
         this.classDefinitionMatrix = classDefinitionMatrix;
     }
 
     @Override
     public boolean execute() {
-        logger.atInfo().log("START");
 
         final ClassDefinitionMatrix classDefinitionMatrix = this.classDefinitionMatrix;
         final ClassNameDefinition classNameDefinition = classDefinitionMatrix.getClassNameDefinition();
@@ -106,7 +104,6 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
 
         this.classResource = new ClassResource(classNameDefinition.getPackageName(), formattedResources);
 
-        logger.atInfo().log("END");
         return true;
     }
 
@@ -118,7 +115,6 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
      * @see RecursiveRequiredParameters
      */
     private boolean formatClassDefinitionRecursively(@NonNull final RecursiveRequiredParameters parameters) {
-        logger.atInfo().log("START");
         logger.atInfo().log("再帰処理に使用するパラメータ情報 = (%s)", parameters);
 
         final ClassNameDefinition classNameDefinition = parameters.getClassNameDefinition();
@@ -140,7 +136,6 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
         }
 
         logger.atInfo().log("整形されたJavaリソース = (%s)", formattedResources);
-        logger.atInfo().log("END");
         return true;
     }
 
@@ -162,7 +157,7 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
             @NonNull final ClassNameDefinition classNameDefinition,
             @NonNull final ClassCreatorDefinition classCreatorDefinition,
             @NonNull final Map<String, String> formattedResources) {
-        logger.atInfo().log("START");
+
         assert className.length() > 0;
         assert !classItemDefinitionList.isEmpty();
 
@@ -208,7 +203,6 @@ public final class ClassDefinitionMatrixFormatter extends AbstractRule {
         resource.add(requiredConstructor);
         resource.add(copyingConstructor);
 
-        logger.atInfo().log("END");
         return resource;
     }
 
