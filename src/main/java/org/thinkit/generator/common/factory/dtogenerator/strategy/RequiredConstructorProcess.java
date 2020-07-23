@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : RequiredConstructorProcessStrategy.java<br>
+ * File Name : RequiredConstructorProcess.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/06/09<br>
  * <p>
@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.rule.factory.strategy.dtogenerator;
+package org.thinkit.generator.common.factory.dtogenerator.strategy;
 
 import org.thinkit.common.catalog.Delimiter;
 import org.thinkit.common.catalog.Indentation;
@@ -35,7 +35,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class RequiredConstructorProcessStrategy extends ConstructorProcessStrategy {
+public class RequiredConstructorProcess extends ConstructorProcessStrategy {
 
     /**
      * カレントオブジェクト

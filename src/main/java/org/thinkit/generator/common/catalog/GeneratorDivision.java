@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.catalog;
+package org.thinkit.generator.common.catalog;
 
 import org.thinkit.common.catalog.Catalog;
 

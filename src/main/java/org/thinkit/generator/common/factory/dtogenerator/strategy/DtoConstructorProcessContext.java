@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.rule.factory.strategy.dtogenerator;
+package org.thinkit.generator.common.factory.dtogenerator.strategy;
 
 import org.thinkit.generator.rule.factory.strategy.resource.ConstructorProcessContext;
 import org.thinkit.generator.rule.factory.strategy.resource.ConstructorProcessStrategy;

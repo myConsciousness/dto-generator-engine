@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.rule.factory.dtofactory;
+package org.thinkit.generator.common.factory.dtogenerator;
 
 import org.thinkit.generator.rule.factory.resource.Description;
 import org.thinkit.common.catalog.Indentation;

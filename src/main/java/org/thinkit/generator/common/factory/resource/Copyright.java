@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.rule.factory.resource;
+package org.thinkit.generator.common.factory.resource;
 
 import org.thinkit.common.exception.LogicException;
 

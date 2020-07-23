@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.rule.factory.dtofactory;
+package org.thinkit.generator.common.factory.dtogenerator;
 
 import java.util.List;
 

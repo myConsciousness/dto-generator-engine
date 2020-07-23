@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.dtogenerator;
+package org.thinkit.generator.common.dtogenerator;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : DefaultConstructorProcessStrategy.java<br>
+ * File Name : DefaultConstructorProcess.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/06/09<br>
  * <p>
@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.rule.factory.strategy.dtogenerator;
+package org.thinkit.generator.common.factory.dtogenerator.strategy;
 
 import org.apache.commons.lang3.StringUtils;
 import org.thinkit.generator.rule.factory.strategy.resource.ConstructorProcessStrategy;
@@ -35,7 +35,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class DefaultConstructorProcessStrategy extends ConstructorProcessStrategy {
+public class DefaultConstructorProcess extends ConstructorProcessStrategy {
 
     @Override
     public String toConstructorProcess(@NonNull String variableName, @NonNull String getterName) {

@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator;
+package org.thinkit.generator.common;
 
 /**
  * 生成器インターフェース
