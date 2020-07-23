@@ -50,6 +50,8 @@ dependencies {
 	compile(group: 'org.apache.poi', name : 'poi-ooxml', version: '4.1.2') {
 	exclude group: 'stax', module: 'stax-api'
 	}
+
+    compile fileTree(dir: 'libs', include: '*.jar')
 }
 
 test {
