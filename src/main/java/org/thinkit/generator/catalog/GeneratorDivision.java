@@ -1,5 +1,5 @@
 /**
- * Project Name : Generator<br>
+ * Project Name : generator-commons<br>
  * File Name : GeneratorDivision.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/05/16<br>

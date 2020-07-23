@@ -1,5 +1,5 @@
 /**
- * Project Name : Generator<br>
+ * Project Name : generator-commons<br>
  * File Name : ClassDefinitionMatrixFormatter.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/05/11<br>
@@ -27,7 +27,7 @@ import org.thinkit.generator.dtogenerator.ClassDefinition;
 import org.thinkit.generator.dtogenerator.ClassDefinitionMatrix;
 import org.thinkit.generator.dtogenerator.ClassItemDefinition;
 import org.thinkit.generator.dtogenerator.ClassNameDefinition;
-import org.thinkit.generator.dtogenerator.DtoClassResource;
+import org.thinkit.generator.dtogenerator.ClassResource;
 import org.thinkit.generator.rule.factory.dtofactory.DtoResourceFactory;
 import org.thinkit.generator.rule.factory.resource.ClassDescription;
 import org.thinkit.generator.rule.factory.resource.Constructor;
@@ -51,7 +51,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-final class ClassDefinitionMatrixFormatter extends AbstractRule {
+public final class ClassDefinitionMatrixFormatter extends AbstractRule {
 
     /**
      * ログ出力オブジェクト
@@ -65,10 +65,10 @@ final class ClassDefinitionMatrixFormatter extends AbstractRule {
     private ClassDefinitionMatrix classDefinitionMatrix = null;
 
     /**
-     * DTOクラスリソース
+     * クラスリソース
      */
     @Getter
-    private DtoClassResource dtoClassResource = null;
+    private ClassResource classResource = null;
 
     /**
      * デフォルトコンストラクタ
@@ -104,7 +104,7 @@ final class ClassDefinitionMatrixFormatter extends AbstractRule {
             return false;
         }
 
-        this.dtoClassResource = new DtoClassResource(classNameDefinition.getPackageName(), formattedResources);
+        this.classResource = new ClassResource(classNameDefinition.getPackageName(), formattedResources);
 
         logger.atInfo().log("END");
         return true;

@@ -1,6 +1,6 @@
 /**
- * Project Name : Generator<br>
- * File Name : DtoCellItem.java<br>
+ * Project Name : generator-commons<br>
+ * File Name : DtoItem.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/04/28<br>
  * <p>
@@ -18,14 +18,14 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * DTOのセル項目を管理するカタログです。
+ * DTOの項目を管理するカタログです。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
  */
 @RequiredArgsConstructor
-public enum DtoCellItem implements Catalog<DtoCellItem> {
+public enum DtoItem implements Catalog<DtoItem> {
 
     /**
      * 物理名
