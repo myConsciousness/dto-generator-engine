@@ -50,30 +50,6 @@ dependencies {
 	compile(group: 'org.apache.poi', name : 'poi-ooxml', version: '4.1.2') {
 	exclude group: 'stax', module: 'stax-api'
 	}
-
-    compile fileTree(dir: 'libs', include: '*.jar')
-}
-
-application {
-    mainClassName = 'org.thinkit.generator.Main'
-}
-
-run {
-    if (project.hasProperty('generatorCategory')) {
-        args project.generatorCategory
-    } else {
-        args "0"
-    }
-
-    if (project.hasProperty('filePath')) {
-        args project.filePath
-    }
-
-    if (project.hasProperty('outputPath')) {
-        args project.outputPath
-    } else {
-        args ""
-    }
 }
 
 test {
