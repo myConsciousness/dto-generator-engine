@@ -15,9 +15,9 @@ package org.thinkit.generator.common.factory.dtogenerator;
 import java.util.List;
 
 import org.thinkit.common.catalog.Indentation;
-import org.thinkit.generator.rule.factory.resource.Description;
-import org.thinkit.generator.rule.factory.resource.Field;
-import org.thinkit.generator.rule.factory.resource.FieldDefinition;
+import org.thinkit.generator.common.factory.resource.Description;
+import org.thinkit.generator.common.factory.resource.Field;
+import org.thinkit.generator.common.factory.resource.FieldDefinition;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

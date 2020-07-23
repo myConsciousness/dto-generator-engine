@@ -19,10 +19,10 @@ import org.thinkit.common.catalog.Delimiter;
 import org.thinkit.common.catalog.Identifier;
 import org.thinkit.common.catalog.Indentation;
 import org.thinkit.common.catalog.Parenthesis;
-import org.thinkit.generator.rule.factory.resource.Constructor;
-import org.thinkit.generator.rule.factory.resource.FunctionDescription;
-import org.thinkit.generator.rule.factory.resource.Parameter;
-import org.thinkit.generator.rule.factory.resource.Process;
+import org.thinkit.generator.common.factory.resource.Constructor;
+import org.thinkit.generator.common.factory.resource.FunctionDescription;
+import org.thinkit.generator.common.factory.resource.Parameter;
+import org.thinkit.generator.common.factory.resource.Process;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

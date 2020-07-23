@@ -13,7 +13,7 @@
 package org.thinkit.generator.common.factory.dtogenerator.strategy;
 
 import org.apache.commons.lang3.StringUtils;
-import org.thinkit.generator.rule.factory.strategy.resource.ConstructorProcessStrategy;
+import org.thinkit.generator.common.factory.resource.strategy.ConstructorProcessStrategy;
 
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;

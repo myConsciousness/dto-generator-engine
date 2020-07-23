@@ -17,11 +17,11 @@ import java.util.List;
 import org.thinkit.common.catalog.Brace;
 import org.thinkit.common.catalog.Identifier;
 import org.thinkit.common.catalog.Indentation;
-import org.thinkit.generator.catalog.dtogenerator.DtoAnnotation;
-import org.thinkit.generator.rule.factory.resource.ClassDescription;
-import org.thinkit.generator.rule.factory.resource.Constructor;
-import org.thinkit.generator.rule.factory.resource.Copyright;
-import org.thinkit.generator.rule.factory.resource.Resource;
+import org.thinkit.generator.common.catalog.dtogenerator.DtoAnnotation;
+import org.thinkit.generator.common.factory.resource.ClassDescription;
+import org.thinkit.generator.common.factory.resource.Constructor;
+import org.thinkit.generator.common.factory.resource.Copyright;
+import org.thinkit.generator.common.factory.resource.Resource;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

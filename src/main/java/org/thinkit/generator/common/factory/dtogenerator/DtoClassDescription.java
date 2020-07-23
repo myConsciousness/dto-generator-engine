@@ -13,8 +13,8 @@
 package org.thinkit.generator.common.factory.dtogenerator;
 
 import org.thinkit.common.catalog.Indentation;
-import org.thinkit.generator.catalog.dtogenerator.DtoAnnotation;
-import org.thinkit.generator.rule.factory.resource.ClassDescription;
+import org.thinkit.generator.common.catalog.dtogenerator.DtoAnnotation;
+import org.thinkit.generator.common.factory.resource.ClassDescription;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

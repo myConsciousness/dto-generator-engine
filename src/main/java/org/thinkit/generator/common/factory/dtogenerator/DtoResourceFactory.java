@@ -12,17 +12,17 @@
 
 package org.thinkit.generator.common.factory.dtogenerator;
 
-import org.thinkit.generator.rule.factory.resource.ClassDescription;
-import org.thinkit.generator.rule.factory.resource.Constructor;
-import org.thinkit.generator.rule.factory.resource.ConstructorProcess;
-import org.thinkit.generator.rule.factory.resource.Copyright;
-import org.thinkit.generator.rule.factory.resource.Description;
-import org.thinkit.generator.rule.factory.resource.FieldDefinition;
-import org.thinkit.generator.rule.factory.resource.FunctionDescription;
-import org.thinkit.generator.rule.factory.resource.FunctionParamAnnotation;
-import org.thinkit.generator.rule.factory.resource.Parameter;
-import org.thinkit.generator.rule.factory.resource.Resource;
-import org.thinkit.generator.rule.factory.resource.ResourceFactory;
+import org.thinkit.generator.common.factory.resource.ClassDescription;
+import org.thinkit.generator.common.factory.resource.Constructor;
+import org.thinkit.generator.common.factory.resource.ConstructorProcess;
+import org.thinkit.generator.common.factory.resource.Copyright;
+import org.thinkit.generator.common.factory.resource.Description;
+import org.thinkit.generator.common.factory.resource.FieldDefinition;
+import org.thinkit.generator.common.factory.resource.FunctionDescription;
+import org.thinkit.generator.common.factory.resource.FunctionParamAnnotation;
+import org.thinkit.generator.common.factory.resource.Parameter;
+import org.thinkit.generator.common.factory.resource.Resource;
+import org.thinkit.generator.common.factory.resource.ResourceFactory;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

@@ -17,8 +17,8 @@ import org.thinkit.common.catalog.Identifier;
 import org.thinkit.common.catalog.Indentation;
 import org.thinkit.common.catalog.Operand;
 import org.thinkit.common.catalog.PrimitiveDataType;
-import org.thinkit.generator.catalog.dtogenerator.DtoAnnotation;
-import org.thinkit.generator.rule.factory.resource.FieldDefinition;
+import org.thinkit.generator.common.catalog.dtogenerator.DtoAnnotation;
+import org.thinkit.generator.common.factory.resource.FieldDefinition;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

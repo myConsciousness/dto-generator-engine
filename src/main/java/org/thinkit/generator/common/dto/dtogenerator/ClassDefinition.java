@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.common.dtogenerator;
+package org.thinkit.generator.common.dto.dtogenerator;
 
 import java.util.ArrayList;
 import java.util.List;

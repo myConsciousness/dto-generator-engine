@@ -12,7 +12,7 @@
 
 package org.thinkit.generator.common.factory.resource;
 
-import org.thinkit.generator.catalog.ConstructorState;
+import org.thinkit.generator.common.catalog.ConstructorState;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;

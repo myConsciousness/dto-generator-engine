@@ -12,13 +12,13 @@
 
 package org.thinkit.generator.common.factory.dtogenerator;
 
-import org.thinkit.generator.catalog.ConstructorState;
-import org.thinkit.generator.rule.factory.resource.ConstructorProcess;
-import org.thinkit.generator.rule.factory.strategy.dtogenerator.DtoConstructorProcessContext;
-import org.thinkit.generator.rule.factory.strategy.dtogenerator.CopyingConstructorProcessStrategy;
-import org.thinkit.generator.rule.factory.strategy.dtogenerator.DefaultConstructorProcessStrategy;
-import org.thinkit.generator.rule.factory.strategy.dtogenerator.RequiredConstructorProcessStrategy;
-import org.thinkit.generator.rule.factory.strategy.resource.ConstructorProcessContext;
+import org.thinkit.generator.common.catalog.ConstructorState;
+import org.thinkit.generator.common.factory.resource.ConstructorProcess;
+import org.thinkit.generator.common.factory.dtogenerator.strategy.DtoConstructorProcessContext;
+import org.thinkit.generator.common.factory.dtogenerator.strategy.CopyingConstructorProcess;
+import org.thinkit.generator.common.factory.dtogenerator.strategy.DefaultConstructorProcess;
+import org.thinkit.generator.common.factory.dtogenerator.strategy.RequiredConstructorProcess;
+import org.thinkit.generator.common.factory.resource.strategy.ConstructorProcessContext;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -67,9 +67,9 @@ final class DtoConstructorProcess extends ConstructorProcess {
     /**
      * 設定された{@link ConstructorState}の値を基にコンストラクタの処理定義を生成する際のコンテキストを取得し返却します。<br>
      * 以下のストラテジーを使用します。<br>
-     * {@link DefaultConstructorProcessStrategy}<br>
-     * {@link RequiredConstructorProcessStrategy}<br>
-     * {@link CopyingConstructorProcessStrategy}<br>
+     * {@link DefaultConstructorProcess}<br>
+     * {@link RequiredConstructorProcess}<br>
+     * {@link CopyingConstructorProcess}<br>
      *
      * @return コンストラクタ定義を生成する際に使用するコンテキスト
      */
@@ -77,11 +77,11 @@ final class DtoConstructorProcess extends ConstructorProcess {
 
         switch (super.getConstructorState()) {
             case REQUIRED:
-                return new DtoConstructorProcessContext(new RequiredConstructorProcessStrategy());
+                return new DtoConstructorProcessContext(new RequiredConstructorProcess());
             case COPYING:
-                return new DtoConstructorProcessContext(new CopyingConstructorProcessStrategy());
+                return new DtoConstructorProcessContext(new CopyingConstructorProcess());
             default:
-                return new DtoConstructorProcessContext(new DefaultConstructorProcessStrategy());
+                return new DtoConstructorProcessContext(new DefaultConstructorProcess());
         }
     }
 }

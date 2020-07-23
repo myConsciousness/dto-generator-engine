@@ -15,7 +15,7 @@ package org.thinkit.generator.common.factory.dtogenerator.strategy;
 import org.thinkit.common.catalog.Delimiter;
 import org.thinkit.common.catalog.Indentation;
 import org.thinkit.common.catalog.Operand;
-import org.thinkit.generator.rule.factory.strategy.resource.ConstructorProcessStrategy;
+import org.thinkit.generator.common.factory.resource.strategy.ConstructorProcessStrategy;
 
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;

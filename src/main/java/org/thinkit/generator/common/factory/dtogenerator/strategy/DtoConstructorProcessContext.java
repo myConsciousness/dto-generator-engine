@@ -12,8 +12,8 @@
 
 package org.thinkit.generator.common.factory.dtogenerator.strategy;
 
-import org.thinkit.generator.rule.factory.strategy.resource.ConstructorProcessContext;
-import org.thinkit.generator.rule.factory.strategy.resource.ConstructorProcessStrategy;
+import org.thinkit.generator.common.factory.resource.strategy.ConstructorProcessContext;
+import org.thinkit.generator.common.factory.resource.strategy.ConstructorProcessStrategy;
 
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
