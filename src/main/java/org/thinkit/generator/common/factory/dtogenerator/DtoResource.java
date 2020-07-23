@@ -17,7 +17,7 @@ import java.util.List;
 import org.thinkit.common.catalog.Brace;
 import org.thinkit.common.catalog.Identifier;
 import org.thinkit.common.catalog.Indentation;
-import org.thinkit.generator.common.catalog.dtogenerator.DtoAnnotation;
+import org.thinkit.generator.common.catalog.Annotation;
 import org.thinkit.generator.common.factory.resource.ClassDescription;
 import org.thinkit.generator.common.factory.resource.Constructor;
 import org.thinkit.generator.common.factory.resource.Copyright;
@@ -97,9 +97,9 @@ final class DtoResource extends Resource {
         resource.append("import lombok.*;").append(returnCode);
         resource.append(returnCode);
         resource.append(super.getClassDescription().createResource()).append(returnCode);
-        resource.append(DtoAnnotation.lombokGetter()).append(returnCode);
-        resource.append(DtoAnnotation.lombokToString()).append(returnCode);
-        resource.append(DtoAnnotation.lombokEqualsAndHashCode()).append(returnCode);
+        resource.append(Annotation.lombokGetter()).append(returnCode);
+        resource.append(Annotation.lombokToString()).append(returnCode);
+        resource.append(Annotation.lombokEqualsAndHashCode()).append(returnCode);
         resource.append(Identifier.PUBLIC.toIdentifier()).append(space).append("final").append(space).append("class")
                 .append(space).append(super.getResourceName()).append(space);
         resource.append(Brace.start()).append(returnCode);

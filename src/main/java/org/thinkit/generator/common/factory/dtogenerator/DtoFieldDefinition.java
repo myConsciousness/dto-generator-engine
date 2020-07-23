@@ -17,7 +17,7 @@ import org.thinkit.common.catalog.Identifier;
 import org.thinkit.common.catalog.Indentation;
 import org.thinkit.common.catalog.Operand;
 import org.thinkit.common.catalog.PrimitiveDataType;
-import org.thinkit.generator.common.catalog.dtogenerator.DtoAnnotation;
+import org.thinkit.generator.common.catalog.Annotation;
 import org.thinkit.generator.common.factory.resource.FieldDefinition;
 
 import lombok.EqualsAndHashCode;
@@ -57,7 +57,7 @@ final class DtoFieldDefinition extends FieldDefinition {
 
         final String dataType = super.getDataType();
         if (PrimitiveDataType.isPrimitive(dataType)) {
-            field.append(DtoAnnotation.lombokNonNull()).append(Indentation.returnCode());
+            field.append(Annotation.lombokNonNull()).append(Indentation.returnCode());
         }
 
         final String space = Indentation.space();

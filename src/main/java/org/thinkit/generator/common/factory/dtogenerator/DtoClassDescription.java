@@ -13,7 +13,7 @@
 package org.thinkit.generator.common.factory.dtogenerator;
 
 import org.thinkit.common.catalog.Indentation;
-import org.thinkit.generator.common.catalog.dtogenerator.DtoAnnotation;
+import org.thinkit.generator.common.catalog.Annotation;
 import org.thinkit.generator.common.factory.resource.ClassDescription;
 
 import lombok.EqualsAndHashCode;
@@ -60,11 +60,11 @@ final class DtoClassDescription extends ClassDescription {
         classDescription.append("/**").append(returnCode);
         classDescription.append(" * ").append(super.getDescription()).append(returnCode);
         classDescription.append(" *").append(returnCode);
-        classDescription.append(" * ").append(DtoAnnotation.author()).append(space).append(super.getCreator())
+        classDescription.append(" * ").append(Annotation.author()).append(space).append(super.getCreator())
                 .append(returnCode);
-        classDescription.append(" * ").append(DtoAnnotation.since()).append(space).append(INITIAL_VERSION)
+        classDescription.append(" * ").append(Annotation.since()).append(space).append(INITIAL_VERSION)
                 .append(returnCode);
-        classDescription.append(" * ").append(DtoAnnotation.version()).append(space).append(super.getVersion())
+        classDescription.append(" * ").append(Annotation.version()).append(space).append(super.getVersion())
                 .append(returnCode);
         classDescription.append(" */");
 

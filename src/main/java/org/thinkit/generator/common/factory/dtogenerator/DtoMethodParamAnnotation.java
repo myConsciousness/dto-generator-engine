@@ -13,7 +13,7 @@
 package org.thinkit.generator.common.factory.dtogenerator;
 
 import org.thinkit.common.catalog.Indentation;
-import org.thinkit.generator.common.catalog.dtogenerator.DtoAnnotation;
+import org.thinkit.generator.common.catalog.Annotation;
 import org.thinkit.generator.common.factory.resource.FunctionParamAnnotation;
 
 import lombok.EqualsAndHashCode;
@@ -48,7 +48,7 @@ final class DtoMethodParamAnnotation extends FunctionParamAnnotation {
     @Override
     public String createResource() {
         final String space = Indentation.space();
-        final String annotation = DtoAnnotation.param();
+        final String annotation = Annotation.param();
 
         final StringBuilder paramAnnotation = new StringBuilder();
         paramAnnotation.append(annotation).append(space).append(super.getVariableName()).append(space)
