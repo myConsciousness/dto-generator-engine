@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.thinkit.common.iterator.FluentIterator;
+import org.thinkit.common.iterator.IterableNode;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -42,7 +45,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public final class SelectionNodes implements Iterable<SelectionNode>, Iterator<SelectionNode> {
+public final class SelectionNodes implements Iterable<SelectionNode>, IterableNode<SelectionNode> {
 
     /**
      * 選択ノード群
@@ -54,11 +57,6 @@ public final class SelectionNodes implements Iterable<SelectionNode>, Iterator<S
      * 選択ノード群のサイズ
      */
     private int size = 0;
-
-    /**
-     * イテレート時のカーソルインデックス
-     */
-    private int cursorIndex = 0;
 
     /**
      * デフォルトコンストラクタ
@@ -96,36 +94,6 @@ public final class SelectionNodes implements Iterable<SelectionNode>, Iterator<S
     }
 
     /**
-     * {@link SelectionNode} クラスを総称型としてもつ {@link Iterator} オブジェクトを返却します。
-     *
-     * @return {@link SelectionNode} クラスを総称型としてもつ {@link Iterator} オブジェクト
-     */
-    @Override
-    public Iterator<SelectionNode> iterator() {
-        return this;
-    }
-
-    /**
-     * イテレート処理時に選択ノード群の次の要素を返却します。
-     *
-     * @return 選択ノード群の次の要素
-     */
-    @Override
-    public SelectionNode next() {
-        return this.selectionNodes.get(++this.cursorIndex);
-    }
-
-    /**
-     * イテレート時に選択ノード群の次の要素が存在するか確認します。
-     *
-     * @return イテレート時における選択ノード群に次の要素が存在する場合は {@code true} 、それ以外は {@code false}
-     */
-    @Override
-    public boolean hasNext() {
-        return this.size > this.cursorIndex;
-    }
-
-    /**
      * 引数として渡された {@code selectionNode} を選択ノードリストへ追加します。
      * <p>
      * この {@link SelectionNodes#add(SelectionNode)}
@@ -151,12 +119,18 @@ public final class SelectionNodes implements Iterable<SelectionNode>, Iterator<S
         return this;
     }
 
-    /**
-     * 選択ノード群のサイズを返却します。
-     *
-     * @return 選択ノード群のサイズ
-     */
+    @Override
+    public Iterator<SelectionNode> iterator() {
+        return FluentIterator.of(this);
+    }
+
+    @Override
     public int size() {
         return this.size;
+    }
+
+    @Override
+    public List<SelectionNode> nodes() {
+        return this.selectionNodes;
     }
 }
