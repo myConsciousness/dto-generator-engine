@@ -18,7 +18,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * 条件ノードを管理するデータクラスです。
+ * コンテンツの条件ノードを管理するデータクラスです。
  *
  * @author Kato Shinya
  * @since 1.0
