@@ -40,7 +40,6 @@ import lombok.ToString;
  * @since 1.0
  * @version 1.0
  */
-@Getter
 @ToString
 @EqualsAndHashCode
 public final class SelectionNodes implements Iterable<SelectionNode>, Iterator<SelectionNode> {
@@ -48,6 +47,7 @@ public final class SelectionNodes implements Iterable<SelectionNode>, Iterator<S
     /**
      * 選択ノード群
      */
+    @Getter
     private List<SelectionNode> selectionNodes = List.of();
 
     /**
@@ -75,6 +75,7 @@ public final class SelectionNodes implements Iterable<SelectionNode>, Iterator<S
      */
     private SelectionNodes(@NonNull SelectionNodes selectionNodes) {
         this.selectionNodes = new ArrayList<>(selectionNodes.getSelectionNodes());
+        this.size = selectionNodes.size();
     }
 
     /**
@@ -148,5 +149,14 @@ public final class SelectionNodes implements Iterable<SelectionNode>, Iterator<S
         this.size++;
 
         return this;
+    }
+
+    /**
+     * 選択ノード群のサイズを返却します。
+     *
+     * @return 選択ノード群のサイズ
+     */
+    public int size() {
+        return this.size;
     }
 }
