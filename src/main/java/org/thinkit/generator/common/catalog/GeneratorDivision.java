@@ -31,7 +31,12 @@ public enum GeneratorDivision implements Catalog<GeneratorDivision> {
     /**
      * DTO定義
      */
-    DTO_DEFINITOON(0);
+    DTO_DEFINITION(0),
+
+    /**
+     * コンテンツ定義
+     */
+    CONTENT_DEFINITION(1);
 
     /**
      * コード値
