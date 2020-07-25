@@ -68,8 +68,20 @@ public final class SelectionNode {
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public SelectionNode(@NonNull String conditionId) {
+    private SelectionNode(@NonNull String conditionId) {
         this.conditionId = conditionId;
+    }
+
+    /**
+     * コピーコンストラクタ
+     *
+     * @param selectionNode 選択ノード
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    public SelectionNode(@NonNull SelectionNode selectionNode) {
+        this.conditionId = selectionNode.getConditionId();
+        this.selection = new HashMap<>(selectionNode.getSelection());
     }
 
     /**
@@ -85,15 +97,16 @@ public final class SelectionNode {
     }
 
     /**
-     * コピーコンストラクタ
+     * 引数として渡された {@code selectionNode} オブジェクトの情報をコピーした{@link SelectionNode}
+     * クラスの新しいインスタンスを生成し返却します。
      *
      * @param selectionNode 選択ノード
+     * @return {@link SelectionNode} クラスの新しいインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public SelectionNode(@NonNull SelectionNode selectionNode) {
-        this.conditionId = selectionNode.getConditionId();
-        this.selection = new HashMap<>(selectionNode.getSelection());
+    public static SelectionNode of(@NonNull SelectionNode selectionNode) {
+        return new SelectionNode(selectionNode);
     }
 
     /**
