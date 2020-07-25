@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Generator</name>
-	<comment>Project Generator created by Buildship.</comment>
+	<name>generator-commons</name>
+	<comment>Project generator-commons created by Buildship.</comment>
 	<projects>
 	</projects>
 	<buildSpec>
