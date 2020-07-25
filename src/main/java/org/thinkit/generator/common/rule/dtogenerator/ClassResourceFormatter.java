@@ -142,7 +142,9 @@ public final class ClassResourceFormatter extends AbstractRule {
 
     /**
      * 引数として渡された情報を基にリソース情報を構築します。<br>
-     * 各項目に子クラスが存在する場合は再帰処理( {@link #formatClassDefinitionRecursively(RecursiveRequiredParameters)} )を行います。
+     * 各項目に子クラスが存在する場合は再帰処理(
+     * {@link #formatClassDefinitionRecursively(RecursiveRequiredParameters)}
+     * )を行います。
      * <p>
      * 再帰処理中に想定外のエラーが発生した場合は必ず {@code null} を返却します。
      *

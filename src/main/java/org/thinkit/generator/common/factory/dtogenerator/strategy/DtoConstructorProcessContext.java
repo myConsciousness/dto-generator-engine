@@ -21,7 +21,8 @@ import lombok.ToString;
 
 /**
  * DTOのコンストラクタ処理定義を生成する際のストラテジーを判断するコンテキストを実装した具象クラスです。<br>
- * {@link ConstructorProcessContext} を実装し、{@link ConstructorProcessStrategy} の処理を委譲しています。
+ * {@link ConstructorProcessContext} を実装し、{@link ConstructorProcessStrategy}
+ * の処理を委譲しています。
  * <p>
  * 以下の機能を提供しています。<br>
  * {@link #toConstructorProcess(String, String)}<br>
