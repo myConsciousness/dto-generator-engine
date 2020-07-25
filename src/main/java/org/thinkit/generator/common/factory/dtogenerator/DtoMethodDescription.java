@@ -22,15 +22,12 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * DTOクラスのメソッドの説明定義を生成する具象クラスです。<br>
- * DTOに必要なメソッドの説明定義を生成する処理を {@link Component#createResource()} に実装します。
+ * DTOクラスのメソッドの説明定義を生成する具象クラスです。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
  *
- * @see Component
- * @see Component#createResource()
  * @see FunctionDescription
  */
 @ToString

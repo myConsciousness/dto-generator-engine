@@ -19,15 +19,12 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * DTOクラスの引数定義を生成する具象クラスです。<br>
- * DTOに必要な引数定義定義を生成する処理を {@link Component#createResource()} に実装します。
+ * DTOクラスの引数定義を生成する具象クラスです。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
  *
- * @see Component
- * @see Component#createResource()
  * @see Parameter
  */
 @ToString

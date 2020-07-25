@@ -27,15 +27,12 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * DTOクラスのリソースを生成する具象クラスです。<br>
- * DTOのリソースを生成する処理を {@link Component#createResource()} に実装します。
+ * DTOクラスのリソースを生成する具象クラスです。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
  *
- * @see Component
- * @see Component#createResource()
  * @see Resource
  */
 @ToString

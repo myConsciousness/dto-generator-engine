@@ -13,26 +13,22 @@
 package org.thinkit.generator.common.factory.dtogenerator;
 
 import org.thinkit.generator.common.catalog.ConstructorState;
-import org.thinkit.generator.common.factory.resource.ConstructorProcess;
-import org.thinkit.generator.common.factory.dtogenerator.strategy.DtoConstructorProcessContext;
 import org.thinkit.generator.common.factory.dtogenerator.strategy.CopyingConstructorProcess;
 import org.thinkit.generator.common.factory.dtogenerator.strategy.DefaultConstructorProcess;
+import org.thinkit.generator.common.factory.dtogenerator.strategy.DtoConstructorProcessContext;
 import org.thinkit.generator.common.factory.dtogenerator.strategy.RequiredConstructorProcess;
-import org.thinkit.generator.common.factory.resource.strategy.ConstructorProcessContext;
+import org.thinkit.generator.common.factory.resource.ConstructorProcess;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * DTOクラスのコンストラクタ処理を生成する具象クラスです。<br>
- * DTOに必要なコンストラクタ処理を生成する処理を {@link Component#createResource()} に実装します。
+ * DTOクラスのコンストラクタ処理を生成する具象クラスです。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
  *
- * @see Component
- * @see Component#createResource()
  * @see ConstructorProcess
  */
 @ToString
@@ -68,8 +64,7 @@ final class DtoConstructorProcess extends ConstructorProcess {
     /**
      * 設定された{@link ConstructorState}の値を基にコンストラクタの処理定義を生成する際のコンテキストを取得し返却します。
      * <p>
-     * 以下のストラテジーを使用します。
-     * {@link DefaultConstructorProcess} <br>
+     * 以下のストラテジーを使用します。 {@link DefaultConstructorProcess} <br>
      * {@link RequiredConstructorProcess} <br>
      * {@link CopyingConstructorProcess} <br>
      *

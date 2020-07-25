@@ -12,22 +12,19 @@
 
 package org.thinkit.generator.common.factory.dtogenerator;
 
-import org.thinkit.generator.common.factory.resource.Description;
 import org.thinkit.common.catalog.Indentation;
+import org.thinkit.generator.common.factory.resource.Description;
 
-import lombok.ToString;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
- * DTOクラスの説明を生成する具象クラスです。<br>
- * DTOに必要な説明を生成する処理を {@link Component#createResource()} に実装します。
+ * DTOクラスの説明を生成する具象クラスです。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
  *
- * @see Component
- * @see Component#createResource()
  * @see Description
  */
 @ToString

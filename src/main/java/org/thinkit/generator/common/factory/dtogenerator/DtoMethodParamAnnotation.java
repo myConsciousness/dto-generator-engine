@@ -20,15 +20,12 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * DTOクラスのメソッドの引数アノテーションを生成する具象クラスです。<br>
- * DTOに必要なメソッドの引数アノテーションを生成する処理を {@link Component#createResource()} に実装します。
+ * DTOクラスのメソッドの引数アノテーションを生成する具象クラスです。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
  *
- * @see Component
- * @see Component#createResource()
  * @see FunctionParamAnnotation
  */
 @ToString

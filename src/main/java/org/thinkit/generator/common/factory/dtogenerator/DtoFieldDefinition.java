@@ -24,15 +24,12 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * DTOクラスのフィールド定義を生成する具象クラスです。<br>
- * DTOに必要なフィールド定義を生成する処理を {@link Component#createResource()} に実装します。
+ * DTOクラスのフィールド定義を生成する具象クラスです。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
  *
- * @see Component
- * @see Component#createResource()
  * @see FieldDefinition
  */
 @ToString
