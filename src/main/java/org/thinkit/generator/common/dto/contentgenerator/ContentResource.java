@@ -1,8 +1,8 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : ClassResource.java<br>
+ * File Name : ContentResource.java<br>
  * Encoding : UTF-8<br>
- * Creation Date : 2020/06/15<br>
+ * Creation Date : 2020/07/25<br>
  * <p>
  * Copyright © 2020 Kato Shinya. All rights reserved.
  * <p>
