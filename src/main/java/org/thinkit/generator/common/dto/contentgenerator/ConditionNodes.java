@@ -125,6 +125,15 @@ public final class ConditionNodes implements Iterable<ConditionNode>, IterableNo
         return this;
     }
 
+    /**
+     * 条件ノード群のサイズが空か判定します。
+     *
+     * @return 条件ノード群のサイズが {@code 0} 以下の場合は {@code true} 、 それ以外は{@code false}
+     */
+    public boolean isEmpty() {
+        return this.size <= 0;
+    }
+
     @Override
     public List<ConditionNode> nodes() {
         return this.conditionNodes;
