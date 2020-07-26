@@ -40,6 +40,11 @@ public final class ConditionNode {
     private boolean exclude;
 
     /**
+     * 条件群
+     */
+    private Conditions conditions;
+
+    /**
      * デフォルトコンストラクタ
      */
     private ConditionNode() {
@@ -50,12 +55,14 @@ public final class ConditionNode {
      *
      * @param conditionId 条件ID
      * @param exclude     除外
+     * @param conditions  条件群
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private ConditionNode(@NonNull String conditionId, boolean exclude) {
+    private ConditionNode(@NonNull String conditionId, boolean exclude, @NonNull Conditions conditions) {
         this.conditionId = conditionId;
         this.exclude = exclude;
+        this.conditions = conditions;
     }
 
     /**
@@ -68,6 +75,7 @@ public final class ConditionNode {
     private ConditionNode(@NonNull ConditionNode conditionNode) {
         this.conditionId = conditionNode.getConditionId();
         this.exclude = conditionNode.isExclude();
+        this.conditions = Conditions.of(conditions);
     }
 
     /**
@@ -75,11 +83,12 @@ public final class ConditionNode {
      *
      * @param conditionId 条件ID
      * @param exclude     除外
+     * @param conditions  条件群
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public static ConditionNode of(@NonNull String conditionId, boolean exclude) {
-        return new ConditionNode(conditionId, exclude);
+    public static ConditionNode of(@NonNull String conditionId, boolean exclude, @NonNull Conditions conditions) {
+        return new ConditionNode(conditionId, exclude, conditions);
     }
 
     /**
