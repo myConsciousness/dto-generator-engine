@@ -26,6 +26,17 @@ import lombok.ToString;
 
 /**
  * コンテンツの条件群を管理するデータクラスです。
+ * <p>
+ * このクラスはFluentインターフェースの概念を応用し設計されています。<br>
+ * そのため、以下のようなメソッドチェーンでの操作が可能です。
+ *
+ * <pre>
+ * <code>
+ * Conditions conditions = Conditions.of()
+ *                                  .add(condition1)
+ *                                  .add(condition2);
+ * </code>
+ * </pre>
  *
  * @author Kato Shinya
  * @since 1.0
@@ -35,9 +46,15 @@ import lombok.ToString;
 @EqualsAndHashCode
 public final class Conditions implements Iterable<Condition>, IterableNode<Condition> {
 
+    /**
+     * 条件群
+     */
     @Getter
     private List<Condition> conditions = List.of();
 
+    /**
+     * 条件群のサイズ
+     */
     private int size;
 
     /**
