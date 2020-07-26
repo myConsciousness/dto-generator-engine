@@ -50,7 +50,7 @@ public final class Conditions implements Iterable<Condition>, IterableNode<Condi
      * 条件群
      */
     @Getter
-    private List<Condition> conditions = List.of();
+    private List<Condition> conditions;
 
     /**
      * 条件群のサイズ
@@ -114,7 +114,7 @@ public final class Conditions implements Iterable<Condition>, IterableNode<Condi
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     public Conditions add(@NonNull Condition condition) {
-        conditions.add(condition);
+        this.conditions.add(condition);
         size++;
 
         return this;
