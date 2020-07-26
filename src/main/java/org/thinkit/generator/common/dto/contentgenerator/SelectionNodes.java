@@ -51,17 +51,19 @@ public final class SelectionNodes implements Iterable<SelectionNode>, IterableNo
      * 選択ノード群
      */
     @Getter
-    private List<SelectionNode> selectionNodes = List.of();
+    private List<SelectionNode> selectionNodes;
 
     /**
      * 選択ノード群のサイズ
      */
-    private int size = 0;
+    private int size;
 
     /**
      * デフォルトコンストラクタ
      */
     private SelectionNodes() {
+        this.selectionNodes = List.of();
+        this.size = 0;
     }
 
     /**
@@ -120,8 +122,8 @@ public final class SelectionNodes implements Iterable<SelectionNode>, IterableNo
     }
 
     @Override
-    public Iterator<SelectionNode> iterator() {
-        return FluentIterator.of(this);
+    public List<SelectionNode> nodes() {
+        return this.selectionNodes;
     }
 
     @Override
@@ -130,7 +132,7 @@ public final class SelectionNodes implements Iterable<SelectionNode>, IterableNo
     }
 
     @Override
-    public List<SelectionNode> nodes() {
-        return this.selectionNodes;
+    public Iterator<SelectionNode> iterator() {
+        return FluentIterator.of(this);
     }
 }
