@@ -1,3 +1,15 @@
+/**
+ * Project Name : generator-commons<br>
+ * File Name : Conditions.java<br>
+ * Encoding : UTF-8<br>
+ * Creation Date : 2020/07/26<br>
+ * <p>
+ * Copyright © 2020 Kato Shinya. All rights reserved.
+ * <p>
+ * This source code or any portion thereof must not be<br>
+ * reproduced or used in any manner whatsoever.
+ */
+
 package org.thinkit.generator.common.dto.contentgenerator;
 
 import java.util.ArrayList;
@@ -12,6 +24,13 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 
+/**
+ * コンテンツの条件群を管理するデータクラスです。
+ *
+ * @author Kato Shinya
+ * @since 1.0
+ * @version 1.0
+ */
 @ToString
 @EqualsAndHashCode
 public final class Conditions implements Iterable<Condition>, IterableNode<Condition> {
@@ -58,6 +77,25 @@ public final class Conditions implements Iterable<Condition>, IterableNode<Condi
         return new Conditions(conditions);
     }
 
+    /**
+     * 引数として渡された {@code condition} を条件リストへ追加します。
+     * <p>
+     * この {@link Conditions#add(Condition)}
+     * メソッドは自分自身のインスタンスを返却するため以下のようなメソッドチェーンでの操作が可能です。
+     *
+     * <pre>
+     * <code>
+     * Conditions conditions = Conditions.of()
+     *                                  .add(condition1)
+     *                                  .add(condition2);
+     * </code>
+     * </pre>
+     *
+     * @param condition 条件オブジェクト
+     * @return 自分自身のインスタンス
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
     public Conditions add(@NonNull Condition condition) {
         conditions.add(condition);
         size++;
