@@ -12,6 +12,8 @@
 
 package org.thinkit.generator.common.dto.contentgenerator;
 
+import java.io.Serializable;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -24,19 +26,25 @@ import lombok.ToString;
  * @since 1.0
  * @version 1.0
  */
-@Getter
 @ToString
 @EqualsAndHashCode
-public final class ContentMatrix {
+public final class ContentMatrix implements Serializable {
+
+    /**
+     * シリアルバージョンUID
+     */
+    private static final long serialVersionUID = 7166357277027973034L;
 
     /**
      * 選択ノード群
      */
+    @Getter
     private SelectionNodes selectionNodes;
 
     /**
      * 条件ノード群
      */
+    @Getter
     private ConditionNodes conditionNodes;
 
     /**

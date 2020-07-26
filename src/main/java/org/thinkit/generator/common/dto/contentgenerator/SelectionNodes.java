@@ -12,6 +12,7 @@
 
 package org.thinkit.generator.common.dto.contentgenerator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -45,7 +46,12 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public final class SelectionNodes implements Iterable<SelectionNode>, IterableNode<SelectionNode> {
+public final class SelectionNodes implements Iterable<SelectionNode>, IterableNode<SelectionNode>, Serializable {
+
+    /**
+     * シリアルバージョンUID
+     */
+    private static final long serialVersionUID = -8802715416310295230L;
 
     /**
      * 選択ノード群

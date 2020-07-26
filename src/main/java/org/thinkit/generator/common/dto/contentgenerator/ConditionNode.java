@@ -12,6 +12,8 @@
 
 package org.thinkit.generator.common.dto.contentgenerator;
 
+import java.io.Serializable;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -24,24 +26,31 @@ import lombok.ToString;
  * @since 1.0
  * @version 1.0
  */
-@Getter
 @ToString
 @EqualsAndHashCode
-public final class ConditionNode {
+public final class ConditionNode implements Serializable {
+
+    /**
+     * シリアルバージョンUID
+     */
+    private static final long serialVersionUID = 5000914024927667235L;
 
     /**
      * 条件ID
      */
+    @Getter
     private String conditionId;
 
     /**
      * 除外
      */
+    @Getter
     private boolean exclude;
 
     /**
      * 条件群
      */
+    @Getter
     private Conditions conditions;
 
     /**

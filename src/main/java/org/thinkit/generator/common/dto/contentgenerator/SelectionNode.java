@@ -12,6 +12,7 @@
 
 package org.thinkit.generator.common.dto.contentgenerator;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,20 +40,26 @@ import lombok.ToString;
  * @since 1.0
  * @version 1.0
  */
-@Getter
 @ToString
 @EqualsAndHashCode
-public final class SelectionNode {
+public final class SelectionNode implements Serializable {
+
+    /**
+     * シリアルバージョンUID
+     */
+    private static final long serialVersionUID = 3246450914037753704L;
 
     /**
      * 条件ID
      */
+    @Getter
     private String conditionId;
 
     /**
      * 選択情報
      */
-    private Map<String, String> selection = Map.of();
+    @Getter
+    private Map<String, String> selection;
 
     /**
      * デフォルトコンストラクタ
@@ -70,6 +77,7 @@ public final class SelectionNode {
      */
     private SelectionNode(@NonNull String conditionId) {
         this.conditionId = conditionId;
+        this.selection = Map.of();
     }
 
     /**

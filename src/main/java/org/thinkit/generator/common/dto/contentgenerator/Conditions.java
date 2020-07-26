@@ -12,6 +12,7 @@
 
 package org.thinkit.generator.common.dto.contentgenerator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -44,7 +45,12 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public final class Conditions implements Iterable<Condition>, IterableNode<Condition> {
+public final class Conditions implements Iterable<Condition>, IterableNode<Condition>, Serializable {
+
+    /**
+     * シリアルバージョンUID
+     */
+    private static final long serialVersionUID = 8402668932877014054L;
 
     /**
      * 条件群
