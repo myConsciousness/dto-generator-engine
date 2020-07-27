@@ -1,6 +1,6 @@
 package org.thinkit.generator.common.rule.contentgenerator;
 
-import org.thinkit.common.rule.AbstractRule;
+import org.thinkit.common.command.Command;
 import org.thinkit.generator.common.dto.contentgenerator.ContentMatrix;
 import org.thinkit.generator.common.dto.contentgenerator.ContentResource;
 
@@ -11,7 +11,7 @@ import lombok.ToString;
 
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public final class ContentResourceFormatter extends AbstractRule {
+public final class ContentResourceFormatter implements Command<ContentResource> {
 
     /**
      * コンテンツマトリクス
@@ -55,7 +55,7 @@ public final class ContentResourceFormatter extends AbstractRule {
     }
 
     @Override
-    public boolean execute() {
-        return true;
+    public ContentResource run() {
+        return null;
     }
 }

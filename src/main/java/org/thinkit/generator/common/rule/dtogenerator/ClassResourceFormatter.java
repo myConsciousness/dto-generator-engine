@@ -21,7 +21,7 @@ import java.util.Map;
 import com.google.common.flogger.FluentLogger;
 
 import org.thinkit.common.catalog.Extension;
-import org.thinkit.common.rule.AbstractRule;
+import org.thinkit.common.command.Command;
 import org.thinkit.generator.common.dto.dtogenerator.ClassCreatorDefinition;
 import org.thinkit.generator.common.dto.dtogenerator.ClassDefinition;
 import org.thinkit.generator.common.dto.dtogenerator.ClassDefinitionMatrix;
@@ -42,7 +42,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 /**
- * クラス定義マトリクス情報を基にJavaのDTOリソースを生成する処理を定義したルールクラスです。
+ * クラス定義マトリクス情報を基にJavaのDTOリソースを生成する処理を定義したコマンドクラスです。
  *
  * @author Kato Shinya
  * @since 1.0
@@ -50,7 +50,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public final class ClassResourceFormatter extends AbstractRule {
+public final class ClassResourceFormatter implements Command<ClassResource> {
 
     /**
      * ログ出力オブジェクト
@@ -61,13 +61,7 @@ public final class ClassResourceFormatter extends AbstractRule {
      * クラス定義情報群
      */
     @NonNull
-    private ClassDefinitionMatrix classDefinitionMatrix = null;
-
-    /**
-     * クラスリソース
-     */
-    @Getter
-    private ClassResource classResource = null;
+    private ClassDefinitionMatrix classDefinitionMatrix;
 
     /**
      * デフォルトコンストラクタ
@@ -87,7 +81,7 @@ public final class ClassResourceFormatter extends AbstractRule {
     }
 
     @Override
-    public boolean execute() {
+    public ClassResource run() {
 
         final ClassDefinitionMatrix classDefinitionMatrix = this.classDefinitionMatrix;
         final ClassNameDefinition classNameDefinition = classDefinitionMatrix.getClassNameDefinition();
@@ -99,12 +93,10 @@ public final class ClassResourceFormatter extends AbstractRule {
 
         if (!this.formatClassDefinitionRecursively(parameters)) {
             logger.atSevere().log("クラス定義情報の整形処理が異常終了しました。");
-            return false;
+            return null;
         }
 
-        this.classResource = new ClassResource(classNameDefinition.getPackageName(), formattedResources);
-
-        return true;
+        return new ClassResource(classNameDefinition.getPackageName(), formattedResources);
     }
 
     /**
