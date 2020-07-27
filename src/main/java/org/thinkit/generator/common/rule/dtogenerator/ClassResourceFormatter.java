@@ -76,7 +76,6 @@ public final class ClassResourceFormatter implements Command<ClassResource> {
      * @param classDefinitionMatrix クラス定義情報群
      */
     public ClassResourceFormatter(final ClassDefinitionMatrix classDefinitionMatrix) {
-        super();
         this.classDefinitionMatrix = classDefinitionMatrix;
     }
 
