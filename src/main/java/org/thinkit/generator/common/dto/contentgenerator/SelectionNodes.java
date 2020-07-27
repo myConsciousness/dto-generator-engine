@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.thinkit.common.iterator.FluentIterator;
-import org.thinkit.common.iterator.IterableNode;
+import org.thinkit.common.util.iterator.FluentIterator;
+import org.thinkit.common.util.iterator.IterableNode;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
