@@ -72,13 +72,10 @@ final class DtoConstructorProcess extends ConstructorProcess {
      */
     private DtoConstructorProcessContext getConstructorProcessContext() {
 
-        switch (super.getConstructorState()) {
-            case REQUIRED:
-                return new DtoConstructorProcessContext(new RequiredConstructorProcess());
-            case COPYING:
-                return new DtoConstructorProcessContext(new CopyingConstructorProcess());
-            default:
-                return new DtoConstructorProcessContext(new DefaultConstructorProcess());
-        }
+        return switch (super.getConstructorState()) {
+            case REQUIRED -> new DtoConstructorProcessContext(new RequiredConstructorProcess());
+            case COPYING -> new DtoConstructorProcessContext(new CopyingConstructorProcess());
+            default -> new DtoConstructorProcessContext(new DefaultConstructorProcess());
+        };
     }
 }
