@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : ClassItem.java<br>
+ * File Name : DtoItem.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/05/04<br>
  * <p>
@@ -22,7 +22,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * クラス項目定義の情報を管理するデータクラスです。
+ * DTO項目の情報を管理するデータクラスです。
  *
  * @author Kato Shinya
  * @since 1.0
@@ -31,7 +31,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public final class ClassItem {
+public final class DtoItem {
 
     /**
      * 変数名
@@ -62,13 +62,13 @@ public final class ClassItem {
      * 子クラス定義情報群
      */
     @Setter
-    private List<ClassDefinition> childClassDefinitionList = new ArrayList<>();
+    private List<DtoDefinition> childDtoDefinitionList = new ArrayList<>();
 
     /**
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private ClassItem() {
+    private DtoItem() {
     }
 
     /**
@@ -80,7 +80,7 @@ public final class ClassItem {
      * @param invariant    不変
      * @param description  説明
      */
-    public ClassItem(@NonNull String variableName, @NonNull String dataType, @NonNull String initialValue,
+    public DtoItem(@NonNull String variableName, @NonNull String dataType, @NonNull String initialValue,
             boolean invariant, @NonNull String description) {
         this.variableName = variableName;
         this.dataType = dataType;
@@ -92,14 +92,14 @@ public final class ClassItem {
     /**
      * コピーコンストラクタ
      *
-     * @param classItemDefinition クラス項目定義情報
+     * @param dtoItem クラス項目定義情報
      */
-    public ClassItem(@NonNull ClassItem classItem) {
-        this.variableName = classItem.getVariableName();
-        this.dataType = classItem.getDataType();
-        this.initialValue = classItem.getInitialValue();
-        this.invariant = classItem.isInvariant();
-        this.description = classItem.getDescription();
-        this.childClassDefinitionList = new ArrayList<>(classItem.getChildClassDefinitionList());
+    public DtoItem(@NonNull DtoItem dtoItem) {
+        this.variableName = dtoItem.getVariableName();
+        this.dataType = dtoItem.getDataType();
+        this.initialValue = dtoItem.getInitialValue();
+        this.invariant = dtoItem.isInvariant();
+        this.description = dtoItem.getDescription();
+        this.childDtoDefinitionList = new ArrayList<>(dtoItem.getChildDtoDefinitionList());
     }
 }

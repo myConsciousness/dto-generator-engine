@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : ClassMeta.java<br>
+ * File Name : DtoMeta.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/04/23<br>
  * <p>
@@ -17,7 +17,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * クラス名の定義情報を管理するデータクラスです。
+ * DTOメタ情報を管理するデータクラスです。
  *
  * @author Kato Shinya
  * @since 1.0
@@ -26,7 +26,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public final class ClassMeta {
+public final class DtoMeta {
 
     /**
      * バージョン
@@ -62,7 +62,7 @@ public final class ClassMeta {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private ClassMeta() {
+    private DtoMeta() {
     }
 
     /**
@@ -75,9 +75,8 @@ public final class ClassMeta {
      * @param logicalName  論理名
      * @param description  補足
      */
-    public ClassMeta(@NonNull final String version, @NonNull final String projectName,
-            @NonNull final String packageName, @NonNull String physicalName, @NonNull String logicalName,
-            @NonNull String description) {
+    public DtoMeta(@NonNull final String version, @NonNull final String projectName, @NonNull final String packageName,
+            @NonNull String physicalName, @NonNull String logicalName, @NonNull String description) {
         this.version = version;
         this.projectName = projectName;
         this.packageName = packageName;
@@ -89,14 +88,14 @@ public final class ClassMeta {
     /**
      * コピーコンストラクタ
      *
-     * @param classMeta クラスメタ
+     * @param dtoMeta DTOメタ
      */
-    public ClassMeta(@NonNull ClassMeta classMeta) {
-        this.version = classMeta.getVersion();
-        this.projectName = classMeta.getProjectName();
-        this.packageName = classMeta.getPackageName();
-        this.logicalName = classMeta.getLogicalName();
-        this.physicalName = classMeta.getPhysicalName();
-        this.description = classMeta.getDescription();
+    public DtoMeta(@NonNull DtoMeta dtoMeta) {
+        this.version = dtoMeta.getVersion();
+        this.projectName = dtoMeta.getProjectName();
+        this.packageName = dtoMeta.getPackageName();
+        this.logicalName = dtoMeta.getLogicalName();
+        this.physicalName = dtoMeta.getPhysicalName();
+        this.description = dtoMeta.getDescription();
     }
 }

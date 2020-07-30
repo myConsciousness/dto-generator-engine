@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : ClassDefinitionMatrix.java<br>
+ * File Name : DtoDefinitionMatrix.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/04/23<br>
  * <p>
@@ -20,7 +20,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * クラスの定義情報群を管理するデータクラスです。
+ * DTO定義情報を管理するデータクラスです。
  *
  * @author Kato Shinya
  * @since 1.0
@@ -29,52 +29,52 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public final class ClassDefinitionMatrix {
+public final class DtoDefinitionMatrix {
 
     /**
      * クラスメタ
      */
-    private ClassMeta classMeta = null;
+    private DtoMeta dtoMeta = null;
 
     /**
      * クラス作成者
      */
-    private ClassCreator classCreator = null;
+    private DtoCreator dtoCreator = null;
 
     /**
      * クラス定義情報群
      */
-    private List<ClassDefinition> classDefinitionList = null;
+    private List<DtoDefinition> dtoDefinitionList = null;
 
     /**
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private ClassDefinitionMatrix() {
+    private DtoDefinitionMatrix() {
     }
 
     /**
      * コンストラクタ
      *
-     * @param classMeta           クラスメタ
-     * @param classCreator        クラス作成者
-     * @param classDefinitionList クラス定義情報群
+     * @param dtoMeta           クラスメタ
+     * @param dtoCreator        クラス作成者
+     * @param dtoDefinitionList クラス定義情報群
      */
-    public ClassDefinitionMatrix(@NonNull ClassMeta classMeta, @NonNull ClassCreator classCreator,
-            @NonNull List<ClassDefinition> classDefinitionList) {
-        this.classMeta = new ClassMeta(classMeta);
-        this.classCreator = new ClassCreator(classCreator);
-        this.classDefinitionList = new ArrayList<>(classDefinitionList);
+    public DtoDefinitionMatrix(@NonNull DtoMeta dtoMeta, @NonNull DtoCreator dtoCreator,
+            @NonNull List<DtoDefinition> dtoDefinitionList) {
+        this.dtoMeta = new DtoMeta(dtoMeta);
+        this.dtoCreator = new DtoCreator(dtoCreator);
+        this.dtoDefinitionList = new ArrayList<>(dtoDefinitionList);
     }
 
     /**
      * コピーコンストラクタ
      *
-     * @param classMeta クラス定義情報群
+     * @param DtoMeta クラス定義情報群
      */
-    public ClassDefinitionMatrix(@NonNull ClassDefinitionMatrix classDefinitionMatrix) {
-        this.classMeta = new ClassMeta(classDefinitionMatrix.getClassMeta());
-        this.classCreator = new ClassCreator(classDefinitionMatrix.getClassCreator());
-        this.classDefinitionList = new ArrayList<>(classDefinitionMatrix.getClassDefinitionList());
+    public DtoDefinitionMatrix(@NonNull DtoDefinitionMatrix dtoDefinitionMatrix) {
+        this.dtoMeta = new DtoMeta(dtoDefinitionMatrix.getDtoMeta());
+        this.dtoCreator = new DtoCreator(dtoDefinitionMatrix.getDtoCreator());
+        this.dtoDefinitionList = new ArrayList<>(dtoDefinitionMatrix.getDtoDefinitionList());
     }
 }

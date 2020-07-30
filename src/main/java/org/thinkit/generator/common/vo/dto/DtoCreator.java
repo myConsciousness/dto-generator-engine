@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : ClassCreator.java<br>
+ * File Name : DtoCreator.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/05/02<br>
  * <p>
@@ -18,7 +18,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * クラス作成者の情報を管理するデータクラスです。
+ * DTO作成者の情報を管理するデータクラスです。
  *
  * @author Kato Shinya
  * @since 1.0
@@ -27,7 +27,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public final class ClassCreator {
+public final class DtoCreator {
 
     /**
      * 作成者
@@ -48,7 +48,7 @@ public final class ClassCreator {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private ClassCreator() {
+    private DtoCreator() {
     }
 
     /**
@@ -58,7 +58,7 @@ public final class ClassCreator {
      * @param creationDate 作成日付
      * @param updateDate   更新日付
      */
-    public ClassCreator(@NonNull String creator, @NonNull String creationDate, @NonNull String updateDate) {
+    public DtoCreator(@NonNull String creator, @NonNull String creationDate, @NonNull String updateDate) {
         this.creator = creator;
         this.creationDate = creationDate;
         this.updateDate = updateDate;
@@ -67,11 +67,11 @@ public final class ClassCreator {
     /**
      * コピーコンストラクタ
      *
-     * @param classCreator クラス作成者
+     * @param dtoCreator DTO作成者
      */
-    public ClassCreator(@NonNull ClassCreator classCreator) {
-        this.creator = classCreator.getCreator();
-        this.creationDate = classCreator.getCreationDate();
-        this.updateDate = classCreator.getUpdateDate();
+    public DtoCreator(@NonNull DtoCreator dtoCreator) {
+        this.creator = dtoCreator.getCreator();
+        this.creationDate = dtoCreator.getCreationDate();
+        this.updateDate = dtoCreator.getUpdateDate();
     }
 }

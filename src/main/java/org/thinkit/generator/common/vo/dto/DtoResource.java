@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : ClassResource.java<br>
+ * File Name : DtoResource.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/06/15<br>
  * <p>
@@ -21,7 +21,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * クラスのリソース情報を管理するデータクラスです。
+ * DTOのリソース情報を管理するデータクラスです。
  *
  * @author Kato Shinya
  * @since 1.0
@@ -30,7 +30,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public final class ClassResource {
+public final class DtoResource {
 
     /**
      * パッケージ名
@@ -46,7 +46,7 @@ public final class ClassResource {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private ClassResource() {
+    private DtoResource() {
     }
 
     /**
@@ -55,7 +55,7 @@ public final class ClassResource {
      * @param packageName パッケージ名
      * @param resources   リソースマップ
      */
-    public ClassResource(@NonNull String packageName, @NonNull Map<String, String> resources) {
+    public DtoResource(@NonNull String packageName, @NonNull Map<String, String> resources) {
         this.packageName = packageName;
         this.resources = resources;
     }
