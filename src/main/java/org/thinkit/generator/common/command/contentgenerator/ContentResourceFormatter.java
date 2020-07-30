@@ -1,8 +1,8 @@
 package org.thinkit.generator.common.command.contentgenerator;
 
 import org.thinkit.common.command.Command;
-import org.thinkit.generator.common.dto.contentgenerator.ContentMatrix;
-import org.thinkit.generator.common.dto.contentgenerator.ContentResource;
+import org.thinkit.generator.common.vo.content.ContentMatrix;
+import org.thinkit.generator.common.vo.content.ContentResource;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
