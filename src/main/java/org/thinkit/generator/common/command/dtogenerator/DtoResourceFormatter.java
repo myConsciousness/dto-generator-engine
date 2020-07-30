@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : ClassResourceFormatter.java<br>
+ * File Name : DtoResourceFormatter.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/05/11<br>
  * <p>
@@ -49,7 +49,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public final class ClassResourceFormatter implements Command<ClassResource> {
+public final class DtoResourceFormatter implements Command<ClassResource> {
 
     /**
      * ログ出力オブジェクト
@@ -65,7 +65,7 @@ public final class ClassResourceFormatter implements Command<ClassResource> {
     /**
      * デフォルトコンストラクタ
      */
-    private ClassResourceFormatter() {
+    private DtoResourceFormatter() {
     }
 
     /**
@@ -75,21 +75,21 @@ public final class ClassResourceFormatter implements Command<ClassResource> {
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private ClassResourceFormatter(@NonNull final ClassDefinitionMatrix classDefinitionMatrix) {
+    private DtoResourceFormatter(@NonNull final ClassDefinitionMatrix classDefinitionMatrix) {
         this.classDefinitionMatrix = classDefinitionMatrix;
     }
 
     /**
-     * 引数として渡された {@code classDefinitionMatrix} を基に {@link ClassResourceFormatter}
+     * 引数として渡された {@code classDefinitionMatrix} を基に {@link DtoResourceFormatter}
      * クラスの新しいインスタンスを生成し返却します。
      *
      * @param classDefinitionMatrix クラス定義マトリクス
-     * @return {@link ClassResourceFormatter} クラスの新しいインスタンス
+     * @return {@link DtoResourceFormatter} クラスの新しいインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     public Command<ClassResource> of(@NonNull final ClassDefinitionMatrix classDefinitionMatrix) {
-        return new ClassResourceFormatter(classDefinitionMatrix);
+        return new DtoResourceFormatter(classDefinitionMatrix);
     }
 
     @Override
