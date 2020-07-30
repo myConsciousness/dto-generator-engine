@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : ClassNameDefinition.java<br>
+ * File Name : ClassName.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/04/23<br>
  * <p>
@@ -9,8 +9,7 @@
  * This source code or any portion thereof must not be<br>
  * reproduced or used in any manner whatsoever.
  */
-
-package org.thinkit.generator.common.dto.dtogenerator;
+package org.thinkit.generator.common.vo.dto;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,7 +26,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public final class ClassNameDefinition {
+public final class ClassName {
 
     /**
      * バージョン
@@ -63,7 +62,7 @@ public final class ClassNameDefinition {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private ClassNameDefinition() {
+    private ClassName() {
     }
 
     /**
@@ -76,7 +75,7 @@ public final class ClassNameDefinition {
      * @param logicalName  論理名
      * @param description  補足
      */
-    public ClassNameDefinition(@NonNull final String version, @NonNull final String projectName,
+    public ClassName(@NonNull final String version, @NonNull final String projectName,
             @NonNull final String packageName, @NonNull String physicalName, @NonNull String logicalName,
             @NonNull String description) {
         this.version = version;
@@ -92,12 +91,12 @@ public final class ClassNameDefinition {
      *
      * @param classNameDefinition クラス名定義情報
      */
-    public ClassNameDefinition(@NonNull ClassNameDefinition classNameDefinition) {
-        this.version = classNameDefinition.getVersion();
-        this.projectName = classNameDefinition.getProjectName();
-        this.packageName = classNameDefinition.getPackageName();
-        this.logicalName = classNameDefinition.getLogicalName();
-        this.physicalName = classNameDefinition.getPhysicalName();
-        this.description = classNameDefinition.getDescription();
+    public ClassName(@NonNull ClassName className) {
+        this.version = className.getVersion();
+        this.projectName = className.getProjectName();
+        this.packageName = className.getPackageName();
+        this.logicalName = className.getLogicalName();
+        this.physicalName = className.getPhysicalName();
+        this.description = className.getDescription();
     }
 }

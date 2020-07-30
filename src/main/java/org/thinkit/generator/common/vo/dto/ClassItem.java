@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : ClassItemDefinition.java<br>
+ * File Name : ClassItem.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/05/04<br>
  * <p>
@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.common.dto.dtogenerator;
+package org.thinkit.generator.common.vo.dto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public final class ClassItemDefinition {
+public final class ClassItem {
 
     /**
      * 変数名
@@ -68,7 +68,7 @@ public final class ClassItemDefinition {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private ClassItemDefinition() {
+    private ClassItem() {
     }
 
     /**
@@ -80,7 +80,7 @@ public final class ClassItemDefinition {
      * @param invariant    不変
      * @param description  説明
      */
-    public ClassItemDefinition(@NonNull String variableName, @NonNull String dataType, @NonNull String initialValue,
+    public ClassItem(@NonNull String variableName, @NonNull String dataType, @NonNull String initialValue,
             boolean invariant, @NonNull String description) {
         this.variableName = variableName;
         this.dataType = dataType;
@@ -94,12 +94,12 @@ public final class ClassItemDefinition {
      *
      * @param classItemDefinition クラス項目定義情報
      */
-    public ClassItemDefinition(@NonNull ClassItemDefinition classItemDefinition) {
-        this.variableName = classItemDefinition.getVariableName();
-        this.dataType = classItemDefinition.getDataType();
-        this.initialValue = classItemDefinition.getInitialValue();
-        this.invariant = classItemDefinition.isInvariant();
-        this.description = classItemDefinition.getDescription();
-        this.childClassDefinitionList = new ArrayList<>(classItemDefinition.getChildClassDefinitionList());
+    public ClassItem(@NonNull ClassItem classItem) {
+        this.variableName = classItem.getVariableName();
+        this.dataType = classItem.getDataType();
+        this.initialValue = classItem.getInitialValue();
+        this.invariant = classItem.isInvariant();
+        this.description = classItem.getDescription();
+        this.childClassDefinitionList = new ArrayList<>(classItem.getChildClassDefinitionList());
     }
 }

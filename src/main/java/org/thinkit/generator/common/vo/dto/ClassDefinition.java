@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.common.dto.dtogenerator;
+package org.thinkit.generator.common.vo.dto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,7 @@ public final class ClassDefinition {
     /**
      * クラス項目定義群
      */
-    private List<ClassItemDefinition> classItemDefinitionList = new ArrayList<>();
+    private List<ClassItem> classItemList = new ArrayList<>();
 
     /**
      * デフォルトコンストラクタ
@@ -63,6 +63,6 @@ public final class ClassDefinition {
     public ClassDefinition(@NonNull ClassDefinition classDefinition) {
         this.className = classDefinition.getClassName();
         this.description = classDefinition.getDescription();
-        this.classItemDefinitionList = new ArrayList<>(classDefinition.getClassItemDefinitionList());
+        this.classItemList = new ArrayList<>(classDefinition.getClassItemList());
     }
 }

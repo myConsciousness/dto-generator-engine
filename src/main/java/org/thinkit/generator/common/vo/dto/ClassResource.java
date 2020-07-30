@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.common.dto.dtogenerator;
+package org.thinkit.generator.common.vo.dto;
 
 import java.util.HashMap;
 import java.util.Map;

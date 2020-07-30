@@ -9,8 +9,7 @@
  * This source code or any portion thereof must not be<br>
  * reproduced or used in any manner whatsoever.
  */
-
-package org.thinkit.generator.common.dto.dtogenerator;
+package org.thinkit.generator.common.vo.dto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +34,12 @@ public final class ClassDefinitionMatrix {
     /**
      * クラス名定義情報
      */
-    private ClassNameDefinition classNameDefinition = null;
+    private ClassName className = null;
 
     /**
      * クラス作成者情報
      */
-    private ClassCreatorDefinition classCreatorDefinition = null;
+    private ClassCreator classCreator = null;
 
     /**
      * クラス定義情報群
@@ -57,26 +56,25 @@ public final class ClassDefinitionMatrix {
     /**
      * コンストラクタ
      *
-     * @param classNameDefinition    クラス名定義情報
-     * @param classCreatorDefinition クラス作成者情報
-     * @param classDefinitionList    クラス定義情報群
+     * @param className           クラス名定義情報
+     * @param classCreator        クラス作成者情報
+     * @param classDefinitionList クラス定義情報群
      */
-    public ClassDefinitionMatrix(@NonNull ClassNameDefinition classNameDefinition,
-            @NonNull ClassCreatorDefinition classCreatorDefinition,
+    public ClassDefinitionMatrix(@NonNull ClassName className, @NonNull ClassCreator classCreator,
             @NonNull List<ClassDefinition> classDefinitionList) {
-        this.classNameDefinition = new ClassNameDefinition(classNameDefinition);
-        this.classCreatorDefinition = new ClassCreatorDefinition(classCreatorDefinition);
+        this.className = new ClassName(className);
+        this.classCreator = new ClassCreator(classCreator);
         this.classDefinitionList = new ArrayList<>(classDefinitionList);
     }
 
     /**
      * コピーコンストラクタ
      *
-     * @param classNameDefinition クラス定義情報群
+     * @param className クラス定義情報群
      */
     public ClassDefinitionMatrix(@NonNull ClassDefinitionMatrix classDefinitionMatrix) {
-        this.classNameDefinition = new ClassNameDefinition(classDefinitionMatrix.getClassNameDefinition());
-        this.classCreatorDefinition = new ClassCreatorDefinition(classDefinitionMatrix.getClassCreatorDefinition());
+        this.className = new ClassName(classDefinitionMatrix.getClassName());
+        this.classCreator = new ClassCreator(classDefinitionMatrix.getClassCreator());
         this.classDefinitionList = new ArrayList<>(classDefinitionMatrix.getClassDefinitionList());
     }
 }
