@@ -14,7 +14,6 @@ package org.thinkit.generator.common.command.dtogenerator;
 
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,18 +21,18 @@ import com.google.common.flogger.FluentLogger;
 
 import org.thinkit.common.catalog.Extension;
 import org.thinkit.common.command.Command;
-import org.thinkit.generator.common.dto.dtogenerator.ClassCreatorDefinition;
-import org.thinkit.generator.common.dto.dtogenerator.ClassDefinition;
-import org.thinkit.generator.common.dto.dtogenerator.ClassDefinitionMatrix;
-import org.thinkit.generator.common.dto.dtogenerator.ClassItemDefinition;
-import org.thinkit.generator.common.dto.dtogenerator.ClassNameDefinition;
-import org.thinkit.generator.common.dto.dtogenerator.ClassResource;
 import org.thinkit.generator.common.factory.dtogenerator.DtoResourceFactory;
 import org.thinkit.generator.common.factory.resource.ClassDescription;
 import org.thinkit.generator.common.factory.resource.Constructor;
 import org.thinkit.generator.common.factory.resource.Copyright;
 import org.thinkit.generator.common.factory.resource.Resource;
 import org.thinkit.generator.common.factory.resource.ResourceFactory;
+import org.thinkit.generator.common.vo.dto.ClassCreator;
+import org.thinkit.generator.common.vo.dto.ClassDefinition;
+import org.thinkit.generator.common.vo.dto.ClassDefinitionMatrix;
+import org.thinkit.generator.common.vo.dto.ClassItem;
+import org.thinkit.generator.common.vo.dto.ClassMeta;
+import org.thinkit.generator.common.vo.dto.ClassResource;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -58,7 +57,7 @@ public final class ClassResourceFormatter implements Command<ClassResource> {
     private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
     /**
-     * クラス定義情報群
+     * クラス定義マトリクス
      */
     @NonNull
     private ClassDefinitionMatrix classDefinitionMatrix;
@@ -66,28 +65,42 @@ public final class ClassResourceFormatter implements Command<ClassResource> {
     /**
      * デフォルトコンストラクタ
      */
-    @SuppressWarnings("unused")
     private ClassResourceFormatter() {
     }
 
     /**
      * コンストラクタ
      *
-     * @param classDefinitionMatrix クラス定義情報群
+     * @param classDefinitionMatrix クラス定義マトリクス
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public ClassResourceFormatter(final ClassDefinitionMatrix classDefinitionMatrix) {
+    private ClassResourceFormatter(@NonNull final ClassDefinitionMatrix classDefinitionMatrix) {
         this.classDefinitionMatrix = classDefinitionMatrix;
+    }
+
+    /**
+     * 引数として渡された {@code classDefinitionMatrix} を基に {@link ClassResourceFormatter}
+     * クラスの新しいインスタンスを生成し返却します。
+     *
+     * @param classDefinitionMatrix クラス定義マトリクス
+     * @return {@link ClassResourceFormatter} クラスの新しいインスタンス
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    public Command<ClassResource> of(@NonNull final ClassDefinitionMatrix classDefinitionMatrix) {
+        return new ClassResourceFormatter(classDefinitionMatrix);
     }
 
     @Override
     public ClassResource run() {
 
         final ClassDefinitionMatrix classDefinitionMatrix = this.classDefinitionMatrix;
-        final ClassNameDefinition classNameDefinition = classDefinitionMatrix.getClassNameDefinition();
-        final Map<String, String> formattedResources = new HashMap<>();
+        final ClassMeta classMeta = classDefinitionMatrix.getClassMeta();
+        final Map<String, String> formattedResources = Map.of();
 
-        final RecursiveRequiredParameters parameters = RecursiveRequiredParameters.of(classNameDefinition,
-                classDefinitionMatrix.getClassCreatorDefinition(), classDefinitionMatrix.getClassDefinitionList(),
+        final RecursiveRequiredParameters parameters = RecursiveRequiredParameters.of(classMeta,
+                classDefinitionMatrix.getClassCreator(), classDefinitionMatrix.getClassDefinitionList(),
                 formattedResources);
 
         if (!this.formatClassDefinitionRecursively(parameters)) {
@@ -95,7 +108,7 @@ public final class ClassResourceFormatter implements Command<ClassResource> {
             return null;
         }
 
-        return new ClassResource(classNameDefinition.getPackageName(), formattedResources);
+        return new ClassResource(classMeta.getPackageName(), formattedResources);
     }
 
     /**
@@ -109,15 +122,15 @@ public final class ClassResourceFormatter implements Command<ClassResource> {
     private boolean formatClassDefinitionRecursively(@NonNull final RecursiveRequiredParameters parameters) {
         logger.atInfo().log("再帰処理に使用するパラメータ情報 = (%s)", parameters);
 
-        final ClassNameDefinition classNameDefinition = parameters.getClassNameDefinition();
-        final ClassCreatorDefinition classCreatorDefinition = parameters.getClassCreatorDefinition();
+        final ClassMeta classMeta = parameters.getClassMeta();
+        final ClassCreator classCreator = parameters.getClassCreator();
         final List<ClassDefinition> classDefinitionList = parameters.getClassDefinitionList();
         final Map<String, String> formattedResources = parameters.getFormattedResources();
 
         for (ClassDefinition classDefinition : classDefinitionList) {
             final String className = classDefinition.getClassName();
-            final Resource resource = this.formatResource(className, classDefinition.getClassItemDefinitionList(),
-                    classNameDefinition, classCreatorDefinition, formattedResources);
+            final Resource resource = this.formatResource(className, classDefinition.getClassItemList(), classMeta,
+                    classCreator, formattedResources);
 
             if (resource == null) {
                 logger.atSevere().log("クラス項目定義情報の整形処理が異常終了しました。");
@@ -139,54 +152,51 @@ public final class ClassResourceFormatter implements Command<ClassResource> {
      * <p>
      * 再帰処理中に想定外のエラーが発生した場合は必ず {@code null} を返却します。
      *
-     * @param className               クラス名
-     * @param classItemDefinitionList クラス項目定義情報リスト
-     * @param classNameDefinition     クラス名定義情報
-     * @param classCreatorDefinition  クラス作成者情報
-     * @param formattedResources      整形されたJavaリソース情報
+     * @param className          クラス名
+     * @param classItemList      クラス項目定義情報リスト
+     * @param classMeta          クラスメタ
+     * @param classCreator       クラス作成者
+     * @param formattedResources 整形されたJavaリソース情報
      *
      * @return #see {@link Resource}
      */
-    private Resource formatResource(@NonNull final String className,
-            @NonNull final List<ClassItemDefinition> classItemDefinitionList,
-            @NonNull final ClassNameDefinition classNameDefinition,
-            @NonNull final ClassCreatorDefinition classCreatorDefinition,
+    private Resource formatResource(@NonNull final String className, @NonNull final List<ClassItem> classItemList,
+            @NonNull final ClassMeta classMeta, @NonNull final ClassCreator classCreator,
             @NonNull final Map<String, String> formattedResources) {
 
         assert className.length() > 0;
-        assert !classItemDefinitionList.isEmpty();
+        assert !classItemList.isEmpty();
 
         final ResourceFactory resourceFactory = DtoResourceFactory.getInstance();
-        final Resource resource = this.createResource(className, classNameDefinition, classCreatorDefinition);
+        final Resource resource = this.createResource(className, classMeta, classCreator);
         final Constructor requiredConstructor = this.createConstructor(className, "Constructor");
         final Constructor copyingConstructor = this.createConstructor(className, "Copying constructor");
 
         copyingConstructor.add(resourceFactory.createParameter(className, this.toInitialLowerCase(className)));
 
-        for (ClassItemDefinition classItemDefinition : classItemDefinitionList) {
-            final String dataType = classItemDefinition.getDataType();
-            final String variableName = classItemDefinition.getVariableName();
+        for (ClassItem classItem : classItemList) {
+            final String dataType = classItem.getDataType();
+            final String variableName = classItem.getVariableName();
 
-            resource.add(resourceFactory.createDescription(classItemDefinition.getDescription()));
-            resource.add(resourceFactory.createFieldDefinition(dataType, variableName,
-                    classItemDefinition.getInitialValue()));
+            resource.add(resourceFactory.createDescription(classItem.getDescription()));
+            resource.add(resourceFactory.createFieldDefinition(dataType, variableName, classItem.getInitialValue()));
 
-            if (classItemDefinition.isInvariant()) {
-                requiredConstructor.add(resourceFactory.createFunctionParamAnnotation(variableName,
-                        classItemDefinition.getDescription()));
+            if (classItem.isInvariant()) {
+                requiredConstructor
+                        .add(resourceFactory.createFunctionParamAnnotation(variableName, classItem.getDescription()));
                 requiredConstructor.add(resourceFactory.createParameter(dataType, variableName));
                 requiredConstructor.add(resourceFactory.createConstructorProcess(variableName).toRequired());
             }
 
             copyingConstructor.add(resourceFactory.createConstructorProcess(className, variableName).toCopying());
 
-            final List<ClassDefinition> childClassDefinitionList = classItemDefinition.getChildClassDefinitionList();
+            final List<ClassDefinition> childClassDefinitionList = classItem.getChildClassDefinitionList();
 
             if (!childClassDefinitionList.isEmpty()) {
                 logger.atInfo().log("子クラスが存在するため再帰処理を開始します。");
 
-                final RecursiveRequiredParameters newRequiredParameters = RecursiveRequiredParameters
-                        .of(classNameDefinition, classCreatorDefinition, childClassDefinitionList, formattedResources);
+                final RecursiveRequiredParameters newRequiredParameters = RecursiveRequiredParameters.of(classMeta,
+                        classCreator, childClassDefinitionList, formattedResources);
 
                 if (!this.formatClassDefinitionRecursively(newRequiredParameters)) {
                     logger.atSevere().log("子クラス定義情報を生成するための再起処理が異常終了しました。");
@@ -205,42 +215,40 @@ public final class ClassResourceFormatter implements Command<ClassResource> {
      * 引数として渡された情報を基に著作権定義オブジェクトを生成し返却します。<br>
      * 引数として {@code null} が渡された場合は実行時に必ず失敗します。<br>
      *
-     * @param className              クラス名
-     * @param classNameDefinition    クラス名定義情報
-     * @param classCreatorDefinition クラス作成者情報
+     * @param className    クラス名
+     * @param classMeta    クラスメタ
+     * @param classCreator クラス作成者
      * @return 著作権定義オブジェクト
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private Copyright createCopyright(@NonNull String className, @NonNull ClassNameDefinition classNameDefinition,
-            @NonNull ClassCreatorDefinition classCreatorDefinition) {
-        return DtoResourceFactory.getInstance().createCopyright(classNameDefinition.getProjectName(),
-                className + Extension.java(), StandardCharsets.UTF_8.name(), classCreatorDefinition.getCreator(),
-                classCreatorDefinition.getCreationDate());
+    private Copyright createCopyright(@NonNull String className, @NonNull ClassMeta classMeta,
+            @NonNull ClassCreator classCreator) {
+        return DtoResourceFactory.getInstance().createCopyright(classMeta.getProjectName(),
+                className + Extension.java(), StandardCharsets.UTF_8.name(), classCreator.getCreator(),
+                classCreator.getCreationDate());
     }
 
     /**
      * 引数として渡された情報を基にリソース定義オブジェクトを生成し返却します。<br>
      * 引数として {@code null} が渡された場合は実行時に必ず失敗します。<br>
      *
-     * @param className              クラス名
-     * @param classNameDefinition    クラス名定義情報
-     * @param classCreatorDefinition クラス作成者情報
+     * @param className    クラス名
+     * @param classMeta    クラスメタ
+     * @param classCreator クラス作成者
      * @return リソース定義オブジェクト
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private Resource createResource(@NonNull String className, @NonNull ClassNameDefinition classNameDefinition,
-            @NonNull ClassCreatorDefinition classCreatorDefinition) {
+    private Resource createResource(@NonNull String className, @NonNull ClassMeta classMeta,
+            @NonNull ClassCreator classCreator) {
 
         final ResourceFactory resourceFactory = DtoResourceFactory.getInstance();
-        final Copyright copyright = this.createCopyright(className, classNameDefinition, classCreatorDefinition);
-        final ClassDescription classDescription = resourceFactory.createClassDescription(
-                classNameDefinition.getDescription(), classCreatorDefinition.getCreator(),
-                classNameDefinition.getVersion());
+        final Copyright copyright = this.createCopyright(className, classMeta, classCreator);
+        final ClassDescription classDescription = resourceFactory.createClassDescription(classMeta.getDescription(),
+                classCreator.getCreator(), classMeta.getVersion());
 
-        return resourceFactory.createResource(copyright, classNameDefinition.getPackageName(), classDescription,
-                className);
+        return resourceFactory.createResource(copyright, classMeta.getPackageName(), classDescription, className);
     }
 
     /**
@@ -290,19 +298,19 @@ public final class ClassResourceFormatter implements Command<ClassResource> {
         private static final long serialVersionUID = -9084043880553539265L;
 
         /**
-         * クラス名定義情報
+         * クラスメタ
          */
         @NonNull
-        private final ClassNameDefinition classNameDefinition;
+        private final ClassMeta classMeta;
 
         /**
-         * クラス作成者情報
+         * クラス作成者
          */
         @NonNull
-        private final ClassCreatorDefinition classCreatorDefinition;
+        private final ClassCreator classCreator;
 
         /**
-         * クラス定義情報群
+         * クラス定義マトリクス
          */
         @NonNull
         private final List<ClassDefinition> classDefinitionList;
