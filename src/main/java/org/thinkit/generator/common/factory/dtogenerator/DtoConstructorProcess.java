@@ -62,9 +62,11 @@ final class DtoConstructorProcess extends ConstructorProcess {
     }
 
     /**
-     * 設定された{@link ConstructorState}の値を基にコンストラクタの処理定義を生成する際のコンテキストを取得し返却します。
+     * 設定された {@link ConstructorState} の値を基にコンストラクタの処理定義を生成する際のコンテキストを取得し返却します。
      * <p>
-     * 以下のストラテジーを使用します。 {@link DefaultConstructorProcess} <br>
+     * 以下のストラテジーを使用します。
+     * <p>
+     * {@link DefaultConstructorProcess} <br>
      * {@link RequiredConstructorProcess} <br>
      * {@link CopyingConstructorProcess} <br>
      *
