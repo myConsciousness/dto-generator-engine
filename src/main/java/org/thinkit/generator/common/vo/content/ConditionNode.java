@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.common.dto.contentgenerator;
+package org.thinkit.generator.common.vo.content;
 
 import java.io.Serializable;
 
@@ -51,7 +51,7 @@ public final class ConditionNode implements Serializable {
      * 条件群
      */
     @Getter
-    private Conditions conditions;
+    private ConditionGroup conditionGroup;
 
     /**
      * デフォルトコンストラクタ
@@ -62,16 +62,16 @@ public final class ConditionNode implements Serializable {
     /**
      * コンストラクタ
      *
-     * @param conditionId 条件ID
-     * @param exclude     除外
-     * @param conditions  条件群
+     * @param conditionId    条件ID
+     * @param exclude        除外
+     * @param conditionGroup 条件群
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private ConditionNode(@NonNull String conditionId, boolean exclude, @NonNull Conditions conditions) {
+    private ConditionNode(@NonNull String conditionId, boolean exclude, @NonNull ConditionGroup conditionGroup) {
         this.conditionId = conditionId;
         this.exclude = exclude;
-        this.conditions = conditions;
+        this.conditionGroup = conditionGroup;
     }
 
     /**
@@ -84,20 +84,21 @@ public final class ConditionNode implements Serializable {
     private ConditionNode(@NonNull ConditionNode conditionNode) {
         this.conditionId = conditionNode.getConditionId();
         this.exclude = conditionNode.isExclude();
-        this.conditions = Conditions.of(conditions);
+        this.conditionGroup = ConditionGroup.of(conditionNode.getConditionGroup());
     }
 
     /**
      * 引数として指定された情報をもとに {@link ConditionNode} クラスの新しいインスタンスを生成し返却します。
      *
-     * @param conditionId 条件ID
-     * @param exclude     除外
-     * @param conditions  条件群
+     * @param conditionId    条件ID
+     * @param exclude        除外
+     * @param conditionGroup 条件群
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public static ConditionNode of(@NonNull String conditionId, boolean exclude, @NonNull Conditions conditions) {
-        return new ConditionNode(conditionId, exclude, conditions);
+    public static ConditionNode of(@NonNull String conditionId, boolean exclude,
+            @NonNull ConditionGroup conditionGroup) {
+        return new ConditionNode(conditionId, exclude, conditionGroup);
     }
 
     /**

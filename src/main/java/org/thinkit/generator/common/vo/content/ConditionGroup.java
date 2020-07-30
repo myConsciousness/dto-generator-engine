@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : Conditions.java<br>
+ * File Name : ConditionGroup.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/07/26<br>
  * <p>
@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.common.dto.contentgenerator;
+package org.thinkit.generator.common.vo.content;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ import lombok.ToString;
  *
  * <pre>
  * <code>
- * Conditions conditions = Conditions.of()
+ * ConditionGroup conditionGroup = ConditionGroup.of()
  *                                  .add(condition1)
  *                                  .add(condition2);
  * </code>
@@ -45,7 +45,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public final class Conditions implements Iterable<Condition>, IterableNode<Condition>, Serializable {
+public final class ConditionGroup implements Iterable<Condition>, IterableNode<Condition>, Serializable {
 
     /**
      * シリアルバージョンUID
@@ -66,7 +66,7 @@ public final class Conditions implements Iterable<Condition>, IterableNode<Condi
     /**
      * デフォルトコンストラクタ
      */
-    private Conditions() {
+    private ConditionGroup() {
         this.conditions = List.of();
         this.size = 0;
     }
@@ -78,37 +78,37 @@ public final class Conditions implements Iterable<Condition>, IterableNode<Condi
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private Conditions(@NonNull Conditions conditions) {
-        this.conditions = new ArrayList<>(conditions.getConditions());
+    private ConditionGroup(@NonNull ConditionGroup conditionGroup) {
+        this.conditions = new ArrayList<>(conditionGroup.getConditions());
         this.size = conditions.size();
     }
 
     /**
-     * {@link Conditions} クラスの新しいインスタンスを生成し返却します。
+     * {@link ConditionGroup} クラスの新しいインスタンスを生成し返却します。
      *
-     * @return {@link Conditions} クラスの新しいインスタンス
+     * @return {@link ConditionGroup} クラスの新しいインスタンス
      */
-    public static Conditions of() {
-        return new Conditions();
+    public static ConditionGroup of() {
+        return new ConditionGroup();
     }
 
     /**
-     * 引数として指定された {@code conditions} オブジェクトの情報をコピーした新しい {@link Conditions}
+     * 引数として指定された {@code conditionGroup} オブジェクトの情報をコピーした新しい {@link ConditionGroup}
      * クラスのインスタンスを生成し返却します。
      */
-    public static Conditions of(@NonNull Conditions conditions) {
-        return new Conditions(conditions);
+    public static ConditionGroup of(@NonNull ConditionGroup conditionGroup) {
+        return new ConditionGroup(conditionGroup);
     }
 
     /**
      * 引数として渡された {@code condition} を条件リストへ追加します。
      * <p>
-     * この {@link Conditions#add(Condition)}
+     * この {@link ConditionGroup#add(Condition)}
      * メソッドは自分自身のインスタンスを返却するため以下のようなメソッドチェーンでの操作が可能です。
      *
      * <pre>
      * <code>
-     * Conditions conditions = Conditions.of()
+     * ConditionGroup conditionGroup = ConditionGroup.of()
      *                                  .add(condition1)
      *                                  .add(condition2);
      * </code>
@@ -119,7 +119,7 @@ public final class Conditions implements Iterable<Condition>, IterableNode<Condi
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public Conditions add(@NonNull Condition condition) {
+    public ConditionGroup add(@NonNull Condition condition) {
         this.conditions.add(condition);
         size++;
 

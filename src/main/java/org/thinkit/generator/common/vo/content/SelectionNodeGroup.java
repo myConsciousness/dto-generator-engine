@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : SelectionNodes.java<br>
+ * File Name : SelectionNodeGroup.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/07/25<br>
  * <p>
@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.common.dto.contentgenerator;
+package org.thinkit.generator.common.vo.content;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ import lombok.ToString;
  * <pre>
  * 使用例:
  * <code>
- * SelectionNodes selectionNodes = SelectionNodes.of()
+ * SelectionNodeGroup selectionNodeGroup = SelectionNodeGroup.of()
  *                                               .add(selectionNode1)
  *                                               .add(selectionNode2);
  * </code>
@@ -46,7 +46,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public final class SelectionNodes implements Iterable<SelectionNode>, IterableNode<SelectionNode>, Serializable {
+public final class SelectionNodeGroup implements Iterable<SelectionNode>, IterableNode<SelectionNode>, Serializable {
 
     /**
      * シリアルバージョンUID
@@ -67,7 +67,7 @@ public final class SelectionNodes implements Iterable<SelectionNode>, IterableNo
     /**
      * デフォルトコンストラクタ
      */
-    private SelectionNodes() {
+    private SelectionNodeGroup() {
         this.selectionNodes = List.of();
         this.size = 0;
     }
@@ -79,37 +79,37 @@ public final class SelectionNodes implements Iterable<SelectionNode>, IterableNo
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private SelectionNodes(@NonNull SelectionNodes selectionNodes) {
-        this.selectionNodes = new ArrayList<>(selectionNodes.getSelectionNodes());
+    private SelectionNodeGroup(@NonNull SelectionNodeGroup selectionNodeGroup) {
+        this.selectionNodes = new ArrayList<>(selectionNodeGroup.getSelectionNodes());
         this.size = selectionNodes.size();
     }
 
     /**
-     * {@link SelectionNodes} クラスの新しいインスタンスを生成し返却します。
+     * {@link SelectionNodeGroup} クラスの新しいインスタンスを生成し返却します。
      *
-     * @return {@link SelectionNodes} クラスの新しいインスタンス
+     * @return {@link SelectionNodeGroup} クラスの新しいインスタンス
      */
-    public static SelectionNodes of() {
-        return new SelectionNodes();
+    public static SelectionNodeGroup of() {
+        return new SelectionNodeGroup();
     }
 
     /**
-     * 引数として指定された {@code selectionNodes} オブジェクトの情報をコピーした新しい {@link SelectionNodes}
-     * クラスのインスタンスを生成し返却します。
+     * 引数として指定された {@code selectionNodeGroup} オブジェクトの情報をコピーした新しい
+     * {@link SelectionNodeGroup} クラスのインスタンスを生成し返却します。
      */
-    public static SelectionNodes of(@NonNull SelectionNodes selectionNodes) {
-        return new SelectionNodes(selectionNodes);
+    public static SelectionNodeGroup of(@NonNull SelectionNodeGroup selectionNodeGroup) {
+        return new SelectionNodeGroup(selectionNodeGroup);
     }
 
     /**
      * 引数として渡された {@code selectionNode} を選択ノードリストへ追加します。
      * <p>
-     * この {@link SelectionNodes#add(SelectionNode)}
+     * この {@link SelectionNodeGroup#add(SelectionNode)}
      * メソッドは自分自身のインスタンスを返却するため以下のようなメソッドチェーンでの操作が可能です。
      *
      * <pre>
      * <code>
-     * SelectionNodes selectionNodes = SelectionNodes.of()
+     * SelectionNodeGroup selectionNodeGroup = SelectionNodeGroup.of()
      *                                               .add(selectionNode1)
      *                                               .add(selectionNode2);
      * </code>
@@ -120,7 +120,7 @@ public final class SelectionNodes implements Iterable<SelectionNode>, IterableNo
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public SelectionNodes add(@NonNull SelectionNode selectionNode) {
+    public SelectionNodeGroup add(@NonNull SelectionNode selectionNode) {
         selectionNodes.add(selectionNode);
         this.size++;
 

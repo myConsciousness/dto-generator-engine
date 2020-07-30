@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : ConditionNodes.java<br>
+ * File Name : ConditionNodeGroup.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/07/26<br>
  * <p>
@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.common.dto.contentgenerator;
+package org.thinkit.generator.common.vo.content;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ import lombok.ToString;
  *
  * <pre>
  * <code>
- * ConditionNodes conditionNodes = ConditionNodes.of()
+ * ConditionNodeGroup conditionNodeGroup = ConditionNodeGroup.of()
  *                                              .add(conditionNode1)
  *                                              .add(conditionNode2);
  * </code>
@@ -45,7 +45,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public final class ConditionNodes implements Iterable<ConditionNode>, IterableNode<ConditionNode>, Serializable {
+public final class ConditionNodeGroup implements Iterable<ConditionNode>, IterableNode<ConditionNode>, Serializable {
 
     /**
      * シリアルバージョンUID
@@ -66,7 +66,7 @@ public final class ConditionNodes implements Iterable<ConditionNode>, IterableNo
     /**
      * デフォルトコンストラクタ
      */
-    private ConditionNodes() {
+    private ConditionNodeGroup() {
         this.conditionNodes = List.of();
         this.size = 0;
     }
@@ -78,42 +78,42 @@ public final class ConditionNodes implements Iterable<ConditionNode>, IterableNo
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private ConditionNodes(@NonNull ConditionNodes conditionNodes) {
-        this.conditionNodes = new ArrayList<>(conditionNodes.getConditionNodes());
+    private ConditionNodeGroup(@NonNull ConditionNodeGroup conditionNodeGroup) {
+        this.conditionNodes = new ArrayList<>(conditionNodeGroup.getConditionNodes());
         this.size = conditionNodes.size();
     }
 
     /**
-     * {@link ConditionNodes} クラスの新しいインスタンスを生成し返却します。
+     * {@link ConditionNodeGroup} クラスの新しいインスタンスを生成し返却します。
      *
-     * @return {@link ConditionNodes} クラスの新しいインスタンス
+     * @return {@link ConditionNodeGroup} クラスの新しいインスタンス
      */
-    public static ConditionNodes of() {
-        return new ConditionNodes();
+    public static ConditionNodeGroup of() {
+        return new ConditionNodeGroup();
     }
 
     /**
-     * 引数として指定された {@code conditionNodes} オブジェクトの情報をコピーした新しい {@link ConditionNodes}
-     * クラスのインスタンスを生成し返却します。
+     * 引数として指定された {@code conditionNodes} オブジェクトの情報をコピーした新しい
+     * {@link ConditionNodeGroup} クラスのインスタンスを生成し返却します。
      *
-     * @param conditionNodes 条件ノード群
-     * @return {@link ConditionNodes} クラスの新しいインスタンス
+     * @param conditionNodeGroup 条件ノード群
+     * @return {@link ConditionNodeGroup} クラスの新しいインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が指定された場合
      */
-    public static ConditionNodes of(@NonNull ConditionNodes conditionNodes) {
-        return new ConditionNodes(conditionNodes);
+    public static ConditionNodeGroup of(@NonNull ConditionNodeGroup conditionNodeGroup) {
+        return new ConditionNodeGroup(conditionNodeGroup);
     }
 
     /**
      * 引数として渡された {@code conditionNode} を条件リストへ追加します。
      * <p>
-     * この {@link ConditionNodes#add(ConditionNode)}
+     * この {@link ConditionNodeGroup#add(ConditionNode)}
      * メソッドは自分自身のインスタンスを返却するため以下のようなメソッドチェーンでの操作が可能です。
      *
      * <pre>
      * <code>
-     * ConditionNodes conditionNodes = ConditionNodes.of()
+     * ConditionNodeGroup conditionNodeGroup = ConditionNodeGroup.of()
      *                                              .add(conditionNode1)
      *                                              .add(conditionNode2);
      * </code>
@@ -124,7 +124,7 @@ public final class ConditionNodes implements Iterable<ConditionNode>, IterableNo
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public ConditionNodes add(@NonNull ConditionNode conditionNode) {
+    public ConditionNodeGroup add(@NonNull ConditionNode conditionNode) {
         this.conditionNodes.add(conditionNode);
         size++;
 
