@@ -27,12 +27,12 @@ import org.thinkit.generator.common.factory.resource.Constructor;
 import org.thinkit.generator.common.factory.resource.Copyright;
 import org.thinkit.generator.common.factory.resource.Resource;
 import org.thinkit.generator.common.factory.resource.ResourceFactory;
-import org.thinkit.generator.common.vo.dto.ClassCreator;
-import org.thinkit.generator.common.vo.dto.ClassDefinition;
-import org.thinkit.generator.common.vo.dto.ClassDefinitionMatrix;
-import org.thinkit.generator.common.vo.dto.ClassItem;
-import org.thinkit.generator.common.vo.dto.ClassMeta;
-import org.thinkit.generator.common.vo.dto.ClassResource;
+import org.thinkit.generator.common.vo.dto.DtoCreator;
+import org.thinkit.generator.common.vo.dto.DtoDefinition;
+import org.thinkit.generator.common.vo.dto.DtoDefinitionMatrix;
+import org.thinkit.generator.common.vo.dto.DtoItem;
+import org.thinkit.generator.common.vo.dto.DtoMeta;
+import org.thinkit.generator.common.vo.dto.DtoResource;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -49,7 +49,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public final class DtoResourceFormatter implements Command<ClassResource> {
+public final class DtoResourceFormatter implements Command<DtoResource> {
 
     /**
      * ログ出力オブジェクト
@@ -60,7 +60,7 @@ public final class DtoResourceFormatter implements Command<ClassResource> {
      * クラス定義マトリクス
      */
     @NonNull
-    private ClassDefinitionMatrix classDefinitionMatrix;
+    private DtoDefinitionMatrix dtoDefinitionMatrix;
 
     /**
      * デフォルトコンストラクタ
@@ -71,44 +71,43 @@ public final class DtoResourceFormatter implements Command<ClassResource> {
     /**
      * コンストラクタ
      *
-     * @param classDefinitionMatrix クラス定義マトリクス
+     * @param dtoDefinitionMatrix クラス定義マトリクス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private DtoResourceFormatter(@NonNull final ClassDefinitionMatrix classDefinitionMatrix) {
-        this.classDefinitionMatrix = classDefinitionMatrix;
+    private DtoResourceFormatter(@NonNull final DtoDefinitionMatrix dtoDefinitionMatrix) {
+        this.dtoDefinitionMatrix = dtoDefinitionMatrix;
     }
 
     /**
-     * 引数として渡された {@code classDefinitionMatrix} を基に {@link DtoResourceFormatter}
+     * 引数として渡された {@code dtoDefinitionMatrix} を基に {@link DtoResourceFormatter}
      * クラスの新しいインスタンスを生成し返却します。
      *
-     * @param classDefinitionMatrix クラス定義マトリクス
+     * @param dtoDefinitionMatrix クラス定義マトリクス
      * @return {@link DtoResourceFormatter} クラスの新しいインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public Command<ClassResource> of(@NonNull final ClassDefinitionMatrix classDefinitionMatrix) {
-        return new DtoResourceFormatter(classDefinitionMatrix);
+    public Command<DtoResource> of(@NonNull final DtoDefinitionMatrix dtoDefinitionMatrix) {
+        return new DtoResourceFormatter(dtoDefinitionMatrix);
     }
 
     @Override
-    public ClassResource run() {
+    public DtoResource run() {
 
-        final ClassDefinitionMatrix classDefinitionMatrix = this.classDefinitionMatrix;
-        final ClassMeta classMeta = classDefinitionMatrix.getClassMeta();
+        final DtoDefinitionMatrix dtoDefinitionMatrix = this.dtoDefinitionMatrix;
+        final DtoMeta dtoMeta = dtoDefinitionMatrix.getDtoMeta();
         final Map<String, String> formattedResources = Map.of();
 
-        final RecursiveRequiredParameters parameters = RecursiveRequiredParameters.of(classMeta,
-                classDefinitionMatrix.getClassCreator(), classDefinitionMatrix.getClassDefinitionList(),
-                formattedResources);
+        final RecursiveRequiredParameters parameters = RecursiveRequiredParameters.of(dtoMeta,
+                dtoDefinitionMatrix.getDtoCreator(), dtoDefinitionMatrix.getDtoDefinitionList(), formattedResources);
 
-        if (!this.formatClassDefinitionRecursively(parameters)) {
+        if (!this.formatDtoDefinitionRecursively(parameters)) {
             logger.atSevere().log("クラス定義情報の整形処理が異常終了しました。");
             return null;
         }
 
-        return new ClassResource(classMeta.getPackageName(), formattedResources);
+        return new DtoResource(dtoMeta.getPackageName(), formattedResources);
     }
 
     /**
@@ -119,18 +118,18 @@ public final class DtoResourceFormatter implements Command<ClassResource> {
      *
      * @see RecursiveRequiredParameters
      */
-    private boolean formatClassDefinitionRecursively(@NonNull final RecursiveRequiredParameters parameters) {
+    private boolean formatDtoDefinitionRecursively(@NonNull final RecursiveRequiredParameters parameters) {
         logger.atInfo().log("再帰処理に使用するパラメータ情報 = (%s)", parameters);
 
-        final ClassMeta classMeta = parameters.getClassMeta();
-        final ClassCreator classCreator = parameters.getClassCreator();
-        final List<ClassDefinition> classDefinitionList = parameters.getClassDefinitionList();
+        final DtoMeta dtoMeta = parameters.getDtoMeta();
+        final DtoCreator dtoCreator = parameters.getDtoCreator();
+        final List<DtoDefinition> dtoDefinitionList = parameters.getDtoDefinitionList();
         final Map<String, String> formattedResources = parameters.getFormattedResources();
 
-        for (ClassDefinition classDefinition : classDefinitionList) {
-            final String className = classDefinition.getClassName();
-            final Resource resource = this.formatResource(className, classDefinition.getClassItemList(), classMeta,
-                    classCreator, formattedResources);
+        for (DtoDefinition dtoDefinition : dtoDefinitionList) {
+            final String className = dtoDefinition.getClassName();
+            final Resource resource = this.formatResource(className, dtoDefinition.getDtoItemList(), dtoMeta,
+                    dtoCreator, formattedResources);
 
             if (resource == null) {
                 logger.atSevere().log("クラス項目定義情報の整形処理が異常終了しました。");
@@ -147,58 +146,57 @@ public final class DtoResourceFormatter implements Command<ClassResource> {
     /**
      * 引数として渡された情報を基にリソース情報を構築します。<br>
      * 各項目に子クラスが存在する場合は再帰処理(
-     * {@link #formatClassDefinitionRecursively(RecursiveRequiredParameters)}
-     * )を行います。
+     * {@link #formatDtoDefinitionRecursively(RecursiveRequiredParameters)} )を行います。
      * <p>
      * 再帰処理中に想定外のエラーが発生した場合は必ず {@code null} を返却します。
      *
      * @param className          クラス名
-     * @param classItemList      クラス項目定義情報リスト
-     * @param classMeta          クラスメタ
-     * @param classCreator       クラス作成者
+     * @param dtoItemList        クラス項目定義情報リスト
+     * @param dtoMeta            クラスメタ
+     * @param dtoCreator         クラス作成者
      * @param formattedResources 整形されたJavaリソース情報
      *
      * @return #see {@link Resource}
      */
-    private Resource formatResource(@NonNull final String className, @NonNull final List<ClassItem> classItemList,
-            @NonNull final ClassMeta classMeta, @NonNull final ClassCreator classCreator,
+    private Resource formatResource(@NonNull final String className, @NonNull final List<DtoItem> dtoItemList,
+            @NonNull final DtoMeta dtoMeta, @NonNull final DtoCreator dtoCreator,
             @NonNull final Map<String, String> formattedResources) {
 
         assert className.length() > 0;
-        assert !classItemList.isEmpty();
+        assert !dtoItemList.isEmpty();
 
         final ResourceFactory resourceFactory = DtoResourceFactory.getInstance();
-        final Resource resource = this.createResource(className, classMeta, classCreator);
+        final Resource resource = this.createResource(className, dtoMeta, dtoCreator);
         final Constructor requiredConstructor = this.createConstructor(className, "Constructor");
         final Constructor copyingConstructor = this.createConstructor(className, "Copying constructor");
 
         copyingConstructor.add(resourceFactory.createParameter(className, this.toInitialLowerCase(className)));
 
-        for (ClassItem classItem : classItemList) {
-            final String dataType = classItem.getDataType();
-            final String variableName = classItem.getVariableName();
+        for (DtoItem dtoItem : dtoItemList) {
+            final String dataType = dtoItem.getDataType();
+            final String variableName = dtoItem.getVariableName();
 
-            resource.add(resourceFactory.createDescription(classItem.getDescription()));
-            resource.add(resourceFactory.createFieldDefinition(dataType, variableName, classItem.getInitialValue()));
+            resource.add(resourceFactory.createDescription(dtoItem.getDescription()));
+            resource.add(resourceFactory.createFieldDefinition(dataType, variableName, dtoItem.getInitialValue()));
 
-            if (classItem.isInvariant()) {
+            if (dtoItem.isInvariant()) {
                 requiredConstructor
-                        .add(resourceFactory.createFunctionParamAnnotation(variableName, classItem.getDescription()));
+                        .add(resourceFactory.createFunctionParamAnnotation(variableName, dtoItem.getDescription()));
                 requiredConstructor.add(resourceFactory.createParameter(dataType, variableName));
                 requiredConstructor.add(resourceFactory.createConstructorProcess(variableName).toRequired());
             }
 
             copyingConstructor.add(resourceFactory.createConstructorProcess(className, variableName).toCopying());
 
-            final List<ClassDefinition> childClassDefinitionList = classItem.getChildClassDefinitionList();
+            final List<DtoDefinition> childDtoDefinitionList = dtoItem.getChildDtoDefinitionList();
 
-            if (!childClassDefinitionList.isEmpty()) {
+            if (!childDtoDefinitionList.isEmpty()) {
                 logger.atInfo().log("子クラスが存在するため再帰処理を開始します。");
 
-                final RecursiveRequiredParameters newRequiredParameters = RecursiveRequiredParameters.of(classMeta,
-                        classCreator, childClassDefinitionList, formattedResources);
+                final RecursiveRequiredParameters newRequiredParameters = RecursiveRequiredParameters.of(dtoMeta,
+                        dtoCreator, childDtoDefinitionList, formattedResources);
 
-                if (!this.formatClassDefinitionRecursively(newRequiredParameters)) {
+                if (!this.formatDtoDefinitionRecursively(newRequiredParameters)) {
                     logger.atSevere().log("子クラス定義情報を生成するための再起処理が異常終了しました。");
                     return null;
                 }
@@ -215,40 +213,39 @@ public final class DtoResourceFormatter implements Command<ClassResource> {
      * 引数として渡された情報を基に著作権定義オブジェクトを生成し返却します。<br>
      * 引数として {@code null} が渡された場合は実行時に必ず失敗します。<br>
      *
-     * @param className    クラス名
-     * @param classMeta    クラスメタ
-     * @param classCreator クラス作成者
+     * @param className  クラス名
+     * @param dtoMeta    クラスメタ
+     * @param dtoCreator クラス作成者
      * @return 著作権定義オブジェクト
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private Copyright createCopyright(@NonNull String className, @NonNull ClassMeta classMeta,
-            @NonNull ClassCreator classCreator) {
-        return DtoResourceFactory.getInstance().createCopyright(classMeta.getProjectName(),
-                className + Extension.java(), StandardCharsets.UTF_8.name(), classCreator.getCreator(),
-                classCreator.getCreationDate());
+    private Copyright createCopyright(@NonNull String className, @NonNull DtoMeta dtoMeta,
+            @NonNull DtoCreator dtoCreator) {
+        return DtoResourceFactory.getInstance().createCopyright(dtoMeta.getProjectName(), className + Extension.java(),
+                StandardCharsets.UTF_8.name(), dtoCreator.getCreator(), dtoCreator.getCreationDate());
     }
 
     /**
      * 引数として渡された情報を基にリソース定義オブジェクトを生成し返却します。<br>
      * 引数として {@code null} が渡された場合は実行時に必ず失敗します。<br>
      *
-     * @param className    クラス名
-     * @param classMeta    クラスメタ
-     * @param classCreator クラス作成者
+     * @param className  クラス名
+     * @param dtoMeta    クラスメタ
+     * @param dtoCreator クラス作成者
      * @return リソース定義オブジェクト
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private Resource createResource(@NonNull String className, @NonNull ClassMeta classMeta,
-            @NonNull ClassCreator classCreator) {
+    private Resource createResource(@NonNull String className, @NonNull DtoMeta dtoMeta,
+            @NonNull DtoCreator dtoCreator) {
 
         final ResourceFactory resourceFactory = DtoResourceFactory.getInstance();
-        final Copyright copyright = this.createCopyright(className, classMeta, classCreator);
-        final ClassDescription classDescription = resourceFactory.createClassDescription(classMeta.getDescription(),
-                classCreator.getCreator(), classMeta.getVersion());
+        final Copyright copyright = this.createCopyright(className, dtoMeta, dtoCreator);
+        final ClassDescription classDescription = resourceFactory.createClassDescription(dtoMeta.getDescription(),
+                dtoCreator.getCreator(), dtoMeta.getVersion());
 
-        return resourceFactory.createResource(copyright, classMeta.getPackageName(), classDescription, className);
+        return resourceFactory.createResource(copyright, dtoMeta.getPackageName(), classDescription, className);
     }
 
     /**
@@ -301,19 +298,19 @@ public final class DtoResourceFormatter implements Command<ClassResource> {
          * クラスメタ
          */
         @NonNull
-        private final ClassMeta classMeta;
+        private final DtoMeta DtoMeta;
 
         /**
          * クラス作成者
          */
         @NonNull
-        private final ClassCreator classCreator;
+        private final DtoCreator DtoCreator;
 
         /**
          * クラス定義マトリクス
          */
         @NonNull
-        private final List<ClassDefinition> classDefinitionList;
+        private final List<DtoDefinition> DtoDefinitionList;
 
         /**
          * 整形済みJavaリソース

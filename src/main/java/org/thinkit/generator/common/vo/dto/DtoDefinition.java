@@ -15,8 +15,6 @@ package org.thinkit.generator.common.vo.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.thinkit.generator.common.catalog.dtogenerator.DtoItem;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
