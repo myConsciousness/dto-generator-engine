@@ -32,12 +32,12 @@ import lombok.ToString;
 public final class ClassDefinitionMatrix {
 
     /**
-     * クラス名定義情報
+     * クラスメタ
      */
-    private ClassName className = null;
+    private ClassMeta classMeta = null;
 
     /**
-     * クラス作成者情報
+     * クラス作成者
      */
     private ClassCreator classCreator = null;
 
@@ -56,13 +56,13 @@ public final class ClassDefinitionMatrix {
     /**
      * コンストラクタ
      *
-     * @param className           クラス名定義情報
-     * @param classCreator        クラス作成者情報
+     * @param classMeta           クラスメタ
+     * @param classCreator        クラス作成者
      * @param classDefinitionList クラス定義情報群
      */
-    public ClassDefinitionMatrix(@NonNull ClassName className, @NonNull ClassCreator classCreator,
+    public ClassDefinitionMatrix(@NonNull ClassMeta classMeta, @NonNull ClassCreator classCreator,
             @NonNull List<ClassDefinition> classDefinitionList) {
-        this.className = new ClassName(className);
+        this.classMeta = new ClassMeta(classMeta);
         this.classCreator = new ClassCreator(classCreator);
         this.classDefinitionList = new ArrayList<>(classDefinitionList);
     }
@@ -70,10 +70,10 @@ public final class ClassDefinitionMatrix {
     /**
      * コピーコンストラクタ
      *
-     * @param className クラス定義情報群
+     * @param classMeta クラス定義情報群
      */
     public ClassDefinitionMatrix(@NonNull ClassDefinitionMatrix classDefinitionMatrix) {
-        this.className = new ClassName(classDefinitionMatrix.getClassName());
+        this.classMeta = new ClassMeta(classDefinitionMatrix.getClassMeta());
         this.classCreator = new ClassCreator(classDefinitionMatrix.getClassCreator());
         this.classDefinitionList = new ArrayList<>(classDefinitionMatrix.getClassDefinitionList());
     }

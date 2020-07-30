@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : ClassName.java<br>
+ * File Name : ClassMeta.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/04/23<br>
  * <p>
@@ -26,7 +26,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public final class ClassName {
+public final class ClassMeta {
 
     /**
      * バージョン
@@ -62,7 +62,7 @@ public final class ClassName {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private ClassName() {
+    private ClassMeta() {
     }
 
     /**
@@ -75,7 +75,7 @@ public final class ClassName {
      * @param logicalName  論理名
      * @param description  補足
      */
-    public ClassName(@NonNull final String version, @NonNull final String projectName,
+    public ClassMeta(@NonNull final String version, @NonNull final String projectName,
             @NonNull final String packageName, @NonNull String physicalName, @NonNull String logicalName,
             @NonNull String description) {
         this.version = version;
@@ -89,14 +89,14 @@ public final class ClassName {
     /**
      * コピーコンストラクタ
      *
-     * @param classNameDefinition クラス名定義情報
+     * @param classMeta クラスメタ
      */
-    public ClassName(@NonNull ClassName className) {
-        this.version = className.getVersion();
-        this.projectName = className.getProjectName();
-        this.packageName = className.getPackageName();
-        this.logicalName = className.getLogicalName();
-        this.physicalName = className.getPhysicalName();
-        this.description = className.getDescription();
+    public ClassMeta(@NonNull ClassMeta classMeta) {
+        this.version = classMeta.getVersion();
+        this.projectName = classMeta.getProjectName();
+        this.packageName = classMeta.getPackageName();
+        this.logicalName = classMeta.getLogicalName();
+        this.physicalName = classMeta.getPhysicalName();
+        this.description = classMeta.getDescription();
     }
 }
