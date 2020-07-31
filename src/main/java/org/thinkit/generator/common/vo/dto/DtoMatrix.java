@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : DtoDefinitionMatrix.java<br>
+ * File Name : DtoMatrix.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/04/23<br>
  * <p>
@@ -20,7 +20,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * DTO定義情報を管理するデータクラスです。
+ * DTOマトリクスを管理するデータクラスです。
  *
  * @author Kato Shinya
  * @since 1.0
@@ -29,7 +29,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public final class DtoDefinitionMatrix {
+public final class DtoMatrix {
 
     /**
      * クラスメタ
@@ -50,7 +50,7 @@ public final class DtoDefinitionMatrix {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private DtoDefinitionMatrix() {
+    private DtoMatrix() {
     }
 
     /**
@@ -60,7 +60,7 @@ public final class DtoDefinitionMatrix {
      * @param dtoCreator        クラス作成者
      * @param dtoDefinitionList クラス定義情報群
      */
-    public DtoDefinitionMatrix(@NonNull DtoMeta dtoMeta, @NonNull DtoCreator dtoCreator,
+    public DtoMatrix(@NonNull DtoMeta dtoMeta, @NonNull DtoCreator dtoCreator,
             @NonNull List<DtoDefinition> dtoDefinitionList) {
         this.dtoMeta = new DtoMeta(dtoMeta);
         this.dtoCreator = new DtoCreator(dtoCreator);
@@ -72,9 +72,9 @@ public final class DtoDefinitionMatrix {
      *
      * @param DtoMeta クラス定義情報群
      */
-    public DtoDefinitionMatrix(@NonNull DtoDefinitionMatrix dtoDefinitionMatrix) {
-        this.dtoMeta = new DtoMeta(dtoDefinitionMatrix.getDtoMeta());
-        this.dtoCreator = new DtoCreator(dtoDefinitionMatrix.getDtoCreator());
-        this.dtoDefinitionList = new ArrayList<>(dtoDefinitionMatrix.getDtoDefinitionList());
+    public DtoMatrix(@NonNull DtoMatrix dtoMatrix) {
+        this.dtoMeta = new DtoMeta(dtoMatrix.getDtoMeta());
+        this.dtoCreator = new DtoCreator(dtoMatrix.getDtoCreator());
+        this.dtoDefinitionList = new ArrayList<>(dtoMatrix.getDtoDefinitionList());
     }
 }
