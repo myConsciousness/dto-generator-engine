@@ -1,4 +1,4 @@
-package org.thinkit.generator.common.command.contentgenerator;
+package org.thinkit.generator.common.command.content;
 
 import org.thinkit.common.command.Command;
 import org.thinkit.generator.common.vo.content.ContentMatrix;

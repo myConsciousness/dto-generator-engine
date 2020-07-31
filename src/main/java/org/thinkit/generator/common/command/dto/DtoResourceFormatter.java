@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.common.command.dtogenerator;
+package org.thinkit.generator.common.command.dto;
 
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
