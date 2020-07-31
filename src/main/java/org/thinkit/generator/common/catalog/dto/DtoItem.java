@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.common.catalog.dtogenerator;
+package org.thinkit.generator.common.catalog.dto;
 
 import org.thinkit.common.catalog.Catalog;
 
