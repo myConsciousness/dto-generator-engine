@@ -45,9 +45,9 @@ public final class DtoDefinition {
     private String description = "";
 
     /**
-     * クラス項目定義群
+     * DTOフィールド群
      */
-    private List<DtoItem> dtoItemList = new ArrayList<>();
+    private List<DtoField> dtoFieldList = new ArrayList<>();
 
     /**
      * デフォルトコンストラクタ
@@ -63,6 +63,6 @@ public final class DtoDefinition {
     public DtoDefinition(@NonNull DtoDefinition dtoDefinition) {
         this.className = dtoDefinition.getClassName();
         this.description = dtoDefinition.getDescription();
-        this.dtoItemList = new ArrayList<>(dtoDefinition.getDtoItemList());
+        this.dtoFieldList = new ArrayList<>(dtoDefinition.getDtoFieldList());
     }
 }

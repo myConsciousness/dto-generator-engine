@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : DtoItem.java<br>
+ * File Name : DtoField.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/05/04<br>
  * <p>
@@ -22,7 +22,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * DTO項目の情報を管理するデータクラスです。
+ * DTOフィールドの情報を管理するデータクラスです。
  *
  * @author Kato Shinya
  * @since 1.0
@@ -31,7 +31,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public final class DtoItem {
+public final class DtoField {
 
     /**
      * 変数名
@@ -68,7 +68,7 @@ public final class DtoItem {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private DtoItem() {
+    private DtoField() {
     }
 
     /**
@@ -80,7 +80,7 @@ public final class DtoItem {
      * @param invariant    不変
      * @param description  説明
      */
-    public DtoItem(@NonNull String variableName, @NonNull String dataType, @NonNull String initialValue,
+    public DtoField(@NonNull String variableName, @NonNull String dataType, @NonNull String initialValue,
             boolean invariant, @NonNull String description) {
         this.variableName = variableName;
         this.dataType = dataType;
@@ -92,14 +92,14 @@ public final class DtoItem {
     /**
      * コピーコンストラクタ
      *
-     * @param dtoItem クラス項目定義情報
+     * @param dtoField DTOフィールド
      */
-    public DtoItem(@NonNull DtoItem dtoItem) {
-        this.variableName = dtoItem.getVariableName();
-        this.dataType = dtoItem.getDataType();
-        this.initialValue = dtoItem.getInitialValue();
-        this.invariant = dtoItem.isInvariant();
-        this.description = dtoItem.getDescription();
-        this.childDtoDefinitionList = new ArrayList<>(dtoItem.getChildDtoDefinitionList());
+    public DtoField(@NonNull DtoField dtoField) {
+        this.variableName = dtoField.getVariableName();
+        this.dataType = dtoField.getDataType();
+        this.initialValue = dtoField.getInitialValue();
+        this.invariant = dtoField.isInvariant();
+        this.description = dtoField.getDescription();
+        this.childDtoDefinitionList = new ArrayList<>(dtoField.getChildDtoDefinitionList());
     }
 }

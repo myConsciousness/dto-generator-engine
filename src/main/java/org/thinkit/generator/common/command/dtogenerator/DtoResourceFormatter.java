@@ -30,7 +30,7 @@ import org.thinkit.generator.common.factory.resource.ResourceFactory;
 import org.thinkit.generator.common.vo.dto.DtoCreator;
 import org.thinkit.generator.common.vo.dto.DtoDefinition;
 import org.thinkit.generator.common.vo.dto.DtoDefinitionMatrix;
-import org.thinkit.generator.common.vo.dto.DtoItem;
+import org.thinkit.generator.common.vo.dto.DtoField;
 import org.thinkit.generator.common.vo.dto.DtoMeta;
 import org.thinkit.generator.common.vo.dto.DtoResource;
 
@@ -128,7 +128,7 @@ public final class DtoResourceFormatter implements Command<DtoResource> {
 
         for (DtoDefinition dtoDefinition : dtoDefinitionList) {
             final String className = dtoDefinition.getClassName();
-            final Resource resource = this.formatResource(className, dtoDefinition.getDtoItemList(), dtoMeta,
+            final Resource resource = this.formatResource(className, dtoDefinition.getDtoFieldList(), dtoMeta,
                     dtoCreator, formattedResources);
 
             if (resource == null) {
@@ -151,19 +151,19 @@ public final class DtoResourceFormatter implements Command<DtoResource> {
      * 再帰処理中に想定外のエラーが発生した場合は必ず {@code null} を返却します。
      *
      * @param className          クラス名
-     * @param dtoItemList        クラス項目定義情報リスト
+     * @param dtoFieldList       クラス項目定義情報リスト
      * @param dtoMeta            クラスメタ
      * @param dtoCreator         クラス作成者
      * @param formattedResources 整形されたJavaリソース情報
      *
      * @return #see {@link Resource}
      */
-    private Resource formatResource(@NonNull final String className, @NonNull final List<DtoItem> dtoItemList,
+    private Resource formatResource(@NonNull final String className, @NonNull final List<DtoField> dtoFieldList,
             @NonNull final DtoMeta dtoMeta, @NonNull final DtoCreator dtoCreator,
             @NonNull final Map<String, String> formattedResources) {
 
         assert className.length() > 0;
-        assert !dtoItemList.isEmpty();
+        assert !dtoFieldList.isEmpty();
 
         final ResourceFactory resourceFactory = DtoResourceFactory.getInstance();
         final Resource resource = this.createResource(className, dtoMeta, dtoCreator);
@@ -172,23 +172,23 @@ public final class DtoResourceFormatter implements Command<DtoResource> {
 
         copyingConstructor.add(resourceFactory.createParameter(className, this.toInitialLowerCase(className)));
 
-        for (DtoItem dtoItem : dtoItemList) {
-            final String dataType = dtoItem.getDataType();
-            final String variableName = dtoItem.getVariableName();
+        for (DtoField dtoField : dtoFieldList) {
+            final String dataType = dtoField.getDataType();
+            final String variableName = dtoField.getVariableName();
 
-            resource.add(resourceFactory.createDescription(dtoItem.getDescription()));
-            resource.add(resourceFactory.createFieldDefinition(dataType, variableName, dtoItem.getInitialValue()));
+            resource.add(resourceFactory.createDescription(dtoField.getDescription()));
+            resource.add(resourceFactory.createFieldDefinition(dataType, variableName, dtoField.getInitialValue()));
 
-            if (dtoItem.isInvariant()) {
+            if (dtoField.isInvariant()) {
                 requiredConstructor
-                        .add(resourceFactory.createFunctionParamAnnotation(variableName, dtoItem.getDescription()));
+                        .add(resourceFactory.createFunctionParamAnnotation(variableName, dtoField.getDescription()));
                 requiredConstructor.add(resourceFactory.createParameter(dataType, variableName));
                 requiredConstructor.add(resourceFactory.createConstructorProcess(variableName).toRequired());
             }
 
             copyingConstructor.add(resourceFactory.createConstructorProcess(className, variableName).toCopying());
 
-            final List<DtoDefinition> childDtoDefinitionList = dtoItem.getChildDtoDefinitionList();
+            final List<DtoDefinition> childDtoDefinitionList = dtoField.getChildDtoDefinitionList();
 
             if (!childDtoDefinitionList.isEmpty()) {
                 logger.atInfo().log("子クラスが存在するため再帰処理を開始します。");
