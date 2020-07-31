@@ -14,6 +14,7 @@ package org.thinkit.generator.common.command.dto;
 
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -97,7 +98,7 @@ public final class DtoResourceFormatter implements Command<DtoResource> {
 
         final DtoDefinitionMatrix dtoDefinitionMatrix = this.dtoDefinitionMatrix;
         final DtoMeta dtoMeta = dtoDefinitionMatrix.getDtoMeta();
-        final Map<String, String> formattedResources = Map.of();
+        final Map<String, String> formattedResources = new HashMap<>();
 
         final RecursiveRequiredParameters parameters = RecursiveRequiredParameters.of(dtoMeta,
                 dtoDefinitionMatrix.getDtoCreator(), dtoDefinitionMatrix.getDtoDefinitionList(), formattedResources);
