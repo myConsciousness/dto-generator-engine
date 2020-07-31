@@ -88,7 +88,7 @@ public final class DtoResourceFormatter implements Command<DtoResource> {
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public Command<DtoResource> of(@NonNull final DtoDefinitionMatrix dtoDefinitionMatrix) {
+    public static Command<DtoResource> of(@NonNull final DtoDefinitionMatrix dtoDefinitionMatrix) {
         return new DtoResourceFormatter(dtoDefinitionMatrix);
     }
 
