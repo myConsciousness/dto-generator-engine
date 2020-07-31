@@ -30,8 +30,8 @@ import org.thinkit.generator.common.factory.resource.Resource;
 import org.thinkit.generator.common.factory.resource.ResourceFactory;
 import org.thinkit.generator.common.vo.dto.DtoCreator;
 import org.thinkit.generator.common.vo.dto.DtoDefinition;
-import org.thinkit.generator.common.vo.dto.DtoDefinitionMatrix;
 import org.thinkit.generator.common.vo.dto.DtoField;
+import org.thinkit.generator.common.vo.dto.DtoMatrix;
 import org.thinkit.generator.common.vo.dto.DtoMeta;
 import org.thinkit.generator.common.vo.dto.DtoResource;
 
@@ -42,7 +42,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 /**
- * クラス定義マトリクス情報を基にJavaのDTOリソースを生成する処理を定義したコマンドクラスです。
+ * DTOマトリクス情報を基にJavaのDTOリソースを生成する処理を定義したコマンドクラスです。
  *
  * @author Kato Shinya
  * @since 1.0
@@ -58,10 +58,10 @@ public final class DtoResourceFormatter implements Command<DtoResource> {
     private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
     /**
-     * クラス定義マトリクス
+     * DTOマトリクス
      */
     @NonNull
-    private DtoDefinitionMatrix dtoDefinitionMatrix;
+    private DtoMatrix dtoMatrix;
 
     /**
      * デフォルトコンストラクタ
@@ -72,36 +72,36 @@ public final class DtoResourceFormatter implements Command<DtoResource> {
     /**
      * コンストラクタ
      *
-     * @param dtoDefinitionMatrix クラス定義マトリクス
+     * @param dtoMatrix DTOマトリクス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private DtoResourceFormatter(@NonNull final DtoDefinitionMatrix dtoDefinitionMatrix) {
-        this.dtoDefinitionMatrix = dtoDefinitionMatrix;
+    private DtoResourceFormatter(@NonNull final DtoMatrix dtoMatrix) {
+        this.dtoMatrix = dtoMatrix;
     }
 
     /**
-     * 引数として渡された {@code dtoDefinitionMatrix} を基に {@link DtoResourceFormatter}
+     * 引数として渡された {@code dtoMatrix} を基に {@link DtoResourceFormatter}
      * クラスの新しいインスタンスを生成し返却します。
      *
-     * @param dtoDefinitionMatrix クラス定義マトリクス
+     * @param dtoMatrix DTOマトリクス
      * @return {@link DtoResourceFormatter} クラスの新しいインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public static Command<DtoResource> of(@NonNull final DtoDefinitionMatrix dtoDefinitionMatrix) {
-        return new DtoResourceFormatter(dtoDefinitionMatrix);
+    public static Command<DtoResource> of(@NonNull final DtoMatrix dtoMatrix) {
+        return new DtoResourceFormatter(dtoMatrix);
     }
 
     @Override
     public DtoResource run() {
 
-        final DtoDefinitionMatrix dtoDefinitionMatrix = this.dtoDefinitionMatrix;
-        final DtoMeta dtoMeta = dtoDefinitionMatrix.getDtoMeta();
+        final DtoMatrix dtoMatrix = this.dtoMatrix;
+        final DtoMeta dtoMeta = dtoMatrix.getDtoMeta();
         final Map<String, String> formattedResources = new HashMap<>();
 
         final RecursiveRequiredParameters parameters = RecursiveRequiredParameters.of(dtoMeta,
-                dtoDefinitionMatrix.getDtoCreator(), dtoDefinitionMatrix.getDtoDefinitionList(), formattedResources);
+                dtoMatrix.getDtoCreator(), dtoMatrix.getDtoDefinitionList(), formattedResources);
 
         if (!this.formatDtoDefinitionRecursively(parameters)) {
             logger.atSevere().log("クラス定義情報の整形処理が異常終了しました。");
@@ -308,7 +308,7 @@ public final class DtoResourceFormatter implements Command<DtoResource> {
         private final DtoCreator DtoCreator;
 
         /**
-         * クラス定義マトリクス
+         * DTOマトリクス
          */
         @NonNull
         private final List<DtoDefinition> DtoDefinitionList;
