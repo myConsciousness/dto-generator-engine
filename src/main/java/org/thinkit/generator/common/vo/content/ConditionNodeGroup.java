@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.thinkit.common.util.iterator.FluentIterator;
 import org.thinkit.common.util.iterator.IterableNode;
@@ -26,7 +27,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * コンテンツの条件ノード群を管理するデータクラスです。
+ * コンテンツの条件ノードグループを管理するデータクラスです。
  * <p>
  * このクラスはFluentインターフェースの概念を応用し設計されています。<br>
  * そのため、以下のようなメソッドチェーンでの操作が可能です。
@@ -53,13 +54,13 @@ public final class ConditionNodeGroup implements Iterable<ConditionNode>, Iterab
     private static final long serialVersionUID = -1845483983937698317L;
 
     /**
-     * 条件ノード群
+     * 条件ノードグループ
      */
     @Getter
-    private List<ConditionNode> conditionNodes;
+    private List<ConditionNode> conditionNodeGroup;
 
     /**
-     * 条件ノード群のサイズ
+     * 条件ノードグループのサイズ
      */
     private int size;
 
@@ -67,20 +68,20 @@ public final class ConditionNodeGroup implements Iterable<ConditionNode>, Iterab
      * デフォルトコンストラクタ
      */
     private ConditionNodeGroup() {
-        this.conditionNodes = List.of();
+        this.conditionNodeGroup = new ArrayList<>(0);
         this.size = 0;
     }
 
     /**
      * コピーコンストラクタ
      *
-     * @param conditionNodes 条件ノード群
+     * @param conditionNodeGroup 条件ノードグループ
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     private ConditionNodeGroup(@NonNull ConditionNodeGroup conditionNodeGroup) {
-        this.conditionNodes = new ArrayList<>(conditionNodeGroup.getConditionNodes());
-        this.size = conditionNodes.size();
+        this.conditionNodeGroup = new ArrayList<>(conditionNodeGroup.getConditionNodeGroup());
+        this.size = conditionNodeGroup.size();
     }
 
     /**
@@ -93,10 +94,10 @@ public final class ConditionNodeGroup implements Iterable<ConditionNode>, Iterab
     }
 
     /**
-     * 引数として指定された {@code conditionNodes} オブジェクトの情報をコピーした新しい
+     * 引数として指定された {@code conditionNodeGroup} オブジェクトの情報をコピーした新しい
      * {@link ConditionNodeGroup} クラスのインスタンスを生成し返却します。
      *
-     * @param conditionNodeGroup 条件ノード群
+     * @param conditionNodeGroup 条件ノードグループ
      * @return {@link ConditionNodeGroup} クラスの新しいインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が指定された場合
@@ -125,16 +126,25 @@ public final class ConditionNodeGroup implements Iterable<ConditionNode>, Iterab
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     public ConditionNodeGroup add(@NonNull ConditionNode conditionNode) {
-        this.conditionNodes.add(conditionNode);
+        this.conditionNodeGroup.add(conditionNode);
         size++;
 
         return this;
     }
 
     /**
-     * 条件ノード群のサイズが空か判定します。
+     * {@link ConditionNode} クラスを総称型として持つストリームを返却します。
      *
-     * @return 条件ノード群のサイズが {@code 0} 以下の場合は {@code true} 、 それ以外は{@code false}
+     * @return {@link ConditionNode} クラスを総称型として持つストリーム
+     */
+    public Stream<ConditionNode> stream() {
+        return this.conditionNodeGroup.stream();
+    }
+
+    /**
+     * 条件ノードグループのサイズが空か判定します。
+     *
+     * @return 条件ノードグループのサイズが {@code 0} 以下の場合は {@code true} 、 それ以外は{@code false}
      */
     public boolean isEmpty() {
         return this.size <= 0;
@@ -142,7 +152,7 @@ public final class ConditionNodeGroup implements Iterable<ConditionNode>, Iterab
 
     @Override
     public List<ConditionNode> nodes() {
-        return this.conditionNodes;
+        return this.conditionNodeGroup;
     }
 
     @Override

@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.thinkit.common.util.iterator.FluentIterator;
 import org.thinkit.common.util.iterator.IterableNode;
@@ -26,7 +27,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * コンテンツの選択ノード群を管理するデータクラスです。
+ * コンテンツの選択ノードグループを管理するデータクラスです。
  * <p>
  * このクラスはFluentインターフェースの概念を応用し設計されています。<br>
  * そのため、以下のようなメソッドチェーンでの操作が可能です。
@@ -54,13 +55,13 @@ public final class SelectionNodeGroup implements Iterable<SelectionNode>, Iterab
     private static final long serialVersionUID = -8802715416310295230L;
 
     /**
-     * 選択ノード群
+     * 選択ノードグループ
      */
     @Getter
-    private List<SelectionNode> selectionNodes;
+    private List<SelectionNode> selectionNodeGroup;
 
     /**
-     * 選択ノード群のサイズ
+     * 選択ノードグループのサイズ
      */
     private int size;
 
@@ -68,20 +69,20 @@ public final class SelectionNodeGroup implements Iterable<SelectionNode>, Iterab
      * デフォルトコンストラクタ
      */
     private SelectionNodeGroup() {
-        this.selectionNodes = List.of();
+        this.selectionNodeGroup = List.of();
         this.size = 0;
     }
 
     /**
      * コピーコンストラクタ
      *
-     * @param selectionNodes 選択ノード群
+     * @param selectionNodeGroup 選択ノードグループ
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     private SelectionNodeGroup(@NonNull SelectionNodeGroup selectionNodeGroup) {
-        this.selectionNodes = new ArrayList<>(selectionNodeGroup.getSelectionNodes());
-        this.size = selectionNodes.size();
+        this.selectionNodeGroup = new ArrayList<>(selectionNodeGroup.getSelectionNodeGroup());
+        this.size = selectionNodeGroup.size();
     }
 
     /**
@@ -121,15 +122,24 @@ public final class SelectionNodeGroup implements Iterable<SelectionNode>, Iterab
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     public SelectionNodeGroup add(@NonNull SelectionNode selectionNode) {
-        selectionNodes.add(selectionNode);
+        selectionNodeGroup.add(selectionNode);
         this.size++;
 
         return this;
     }
 
+    /**
+     * {@link SelectionNode} クラスを総称型として持つストリームを返却します。
+     *
+     * @return {@link SelectionNode} クラスを総称型として持つストリーム
+     */
+    public Stream<SelectionNode> stream() {
+        return this.selectionNodeGroup.stream();
+    }
+
     @Override
     public List<SelectionNode> nodes() {
-        return this.selectionNodes;
+        return this.selectionNodeGroup;
     }
 
     @Override

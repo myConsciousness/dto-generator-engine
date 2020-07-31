@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.thinkit.common.util.iterator.FluentIterator;
 import org.thinkit.common.util.iterator.IterableNode;
@@ -26,7 +27,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * コンテンツの条件群を管理するデータクラスです。
+ * コンテンツの条件グループを管理するデータクラスです。
  * <p>
  * このクラスはFluentインターフェースの概念を応用し設計されています。<br>
  * そのため、以下のようなメソッドチェーンでの操作が可能です。
@@ -53,13 +54,13 @@ public final class ConditionGroup implements Iterable<Condition>, IterableNode<C
     private static final long serialVersionUID = 8402668932877014054L;
 
     /**
-     * 条件群
+     * 条件グループ
      */
     @Getter
-    private List<Condition> conditions;
+    private List<Condition> conditionGroup;
 
     /**
-     * 条件群のサイズ
+     * 条件グループのサイズ
      */
     private int size;
 
@@ -67,20 +68,20 @@ public final class ConditionGroup implements Iterable<Condition>, IterableNode<C
      * デフォルトコンストラクタ
      */
     private ConditionGroup() {
-        this.conditions = List.of();
+        this.conditionGroup = new ArrayList<>(0);
         this.size = 0;
     }
 
     /**
      * コピーコンストラクタ
      *
-     * @param conditions 条件群
+     * @param conditionGroup 条件グループ
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     private ConditionGroup(@NonNull ConditionGroup conditionGroup) {
-        this.conditions = new ArrayList<>(conditionGroup.getConditions());
-        this.size = conditions.size();
+        this.conditionGroup = new ArrayList<>(conditionGroup.getConditionGroup());
+        this.size = conditionGroup.size();
     }
 
     /**
@@ -120,15 +121,24 @@ public final class ConditionGroup implements Iterable<Condition>, IterableNode<C
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     public ConditionGroup add(@NonNull Condition condition) {
-        this.conditions.add(condition);
+        this.conditionGroup.add(condition);
         size++;
 
         return this;
     }
 
+    /**
+     * {@link Condition} クラスを総称型として持つストリームを返却します。
+     *
+     * @return {@link Condition} クラスを総称型として持つストリーム
+     */
+    public Stream<Condition> stream() {
+        return this.conditionGroup.stream();
+    }
+
     @Override
     public List<Condition> nodes() {
-        return this.conditions;
+        return this.conditionGroup;
     }
 
     @Override
