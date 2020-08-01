@@ -129,6 +129,15 @@ public final class SelectionNodeGroup implements Iterable<SelectionNode>, Iterab
     }
 
     /**
+     * オブジェクトに含まれる情報が空か判定します。
+     *
+     * @return オブジェクトに含まれる情報がからの場合は {@code true} 、それ以外は {@code false}
+     */
+    public boolean isEmpty() {
+        return this.size <= 0;
+    }
+
+    /**
      * {@link SelectionNode} クラスを総称型として持つストリームを返却します。
      *
      * @return {@link SelectionNode} クラスを総称型として持つストリーム

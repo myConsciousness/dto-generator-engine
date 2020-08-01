@@ -128,6 +128,15 @@ public final class DtoFieldGroup implements Iterable<DtoField>, IterableNode<Dto
     }
 
     /**
+     * オブジェクトに含まれる情報が空か判定します。
+     *
+     * @return オブジェクトに含まれる情報がからの場合は {@code true} 、それ以外は {@code false}
+     */
+    public boolean isEmpty() {
+        return this.size <= 0;
+    }
+
+    /**
      * {@link DtoField} クラスを総称型として持つストリームを返却します。
      *
      * @return {@link DtoField} クラスを総称型として持つストリーム

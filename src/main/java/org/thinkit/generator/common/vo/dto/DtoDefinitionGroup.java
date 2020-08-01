@@ -128,6 +128,15 @@ public final class DtoDefinitionGroup implements Iterable<DtoDefinition>, Iterab
     }
 
     /**
+     * オブジェクトに含まれる情報が空か判定します。
+     *
+     * @return オブジェクトに含まれる情報がからの場合は {@code true} 、それ以外は {@code false}
+     */
+    public boolean isEmpty() {
+        return this.size <= 0;
+    }
+
+    /**
      * {@link DtoDefinition} クラスを総称型として持つストリームを返却します。
      *
      * @return {@link DtoDefinition} クラスを総称型として持つストリーム
