@@ -33,7 +33,7 @@ public final class Condition implements Serializable {
     /**
      * シリアルバージョンUID
      */
-    private static final long serialVersionUID = 4403811859133939408L;
+    private static final long serialVersionUID = 464752727099823500L;
 
     /**
      * キー

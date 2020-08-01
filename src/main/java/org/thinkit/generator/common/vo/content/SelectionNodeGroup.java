@@ -27,7 +27,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * コンテンツの選択ノードグループを管理するデータクラスです。
+ * コンテンツの選択ノードオブジェクトグループを管理するデータクラスです。
  * <p>
  * このクラスはFluentインターフェースの概念を応用し設計されています。<br>
  * そのため、以下のようなメソッドチェーンでの操作が可能です。
@@ -55,13 +55,13 @@ public final class SelectionNodeGroup implements Iterable<SelectionNode>, Iterab
     private static final long serialVersionUID = -8802715416310295230L;
 
     /**
-     * 選択ノードグループ
+     * 選択ノードオブジェクトグループ
      */
     @Getter
     private List<SelectionNode> selectionNodeGroup;
 
     /**
-     * 選択ノードグループのサイズ
+     * 選択ノードオブジェクトグループのサイズ
      */
     private int size;
 
@@ -76,7 +76,7 @@ public final class SelectionNodeGroup implements Iterable<SelectionNode>, Iterab
     /**
      * コピーコンストラクタ
      *
-     * @param selectionNodeGroup 選択ノードグループ
+     * @param selectionNodeGroup 選択ノードオブジェクトグループ
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
@@ -103,7 +103,7 @@ public final class SelectionNodeGroup implements Iterable<SelectionNode>, Iterab
     }
 
     /**
-     * 引数として渡された {@code selectionNode} を選択ノードリストへ追加します。
+     * 引数として渡された {@code selectionNode} を選択ノードオブジェクトリストへ追加します。
      * <p>
      * この {@link SelectionNodeGroup#add(SelectionNode)}
      * メソッドは自分自身のインスタンスを返却するため以下のようなメソッドチェーンでの操作が可能です。
@@ -116,7 +116,7 @@ public final class SelectionNodeGroup implements Iterable<SelectionNode>, Iterab
      * </code>
      * </pre>
      *
-     * @param selectionNode 選択ノード
+     * @param selectionNode 選択ノードオブジェクト
      * @return 自分自身のインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合

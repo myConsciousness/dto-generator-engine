@@ -27,7 +27,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * DTOフィールドグループを管理するデータクラスです。
+ * DTOフィールドオブジェクトグループを管理するデータクラスです。
  * <p>
  * このクラスはFluentインターフェースの概念を応用し設計されています。<br>
  * そのため、以下のようなメソッドチェーンでの操作が可能です。
@@ -51,16 +51,16 @@ public final class DtoFieldGroup implements Iterable<DtoField>, IterableNode<Dto
     /**
      * シリアルバージョンUID
      */
-    private static final long serialVersionUID = 8402668932877014054L;
+    private static final long serialVersionUID = 4211335544432048358L;
 
     /**
-     * DTOフィールドグループ
+     * DTOフィールドオブジェクトグループ
      */
     @Getter
     private List<DtoField> dtoFieldGroup;
 
     /**
-     * DTOフィールドグループのサイズ
+     * DTOフィールドオブジェクトグループのサイズ
      */
     private int size;
 
@@ -75,7 +75,7 @@ public final class DtoFieldGroup implements Iterable<DtoField>, IterableNode<Dto
     /**
      * コピーコンストラクタ
      *
-     * @param dtoFieldGroup DTOフィールドグループ
+     * @param dtoFieldGroup DTOフィールドオブジェクトグループ
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
@@ -115,7 +115,7 @@ public final class DtoFieldGroup implements Iterable<DtoField>, IterableNode<Dto
      * </code>
      * </pre>
      *
-     * @param dtoField 条件オブジェクト
+     * @param dtoField DTOフィールドオブジェクト
      * @return 自分自身のインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合

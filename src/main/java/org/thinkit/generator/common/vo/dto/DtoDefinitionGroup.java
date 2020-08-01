@@ -115,7 +115,7 @@ public final class DtoDefinitionGroup implements Iterable<DtoDefinition>, Iterab
      * </code>
      * </pre>
      *
-     * @param dtoDefinition 条件オブジェクト
+     * @param dtoDefinition DTO定義オブジェクト
      * @return 自分自身のインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合

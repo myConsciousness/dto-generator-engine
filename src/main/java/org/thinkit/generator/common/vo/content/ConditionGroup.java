@@ -51,7 +51,7 @@ public final class ConditionGroup implements Iterable<Condition>, IterableNode<C
     /**
      * シリアルバージョンUID
      */
-    private static final long serialVersionUID = 8402668932877014054L;
+    private static final long serialVersionUID = 9059498528635059645L;
 
     /**
      * 条件グループ

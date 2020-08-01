@@ -27,7 +27,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * コンテンツの条件ノードグループを管理するデータクラスです。
+ * コンテンツの条件ノードオブジェクトグループを管理するデータクラスです。
  * <p>
  * このクラスはFluentインターフェースの概念を応用し設計されています。<br>
  * そのため、以下のようなメソッドチェーンでの操作が可能です。
@@ -54,13 +54,13 @@ public final class ConditionNodeGroup implements Iterable<ConditionNode>, Iterab
     private static final long serialVersionUID = -1845483983937698317L;
 
     /**
-     * 条件ノードグループ
+     * 条件ノードオブジェクトグループ
      */
     @Getter
     private List<ConditionNode> conditionNodeGroup;
 
     /**
-     * 条件ノードグループのサイズ
+     * 条件ノードオブジェクトグループのサイズ
      */
     private int size;
 
@@ -75,7 +75,7 @@ public final class ConditionNodeGroup implements Iterable<ConditionNode>, Iterab
     /**
      * コピーコンストラクタ
      *
-     * @param conditionNodeGroup 条件ノードグループ
+     * @param conditionNodeGroup 条件ノードオブジェクトグループ
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
@@ -97,7 +97,7 @@ public final class ConditionNodeGroup implements Iterable<ConditionNode>, Iterab
      * 引数として指定された {@code conditionNodeGroup} オブジェクトの情報をコピーした新しい
      * {@link ConditionNodeGroup} クラスのインスタンスを生成し返却します。
      *
-     * @param conditionNodeGroup 条件ノードグループ
+     * @param conditionNodeGroup 条件ノードオブジェクトグループ
      * @return {@link ConditionNodeGroup} クラスの新しいインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が指定された場合
@@ -120,7 +120,7 @@ public final class ConditionNodeGroup implements Iterable<ConditionNode>, Iterab
      * </code>
      * </pre>
      *
-     * @param conditionNode 条件ノード
+     * @param conditionNode 条件ノードオブジェクト
      * @return 自分自身のインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
@@ -142,9 +142,10 @@ public final class ConditionNodeGroup implements Iterable<ConditionNode>, Iterab
     }
 
     /**
-     * 条件ノードグループのサイズが空か判定します。
+     * 条件ノードオブジェクトグループのサイズが空か判定します。
      *
-     * @return 条件ノードグループのサイズが {@code 0} 以下の場合は {@code true} 、 それ以外は{@code false}
+     * @return 条件ノードオブジェクトグループのサイズが {@code 0} 以下の場合は {@code true} 、
+     *         それ以外は{@code false}
      */
     public boolean isEmpty() {
         return this.size <= 0;
