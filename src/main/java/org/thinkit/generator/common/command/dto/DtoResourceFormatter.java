@@ -49,7 +49,7 @@ import lombok.ToString;
  * @version 1.0
  */
 @ToString
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode
 public final class DtoResourceFormatter implements Command<DtoResource> {
 
     /**
@@ -96,12 +96,11 @@ public final class DtoResourceFormatter implements Command<DtoResource> {
     @Override
     public DtoResource run() {
 
-        final DtoMatrix dtoMatrix = this.dtoMatrix;
-        final DtoMeta dtoMeta = dtoMatrix.getDtoMeta();
+        final DtoMeta dtoMeta = this.dtoMatrix.getDtoMeta();
         final Map<String, String> formattedResources = new HashMap<>();
 
         final RecursiveRequiredParameters parameters = RecursiveRequiredParameters.of(dtoMeta,
-                dtoMatrix.getDtoCreator(), dtoMatrix.getDtoDefinitionList(), formattedResources);
+                this.dtoMatrix.getDtoCreator(), this.dtoMatrix.getDtoDefinitionList(), formattedResources);
 
         if (!this.formatDtoDefinitionRecursively(parameters)) {
             logger.atSevere().log("クラス定義情報の整形処理が異常終了しました。");

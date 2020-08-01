@@ -10,7 +10,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 @ToString
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode
 public final class ContentResourceFormatter implements Command<ContentResource> {
 
     /**
@@ -50,7 +50,7 @@ public final class ContentResourceFormatter implements Command<ContentResource> 
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public static ContentResourceFormatter of(@NonNull ContentMatrix contentMatrix) {
+    public static Command<ContentResource> of(@NonNull ContentMatrix contentMatrix) {
         return new ContentResourceFormatter(contentMatrix);
     }
 
