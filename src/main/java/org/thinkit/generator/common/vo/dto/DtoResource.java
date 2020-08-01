@@ -12,7 +12,6 @@
 
 package org.thinkit.generator.common.vo.dto;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import lombok.EqualsAndHashCode;
@@ -35,12 +34,12 @@ public final class DtoResource {
     /**
      * パッケージ名
      */
-    private String packageName = "";
+    private String packageName;
 
     /**
      * リソースマップ
      */
-    private Map<String, String> resources = new HashMap<>(0);
+    private Map<String, String> resources;
 
     /**
      * デフォルトコンストラクタ
