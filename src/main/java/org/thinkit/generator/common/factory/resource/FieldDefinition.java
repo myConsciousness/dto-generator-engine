@@ -12,6 +12,8 @@
 
 package org.thinkit.generator.common.factory.resource;
 
+import org.thinkit.generator.common.factory.Component;
+
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,7 +30,7 @@ import lombok.ToString;
  * @see Component
  */
 @ToString
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode
 public abstract class FieldDefinition implements Component {
 
     /**

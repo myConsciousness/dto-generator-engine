@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.thinkit.common.exception.LogicException;
+import org.thinkit.generator.common.factory.Component;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -35,7 +36,7 @@ import lombok.ToString;
  * @see Component
  */
 @ToString
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode
 public abstract class Field implements Component {
 
     /**

@@ -13,6 +13,7 @@
 package org.thinkit.generator.common.factory.resource;
 
 import org.thinkit.common.exception.LogicException;
+import org.thinkit.generator.common.factory.Component;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -33,7 +34,7 @@ import lombok.ToString;
  * @see Component#createResource()
  */
 @ToString
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode
 public abstract class Copyright implements Component {
 
     /**
