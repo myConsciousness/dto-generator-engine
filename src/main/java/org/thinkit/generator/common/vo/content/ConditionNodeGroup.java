@@ -133,6 +133,21 @@ public final class ConditionNodeGroup implements Iterable<ConditionNode>, Iterab
     }
 
     /**
+     * 指定された {@code index} の数値に紐づく {@link ConditionNode} オブジェクトを返却します。
+     * 存在しないインデックスを指定した場合は実行時に必ず {@link ArrayIndexOutOfBoundsException} が発生するため、
+     * {@link #get(int) メソッドの実行前にが必ず有効なアクセス範囲を確認してください。
+     *
+     * @param index インデックス
+     * @return 指定された {@code index} の数値に紐づく {@link ConditionNode} オブジェクト
+     *
+     * @exception ArrayIndexOutOfBoundsException 引数として指定された {@code index}
+     *                                           に紐づく情報が存在しない場合
+     */
+    public ConditionNode get(int index) {
+        return this.conditionNodeGroup.get(index);
+    }
+
+    /**
      * オブジェクトに含まれる情報が空か判定します。
      *
      * @return オブジェクトに含まれる情報がからの場合は {@code true} 、それ以外は {@code false}
