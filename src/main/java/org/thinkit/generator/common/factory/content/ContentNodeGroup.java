@@ -17,6 +17,7 @@ import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.common.factory.json.NodeGroup;
 
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -29,6 +30,17 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(callSuper = false)
 final class ContentNodeGroup extends NodeGroup {
+
+    /**
+     * コンストラクタ
+     *
+     * @param key キー
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    protected ContentNodeGroup(@NonNull String key) {
+        super(key);
+    }
 
     @Override
     public String createResource() {

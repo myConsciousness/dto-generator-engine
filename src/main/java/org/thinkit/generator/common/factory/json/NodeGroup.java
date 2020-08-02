@@ -38,6 +38,12 @@ import lombok.ToString;
 public abstract class NodeGroup implements Component {
 
     /**
+     * キー
+     */
+    @Getter(AccessLevel.PROTECTED)
+    private String key;
+
+    /**
      * ノードグループ
      */
     @Getter(AccessLevel.PROTECTED)
@@ -46,7 +52,19 @@ public abstract class NodeGroup implements Component {
     /**
      * デフォルトコンストラクタ
      */
-    protected NodeGroup() {
+    @SuppressWarnings("unused")
+    private NodeGroup() {
+    }
+
+    /**
+     * コンストラクタ
+     *
+     * @param key キー
+     *
+     * @exception NullPointerException 引数として {@code null}が渡された場合
+     */
+    protected NodeGroup(@NonNull String key) {
+        this.key = key;
         this.nodeGroup = new ArrayList<>(0);
     }
 
