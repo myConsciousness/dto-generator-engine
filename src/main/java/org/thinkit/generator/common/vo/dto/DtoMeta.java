@@ -11,6 +11,8 @@
  */
 package org.thinkit.generator.common.vo.dto;
 
+import java.io.Serializable;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -26,42 +28,46 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public final class DtoMeta {
+public final class DtoMeta implements Serializable {
+
+    /**
+     * シリアルバージョンUID
+     */
+    private static final long serialVersionUID = 570555546726415110L;
 
     /**
      * バージョン
      */
-    private String version = "";
+    private String version;
 
     /**
      * プロジェクト名
      */
-    private String projectName = "";
+    private String projectName;
 
     /**
      * パッケージ名
      */
-    private String packageName = "";
+    private String packageName;
 
     /**
      * クラスの物理名
      */
-    private String physicalName = "";
+    private String physicalName;
 
     /**
      * クラスの論理名
      */
-    private String logicalName = "";
+    private String logicalName;
 
     /**
      * クラスの補足
      */
-    private String description = "";
+    private String description;
 
     /**
      * デフォルトコンストラクタ
      */
-    @SuppressWarnings("unused")
     private DtoMeta() {
     }
 
@@ -74,8 +80,10 @@ public final class DtoMeta {
      * @param physicalName 物理名
      * @param logicalName  論理名
      * @param description  補足
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public DtoMeta(@NonNull final String version, @NonNull final String projectName, @NonNull final String packageName,
+    private DtoMeta(@NonNull final String version, @NonNull final String projectName, @NonNull final String packageName,
             @NonNull String physicalName, @NonNull String logicalName, @NonNull String description) {
         this.version = version;
         this.projectName = projectName;
@@ -89,13 +97,47 @@ public final class DtoMeta {
      * コピーコンストラクタ
      *
      * @param dtoMeta DTOメタ
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public DtoMeta(@NonNull DtoMeta dtoMeta) {
+    private DtoMeta(@NonNull DtoMeta dtoMeta) {
         this.version = dtoMeta.getVersion();
         this.projectName = dtoMeta.getProjectName();
         this.packageName = dtoMeta.getPackageName();
         this.logicalName = dtoMeta.getLogicalName();
         this.physicalName = dtoMeta.getPhysicalName();
         this.description = dtoMeta.getDescription();
+    }
+
+    /**
+     * 引数として指定された情報を基に {@link DtoMeta} クラスの新しいインスタンスを生成し返却します。
+     *
+     * @param version      バージョン
+     * @param projectName  プロジェクト名
+     * @param packageName  パッケージ名
+     * @param physicalName 物理名
+     * @param logicalName  論理名
+     * @param description  補足
+     * @return {@link DtoMeta} クラスの新しいインスタンス
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    public static DtoMeta of(@NonNull final String version, @NonNull final String projectName,
+            @NonNull final String packageName, @NonNull String physicalName, @NonNull String logicalName,
+            @NonNull String description) {
+        return new DtoMeta(version, projectName, packageName, physicalName, logicalName, description);
+    }
+
+    /**
+     * 引数として指定された {@code dtoMeta} オブジェクトの情報を基に {@link DtoMeta}
+     * クラスの新しいインスタンスを生成し返却します。
+     *
+     * @param dtoMeta DTOメタ
+     * @return {@link DtoMeta} クラスの新しいインスタンス
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    public static DtoMeta of(@NonNull DtoMeta dtoMeta) {
+        return new DtoMeta(dtoMeta);
     }
 }

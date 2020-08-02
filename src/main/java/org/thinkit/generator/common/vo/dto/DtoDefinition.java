@@ -12,8 +12,7 @@
 
 package org.thinkit.generator.common.vo.dto;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -32,22 +31,27 @@ import lombok.ToString;
 @Setter
 @ToString
 @EqualsAndHashCode
-public final class DtoDefinition {
+public final class DtoDefinition implements Serializable {
+
+    /**
+     * シリアルバージョンUID
+     */
+    private static final long serialVersionUID = -2315269404994313179L;
 
     /**
      * クラス名
      */
-    private String className = "";
+    private String className;
 
     /**
      * 説明
      */
-    private String description = "";
+    private String description;
 
     /**
-     * DTOフィールド群
+     * DTOフィールドグループ
      */
-    private List<DtoField> dtoFieldList = new ArrayList<>();
+    private DtoFieldGroup dtoFieldGroup;
 
     /**
      * デフォルトコンストラクタ
@@ -58,11 +62,11 @@ public final class DtoDefinition {
     /**
      * コピーコンストラクタ
      *
-     * @param dtoDefinition DTO定義情報
+     * @param dtoDefinition DTO定義
      */
     public DtoDefinition(@NonNull DtoDefinition dtoDefinition) {
         this.className = dtoDefinition.getClassName();
         this.description = dtoDefinition.getDescription();
-        this.dtoFieldList = new ArrayList<>(dtoDefinition.getDtoFieldList());
+        this.dtoFieldGroup = DtoFieldGroup.of(dtoDefinition.getDtoFieldGroup());
     }
 }

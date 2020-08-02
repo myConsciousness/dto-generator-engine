@@ -12,6 +12,8 @@
 
 package org.thinkit.generator.common.vo.dto;
 
+import java.io.Serializable;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -27,27 +29,31 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public final class DtoCreator {
+public final class DtoCreator implements Serializable {
+
+    /**
+     * シリアルバージョンUID
+     */
+    private static final long serialVersionUID = 2088194268330223984L;
 
     /**
      * 作成者
      */
-    private String creator = "";
+    private String creator;
 
     /**
      * 作成日付
      */
-    private String creationDate = "";
+    private String creationDate;
 
     /**
      * 更新日付
      */
-    private String updateDate = "";
+    private String updateDate;
 
     /**
      * デフォルトコンストラクタ
      */
-    @SuppressWarnings("unused")
     private DtoCreator() {
     }
 
@@ -57,8 +63,10 @@ public final class DtoCreator {
      * @param creator      作成者
      * @param creationDate 作成日付
      * @param updateDate   更新日付
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public DtoCreator(@NonNull String creator, @NonNull String creationDate, @NonNull String updateDate) {
+    private DtoCreator(@NonNull String creator, @NonNull String creationDate, @NonNull String updateDate) {
         this.creator = creator;
         this.creationDate = creationDate;
         this.updateDate = updateDate;
@@ -68,10 +76,38 @@ public final class DtoCreator {
      * コピーコンストラクタ
      *
      * @param dtoCreator DTO作成者
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public DtoCreator(@NonNull DtoCreator dtoCreator) {
+    private DtoCreator(@NonNull DtoCreator dtoCreator) {
         this.creator = dtoCreator.getCreator();
         this.creationDate = dtoCreator.getCreationDate();
         this.updateDate = dtoCreator.getUpdateDate();
+    }
+
+    /**
+     * 引数として渡された情報を基に {@link DtoCreator} クラスの新しいインスタンスを生成し返却します。
+     *
+     * @param creator      作成者
+     * @param creationDate 作成日付
+     * @param updateDate   更新日付
+     * @return {@link DtoCreator} クラスの新しいインスタンス
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    public static DtoCreator of(@NonNull String creator, @NonNull String creationDate, @NonNull String updateDate) {
+        return new DtoCreator(creator, creationDate, updateDate);
+    }
+
+    /**
+     * 引数として渡された {@code dtoCreator} オブジェクトの情報を基に {@link DtoCreator}
+     * クラスの新しいインスタンスを生成し返却します。
+     *
+     * @param dtoCreator DTO作成者
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    public static DtoCreator of(@NonNull DtoCreator dtoCreator) {
+        return new DtoCreator(dtoCreator);
     }
 }

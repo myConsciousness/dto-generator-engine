@@ -11,8 +11,7 @@
  */
 package org.thinkit.generator.common.vo.dto;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -29,52 +28,88 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public final class DtoMatrix {
+public final class DtoMatrix implements Serializable {
 
     /**
-     * クラスメタ
+     * シリアルバージョンUID
      */
-    private DtoMeta dtoMeta = null;
+    private static final long serialVersionUID = -8358418392349994438L;
 
     /**
-     * クラス作成者
+     * DTOメタ
      */
-    private DtoCreator dtoCreator = null;
+    private DtoMeta dtoMeta;
 
     /**
-     * クラス定義情報群
+     * DTO作成者
      */
-    private List<DtoDefinition> dtoDefinitionList = null;
+    private DtoCreator dtoCreator;
+
+    /**
+     * DTO定義グループ
+     */
+    private DtoDefinitionGroup dtoDefinitionGroup;
 
     /**
      * デフォルトコンストラクタ
      */
-    @SuppressWarnings("unused")
     private DtoMatrix() {
     }
 
     /**
      * コンストラクタ
      *
-     * @param dtoMeta           クラスメタ
-     * @param dtoCreator        クラス作成者
-     * @param dtoDefinitionList クラス定義情報群
+     * @param dtoMeta            DTOメタ
+     * @param dtoCreator         DTO作成者
+     * @param dtoDefinitionGroup DTO定義グループ
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public DtoMatrix(@NonNull DtoMeta dtoMeta, @NonNull DtoCreator dtoCreator,
-            @NonNull List<DtoDefinition> dtoDefinitionList) {
-        this.dtoMeta = new DtoMeta(dtoMeta);
-        this.dtoCreator = new DtoCreator(dtoCreator);
-        this.dtoDefinitionList = new ArrayList<>(dtoDefinitionList);
+    private DtoMatrix(@NonNull DtoMeta dtoMeta, @NonNull DtoCreator dtoCreator,
+            @NonNull DtoDefinitionGroup dtoDefinitionGroup) {
+        this.dtoMeta = DtoMeta.of(dtoMeta);
+        this.dtoCreator = DtoCreator.of(dtoCreator);
+        this.dtoDefinitionGroup = DtoDefinitionGroup.of(dtoDefinitionGroup);
     }
 
     /**
      * コピーコンストラクタ
      *
-     * @param DtoMeta クラス定義情報群
+     * @param dtoMatrix DTOマトリクス
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public DtoMatrix(@NonNull DtoMatrix dtoMatrix) {
-        this.dtoMeta = new DtoMeta(dtoMatrix.getDtoMeta());
-        this.dtoCreator = new DtoCreator(dtoMatrix.getDtoCreator());
-        this.dtoDefinitionList = new ArrayList<>(dtoMatrix.getDtoDefinitionList());
+    private DtoMatrix(@NonNull DtoMatrix dtoMatrix) {
+        this.dtoMeta = DtoMeta.of(dtoMatrix.getDtoMeta());
+        this.dtoCreator = DtoCreator.of(dtoMatrix.getDtoCreator());
+        this.dtoDefinitionGroup = DtoDefinitionGroup.of(dtoMatrix.getDtoDefinitionGroup());
+    }
+
+    /**
+     * 引数として渡された情報を基に {@link DtoMatrix} クラスの新しいインスタンスを生成し返却します。
+     *
+     * @param dtoMeta            DTOメタ
+     * @param dtoCreator         DTO作成者
+     * @param dtoDefinitionGroup DTO定義グループ
+     * @return {@link DtoMatrix} クラスの新しいインスタンス
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    public static DtoMatrix of(@NonNull DtoMeta dtoMeta, @NonNull DtoCreator dtoCreator,
+            @NonNull DtoDefinitionGroup dtoDefinitionGroup) {
+        return new DtoMatrix(dtoMeta, dtoCreator, dtoDefinitionGroup);
+    }
+
+    /**
+     * 引数として渡された {@code dtoMatrix} オブジェクトの情報を基に {@link DtoMatrix}
+     * クラスの新しいインスタンスを生成し返却します。
+     *
+     * @param dtoMatrix DTOマトリクス
+     * @return {@link DtoMatrix} クラスの新しいインスタンス
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    public static DtoMatrix of(@NonNull DtoMatrix dtoMatrix) {
+        return new DtoMatrix(dtoMatrix);
     }
 }

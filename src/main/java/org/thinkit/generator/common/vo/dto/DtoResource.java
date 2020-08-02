@@ -12,7 +12,7 @@
 
 package org.thinkit.generator.common.vo.dto;
 
-import java.util.Map;
+import java.io.Serializable;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -20,7 +20,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * DTOのリソース情報を管理するデータクラスです。
+ * DTOリソースを管理するデータクラスです。
  *
  * @author Kato Shinya
  * @since 1.0
@@ -29,7 +29,12 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public final class DtoResource {
+public final class DtoResource implements Serializable {
+
+    /**
+     * シリアルバージョンUID
+     */
+    private static final long serialVersionUID = -4582640533481509620L;
 
     /**
      * パッケージ名
@@ -37,25 +42,73 @@ public final class DtoResource {
     private String packageName;
 
     /**
-     * リソースマップ
+     * リソース名
      */
-    private Map<String, String> resources;
+    private String resourceName;
+
+    /**
+     * リソース
+     */
+    private String resource;
 
     /**
      * デフォルトコンストラクタ
      */
-    @SuppressWarnings("unused")
     private DtoResource() {
     }
 
     /**
      * コンストラクタ
      *
-     * @param packageName パッケージ名
-     * @param resources   リソースマップ
+     * @param packageName  パッケージ名
+     * @param resourceName リソース名
+     * @param resource     リソース
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public DtoResource(@NonNull String packageName, @NonNull Map<String, String> resources) {
+    private DtoResource(@NonNull String packageName, @NonNull String resourceName, @NonNull String resource) {
         this.packageName = packageName;
-        this.resources = resources;
+        this.resourceName = resourceName;
+        this.resource = resource;
+    }
+
+    /**
+     * コピーコンストラクタ
+     *
+     * @param dtoResource DTOリソース
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    private DtoResource(@NonNull DtoResource dtoResource) {
+        this.packageName = dtoResource.getPackageName();
+        this.resourceName = dtoResource.getResourceName();
+        this.resource = dtoResource.getResource();
+    }
+
+    /**
+     * 引数として指定された情報を基に {@link DtoResource} クラスの新しいインスタンスを生成し返却します。
+     *
+     * @param packageName  パッケージ名
+     * @param resourceName リソース名
+     * @param resource     リソース
+     * @return {@link DtoResource} クラスの新しいインスタンス
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    public static DtoResource of(@NonNull String packageName, @NonNull String resourceName, @NonNull String resource) {
+        return new DtoResource(packageName, resourceName, resource);
+    }
+
+    /**
+     * 引数として指定された {@code dtoResource} オブジェクトの情報を基に {@link DtoResource}
+     * クラスの新しいインスタンスを生成し返却します。
+     *
+     * @param dtoResource DTOリソース
+     * @return {@link DtoResource} クラスの新しいインスタンス
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    public static DtoResource of(@NonNull DtoResource dtoResource) {
+        return new DtoResource(dtoResource);
     }
 }

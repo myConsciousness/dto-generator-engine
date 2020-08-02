@@ -12,11 +12,7 @@
 
 package org.thinkit.generator.common.command.dto;
 
-import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import com.google.common.flogger.FluentLogger;
 
@@ -30,15 +26,16 @@ import org.thinkit.generator.common.factory.resource.Resource;
 import org.thinkit.generator.common.factory.resource.ResourceFactory;
 import org.thinkit.generator.common.vo.dto.DtoCreator;
 import org.thinkit.generator.common.vo.dto.DtoDefinition;
+import org.thinkit.generator.common.vo.dto.DtoDefinitionGroup;
 import org.thinkit.generator.common.vo.dto.DtoField;
+import org.thinkit.generator.common.vo.dto.DtoFieldGroup;
 import org.thinkit.generator.common.vo.dto.DtoMatrix;
 import org.thinkit.generator.common.vo.dto.DtoMeta;
 import org.thinkit.generator.common.vo.dto.DtoResource;
+import org.thinkit.generator.common.vo.dto.DtoResourceGroup;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -50,7 +47,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public final class DtoResourceFormatter implements Command<DtoResource> {
+public final class DtoResourceFormatter implements Command<DtoResourceGroup> {
 
     /**
      * ログ出力オブジェクト
@@ -60,7 +57,6 @@ public final class DtoResourceFormatter implements Command<DtoResource> {
     /**
      * DTOマトリクス
      */
-    @NonNull
     private DtoMatrix dtoMatrix;
 
     /**
@@ -89,81 +85,76 @@ public final class DtoResourceFormatter implements Command<DtoResource> {
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public static Command<DtoResource> of(@NonNull final DtoMatrix dtoMatrix) {
+    public static Command<DtoResourceGroup> of(@NonNull final DtoMatrix dtoMatrix) {
         return new DtoResourceFormatter(dtoMatrix);
     }
 
     @Override
-    public DtoResource run() {
+    public DtoResourceGroup run() {
 
-        final DtoMeta dtoMeta = this.dtoMatrix.getDtoMeta();
-        final Map<String, String> formattedResources = new HashMap<>();
+        final DtoResourceGroup dtoResourceGroup = DtoResourceGroup.of();
 
-        final RecursiveRequiredParameters parameters = RecursiveRequiredParameters.of(dtoMeta,
-                this.dtoMatrix.getDtoCreator(), this.dtoMatrix.getDtoDefinitionList(), formattedResources);
-
-        if (!this.formatDtoDefinitionRecursively(parameters)) {
-            logger.atSevere().log("クラス定義情報の整形処理が異常終了しました。");
+        if (!this.formatDtoResourceRecursively(this.dtoMatrix.getDtoMeta(), this.dtoMatrix.getDtoCreator(),
+                this.dtoMatrix.getDtoDefinitionGroup(), dtoResourceGroup)) {
+            logger.atSevere().log("DTO定義情報の整形処理が異常終了しました。");
             return null;
         }
 
-        return new DtoResource(dtoMeta.getPackageName(), formattedResources);
+        logger.atFinest().log("DTOリソースグループ = (%s)", dtoResourceGroup);
+        return dtoResourceGroup;
     }
 
     /**
-     * 再帰的にクラス定義情報をJavaファイルへ出力する形式へ整形します。
+     * 再帰的にDTOリソースをjavaファイルへ出力する形式へ整形する処理を定義したメソッドです。整形されたDTOリソース情報は引数として渡された
+     * {@code dtoResourceGroup} オブジェクトに格納されます。
      *
-     * @param parameters 再帰処理に必要な情報を格納したデータクラス
-     * @return 整形処理が正常終了した場合は {@code true}、それ以外は {@code false}
+     * @param dtoMeta            DTOメタ（入力）
+     * @param dtoCreator         DTO作成者（入力）
+     * @param dtoDefinitionGroup DTO定義グループ（入力）
+     * @param dtoResourceGroup   DTOリソースグループ（出力）
+     * @return 再帰処理が正常終了した場合は {@code true}、それ以外は {@code false}
      *
-     * @see RecursiveRequiredParameters
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private boolean formatDtoDefinitionRecursively(@NonNull final RecursiveRequiredParameters parameters) {
-        logger.atInfo().log("再帰処理に使用するパラメータ情報 = (%s)", parameters);
+    private boolean formatDtoResourceRecursively(@NonNull final DtoMeta dtoMeta, @NonNull final DtoCreator dtoCreator,
+            @NonNull final DtoDefinitionGroup dtoDefinitionGroup, @NonNull final DtoResourceGroup dtoResourceGroup) {
 
-        final DtoMeta dtoMeta = parameters.getDtoMeta();
-        final DtoCreator dtoCreator = parameters.getDtoCreator();
-        final List<DtoDefinition> dtoDefinitionList = parameters.getDtoDefinitionList();
-        final Map<String, String> formattedResources = parameters.getFormattedResources();
-
-        for (DtoDefinition dtoDefinition : dtoDefinitionList) {
+        for (DtoDefinition dtoDefinition : dtoDefinitionGroup) {
             final String className = dtoDefinition.getClassName();
-            final Resource resource = this.formatResource(className, dtoDefinition.getDtoFieldList(), dtoMeta,
-                    dtoCreator, formattedResources);
+            final Resource resource = this.formatResource(className, dtoDefinition.getDtoFieldGroup(), dtoMeta,
+                    dtoCreator, dtoResourceGroup);
 
             if (resource == null) {
                 logger.atSevere().log("クラス項目定義情報の整形処理が異常終了しました。");
                 return false;
             }
 
-            formattedResources.put(className, resource.createResource());
+            dtoResourceGroup.add(DtoResource.of(dtoMeta.getPackageName(), className, resource.createResource()));
         }
 
-        logger.atInfo().log("整形されたJavaリソース = (%s)", formattedResources);
         return true;
     }
 
     /**
-     * 引数として渡された情報を基にリソース情報を構築します。<br>
+     * 引数として渡された情報を基にリソース情報を構築します。
+     * <p>
      * 各項目に子クラスが存在する場合は再帰処理(
-     * {@link #formatDtoDefinitionRecursively(RecursiveRequiredParameters)} )を行います。
+     * {@link #formatDtoResourceRecursively(DtoMeta, DtoCreator, DtoDefinitionGroup, DtoResourceGroup)}
+     * )を行います。
      * <p>
      * 再帰処理中に想定外のエラーが発生した場合は必ず {@code null} を返却します。
      *
-     * @param className          クラス名
-     * @param dtoFieldList       クラス項目定義情報リスト
-     * @param dtoMeta            クラスメタ
-     * @param dtoCreator         クラス作成者
-     * @param formattedResources 整形されたJavaリソース情報
+     * @param className        クラス名
+     * @param dtoFieldGroup    DTOフィールドグループ
+     * @param dtoMeta          DTOメタ
+     * @param dtoCreator       DTO作成者
+     * @param dtoResourceGroup DTOリソースグループ
      *
-     * @return #see {@link Resource}
+     * @return DTOリソースオブジェクト
      */
-    private Resource formatResource(@NonNull final String className, @NonNull final List<DtoField> dtoFieldList,
+    private Resource formatResource(@NonNull final String className, @NonNull final DtoFieldGroup dtoFieldGroup,
             @NonNull final DtoMeta dtoMeta, @NonNull final DtoCreator dtoCreator,
-            @NonNull final Map<String, String> formattedResources) {
-
-        assert className.length() > 0;
-        assert !dtoFieldList.isEmpty();
+            @NonNull final DtoResourceGroup dtoResourceGroup) {
 
         final ResourceFactory resourceFactory = DtoResourceFactory.getInstance();
         final Resource resource = this.createResource(className, dtoMeta, dtoCreator);
@@ -172,7 +163,7 @@ public final class DtoResourceFormatter implements Command<DtoResource> {
 
         copyingConstructor.add(resourceFactory.createParameter(className, this.toInitialLowerCase(className)));
 
-        for (DtoField dtoField : dtoFieldList) {
+        for (DtoField dtoField : dtoFieldGroup) {
             final String dataType = dtoField.getDataType();
             final String variableName = dtoField.getVariableName();
 
@@ -188,15 +179,13 @@ public final class DtoResourceFormatter implements Command<DtoResource> {
 
             copyingConstructor.add(resourceFactory.createConstructorProcess(className, variableName).toCopying());
 
-            final List<DtoDefinition> childDtoDefinitionList = dtoField.getChildDtoDefinitionList();
+            final DtoDefinitionGroup childDtoDefinitionGroup = dtoField.getChildDtoDefinitionGroup();
 
-            if (!childDtoDefinitionList.isEmpty()) {
-                logger.atInfo().log("子クラスが存在するため再帰処理を開始します。");
+            if (!childDtoDefinitionGroup.isEmpty()) {
+                logger.atFinest().log("子クラスが存在するため再帰処理を開始します。");
 
-                final RecursiveRequiredParameters newRequiredParameters = RecursiveRequiredParameters.of(dtoMeta,
-                        dtoCreator, childDtoDefinitionList, formattedResources);
-
-                if (!this.formatDtoDefinitionRecursively(newRequiredParameters)) {
+                if (!this.formatDtoResourceRecursively(dtoMeta, dtoCreator, childDtoDefinitionGroup,
+                        dtoResourceGroup)) {
                     logger.atSevere().log("子クラス定義情報を生成するための再起処理が異常終了しました。");
                     return null;
                 }
@@ -210,12 +199,11 @@ public final class DtoResourceFormatter implements Command<DtoResource> {
     }
 
     /**
-     * 引数として渡された情報を基に著作権定義オブジェクトを生成し返却します。<br>
-     * 引数として {@code null} が渡された場合は実行時に必ず失敗します。<br>
+     * 引数として渡された情報を基に著作権定義オブジェクトを生成し返却します。
      *
      * @param className  クラス名
-     * @param dtoMeta    クラスメタ
-     * @param dtoCreator クラス作成者
+     * @param dtoMeta    DTOメタ
+     * @param dtoCreator DTO作成者
      * @return 著作権定義オブジェクト
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
@@ -227,12 +215,11 @@ public final class DtoResourceFormatter implements Command<DtoResource> {
     }
 
     /**
-     * 引数として渡された情報を基にリソース定義オブジェクトを生成し返却します。<br>
-     * 引数として {@code null} が渡された場合は実行時に必ず失敗します。<br>
+     * 引数として渡された情報を基にリソース定義オブジェクトを生成し返却します。
      *
      * @param className  クラス名
-     * @param dtoMeta    クラスメタ
-     * @param dtoCreator クラス作成者
+     * @param dtoMeta    DTOメタ
+     * @param dtoCreator DTO作成者
      * @return リソース定義オブジェクト
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
@@ -249,8 +236,7 @@ public final class DtoResourceFormatter implements Command<DtoResource> {
     }
 
     /**
-     * 引数として渡された情報を基にコンストラクタ定義オブジェクトを生成し返却します。<br>
-     * 引数として {@code null} が渡された場合は実行時に必ず失敗します。<br>
+     * 引数として渡された情報を基にコンストラクタ定義オブジェクトを生成し返却します。
      *
      * @param className   クラス名
      * @param description 説明
@@ -273,49 +259,5 @@ public final class DtoResourceFormatter implements Command<DtoResource> {
      */
     private String toInitialLowerCase(@NonNull String sequence) {
         return sequence.substring(0, 1).toLowerCase() + sequence.substring(1);
-    }
-
-    /**
-     * 整形時の再帰処理で使用する情報を管理するデータクラスです。 <br>
-     * インスタンス成時に各フィールドへ {@code null} が設定された場合は必ず例外が発生します。
-     *
-     * @author Kato Shinya
-     * @since 1.0
-     * @version 1.0
-     */
-    @Getter
-    @ToString
-    @EqualsAndHashCode(callSuper = false)
-    @RequiredArgsConstructor(staticName = "of")
-    private static class RecursiveRequiredParameters implements Serializable {
-
-        /**
-         * シリアルバージョンUID
-         */
-        private static final long serialVersionUID = -9084043880553539265L;
-
-        /**
-         * クラスメタ
-         */
-        @NonNull
-        private final DtoMeta DtoMeta;
-
-        /**
-         * クラス作成者
-         */
-        @NonNull
-        private final DtoCreator DtoCreator;
-
-        /**
-         * DTOマトリクス
-         */
-        @NonNull
-        private final List<DtoDefinition> DtoDefinitionList;
-
-        /**
-         * 整形済みJavaリソース
-         */
-        @NonNull
-        private final Map<String, String> formattedResources;
     }
 }

@@ -12,8 +12,7 @@
 
 package org.thinkit.generator.common.vo.dto;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -31,43 +30,47 @@ import lombok.ToString;
 @Getter
 @ToString
 @EqualsAndHashCode
-public final class DtoField {
+public final class DtoField implements Serializable {
+
+    /**
+     * シリアルバージョンUID
+     */
+    private static final long serialVersionUID = 2082213692978784937L;
 
     /**
      * 変数名
      */
-    private String variableName = "";
+    private String variableName;
 
     /**
      * データ型
      */
-    private String dataType = "";
+    private String dataType;
 
     /**
      * 初期値
      */
-    private String initialValue = "";
+    private String initialValue;
 
     /**
      * 不変
      */
-    private boolean invariant = false;
+    private boolean invariant;
 
     /**
      * 説明
      */
-    private String description = "";
+    private String description;
 
     /**
-     * 子クラス定義情報群
+     * 子DTO定義グループ
      */
     @Setter
-    private List<DtoDefinition> childDtoDefinitionList = new ArrayList<>();
+    private DtoDefinitionGroup childDtoDefinitionGroup;
 
     /**
      * デフォルトコンストラクタ
      */
-    @SuppressWarnings("unused")
     private DtoField() {
     }
 
@@ -79,27 +82,62 @@ public final class DtoField {
      * @param initialValue 初期値
      * @param invariant    不変
      * @param description  説明
+     *
+     * @exception NullPointerException 引数として {@code null} が指定された場合
      */
-    public DtoField(@NonNull String variableName, @NonNull String dataType, @NonNull String initialValue,
+    private DtoField(@NonNull String variableName, @NonNull String dataType, @NonNull String initialValue,
             boolean invariant, @NonNull String description) {
         this.variableName = variableName;
         this.dataType = dataType;
         this.initialValue = initialValue;
         this.invariant = invariant;
         this.description = description;
+        this.childDtoDefinitionGroup = DtoDefinitionGroup.of();
     }
 
     /**
      * コピーコンストラクタ
      *
      * @param dtoField DTOフィールド
+     *
+     * @exception NullPointerException 引数として {@code null} が指定された場合
      */
-    public DtoField(@NonNull DtoField dtoField) {
+    private DtoField(@NonNull DtoField dtoField) {
         this.variableName = dtoField.getVariableName();
         this.dataType = dtoField.getDataType();
         this.initialValue = dtoField.getInitialValue();
         this.invariant = dtoField.isInvariant();
         this.description = dtoField.getDescription();
-        this.childDtoDefinitionList = new ArrayList<>(dtoField.getChildDtoDefinitionList());
+        this.childDtoDefinitionGroup = DtoDefinitionGroup.of(dtoField.getChildDtoDefinitionGroup());
+    }
+
+    /**
+     * 引数として指定された情報を基に {@link DtoField} クラスの新しいインスタンスを生成し返却します。
+     *
+     * @param variableName 変数名
+     * @param dataType     データ型
+     * @param initialValue 初期値
+     * @param invariant    不変
+     * @param description  説明
+     * @return {@link DtoField} クラスの新しいインスタンス
+     *
+     * @exception NullPointerException 引数として {@code null} が指定された場合
+     */
+    public static DtoField of(@NonNull String variableName, @NonNull String dataType, @NonNull String initialValue,
+            boolean invariant, @NonNull String description) {
+        return new DtoField(variableName, dataType, initialValue, invariant, description);
+    }
+
+    /**
+     * 引数として指定された {@code dtoField} オブジェクトの情報を基に {@link DtoField}
+     * クラスの新しいインスタンスを生成し返却します。
+     *
+     * @param dtoField DTOフィールド
+     * @return {@link DtoField} クラスの新しいインスタンス
+     *
+     * @exception NullPointerException 引数として {@code null} が指定された場合
+     */
+    public static DtoField of(@NonNull DtoField dtoField) {
+        return new DtoField(dtoField);
     }
 }
