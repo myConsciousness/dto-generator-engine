@@ -10,7 +10,7 @@
  * reproduced or used in any manner whatsoever.
  */
 
-package org.thinkit.generator.common.factory.resource;
+package org.thinkit.generator.common.factory;
 
 /**
  * リソースの構成要素を抽象化したインターフェースです。<br>
