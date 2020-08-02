@@ -47,7 +47,7 @@ final class ContentNodeGroup extends NodeGroup {
 
         final StringBuilder nodeGroup = new StringBuilder();
         final String returnCode = Indentation.returnCode();
-        final String comma = Delimiter.commma();
+        final String comma = Delimiter.comma();
 
         super.getNodeGroup().forEach(node -> {
             nodeGroup.append(node.createResource()).append(comma).append(returnCode).append(returnCode);

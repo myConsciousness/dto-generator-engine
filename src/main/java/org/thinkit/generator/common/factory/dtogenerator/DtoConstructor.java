@@ -90,7 +90,7 @@ final class DtoConstructor extends Constructor {
 
         final StringBuilder sb = new StringBuilder();
         final String space = Indentation.space();
-        final String commma = Delimiter.commma();
+        final String commma = Delimiter.comma();
 
         for (Parameter parameter : parameters) {
             sb.append(parameter.createResource()).append(commma).append(space);
