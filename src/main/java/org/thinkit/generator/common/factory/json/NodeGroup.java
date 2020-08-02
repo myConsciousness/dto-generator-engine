@@ -17,7 +17,9 @@ import java.util.List;
 
 import org.thinkit.generator.common.factory.Component;
 
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 
@@ -38,12 +40,13 @@ public abstract class NodeGroup implements Component {
     /**
      * ノードグループ
      */
+    @Getter(AccessLevel.PROTECTED)
     private List<Node> nodeGroup;
 
     /**
      * デフォルトコンストラクタ
      */
-    private NodeGroup() {
+    protected NodeGroup() {
         this.nodeGroup = new ArrayList<>(0);
     }
 
