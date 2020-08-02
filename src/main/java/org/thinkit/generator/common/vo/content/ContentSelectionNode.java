@@ -13,8 +13,6 @@
 package org.thinkit.generator.common.vo.content;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -56,10 +54,10 @@ public final class ContentSelectionNode implements Serializable {
     private String conditionId;
 
     /**
-     * 選択情報
+     * コンテンツ選択グループ
      */
     @Getter
-    private Map<String, String> selection;
+    private ContentSelectionGroup contentSelectionGroup;
 
     /**
      * デフォルトコンストラクタ
@@ -71,13 +69,14 @@ public final class ContentSelectionNode implements Serializable {
     /**
      * コンストラクタ
      *
-     * @param conditionId 条件ID
+     * @param conditionId           条件ID
+     * @param contentSelectionGroup コンテンツ選択グループ
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private ContentSelectionNode(@NonNull String conditionId) {
+    private ContentSelectionNode(@NonNull String conditionId, @NonNull ContentSelectionGroup contentSelectionGroup) {
         this.conditionId = conditionId;
-        this.selection = Map.of();
+        this.contentSelectionGroup = contentSelectionGroup;
     }
 
     /**
@@ -89,19 +88,21 @@ public final class ContentSelectionNode implements Serializable {
      */
     public ContentSelectionNode(@NonNull ContentSelectionNode contentSelectionNode) {
         this.conditionId = contentSelectionNode.getConditionId();
-        this.selection = new HashMap<>(contentSelectionNode.getSelection());
+        this.contentSelectionGroup = ContentSelectionGroup.of(contentSelectionNode.getContentSelectionGroup());
     }
 
     /**
      * {@link ContentSelectionNode} クラスの新しいインスタンスを生成し返却します。
      *
-     * @param conditionId 条件ID
+     * @param conditionId           条件ID
+     * @param contentSelectionGroup コンテンツ選択グループ
      * @return {@link ContentSelectionNode} クラスの新しいインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public static ContentSelectionNode of(@NonNull String conditionId) {
-        return new ContentSelectionNode(conditionId);
+    public static ContentSelectionNode of(@NonNull String conditionId,
+            @NonNull ContentSelectionGroup contentSelectionGroup) {
+        return new ContentSelectionNode(conditionId, contentSelectionGroup);
     }
 
     /**
@@ -115,30 +116,5 @@ public final class ContentSelectionNode implements Serializable {
      */
     public static ContentSelectionNode of(@NonNull ContentSelectionNode contentSelectionNode) {
         return new ContentSelectionNode(contentSelectionNode);
-    }
-
-    /**
-     * 引数として指定された {@code key} と {@code value} を選択情報に追加します。
-     * <p>
-     * この {@link ContentSelectionNode#put(String, String)}
-     * メソッドは自分自身のインスタンスを返却するため以下のようなメソッドチェーンでの操作が可能です。
-     *
-     * <pre>
-     * <code>
-     * ContentSelectionNode contentSelectionNode = ContentSelectionNode.of(conditionId)
-     *                                           .put(key1, value1)
-     *                                           .put(key2, value2);
-     * </code>
-     * </pre>
-     *
-     * @param key   選択情報のキー
-     * @param value 選択情報の値
-     * @return 自分自身のインスタンス
-     *
-     * @exception NullPointerException 引数として {@code null} が渡された場合
-     */
-    public ContentSelectionNode put(@NonNull String key, @NonNull String value) {
-        this.selection.put(key, value);
-        return this;
     }
 }
