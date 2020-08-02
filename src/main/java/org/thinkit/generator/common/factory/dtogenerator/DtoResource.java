@@ -89,7 +89,7 @@ final class DtoResource extends Resource {
         final String returnCode = Indentation.returnCode();
 
         final StringBuilder resource = new StringBuilder();
-        resource.append(super.getPackageName()).append(returnCode);
+        resource.append("package").append(space).append(super.getPackageName()).append(";").append(returnCode);
         resource.append(returnCode);
         resource.append("import java.util.*;").append(returnCode);
         resource.append("import lombok.*;").append(returnCode);
