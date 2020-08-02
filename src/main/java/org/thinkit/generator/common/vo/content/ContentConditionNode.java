@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : ConditionNode.java<br>
+ * File Name : ContentConditionNode.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/07/25<br>
  * <p>
@@ -28,7 +28,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public final class ConditionNode implements Serializable {
+public final class ContentConditionNode implements Serializable {
 
     /**
      * シリアルバージョンUID
@@ -51,65 +51,66 @@ public final class ConditionNode implements Serializable {
      * 条件群
      */
     @Getter
-    private ConditionGroup conditionGroup;
+    private ContentConditionGroup contentConditionGroup;
 
     /**
      * デフォルトコンストラクタ
      */
-    private ConditionNode() {
+    private ContentConditionNode() {
     }
 
     /**
      * コンストラクタ
      *
-     * @param conditionId    条件ID
-     * @param exclude        除外
-     * @param conditionGroup 条件群
+     * @param conditionId           条件ID
+     * @param exclude               除外
+     * @param contentConditionGroup 条件群
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private ConditionNode(@NonNull String conditionId, boolean exclude, @NonNull ConditionGroup conditionGroup) {
+    private ContentConditionNode(@NonNull String conditionId, boolean exclude,
+            @NonNull ContentConditionGroup contentConditionGroup) {
         this.conditionId = conditionId;
         this.exclude = exclude;
-        this.conditionGroup = conditionGroup;
+        this.contentConditionGroup = contentConditionGroup;
     }
 
     /**
      * コピーコンストラクタ
      *
-     * @param conditionNode コピーする条件ノードオブジェクト
+     * @param contentConditionNode コピーする条件ノードオブジェクト
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private ConditionNode(@NonNull ConditionNode conditionNode) {
-        this.conditionId = conditionNode.getConditionId();
-        this.exclude = conditionNode.isExclude();
-        this.conditionGroup = ConditionGroup.of(conditionNode.getConditionGroup());
+    private ContentConditionNode(@NonNull ContentConditionNode contentConditionNode) {
+        this.conditionId = contentConditionNode.getConditionId();
+        this.exclude = contentConditionNode.isExclude();
+        this.contentConditionGroup = ContentConditionGroup.of(contentConditionNode.getContentConditionGroup());
     }
 
     /**
-     * 引数として指定された情報をもとに {@link ConditionNode} クラスの新しいインスタンスを生成し返却します。
+     * 引数として指定された情報をもとに {@link ContentConditionNode} クラスの新しいインスタンスを生成し返却します。
      *
-     * @param conditionId    条件ID
-     * @param exclude        除外
-     * @param conditionGroup 条件群
+     * @param conditionId           条件ID
+     * @param exclude               除外
+     * @param ContentConditionGroup 条件群
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public static ConditionNode of(@NonNull String conditionId, boolean exclude,
-            @NonNull ConditionGroup conditionGroup) {
-        return new ConditionNode(conditionId, exclude, conditionGroup);
+    public static ContentConditionNode of(@NonNull String conditionId, boolean exclude,
+            @NonNull ContentConditionGroup ContentConditionGroup) {
+        return new ContentConditionNode(conditionId, exclude, ContentConditionGroup);
     }
 
     /**
-     * 引数として指定された {@code conditionNode} オブジェクトの情報をもとに {@link ConditionNode}
-     * クラスの新しいインスタンスを生成し返却します。
+     * 引数として指定された {@code contentConditionNode} オブジェクトの情報をもとに
+     * {@link ContentConditionNode} クラスの新しいインスタンスを生成し返却します。
      *
-     * @param conditionNode 条件ノードオブジェクト
+     * @param ContentConditionNode 条件ノードオブジェクト
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public static ConditionNode of(@NonNull ConditionNode conditionNode) {
-        return new ConditionNode(conditionNode);
+    public static ContentConditionNode of(@NonNull ContentConditionNode contentConditionNode) {
+        return new ContentConditionNode(contentConditionNode);
     }
 }

@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : ConditionGroup.java<br>
+ * File Name : ContentConditionGroup.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/07/26<br>
  * <p>
@@ -34,7 +34,7 @@ import lombok.ToString;
  *
  * <pre>
  * <code>
- * ConditionGroup conditionGroup = ConditionGroup.of()
+ * ContentConditionGroup ContentConditionGroup = ContentConditionGroup.of()
  *                                  .add(condition1)
  *                                  .add(condition2);
  * </code>
@@ -46,7 +46,8 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public final class ConditionGroup implements Iterable<Condition>, IterableNode<Condition>, Serializable {
+public final class ContentConditionGroup
+        implements Iterable<ContentCondition>, IterableNode<ContentCondition>, Serializable {
 
     /**
      * シリアルバージョンUID
@@ -57,7 +58,7 @@ public final class ConditionGroup implements Iterable<Condition>, IterableNode<C
      * 条件グループ
      */
     @Getter
-    private List<Condition> conditionGroup;
+    private List<ContentCondition> contentConditionGroup;
 
     /**
      * 条件グループのサイズ
@@ -67,49 +68,49 @@ public final class ConditionGroup implements Iterable<Condition>, IterableNode<C
     /**
      * デフォルトコンストラクタ
      */
-    private ConditionGroup() {
-        this.conditionGroup = new ArrayList<>(0);
+    private ContentConditionGroup() {
+        this.contentConditionGroup = new ArrayList<>(0);
         this.size = 0;
     }
 
     /**
      * コピーコンストラクタ
      *
-     * @param conditionGroup 条件グループ
+     * @param contentConditionGroup 条件グループ
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private ConditionGroup(@NonNull ConditionGroup conditionGroup) {
-        this.conditionGroup = new ArrayList<>(conditionGroup.getConditionGroup());
-        this.size = conditionGroup.size();
+    private ContentConditionGroup(@NonNull ContentConditionGroup contentConditionGroup) {
+        this.contentConditionGroup = new ArrayList<>(contentConditionGroup.getContentConditionGroup());
+        this.size = contentConditionGroup.size();
     }
 
     /**
-     * {@link ConditionGroup} クラスの新しいインスタンスを生成し返却します。
+     * {@link ContentConditionGroup} クラスの新しいインスタンスを生成し返却します。
      *
-     * @return {@link ConditionGroup} クラスの新しいインスタンス
+     * @return {@link ContentConditionGroup} クラスの新しいインスタンス
      */
-    public static ConditionGroup of() {
-        return new ConditionGroup();
+    public static ContentConditionGroup of() {
+        return new ContentConditionGroup();
     }
 
     /**
-     * 引数として指定された {@code conditionGroup} オブジェクトの情報をコピーした新しい {@link ConditionGroup}
-     * クラスのインスタンスを生成し返却します。
+     * 引数として指定された {@code contentConditionGroup} オブジェクトの情報をコピーした新しい
+     * {@link ContentConditionGroup} クラスのインスタンスを生成し返却します。
      */
-    public static ConditionGroup of(@NonNull ConditionGroup conditionGroup) {
-        return new ConditionGroup(conditionGroup);
+    public static ContentConditionGroup of(@NonNull ContentConditionGroup contentConditionGroup) {
+        return new ContentConditionGroup(contentConditionGroup);
     }
 
     /**
-     * 引数として渡された {@code condition} を条件リストへ追加します。
+     * 引数として渡された {@code contentCondition} を条件リストへ追加します。
      * <p>
-     * この {@link ConditionGroup#add(Condition)}
+     * この {@link ContentConditionGroup#add(ContentCondition)}
      * メソッドは自分自身のインスタンスを返却するため以下のようなメソッドチェーンでの操作が可能です。
      *
      * <pre>
      * <code>
-     * ConditionGroup conditionGroup = ConditionGroup.of()
+     * ContentConditionGroup contentConditionGroup = ContentConditionGroup.of()
      *                                  .add(condition1)
      *                                  .add(condition2);
      * </code>
@@ -120,26 +121,26 @@ public final class ConditionGroup implements Iterable<Condition>, IterableNode<C
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public ConditionGroup add(@NonNull Condition condition) {
-        this.conditionGroup.add(condition);
+    public ContentConditionGroup add(@NonNull ContentCondition contentCondition) {
+        this.contentConditionGroup.add(contentCondition);
         size++;
 
         return this;
     }
 
     /**
-     * 指定された {@code index} の数値に紐づく {@link Condition} オブジェクトを返却します。
+     * 指定された {@code index} の数値に紐づく {@link ContentCondition} オブジェクトを返却します。
      * 存在しないインデックスを指定した場合は実行時に必ず {@link ArrayIndexOutOfBoundsException} が発生するため、
      * {@link #get(int) メソッドの実行前にが必ず有効なアクセス範囲を確認してください。
      *
      * @param index インデックス
-     * @return 指定された {@code index} の数値に紐づく {@link Condition} オブジェクト
+     * @return 指定された {@code index} の数値に紐づく {@link ContentCondition} オブジェクト
      *
      * @exception ArrayIndexOutOfBoundsException 引数として指定された {@code index}
      *                                           に紐づく情報が存在しない場合
      */
-    public Condition get(int index) {
-        return this.conditionGroup.get(index);
+    public ContentCondition get(int index) {
+        return this.contentConditionGroup.get(index);
     }
 
     /**
@@ -152,17 +153,17 @@ public final class ConditionGroup implements Iterable<Condition>, IterableNode<C
     }
 
     /**
-     * {@link Condition} クラスを総称型として持つストリームを返却します。
+     * {@link ContentCondition} クラスを総称型として持つストリームを返却します。
      *
-     * @return {@link Condition} クラスを総称型として持つストリーム
+     * @return {@link ContentCondition} クラスを総称型として持つストリーム
      */
-    public Stream<Condition> stream() {
-        return this.conditionGroup.stream();
+    public Stream<ContentCondition> stream() {
+        return this.contentConditionGroup.stream();
     }
 
     @Override
-    public List<Condition> nodes() {
-        return this.conditionGroup;
+    public List<ContentCondition> nodes() {
+        return this.contentConditionGroup;
     }
 
     @Override
@@ -171,7 +172,7 @@ public final class ConditionGroup implements Iterable<Condition>, IterableNode<C
     }
 
     @Override
-    public Iterator<Condition> iterator() {
+    public Iterator<ContentCondition> iterator() {
         return FluentIterator.of(this);
     }
 }

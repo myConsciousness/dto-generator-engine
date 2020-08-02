@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : SelectionNode.java<br>
+ * File Name : ContentSelectionNode.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/07/25<br>
  * <p>
@@ -30,7 +30,7 @@ import lombok.ToString;
  * <pre>
  * 使用例:
  * <code>
- * SelectionNode selectionNode = SelectionNode.of(conditionId)
+ * ContentSelectionNode contentSelectionNode = ContentSelectionNode.of(conditionId)
  *                                            .put(key1, value1)
  *                                            .put(key2, value2);
  * </code>
@@ -42,7 +42,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public final class SelectionNode implements Serializable {
+public final class ContentSelectionNode implements Serializable {
 
     /**
      * シリアルバージョンUID
@@ -65,7 +65,7 @@ public final class SelectionNode implements Serializable {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private SelectionNode() {
+    private ContentSelectionNode() {
     }
 
     /**
@@ -75,7 +75,7 @@ public final class SelectionNode implements Serializable {
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private SelectionNode(@NonNull String conditionId) {
+    private ContentSelectionNode(@NonNull String conditionId) {
         this.conditionId = conditionId;
         this.selection = Map.of();
     }
@@ -83,49 +83,49 @@ public final class SelectionNode implements Serializable {
     /**
      * コピーコンストラクタ
      *
-     * @param selectionNode 選択ノード
+     * @param contentSelectionNode 選択ノード
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public SelectionNode(@NonNull SelectionNode selectionNode) {
-        this.conditionId = selectionNode.getConditionId();
-        this.selection = new HashMap<>(selectionNode.getSelection());
+    public ContentSelectionNode(@NonNull ContentSelectionNode contentSelectionNode) {
+        this.conditionId = contentSelectionNode.getConditionId();
+        this.selection = new HashMap<>(contentSelectionNode.getSelection());
     }
 
     /**
-     * {@link SelectionNode} クラスの新しいインスタンスを生成し返却します。
+     * {@link ContentSelectionNode} クラスの新しいインスタンスを生成し返却します。
      *
      * @param conditionId 条件ID
-     * @return {@link SelectionNode} クラスの新しいインスタンス
+     * @return {@link ContentSelectionNode} クラスの新しいインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public static SelectionNode of(@NonNull String conditionId) {
-        return new SelectionNode(conditionId);
+    public static ContentSelectionNode of(@NonNull String conditionId) {
+        return new ContentSelectionNode(conditionId);
     }
 
     /**
-     * 引数として渡された {@code selectionNode} オブジェクトの情報をコピーした{@link SelectionNode}
-     * クラスの新しいインスタンスを生成し返却します。
+     * 引数として渡された {@code contentSelectionNode}
+     * オブジェクトの情報をコピーした{@link ContentSelectionNode} クラスの新しいインスタンスを生成し返却します。
      *
-     * @param selectionNode 選択ノード
-     * @return {@link SelectionNode} クラスの新しいインスタンス
+     * @param contentSelectionNode 選択ノード
+     * @return {@link ContentSelectionNode} クラスの新しいインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public static SelectionNode of(@NonNull SelectionNode selectionNode) {
-        return new SelectionNode(selectionNode);
+    public static ContentSelectionNode of(@NonNull ContentSelectionNode contentSelectionNode) {
+        return new ContentSelectionNode(contentSelectionNode);
     }
 
     /**
      * 引数として指定された {@code key} と {@code value} を選択情報に追加します。
      * <p>
-     * この {@link SelectionNode#put(String, String)}
+     * この {@link ContentSelectionNode#put(String, String)}
      * メソッドは自分自身のインスタンスを返却するため以下のようなメソッドチェーンでの操作が可能です。
      *
      * <pre>
      * <code>
-     * SelectionNode selectionNode = SelectionNode.of(conditionId)
+     * ContentSelectionNode contentSelectionNode = ContentSelectionNode.of(conditionId)
      *                                           .put(key1, value1)
      *                                           .put(key2, value2);
      * </code>
@@ -137,8 +137,8 @@ public final class SelectionNode implements Serializable {
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public SelectionNode put(@NonNull String key, @NonNull String value) {
-        selection.put(key, value);
+    public ContentSelectionNode put(@NonNull String key, @NonNull String value) {
+        this.selection.put(key, value);
         return this;
     }
 }

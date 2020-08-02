@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : Condition.java<br>
+ * File Name : ContentCondition.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/07/25<br>
  * <p>
@@ -28,7 +28,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public final class Condition implements Serializable {
+public final class ContentCondition implements Serializable {
 
     /**
      * シリアルバージョンUID
@@ -56,7 +56,7 @@ public final class Condition implements Serializable {
     /**
      * デフォルトコンストラクタ
      */
-    private Condition() {
+    private ContentCondition() {
     }
 
     /**
@@ -68,7 +68,7 @@ public final class Condition implements Serializable {
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private Condition(@NonNull String key, @NonNull String operand, @NonNull String value) {
+    private ContentCondition(@NonNull String key, @NonNull String operand, @NonNull String value) {
         this.key = key;
         this.operand = operand;
         this.value = value;
@@ -77,36 +77,36 @@ public final class Condition implements Serializable {
     /**
      * コピーコンストラクタ
      */
-    private Condition(@NonNull Condition condition) {
-        this.key = condition.getKey();
-        this.operand = condition.getOperand();
-        this.value = condition.getValue();
+    private ContentCondition(@NonNull ContentCondition contentcondition) {
+        this.key = contentcondition.getKey();
+        this.operand = contentcondition.getOperand();
+        this.value = contentcondition.getValue();
     }
 
     /**
-     * 引数として渡された情報を基に {@link Condition} クラスの新しいインスタンスを生成し返却します。
+     * 引数として渡された情報を基に {@link ContentCondition} クラスの新しいインスタンスを生成し返却します。
      *
      * @param key     キー
      * @param operand 演算子
      * @param value   値
-     * @return {@link Condition} クラスの新しいインスタンス
+     * @return {@link ContentCondition} クラスの新しいインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public static Condition of(@NonNull String key, @NonNull String operand, @NonNull String value) {
-        return new Condition(key, operand, value);
+    public static ContentCondition of(@NonNull String key, @NonNull String operand, @NonNull String value) {
+        return new ContentCondition(key, operand, value);
     }
 
     /**
-     * 引数として渡された {@code condition} オブジェクトの情報を基に {@link Condition}
+     * 引数として渡された {@code contentcondition} オブジェクトの情報を基に {@link ContentCondition}
      * クラスの新しいインスタンスを生成し返却します。
      *
-     * @param condition 条件オブジェクト
-     * @return {@link Condition} クラスの新しいインスタンス
+     * @param Contentcondition 条件オブジェクト
+     * @return {@link ContentCondition} クラスの新しいインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public static Condition of(@NonNull Condition condition) {
-        return new Condition(condition);
+    public static ContentCondition of(@NonNull ContentCondition contentcondition) {
+        return new ContentCondition(contentcondition);
     }
 }

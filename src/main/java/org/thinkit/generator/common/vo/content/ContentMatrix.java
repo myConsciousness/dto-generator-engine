@@ -39,13 +39,13 @@ public final class ContentMatrix implements Serializable {
      * 選択ノード群
      */
     @Getter
-    private SelectionNodeGroup selectionNodeGroup;
+    private ContentSelectionNodeGroup contentSelectionNodeGroup;
 
     /**
      * 条件ノード群
      */
     @Getter
-    private ConditionNodeGroup conditionNodeGroup;
+    private ContentConditionNodeGroup contentConditionNodeGroup;
 
     /**
      * デフォルトコンストラクタ
@@ -56,15 +56,15 @@ public final class ContentMatrix implements Serializable {
     /**
      * コンストラクタ
      *
-     * @param selectionNodeGroup 選択ノード群
-     * @param conditionNodeGroup 条件ノード群
+     * @param contentSelectionNodeGroup 選択ノード群
+     * @param contentConditionNodeGroup 条件ノード群
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private ContentMatrix(@NonNull SelectionNodeGroup selectionNodeGroup,
-            @NonNull ConditionNodeGroup conditionNodeGroup) {
-        this.selectionNodeGroup = selectionNodeGroup;
-        this.conditionNodeGroup = conditionNodeGroup;
+    private ContentMatrix(@NonNull ContentSelectionNodeGroup contentSelectionNodeGroup,
+            @NonNull ContentConditionNodeGroup contentConditionNodeGroup) {
+        this.contentSelectionNodeGroup = contentSelectionNodeGroup;
+        this.contentConditionNodeGroup = contentConditionNodeGroup;
     }
 
     /**
@@ -75,22 +75,22 @@ public final class ContentMatrix implements Serializable {
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     private ContentMatrix(@NonNull ContentMatrix contentMatrix) {
-        this.selectionNodeGroup = SelectionNodeGroup.of(contentMatrix.getSelectionNodeGroup());
-        this.conditionNodeGroup = ConditionNodeGroup.of(contentMatrix.getConditionNodeGroup());
+        this.contentSelectionNodeGroup = ContentSelectionNodeGroup.of(contentMatrix.getContentSelectionNodeGroup());
+        this.contentConditionNodeGroup = ContentConditionNodeGroup.of(contentMatrix.getContentConditionNodeGroup());
     }
 
     /**
      * 引数として指定された情報を基に {@link ContentMatrix} クラスの新しいインスタンスを生成し返却します。
      *
-     * @param selectionNodeGroup 選択ノード群
-     * @param conditionNodeGroup 条件ノード群
+     * @param contentSelectionNodeGroup 選択ノード群
+     * @param contentConditionNodeGroup 条件ノード群
      * @return {@link ContentMatrix} クラスの新しいインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public static ContentMatrix of(@NonNull SelectionNodeGroup selectionNodeGroup,
-            @NonNull ConditionNodeGroup conditionNodeGroup) {
-        return new ContentMatrix(selectionNodeGroup, conditionNodeGroup);
+    public static ContentMatrix of(@NonNull ContentSelectionNodeGroup contentSelectionNodeGroup,
+            @NonNull ContentConditionNodeGroup contentConditionNodeGroup) {
+        return new ContentMatrix(contentSelectionNodeGroup, contentConditionNodeGroup);
     }
 
     /**
