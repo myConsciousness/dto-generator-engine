@@ -26,6 +26,7 @@ import lombok.ToString;
  * @since 1.0
  * @version 1.0
  */
+@Getter
 @ToString
 @EqualsAndHashCode
 public final class ContentMatrix implements Serializable {
@@ -36,15 +37,28 @@ public final class ContentMatrix implements Serializable {
     private static final long serialVersionUID = 7166357277027973034L;
 
     /**
+     * コンテンツメタ
+     */
+    private ContentMeta contentMeta;
+
+    /**
+     * コンテンツ作成者
+     */
+    private ContentCreator contentCreator;
+
+    /**
+     * コンテンツバージョン
+     */
+    private ContentVersion contentVersion;
+
+    /**
      * 選択ノード群
      */
-    @Getter
     private ContentSelectionNodeGroup contentSelectionNodeGroup;
 
     /**
      * 条件ノード群
      */
-    @Getter
     private ContentConditionNodeGroup contentConditionNodeGroup;
 
     /**
@@ -56,13 +70,20 @@ public final class ContentMatrix implements Serializable {
     /**
      * コンストラクタ
      *
+     * @param contentMeta               コンテンツメタ
+     * @param contentCreator            コンテンツ作成者
+     * @param contentVersion            コンテンツバージョン
      * @param contentSelectionNodeGroup 選択ノード群
      * @param contentConditionNodeGroup 条件ノード群
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private ContentMatrix(@NonNull ContentSelectionNodeGroup contentSelectionNodeGroup,
+    private ContentMatrix(@NonNull ContentMeta contentMeta, @NonNull ContentCreator contentCreator,
+            @NonNull ContentVersion contentVersion, @NonNull ContentSelectionNodeGroup contentSelectionNodeGroup,
             @NonNull ContentConditionNodeGroup contentConditionNodeGroup) {
+        this.contentMeta = contentMeta;
+        this.contentCreator = contentCreator;
+        this.contentVersion = contentVersion;
         this.contentSelectionNodeGroup = contentSelectionNodeGroup;
         this.contentConditionNodeGroup = contentConditionNodeGroup;
     }
@@ -82,15 +103,20 @@ public final class ContentMatrix implements Serializable {
     /**
      * 引数として指定された情報を基に {@link ContentMatrix} クラスの新しいインスタンスを生成し返却します。
      *
+     * @param contentMeta               コンテンツメタ
+     * @param contentCreator            コンテンツ作成者
+     * @param contentVersion            コンテンツバージョン
      * @param contentSelectionNodeGroup 選択ノード群
      * @param contentConditionNodeGroup 条件ノード群
      * @return {@link ContentMatrix} クラスの新しいインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public static ContentMatrix of(@NonNull ContentSelectionNodeGroup contentSelectionNodeGroup,
+    public static ContentMatrix of(@NonNull ContentMeta contentMeta, @NonNull ContentCreator contentCreator,
+            @NonNull ContentVersion contentVersion, @NonNull ContentSelectionNodeGroup contentSelectionNodeGroup,
             @NonNull ContentConditionNodeGroup contentConditionNodeGroup) {
-        return new ContentMatrix(contentSelectionNodeGroup, contentConditionNodeGroup);
+        return new ContentMatrix(contentMeta, contentCreator, contentVersion, contentSelectionNodeGroup,
+                contentConditionNodeGroup);
     }
 
     /**
