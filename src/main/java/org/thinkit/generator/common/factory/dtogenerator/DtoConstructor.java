@@ -38,7 +38,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public final class DtoConstructor extends Constructor {
+final class DtoConstructor extends Constructor {
 
     /**
      * 処理のインデント数
