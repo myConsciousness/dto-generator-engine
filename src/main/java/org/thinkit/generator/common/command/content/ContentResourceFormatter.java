@@ -15,6 +15,7 @@ package org.thinkit.generator.common.command.content;
 import org.thinkit.common.command.Command;
 import org.thinkit.generator.common.catalog.content.CreatorKey;
 import org.thinkit.generator.common.catalog.content.GroupKey;
+import org.thinkit.generator.common.catalog.content.MetaKey;
 import org.thinkit.generator.common.catalog.content.VersionKey;
 import org.thinkit.generator.common.factory.content.ContentResourceFactory;
 import org.thinkit.generator.common.factory.json.ItemGroup;
@@ -23,6 +24,7 @@ import org.thinkit.generator.common.factory.json.NodeGroup;
 import org.thinkit.generator.common.factory.json.ResourceFactory;
 import org.thinkit.generator.common.vo.content.ContentCreator;
 import org.thinkit.generator.common.vo.content.ContentMatrix;
+import org.thinkit.generator.common.vo.content.ContentMeta;
 import org.thinkit.generator.common.vo.content.ContentResource;
 import org.thinkit.generator.common.vo.content.ContentVersion;
 
@@ -85,6 +87,7 @@ public final class ContentResourceFormatter implements Command<ContentResource> 
         final LeafVertex leafVertex = factory.createLeafVertex();
         leafVertex.add(this.createCreatorNodeGroup());
         leafVertex.add(this.createVersionNodeGroup());
+        leafVertex.add(this.createMetaNodeGroup());
 
         return ContentResource.of("", "", factory.createResource(leafVertex).createResource());
     }
@@ -122,5 +125,23 @@ public final class ContentResourceFormatter implements Command<ContentResource> 
         itemGroup.add(factory.createItem(VersionKey.version(), contentVersion.getVersion()));
 
         return factory.createNodeGroup(GroupKey.version()).add(factory.createNode(itemGroup));
+    }
+
+    /**
+     * コンテンツの {@code "meta"} キーに紐づくメタノードグループを生成し返却します。
+     *
+     * @return メタノードグループ
+     */
+    private NodeGroup createMetaNodeGroup() {
+
+        final ContentMeta contentMeta = this.contentMatrix.getContentMeta();
+        final ResourceFactory factory = ContentResourceFactory.getInstance();
+
+        final ItemGroup itemGroup = factory.createItemGroup();
+        itemGroup.add(factory.createItem(MetaKey.packageName(), contentMeta.getPackageName()));
+        itemGroup.add(factory.createItem(MetaKey.encoding(), contentMeta.getEncoding()));
+        itemGroup.add(factory.createItem(MetaKey.description(), contentMeta.getDescription()));
+
+        return factory.createNodeGroup(GroupKey.meta()).add(factory.createNode(itemGroup));
     }
 }
