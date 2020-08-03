@@ -1,6 +1,6 @@
 /**
  * Project Name : generator-commons<br>
- * File Name : VesionKey.java<br>
+ * File Name : VersionKey.java<br>
  * Encoding : UTF-8<br>
  * Creation Date : 2020/08/03<br>
  * <p>
@@ -29,7 +29,7 @@ import lombok.RequiredArgsConstructor;
  * @version 1.0
  */
 @RequiredArgsConstructor
-public enum VesionKey implements Catalog<VesionKey> {
+public enum VersionKey implements Catalog<VersionKey> {
 
     /**
      * 作成時バージョン
