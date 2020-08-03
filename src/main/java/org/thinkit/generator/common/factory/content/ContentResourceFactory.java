@@ -20,7 +20,9 @@ import org.thinkit.generator.common.factory.json.NodeGroup;
 import org.thinkit.generator.common.factory.json.Resource;
 import org.thinkit.generator.common.factory.json.ResourceFactory;
 
+import lombok.EqualsAndHashCode;
 import lombok.NonNull;
+import lombok.ToString;
 
 /**
  * コンテンツリソースの各構成要素を生成するオブジェクトを返却するファクトリクラスです。
@@ -34,6 +36,8 @@ import lombok.NonNull;
  * @since 1.0
  * @version 1.0
  */
+@ToString
+@EqualsAndHashCode(callSuper = false)
 public final class ContentResourceFactory extends ResourceFactory {
 
     /**
