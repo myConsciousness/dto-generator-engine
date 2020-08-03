@@ -12,6 +12,9 @@
 
 package org.thinkit.generator.common.factory.json;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.thinkit.generator.common.factory.Component;
 
 import lombok.AccessLevel;
@@ -38,23 +41,25 @@ public abstract class LeafVertex implements Component {
      * ノードグループ
      */
     @Getter(AccessLevel.PROTECTED)
-    private NodeGroup nodeGroup;
+    private List<NodeGroup> nodeGroups;
 
     /**
      * デフォルトコンストラクタ
      */
-    @SuppressWarnings("unused")
-    private LeafVertex() {
+    protected LeafVertex() {
+        this.nodeGroups = new ArrayList<>(0);
     }
 
     /**
-     * コンストラクタ
+     * 引数として渡された {@code nodeGroup} オブジェクトをノードグループの集合リストへ追加します。
      *
      * @param nodeGroup ノードグループ
+     * @return 自分自身のインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected LeafVertex(@NonNull NodeGroup nodeGroup) {
-        this.nodeGroup = nodeGroup;
+    public LeafVertex add(@NonNull NodeGroup nodeGroup) {
+        this.nodeGroups.add(nodeGroup);
+        return this;
     }
 }
