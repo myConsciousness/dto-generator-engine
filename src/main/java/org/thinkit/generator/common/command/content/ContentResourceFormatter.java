@@ -16,6 +16,7 @@ import org.thinkit.common.command.Command;
 import org.thinkit.generator.common.catalog.content.CreatorKey;
 import org.thinkit.generator.common.catalog.content.GroupKey;
 import org.thinkit.generator.common.catalog.content.MetaKey;
+import org.thinkit.generator.common.catalog.content.SelectionNodeKey;
 import org.thinkit.generator.common.catalog.content.VersionKey;
 import org.thinkit.generator.common.factory.content.ContentResourceFactory;
 import org.thinkit.generator.common.factory.json.ItemGroup;
@@ -88,8 +89,12 @@ public final class ContentResourceFormatter implements Command<ContentResource> 
         leafVertex.add(this.createCreatorNodeGroup());
         leafVertex.add(this.createVersionNodeGroup());
         leafVertex.add(this.createMetaNodeGroup());
+        leafVertex.add(this.createSelectionNodeGroup());
 
-        return ContentResource.of("", "", factory.createResource(leafVertex).createResource());
+        final ContentMeta contentMeta = this.contentMatrix.getContentMeta();
+
+        return ContentResource.of(contentMeta.getPackageName(), contentMeta.getContentName(),
+                factory.createResource(leafVertex).createResource());
     }
 
     /**
@@ -139,9 +144,36 @@ public final class ContentResourceFormatter implements Command<ContentResource> 
 
         final ItemGroup itemGroup = factory.createItemGroup();
         itemGroup.add(factory.createItem(MetaKey.packageName(), contentMeta.getPackageName()));
+        itemGroup.add(factory.createItem(MetaKey.contentName(), contentMeta.getContentName()));
         itemGroup.add(factory.createItem(MetaKey.encoding(), contentMeta.getEncoding()));
         itemGroup.add(factory.createItem(MetaKey.description(), contentMeta.getDescription()));
 
         return factory.createNodeGroup(GroupKey.meta()).add(factory.createNode(itemGroup));
+    }
+
+    /**
+     * コンテンツの {@code "selectionNodes"} キーに紐づく選択ノードグループを生成し返却します。
+     *
+     * @return 選択ノードグループ
+     */
+    private NodeGroup createSelectionNodeGroup() {
+
+        final ResourceFactory factory = ContentResourceFactory.getInstance();
+        final NodeGroup selectionNodeGroup = factory.createNodeGroup(GroupKey.selectionNodes()).toArray();
+
+        this.contentMatrix.getContentSelectionNodeGroup().forEach(contentSelectionNode -> {
+
+            final ItemGroup itemGroup = factory.createItemGroup();
+            itemGroup.add(factory.createItem(SelectionNodeKey.conditionId(), contentSelectionNode.getConditionId()));
+
+            contentSelectionNode.getContentSelectionGroup().forEach(contentSelection -> {
+                itemGroup.add(factory.createItem(contentSelection.getKey(), contentSelection.getValue()));
+            });
+
+            selectionNodeGroup.add(
+                    factory.createNode(factory.createNodeGroup(GroupKey.node()).add(factory.createNode(itemGroup))));
+        });
+
+        return selectionNodeGroup;
     }
 }
