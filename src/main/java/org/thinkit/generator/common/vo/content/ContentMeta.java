@@ -42,6 +42,11 @@ public final class ContentMeta implements Serializable {
     private String packageName;
 
     /**
+     * コンテンツ名
+     */
+    private String contentName;
+
+    /**
      * エンコード方式
      */
     private String encoding;
@@ -61,13 +66,16 @@ public final class ContentMeta implements Serializable {
      * コンストラクタ
      *
      * @param packageName パッケージ名
+     * @param contentName コンテンツ名
      * @param encoding    エンコード方式
      * @param description 説明
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    private ContentMeta(@NonNull String packageName, @NonNull String encoding, @NonNull String description) {
+    private ContentMeta(@NonNull String packageName, @NonNull String contentName, @NonNull String encoding,
+            @NonNull String description) {
         this.packageName = packageName;
+        this.contentName = contentName;
         this.encoding = encoding;
         this.description = description;
     }
@@ -81,6 +89,7 @@ public final class ContentMeta implements Serializable {
      */
     private ContentMeta(@NonNull ContentMeta contentMeta) {
         this.packageName = contentMeta.getPackageName();
+        this.contentName = contentMeta.getContentName();
         this.encoding = contentMeta.getEncoding();
         this.description = contentMeta.getDescription();
     }
@@ -89,14 +98,16 @@ public final class ContentMeta implements Serializable {
      * 引数として指定された情報を基に {@link ContentMeta} クラスの新しいインスタンスを生成し返却します。
      *
      * @param packageName パッケージ名
+     * @param contentName コンテンツ名
      * @param encoding    エンコード方式
      * @param description 説明
      * @return {@link ContentMeta} クラスの新しいインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public static ContentMeta of(@NonNull String packageName, @NonNull String encoding, @NonNull String description) {
-        return new ContentMeta(packageName, encoding, description);
+    public static ContentMeta of(@NonNull String packageName, @NonNull String contentName, @NonNull String encoding,
+            @NonNull String description) {
+        return new ContentMeta(packageName, contentName, encoding, description);
     }
 
     /**
