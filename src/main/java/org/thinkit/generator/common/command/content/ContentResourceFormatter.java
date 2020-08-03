@@ -13,13 +13,27 @@
 package org.thinkit.generator.common.command.content;
 
 import org.thinkit.common.command.Command;
+import org.thinkit.generator.common.factory.content.ContentResourceFactory;
+import org.thinkit.generator.common.factory.json.NodeGroup;
+import org.thinkit.generator.common.factory.json.ResourceFactory;
+import org.thinkit.generator.common.vo.content.ContentCreator;
 import org.thinkit.generator.common.vo.content.ContentMatrix;
+import org.thinkit.generator.common.vo.content.ContentMeta;
 import org.thinkit.generator.common.vo.content.ContentResource;
+import org.thinkit.generator.common.vo.content.ContentVersion;
 
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
 
+/**
+ * {@link ContentMatrix}
+ * オブジェクトに格納されたコンテンツ定義情報を分析し、jsonファイルへ出力する形式へ整形する処理を定義したコマンドクラスです。
+ *
+ * @author Kato Shinya
+ * @since 1.0
+ * @version 1.0
+ */
 @ToString
 @EqualsAndHashCode
 public final class ContentResourceFormatter implements Command<ContentResource> {
@@ -61,6 +75,20 @@ public final class ContentResourceFormatter implements Command<ContentResource> 
 
     @Override
     public ContentResource run() {
-        return null;
+
+        final ContentVersion contentVersion = this.contentMatrix.getContentVersion();
+        final ContentMeta contentMeta = this.contentMatrix.getContentMeta();
+
+        return ContentResource.of("", "", "");
+    }
+
+    private NodeGroup createCreatorNodeGroup() {
+
+        final ContentCreator ContentCreator = this.contentMatrix.getContentCreator();
+        final ResourceFactory factory = ContentResourceFactory.getInstance();
+
+        final NodeGroup nodeGroup = factory.createNodeGroup("creator");
+
+        return nodeGroup;
     }
 }
