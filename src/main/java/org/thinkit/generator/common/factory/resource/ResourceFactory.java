@@ -14,7 +14,7 @@ package org.thinkit.generator.common.factory.resource;
 
 /**
  * プログラムリソースの各構成要素を抽象化したオブジェクトを返却するファクトリクラスです。<br>
- * {#link ResourceFactory} を継承した具象クラスは必ず各抽象メソッドを実装してください。
+ * {@link ResourceFactory} を継承した具象クラスは必ず各抽象メソッドを実装してください。
  * <p>
  * 以下のファクトリメソッドが正しく実装されることが期待されます。<br>
  * {@link #createCopyright(String, String, String, String, String)} <br>
