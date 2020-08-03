@@ -13,14 +13,16 @@
 package org.thinkit.generator.common.command.content;
 
 import org.thinkit.common.command.Command;
+import org.thinkit.generator.common.catalog.content.CreatorKey;
+import org.thinkit.generator.common.catalog.content.GroupKey;
 import org.thinkit.generator.common.factory.content.ContentResourceFactory;
+import org.thinkit.generator.common.factory.json.ItemGroup;
+import org.thinkit.generator.common.factory.json.LeafVertex;
 import org.thinkit.generator.common.factory.json.NodeGroup;
 import org.thinkit.generator.common.factory.json.ResourceFactory;
 import org.thinkit.generator.common.vo.content.ContentCreator;
 import org.thinkit.generator.common.vo.content.ContentMatrix;
-import org.thinkit.generator.common.vo.content.ContentMeta;
 import org.thinkit.generator.common.vo.content.ContentResource;
-import org.thinkit.generator.common.vo.content.ContentVersion;
 
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
@@ -76,10 +78,12 @@ public final class ContentResourceFormatter implements Command<ContentResource> 
     @Override
     public ContentResource run() {
 
-        final ContentVersion contentVersion = this.contentMatrix.getContentVersion();
-        final ContentMeta contentMeta = this.contentMatrix.getContentMeta();
+        final ResourceFactory factory = ContentResourceFactory.getInstance();
 
-        return ContentResource.of("", "", "");
+        final LeafVertex leafVertex = factory.createLeafVertex();
+        leafVertex.add(this.createCreatorNodeGroup());
+
+        return ContentResource.of("", "", factory.createResource(leafVertex).createResource());
     }
 
     private NodeGroup createCreatorNodeGroup() {
@@ -87,8 +91,11 @@ public final class ContentResourceFormatter implements Command<ContentResource> 
         final ContentCreator ContentCreator = this.contentMatrix.getContentCreator();
         final ResourceFactory factory = ContentResourceFactory.getInstance();
 
-        final NodeGroup nodeGroup = factory.createNodeGroup("creator");
+        final ItemGroup itemGroup = factory.createItemGroup();
+        itemGroup.add(factory.createItem(CreatorKey.author(), ContentCreator.getAuthor()));
+        itemGroup.add(factory.createItem(CreatorKey.creationDate(), ContentCreator.getCreationDate()));
+        itemGroup.add(factory.createItem(CreatorKey.updateDate(), ContentCreator.getUpdateDate()));
 
-        return nodeGroup;
+        return factory.createNodeGroup(GroupKey.creator()).add(factory.createNode(itemGroup, null));
     }
 }
