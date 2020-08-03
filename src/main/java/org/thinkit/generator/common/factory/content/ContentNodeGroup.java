@@ -50,6 +50,7 @@ final class ContentNodeGroup extends NodeGroup {
         final String comma = Delimiter.comma();
 
         super.getNodeGroup().forEach(node -> {
+            nodeGroup.append(String.format("\"%s\" : ", super.getKey())).append(returnCode);
             nodeGroup.append(node.createResource()).append(comma).append(returnCode).append(returnCode);
         });
 
