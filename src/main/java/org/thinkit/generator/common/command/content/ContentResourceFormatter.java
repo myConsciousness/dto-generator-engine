@@ -15,6 +15,7 @@ package org.thinkit.generator.common.command.content;
 import org.thinkit.common.command.Command;
 import org.thinkit.generator.common.catalog.content.CreatorKey;
 import org.thinkit.generator.common.catalog.content.GroupKey;
+import org.thinkit.generator.common.catalog.content.VersionKey;
 import org.thinkit.generator.common.factory.content.ContentResourceFactory;
 import org.thinkit.generator.common.factory.json.ItemGroup;
 import org.thinkit.generator.common.factory.json.LeafVertex;
@@ -23,6 +24,7 @@ import org.thinkit.generator.common.factory.json.ResourceFactory;
 import org.thinkit.generator.common.vo.content.ContentCreator;
 import org.thinkit.generator.common.vo.content.ContentMatrix;
 import org.thinkit.generator.common.vo.content.ContentResource;
+import org.thinkit.generator.common.vo.content.ContentVersion;
 
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
@@ -82,10 +84,16 @@ public final class ContentResourceFormatter implements Command<ContentResource> 
 
         final LeafVertex leafVertex = factory.createLeafVertex();
         leafVertex.add(this.createCreatorNodeGroup());
+        leafVertex.add(this.createVersionNodeGroup());
 
         return ContentResource.of("", "", factory.createResource(leafVertex).createResource());
     }
 
+    /**
+     * コンテンツの {@code "creator"} キーに紐づく作成者ノードグループを生成し返却します。
+     *
+     * @return 作成者ノードグループ
+     */
     private NodeGroup createCreatorNodeGroup() {
 
         final ContentCreator ContentCreator = this.contentMatrix.getContentCreator();
@@ -96,6 +104,23 @@ public final class ContentResourceFormatter implements Command<ContentResource> 
         itemGroup.add(factory.createItem(CreatorKey.creationDate(), ContentCreator.getCreationDate()));
         itemGroup.add(factory.createItem(CreatorKey.updateDate(), ContentCreator.getUpdateDate()));
 
-        return factory.createNodeGroup(GroupKey.creator()).add(factory.createNode(itemGroup, null));
+        return factory.createNodeGroup(GroupKey.creator()).add(factory.createNode(itemGroup));
+    }
+
+    /**
+     * コンテンツの {@code "version"} キーに紐づくバージョンノードグループを生成し返却します。
+     *
+     * @return バージョンノードグループ
+     */
+    private NodeGroup createVersionNodeGroup() {
+
+        final ContentVersion contentVersion = this.contentMatrix.getContentVersion();
+        final ResourceFactory factory = ContentResourceFactory.getInstance();
+
+        final ItemGroup itemGroup = factory.createItemGroup();
+        itemGroup.add(factory.createItem(VersionKey.since(), contentVersion.getSince()));
+        itemGroup.add(factory.createItem(VersionKey.version(), contentVersion.getVersion()));
+
+        return factory.createNodeGroup(GroupKey.version()).add(factory.createNode(itemGroup));
     }
 }
