@@ -21,6 +21,7 @@ import lombok.RequiredArgsConstructor;
  * コンテンツのメタキーを管理するカタログです。
  * <p>
  * 以下の静的メソッドを使用することで各要素の文字列表現を取得することができます。<br>
+ * {@link #packageName()} <br>
  * {@link #encoding()} <br>
  * {@link #description()}
  *
@@ -32,14 +33,19 @@ import lombok.RequiredArgsConstructor;
 public enum MetaKey implements Catalog<MetaKey> {
 
     /**
+     * パッケージ名
+     */
+    PACKAGE_NAME(0, "packageName"),
+
+    /**
      * エンコード方式
      */
-    ENCODING(0, "encoding"),
+    ENCODING(1, "encoding"),
 
     /**
      * 説明
      */
-    DESCRIPTION(1, "description");
+    DESCRIPTION(2, "description");
 
     /**
      * コード値
@@ -52,6 +58,16 @@ public enum MetaKey implements Catalog<MetaKey> {
      */
     @Getter
     private final String key;
+
+    /**
+     * {@link #PACKAGE_NAME} 要素の文字列表現を返却します。
+     *
+     * @return {@link #PACKAGE_NAME} 要素の文字列表現
+     * @see #PACKAGE_NAME
+     */
+    public static String packageName() {
+        return PACKAGE_NAME.getKey();
+    }
 
     /**
      * {@link #ENCODING} 要素の文字列表現を返却します。
