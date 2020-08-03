@@ -52,18 +52,6 @@ import lombok.ToString;
 public final class DtoResourceFactory extends ResourceFactory {
 
     /**
-     * {@link DtoResourceFactory} のシングルトンインスタンスを保持するインナークラスです。<br>
-     * {@link DtoResourceFactory} シングルトンインスタンスは初回参照時にメモリに読み込まれます。
-     */
-    private static class InstanceHolder {
-
-        /**
-         * シングルトンインスタンス
-         */
-        private static final ResourceFactory INSTANCE = new DtoResourceFactory();
-    }
-
-    /**
      * デフォルトコンストラクタ
      */
     private DtoResourceFactory() {
@@ -76,6 +64,18 @@ public final class DtoResourceFactory extends ResourceFactory {
      */
     public static ResourceFactory getInstance() {
         return InstanceHolder.INSTANCE;
+    }
+
+    /**
+     * {@link DtoResourceFactory} のシングルトンインスタンスを保持するインナークラスです。<br>
+     * {@link DtoResourceFactory} シングルトンインスタンスは初回参照時にメモリに読み込まれます。
+     */
+    private static class InstanceHolder {
+
+        /**
+         * シングルトンインスタンス
+         */
+        private static final ResourceFactory INSTANCE = new DtoResourceFactory();
     }
 
     @Override
