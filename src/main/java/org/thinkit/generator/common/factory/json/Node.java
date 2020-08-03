@@ -63,5 +63,6 @@ public abstract class Node implements Component {
      */
     protected Node(@NonNull ItemGroup itemGroup, @NonNull NodeGroup nodeGroup) {
         this.itemGroup = itemGroup;
+        this.nodeGroup = nodeGroup;
     }
 }
