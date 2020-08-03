@@ -12,6 +12,7 @@
 
 package org.thinkit.generator.common.factory.content;
 
+import org.apache.commons.lang3.StringUtils;
 import org.thinkit.generator.common.factory.json.Item;
 import org.thinkit.generator.common.factory.json.ItemGroup;
 import org.thinkit.generator.common.factory.json.LeafVertex;
@@ -78,6 +79,11 @@ public final class ContentResourceFactory extends ResourceFactory {
     @Override
     public ItemGroup createItemGroup() {
         return new ContentItemGroup();
+    }
+
+    @Override
+    public Node createNode(@NonNull ItemGroup itemGroup) {
+        return new ContentNode(itemGroup, this.createNodeGroup(StringUtils.EMPTY));
     }
 
     @Override
