@@ -1,3 +1,15 @@
+/**
+ * Project Name : generator-commons<br>
+ * File Name : ContentResourceFormatter.java<br>
+ * Encoding : UTF-8<br>
+ * Creation Date : 2020/08/03<br>
+ * <p>
+ * Copyright © 2020 Kato Shinya. All rights reserved.
+ * <p>
+ * This source code or any portion thereof must not be<br>
+ * reproduced or used in any manner whatsoever.
+ */
+
 package org.thinkit.generator.common.command.content;
 
 import org.thinkit.common.command.Command;
@@ -5,7 +17,6 @@ import org.thinkit.generator.common.vo.content.ContentMatrix;
 import org.thinkit.generator.common.vo.content.ContentResource;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 
@@ -17,12 +28,6 @@ public final class ContentResourceFormatter implements Command<ContentResource> 
      * コンテンツマトリクス
      */
     private ContentMatrix contentMatrix;
-
-    /**
-     * コンテンツリソース
-     */
-    @Getter
-    private ContentResource contentResource;
 
     /**
      * デフォルトコンストラクタ
