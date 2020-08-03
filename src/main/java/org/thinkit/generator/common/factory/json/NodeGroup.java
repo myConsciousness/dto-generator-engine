@@ -15,6 +15,7 @@ package org.thinkit.generator.common.factory.json;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.thinkit.generator.common.catalog.JsonNodeType;
 import org.thinkit.generator.common.factory.Component;
 
 import lombok.AccessLevel;
@@ -36,6 +37,12 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public abstract class NodeGroup implements Component {
+
+    /**
+     * ノードタイプ
+     */
+    @Getter(AccessLevel.PROTECTED)
+    private JsonNodeType nodeType = JsonNodeType.OBJECT;
 
     /**
      * キー
@@ -90,5 +97,33 @@ public abstract class NodeGroup implements Component {
      */
     public boolean isEmpty() {
         return this.nodeGroup.size() <= 0;
+    }
+
+    /**
+     * JSONノードタイプをオブジェクトへ変換します。JSONノードタイプは初期値として {@link JsonNodeType#OBJECT}
+     * が設定されているため、 {@link NodeGroup} クラスのインスタンスを生成した時点でこの
+     * {@link NodeGroup#toObject()} メソッドを使用する必要はありません。
+     * <p>
+     * この {@link NodeGroup#toObject()}
+     * メソッドは自分自身のインスタンスを返却するため、後続処理をメソッドチェーンの形式で実行することができます。
+     *
+     * @return 自分自身のインスタンス
+     */
+    public NodeGroup toObject() {
+        this.nodeType = JsonNodeType.OBJECT;
+        return this;
+    }
+
+    /**
+     * JSONノードタイプを配列へ変換します。
+     * <p>
+     * この {@link NodeGroup#toArray()}
+     * メソッドは自分自身のインスタンスを返却するため、後続処理をメソッドチェーンの形式で実行することができます。
+     *
+     * @return 自分自身のインスタンス
+     */
+    public NodeGroup toArray() {
+        this.nodeType = JsonNodeType.ARRAY;
+        return this;
     }
 }
