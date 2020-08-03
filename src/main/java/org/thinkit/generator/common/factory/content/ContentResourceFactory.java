@@ -87,6 +87,11 @@ public final class ContentResourceFactory extends ResourceFactory {
     }
 
     @Override
+    public Node createNode(@NonNull NodeGroup nodeGroup) {
+        return new ContentNode(this.createItemGroup(), nodeGroup);
+    }
+
+    @Override
     public Node createNode(@NonNull ItemGroup itemGroup, @NonNull NodeGroup nodeGroup) {
         return new ContentNode(itemGroup, nodeGroup);
     }

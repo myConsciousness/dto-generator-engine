@@ -57,6 +57,16 @@ public abstract class ResourceFactory {
     /**
      * {@link Node} クラスの新しいインスタンスを生成し返却します。
      *
+     * @param nodeGroup ノードグループ
+     * @return {@link Node} クラスの新しいインスタンス
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    public abstract Node createNode(@NonNull NodeGroup nodeGroup);
+
+    /**
+     * {@link Node} クラスの新しいインスタンスを生成し返却します。
+     *
      * @param itemGroup 項目グループ
      * @param nodeGroup ノードグループ
      * @return {@link Node} クラスの新しいインスタンス
