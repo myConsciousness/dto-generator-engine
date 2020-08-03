@@ -12,7 +12,10 @@
 
 package org.thinkit.generator.common.factory.json;
 
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -25,6 +28,30 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 public abstract class Resource {
+
+    /**
+     * 葉頂点
+     */
+    @Getter(AccessLevel.PROTECTED)
+    private LeafVertex leafVertex;
+
+    /**
+     * デフォルトコンストラクタ
+     */
+    @SuppressWarnings("unused")
+    private Resource() {
+    }
+
+    /**
+     * コンストラクタ
+     *
+     * @param leafVertex 葉頂点
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    protected Resource(@NonNull LeafVertex leafVertex) {
+        this.leafVertex = leafVertex;
+    }
 
     /**
      * JSONリソースを生成し文字列表現として返却する処理を定義するメソッドです。
