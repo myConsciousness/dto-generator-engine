@@ -53,7 +53,7 @@ public final class ContentSelectionGroup
     /**
      * シリアルバージョンUID
      */
-    private static final long serialVersionUID = 8649974779963329512L;
+    private static final long serialVersionUID = 8783357037120275796L;
 
     /**
      * コンテンツ選択グループ
@@ -62,16 +62,10 @@ public final class ContentSelectionGroup
     private List<ContentSelection> contentSelectionGroup;
 
     /**
-     * コンテンツ選択グループのサイズ
-     */
-    private int size;
-
-    /**
      * デフォルトコンストラクタ
      */
     private ContentSelectionGroup() {
         this.contentSelectionGroup = new ArrayList<>(0);
-        this.size = 0;
     }
 
     /**
@@ -83,7 +77,6 @@ public final class ContentSelectionGroup
      */
     private ContentSelectionGroup(@NonNull ContentSelectionGroup contentSelectionGroup) {
         this.contentSelectionGroup = new ArrayList<>(contentSelectionGroup.getContentSelectionGroup());
-        this.size = contentSelectionGroup.size();
     }
 
     /**
@@ -128,8 +121,6 @@ public final class ContentSelectionGroup
      */
     public ContentSelectionGroup add(@NonNull ContentSelection contentSelection) {
         this.contentSelectionGroup.add(contentSelection);
-        this.size++;
-
         return this;
     }
 
@@ -154,7 +145,7 @@ public final class ContentSelectionGroup
      * @return オブジェクトに含まれる情報がからの場合は {@code true} 、それ以外は {@code false}
      */
     public boolean isEmpty() {
-        return this.size <= 0;
+        return this.contentSelectionGroup.isEmpty();
     }
 
     /**
@@ -173,7 +164,7 @@ public final class ContentSelectionGroup
 
     @Override
     public int size() {
-        return this.size;
+        return this.contentSelectionGroup.size();
     }
 
     @Override

@@ -52,7 +52,7 @@ public final class ContentConditionGroup
     /**
      * シリアルバージョンUID
      */
-    private static final long serialVersionUID = 9059498528635059645L;
+    private static final long serialVersionUID = -2407821983642951195L;
 
     /**
      * 条件グループ
@@ -61,16 +61,10 @@ public final class ContentConditionGroup
     private List<ContentCondition> contentConditionGroup;
 
     /**
-     * 条件グループのサイズ
-     */
-    private int size;
-
-    /**
      * デフォルトコンストラクタ
      */
     private ContentConditionGroup() {
         this.contentConditionGroup = new ArrayList<>(0);
-        this.size = 0;
     }
 
     /**
@@ -82,7 +76,6 @@ public final class ContentConditionGroup
      */
     private ContentConditionGroup(@NonNull ContentConditionGroup contentConditionGroup) {
         this.contentConditionGroup = new ArrayList<>(contentConditionGroup.getContentConditionGroup());
-        this.size = contentConditionGroup.size();
     }
 
     /**
@@ -123,8 +116,6 @@ public final class ContentConditionGroup
      */
     public ContentConditionGroup add(@NonNull ContentCondition contentCondition) {
         this.contentConditionGroup.add(contentCondition);
-        size++;
-
         return this;
     }
 
@@ -149,7 +140,7 @@ public final class ContentConditionGroup
      * @return オブジェクトに含まれる情報がからの場合は {@code true} 、それ以外は {@code false}
      */
     public boolean isEmpty() {
-        return this.size <= 0;
+        return this.contentConditionGroup.isEmpty();
     }
 
     /**
@@ -168,7 +159,7 @@ public final class ContentConditionGroup
 
     @Override
     public int size() {
-        return this.size;
+        return this.contentConditionGroup.size();
     }
 
     @Override
