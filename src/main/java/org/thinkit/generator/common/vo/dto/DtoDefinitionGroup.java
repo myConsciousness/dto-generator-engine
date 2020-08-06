@@ -51,7 +51,7 @@ public final class DtoDefinitionGroup implements Iterable<DtoDefinition>, Iterab
     /**
      * シリアルバージョンUID
      */
-    private static final long serialVersionUID = -8768027467311196696L;
+    private static final long serialVersionUID = -7569802853448468850L;
 
     /**
      * DTO定義グループ
@@ -60,16 +60,10 @@ public final class DtoDefinitionGroup implements Iterable<DtoDefinition>, Iterab
     private List<DtoDefinition> dtoDefinitionGroup;
 
     /**
-     * DTO定義グループのサイズ
-     */
-    private int size;
-
-    /**
      * デフォルトコンストラクタ
      */
     private DtoDefinitionGroup() {
         this.dtoDefinitionGroup = new ArrayList<>(0);
-        this.size = 0;
     }
 
     /**
@@ -81,7 +75,6 @@ public final class DtoDefinitionGroup implements Iterable<DtoDefinition>, Iterab
      */
     private DtoDefinitionGroup(@NonNull DtoDefinitionGroup dtoDefinitionGroup) {
         this.dtoDefinitionGroup = new ArrayList<>(dtoDefinitionGroup.getDtoDefinitionGroup());
-        this.size = dtoDefinitionGroup.size();
     }
 
     /**
@@ -122,8 +115,6 @@ public final class DtoDefinitionGroup implements Iterable<DtoDefinition>, Iterab
      */
     public DtoDefinitionGroup add(@NonNull DtoDefinition dtoDefinition) {
         this.dtoDefinitionGroup.add(dtoDefinition);
-        size++;
-
         return this;
     }
 
@@ -148,7 +139,7 @@ public final class DtoDefinitionGroup implements Iterable<DtoDefinition>, Iterab
      * @return オブジェクトに含まれる情報がからの場合は {@code true} 、それ以外は {@code false}
      */
     public boolean isEmpty() {
-        return this.size <= 0;
+        return this.dtoDefinitionGroup.isEmpty();
     }
 
     /**
@@ -167,7 +158,7 @@ public final class DtoDefinitionGroup implements Iterable<DtoDefinition>, Iterab
 
     @Override
     public int size() {
-        return this.size;
+        return this.dtoDefinitionGroup.size();
     }
 
     @Override

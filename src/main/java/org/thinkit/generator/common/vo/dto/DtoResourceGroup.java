@@ -51,7 +51,7 @@ public final class DtoResourceGroup implements Iterable<DtoResource>, IterableNo
     /**
      * シリアルバージョンUID
      */
-    private static final long serialVersionUID = 6123221640695557233L;
+    private static final long serialVersionUID = 8049148657195824853L;
 
     /**
      * DTOリソースグループ
@@ -60,16 +60,10 @@ public final class DtoResourceGroup implements Iterable<DtoResource>, IterableNo
     private List<DtoResource> dtoResourceGroup;
 
     /**
-     * DTOリソースグループのサイズ
-     */
-    private int size;
-
-    /**
      * デフォルトコンストラクタ
      */
     private DtoResourceGroup() {
         this.dtoResourceGroup = new ArrayList<>(0);
-        this.size = 0;
     }
 
     /**
@@ -81,7 +75,6 @@ public final class DtoResourceGroup implements Iterable<DtoResource>, IterableNo
      */
     private DtoResourceGroup(@NonNull DtoResourceGroup dtoResourceGroup) {
         this.dtoResourceGroup = new ArrayList<>(dtoResourceGroup.getDtoResourceGroup());
-        this.size = dtoResourceGroup.size();
     }
 
     /**
@@ -122,8 +115,6 @@ public final class DtoResourceGroup implements Iterable<DtoResource>, IterableNo
      */
     public DtoResourceGroup add(@NonNull DtoResource dtoResource) {
         this.dtoResourceGroup.add(dtoResource);
-        size++;
-
         return this;
     }
 
@@ -148,7 +139,7 @@ public final class DtoResourceGroup implements Iterable<DtoResource>, IterableNo
      * @return オブジェクトに含まれる情報がからの場合は {@code true} 、それ以外は {@code false}
      */
     public boolean isEmpty() {
-        return this.size <= 0;
+        return this.dtoResourceGroup.isEmpty();
     }
 
     /**
@@ -167,7 +158,7 @@ public final class DtoResourceGroup implements Iterable<DtoResource>, IterableNo
 
     @Override
     public int size() {
-        return this.size;
+        return this.dtoResourceGroup.size();
     }
 
     @Override

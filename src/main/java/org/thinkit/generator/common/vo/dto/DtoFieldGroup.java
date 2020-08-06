@@ -51,7 +51,7 @@ public final class DtoFieldGroup implements Iterable<DtoField>, IterableNode<Dto
     /**
      * シリアルバージョンUID
      */
-    private static final long serialVersionUID = 4211335544432048358L;
+    private static final long serialVersionUID = -2251700047243592927L;
 
     /**
      * DTOフィールドオブジェクトグループ
@@ -60,16 +60,10 @@ public final class DtoFieldGroup implements Iterable<DtoField>, IterableNode<Dto
     private List<DtoField> dtoFieldGroup;
 
     /**
-     * DTOフィールドオブジェクトグループのサイズ
-     */
-    private int size;
-
-    /**
      * デフォルトコンストラクタ
      */
     private DtoFieldGroup() {
         this.dtoFieldGroup = new ArrayList<>(0);
-        this.size = 0;
     }
 
     /**
@@ -81,7 +75,6 @@ public final class DtoFieldGroup implements Iterable<DtoField>, IterableNode<Dto
      */
     private DtoFieldGroup(@NonNull DtoFieldGroup dtoFieldGroup) {
         this.dtoFieldGroup = new ArrayList<>(dtoFieldGroup.getDtoFieldGroup());
-        this.size = dtoFieldGroup.size();
     }
 
     /**
@@ -122,8 +115,6 @@ public final class DtoFieldGroup implements Iterable<DtoField>, IterableNode<Dto
      */
     public DtoFieldGroup add(@NonNull DtoField dtoField) {
         this.dtoFieldGroup.add(dtoField);
-        size++;
-
         return this;
     }
 
@@ -148,7 +139,7 @@ public final class DtoFieldGroup implements Iterable<DtoField>, IterableNode<Dto
      * @return オブジェクトに含まれる情報がからの場合は {@code true} 、それ以外は {@code false}
      */
     public boolean isEmpty() {
-        return this.size <= 0;
+        return this.dtoFieldGroup.isEmpty();
     }
 
     /**
@@ -167,7 +158,7 @@ public final class DtoFieldGroup implements Iterable<DtoField>, IterableNode<Dto
 
     @Override
     public int size() {
-        return this.size;
+        return this.dtoFieldGroup.size();
     }
 
     @Override
