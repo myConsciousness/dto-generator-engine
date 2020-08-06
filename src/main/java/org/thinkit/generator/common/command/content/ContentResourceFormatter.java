@@ -13,6 +13,8 @@
 package org.thinkit.generator.common.command.content;
 
 import org.thinkit.common.command.Command;
+import org.thinkit.formatter.JsonFormatter;
+import org.thinkit.formatter.common.Formatter;
 import org.thinkit.generator.common.catalog.content.CreatorKey;
 import org.thinkit.generator.common.catalog.content.GroupKey;
 import org.thinkit.generator.common.catalog.content.MetaKey;
@@ -92,9 +94,10 @@ public final class ContentResourceFormatter implements Command<ContentResource> 
         leafVertex.add(this.createSelectionNodeGroup());
 
         final ContentMeta contentMeta = this.contentMatrix.getContentMeta();
+        final Formatter formatter = JsonFormatter.builder().of(factory.createResource(leafVertex).createResource())
+                .build();
 
-        return ContentResource.of(contentMeta.getPackageName(), contentMeta.getContentName(),
-                factory.createResource(leafVertex).createResource());
+        return ContentResource.of(contentMeta.getPackageName(), contentMeta.getContentName(), formatter.format());
     }
 
     /**
