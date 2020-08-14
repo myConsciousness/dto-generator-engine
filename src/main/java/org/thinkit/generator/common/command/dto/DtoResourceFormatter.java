@@ -91,7 +91,7 @@ public final class DtoResourceFormatter implements Command<DtoResourceGroup> {
     }
 
     @Override
-    public DtoResourceGroup run() {
+    public DtoResourceGroup execute() {
 
         final DtoResourceGroup dtoResourceGroup = DtoResourceGroup.of();
 

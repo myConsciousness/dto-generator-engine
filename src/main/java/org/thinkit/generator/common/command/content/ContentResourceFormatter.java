@@ -82,7 +82,7 @@ public final class ContentResourceFormatter implements Command<ContentResource> 
     }
 
     @Override
-    public ContentResource run() {
+    public ContentResource execute() {
 
         final ResourceFactory factory = ContentResourceFactory.getInstance();
 
