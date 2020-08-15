@@ -18,7 +18,6 @@ import com.google.common.flogger.FluentLogger;
 
 import org.thinkit.common.catalog.Extension;
 import org.thinkit.common.command.Command;
-import org.thinkit.formatter.JavaFormatter;
 import org.thinkit.generator.common.factory.dtogenerator.DtoResourceFactory;
 import org.thinkit.generator.common.factory.resource.ClassDescription;
 import org.thinkit.generator.common.factory.resource.Constructor;
@@ -120,8 +119,6 @@ public final class DtoResourceFormatter implements Command<DtoResourceGroup> {
     private boolean formatDtoResourceRecursively(@NonNull final DtoMeta dtoMeta, @NonNull final DtoCreator dtoCreator,
             @NonNull final DtoDefinitionGroup dtoDefinitionGroup, @NonNull final DtoResourceGroup dtoResourceGroup) {
 
-        final JavaFormatter formatter = JavaFormatter.of();
-
         for (DtoDefinition dtoDefinition : dtoDefinitionGroup) {
             final String className = dtoDefinition.getClassName();
             final Resource resource = this.formatResource(className, dtoDefinition.getDtoFieldGroup(), dtoMeta,
@@ -132,8 +129,7 @@ public final class DtoResourceFormatter implements Command<DtoResourceGroup> {
                 return false;
             }
 
-            dtoResourceGroup.add(
-                    DtoResource.of(dtoMeta.getPackageName(), className, formatter.format(resource.createResource())));
+            dtoResourceGroup.add(DtoResource.of(dtoMeta.getPackageName(), className, resource.createResource()));
         }
 
         return true;
