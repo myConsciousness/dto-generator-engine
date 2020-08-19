@@ -89,9 +89,6 @@ dependencies {
     compile group: 'com.google.flogger', name: 'flogger', version: '0.4'
     runtime group: 'com.google.flogger', name: 'flogger-system-backend', version: '0.4'
 
-    compile 'commons-io:commons-io:2.4'
-    compile 'org.apache.commons:commons-lang3:3.4'
-
     compileOnly 'org.projectlombok:lombok:1.18.12'
 	annotationProcessor 'org.projectlombok:lombok:1.18.12'
 
