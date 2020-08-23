@@ -19,6 +19,8 @@ import java.nio.charset.StandardCharsets;
 import com.google.common.flogger.FluentLogger;
 import com.google.googlejavaformat.java.Formatter;
 import com.google.googlejavaformat.java.FormatterException;
+import com.google.googlejavaformat.java.JavaFormatterOptions;
+import com.google.googlejavaformat.java.JavaFormatterOptions.Style;
 
 import org.thinkit.common.catalog.Extension;
 import org.thinkit.common.command.Command;
@@ -123,7 +125,8 @@ public final class DtoResourceFormatter implements Command<DtoResourceGroup> {
     private boolean formatDtoResourceRecursively(@NonNull final DtoMeta dtoMeta, @NonNull final DtoCreator dtoCreator,
             @NonNull final DtoDefinitionGroup dtoDefinitionGroup, @NonNull final DtoResourceGroup dtoResourceGroup) {
 
-        Formatter formatter = new Formatter();
+        JavaFormatterOptions options = JavaFormatterOptions.builder().style(Style.AOSP).build();
+        Formatter formatter = new Formatter(options);
 
         for (DtoDefinition dtoDefinition : dtoDefinitionGroup) {
             final String className = dtoDefinition.getClassName();
