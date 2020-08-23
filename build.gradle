@@ -75,8 +75,8 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok:1.18.12'
 
     implementation 'org.thinkit.common:dev-utils:v1.0.0-5-g7db55aa'
-    implementation 'org.thinkit.formatter.common:formatter-commons:v1.0.0-2-g5f99bb5'
-    implementation 'org.thinkit.formatter:json-formatter:v1.0.0-2-g21a1700'
+    implementation 'org.thinkit.formatter.common:formatter-commons:v1.0.0'
+    implementation 'org.thinkit.formatter:json-formatter:v1.0.0-10-g56add94'
 }
 
 test {
