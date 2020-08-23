@@ -43,11 +43,6 @@ import lombok.ToString;
 final class DtoConstructor extends Constructor {
 
     /**
-     * 処理のインデント数
-     */
-    private static final int PROCESS_INDENT_COUNT = 8;
-
-    /**
      * コンストラクタ
      *
      * @param constructorName     コンストラクタ名
@@ -60,18 +55,15 @@ final class DtoConstructor extends Constructor {
 
     @Override
     public String createResource() {
-        final String indentSpaces = Indentation.getIndentSpaces();
+
         final String space = Indentation.space();
-        final String returnCode = Indentation.returnCode();
 
         final StringBuilder constructor = new StringBuilder();
-
-        constructor.append(super.getFunctionDescription().createResource()).append(returnCode);
-        constructor.append(indentSpaces).append(Identifier.PUBLIC.toIdentifier()).append(space)
-                .append(super.getFunctionName());
+        constructor.append(super.getFunctionDescription().createResource());
+        constructor.append(Identifier.PUBLIC.toIdentifier()).append(space).append(super.getFunctionName());
         constructor.append(Parenthesis.start()).append(this.toParameter()).append(Parenthesis.end()).append(space)
-                .append(Brace.start()).append(returnCode);
-        constructor.append(this.toProcess()).append(returnCode);
+                .append(Brace.start());
+        constructor.append(this.toProcess());
         constructor.append(Indentation.getIndentSpaces()).append(Brace.end());
 
         return constructor.toString();
@@ -84,6 +76,7 @@ final class DtoConstructor extends Constructor {
      * @return 引数の文字列表現
      */
     private String toParameter() {
+
         final List<Parameter> parameters = super.getParameters();
 
         if (parameters.isEmpty()) {
@@ -94,9 +87,9 @@ final class DtoConstructor extends Constructor {
         final String space = Indentation.space();
         final String commma = Delimiter.comma();
 
-        for (Parameter parameter : parameters) {
+        parameters.forEach(parameter -> {
             sb.append(parameter.createResource()).append(commma).append(space);
-        }
+        });
 
         sb.setLength(sb.length() - (commma.length() + space.length()));
 
@@ -110,6 +103,7 @@ final class DtoConstructor extends Constructor {
      * @return 処理の文字列表現
      */
     private String toProcess() {
+
         List<Process> processes = super.getProcesses();
 
         if (processes.isEmpty()) {
@@ -117,14 +111,11 @@ final class DtoConstructor extends Constructor {
         }
 
         final StringBuilder sb = new StringBuilder();
-        final String indentSpaces = Indentation.getIndentSpaces(PROCESS_INDENT_COUNT);
-        final String returnCode = Indentation.returnCode();
 
-        for (Process process : processes) {
-            sb.append(indentSpaces).append(process.createResource()).append(returnCode);
-        }
+        processes.forEach(process -> {
+            sb.append(process.createResource());
+        });
 
-        sb.setLength(sb.length() - returnCode.length());
         return sb.toString();
     }
 }

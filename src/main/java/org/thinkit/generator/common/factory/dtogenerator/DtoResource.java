@@ -14,14 +14,11 @@
 
 package org.thinkit.generator.common.factory.dtogenerator;
 
-import java.util.List;
-
 import org.thinkit.common.catalog.Brace;
 import org.thinkit.common.catalog.Identifier;
 import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.common.catalog.Annotation;
 import org.thinkit.generator.common.factory.resource.ClassDescription;
-import org.thinkit.generator.common.factory.resource.Constructor;
 import org.thinkit.generator.common.factory.resource.Copyright;
 import org.thinkit.generator.common.factory.resource.Resource;
 
@@ -63,21 +60,12 @@ final class DtoResource extends Resource {
 
     @Override
     public String createResource() {
-        final String returnCode = Indentation.returnCode();
 
         this.createResource(super.getCopyright().createResource());
-        this.createResource(returnCode);
-        this.createResource(returnCode);
-
         this.createClassNameResource();
-        this.createResource(returnCode);
-
         this.createFieldResource();
-        this.createResource(returnCode);
-
         this.createConstructorResource();
         this.createResource(Brace.end());
-        this.createResource(returnCode);
 
         return this.getResource();
     }
@@ -87,22 +75,20 @@ final class DtoResource extends Resource {
      * このメソッドではパッケージ名からクラス定義の開始ブレースまでを生成します。<br>
      */
     private void createClassNameResource() {
+
         final String space = Indentation.space();
-        final String returnCode = Indentation.returnCode();
 
         final StringBuilder resource = new StringBuilder();
-        resource.append("package").append(space).append(super.getPackageName()).append(";").append(returnCode);
-        resource.append(returnCode);
-        resource.append("import java.util.*;").append(returnCode);
-        resource.append("import lombok.*;").append(returnCode);
-        resource.append(returnCode);
-        resource.append(super.getClassDescription().createResource()).append(returnCode);
-        resource.append(Annotation.lombokGetter()).append(returnCode);
-        resource.append(Annotation.lombokToString()).append(returnCode);
-        resource.append(Annotation.lombokEqualsAndHashCode()).append(returnCode);
+        resource.append("package").append(space).append(super.getPackageName()).append(";");
+        resource.append("import java.util.*;");
+        resource.append("import lombok.*;");
+        resource.append(super.getClassDescription().createResource());
+        resource.append(Annotation.lombokGetter());
+        resource.append(Annotation.lombokToString());
+        resource.append(Annotation.lombokEqualsAndHashCode());
         resource.append(Identifier.PUBLIC.toIdentifier()).append(space).append("final").append(space).append("class")
                 .append(space).append(super.getResourceName()).append(space);
-        resource.append(Brace.start()).append(returnCode);
+        resource.append(Brace.start());
 
         this.createResource(resource.toString());
     }
@@ -120,17 +106,13 @@ final class DtoResource extends Resource {
      * このメソッドではコンストラクタ定義までを生成します。<br>
      */
     private void createConstructorResource() {
-        final String returnCode = Indentation.returnCode();
 
         final StringBuilder resource = new StringBuilder();
-        final List<Constructor> constructors = super.getConstructors();
 
-        for (Constructor constructor : constructors) {
-            resource.append(constructor.createResource()).append(returnCode);
-            resource.append(returnCode);
-        }
+        super.getConstructors().forEach(constructor -> {
+            resource.append(constructor.createResource());
+        });
 
-        resource.setLength(resource.length() - returnCode.length());
         this.createResource(resource.toString());
     }
 

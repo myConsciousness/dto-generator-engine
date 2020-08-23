@@ -14,11 +14,7 @@
 
 package org.thinkit.generator.common.factory.dtogenerator;
 
-import java.util.List;
-
-import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.common.factory.resource.FunctionDescription;
-import org.thinkit.generator.common.factory.resource.FunctionParamAnnotation;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -48,25 +44,20 @@ class DtoMethodDescription extends FunctionDescription {
 
     @Override
     public String createResource() {
-        final String indentSpaces = Indentation.getIndentSpaces();
-        final String returnCode = Indentation.returnCode();
 
         final StringBuilder methodDescription = new StringBuilder();
-        methodDescription.append(indentSpaces).append("/**").append(returnCode);
-        methodDescription.append(indentSpaces).append(" * ").append(super.getDescription()).append(returnCode);
+        methodDescription.append("/**");
+        methodDescription.append(" * ").append(super.getDescription());
 
         if (super.hasParamAnnotation()) {
-            methodDescription.append(indentSpaces).append(" *").append(returnCode);
+            methodDescription.append(" *");
 
-            final List<FunctionParamAnnotation> functionParamAnnotations = super.getFunctionParamAnnotations();
-
-            for (FunctionParamAnnotation functionParamAnnotation : functionParamAnnotations) {
-                methodDescription.append(indentSpaces).append(" * ").append(functionParamAnnotation.createResource())
-                        .append(returnCode);
-            }
+            super.getFunctionParamAnnotations().forEach(functionParamAnnotation -> {
+                methodDescription.append(" * ").append(functionParamAnnotation.createResource());
+            });
         }
 
-        methodDescription.append(indentSpaces).append(" */");
+        methodDescription.append(" */");
 
         return methodDescription.toString();
     }

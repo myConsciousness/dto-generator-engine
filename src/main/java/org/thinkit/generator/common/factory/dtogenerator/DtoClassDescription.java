@@ -53,19 +53,16 @@ final class DtoClassDescription extends ClassDescription {
 
     @Override
     public String createResource() {
+
         final String space = Indentation.space();
-        final String returnCode = Indentation.returnCode();
 
         final StringBuilder classDescription = new StringBuilder();
-        classDescription.append("/**").append(returnCode);
-        classDescription.append(" * ").append(super.getDescription()).append(returnCode);
-        classDescription.append(" *").append(returnCode);
-        classDescription.append(" * ").append(Annotation.author()).append(space).append(super.getCreator())
-                .append(returnCode);
-        classDescription.append(" * ").append(Annotation.since()).append(space).append(INITIAL_VERSION)
-                .append(returnCode);
-        classDescription.append(" * ").append(Annotation.version()).append(space).append(super.getVersion())
-                .append(returnCode);
+        classDescription.append("/**");
+        classDescription.append(" * ").append(super.getDescription());
+        classDescription.append(" *");
+        classDescription.append(" * ").append(Annotation.author()).append(space).append(super.getCreator());
+        classDescription.append(" * ").append(Annotation.since()).append(space).append(INITIAL_VERSION);
+        classDescription.append(" * ").append(Annotation.version()).append(space).append(super.getVersion());
         classDescription.append(" */");
 
         return classDescription.toString();

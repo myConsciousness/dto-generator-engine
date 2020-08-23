@@ -16,7 +16,6 @@ package org.thinkit.generator.common.factory.dtogenerator;
 
 import java.util.List;
 
-import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.common.factory.resource.Description;
 import org.thinkit.generator.common.factory.resource.Field;
 import org.thinkit.generator.common.factory.resource.FieldDefinition;
@@ -39,26 +38,22 @@ final class DtoField extends Field {
 
     @Override
     public String createResource() {
+
         super.validate();
 
         final List<Description> descriptions = super.getDescriptions();
         final List<FieldDefinition> fieldDefinitions = super.getFieldDefinitions();
 
         final StringBuilder fields = new StringBuilder();
-        final String returnCode = Indentation.returnCode();
 
         for (int i = 0; i < descriptions.size(); i++) {
             final StringBuilder field = new StringBuilder();
             final Description description = descriptions.get(i);
             final FieldDefinition fieldDefinition = fieldDefinitions.get(i);
 
-            field.append(description.createResource()).append(returnCode).append(fieldDefinition.createResource())
-                    .append(returnCode).append(returnCode);
-
+            field.append(description.createResource()).append(fieldDefinition.createResource());
             fields.append(field.toString());
         }
-
-        fields.setLength(fields.length() - returnCode.length());
 
         return fields.toString();
     }

@@ -53,9 +53,8 @@ final class DtoFieldDefinition extends FieldDefinition {
     @Override
     public String createResource() {
         final StringBuilder field = new StringBuilder();
-        field.append(Indentation.getIndentSpaces());
-
         final String dataType = super.getDataType();
+
         if (PrimitiveDataType.isPrimitive(dataType)) {
             field.append(Annotation.lombokNonNull()).append(Indentation.returnCode());
         }

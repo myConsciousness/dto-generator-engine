@@ -51,30 +51,24 @@ final class DtoCopyright extends Copyright {
 
         @Override
         public String createResource() {
-                final String returnCode = Indentation.returnCode();
                 final String htmlTagBreak = HtmlTag.br();
                 final String htmlTagParagraph = HtmlTag.p();
 
                 final StringBuilder copyright = new StringBuilder();
-                copyright.append("/**").append(returnCode);
-                copyright.append(" * ").append("Project Name : ").append(super.getProjectName()).append(htmlTagBreak)
-                                .append(returnCode);
-                copyright.append(" * ").append("File Name : ").append(super.getFileName()).append(htmlTagBreak)
-                                .append(returnCode);
-                copyright.append(" * ").append("Encoding : ").append(super.getEncoding()).append(htmlTagBreak)
-                                .append(returnCode);
-                copyright.append(" * ").append("Creation Date : ").append(super.getCreationDate()).append(htmlTagBreak)
-                                .append(returnCode);
-
-                copyright.append(" * ").append(htmlTagParagraph).append(returnCode);
+                copyright.append("/**");
+                copyright.append(" * ").append("Project Name : ").append(super.getProjectName()).append(htmlTagBreak);
+                copyright.append(" * ").append("File Name : ").append(super.getFileName()).append(htmlTagBreak);
+                copyright.append(" * ").append("Encoding : ").append(super.getEncoding()).append(htmlTagBreak);
+                copyright.append(" * ").append("Creation Date : ").append(super.getCreationDate()).append(htmlTagBreak);
+                copyright.append(" * ").append(htmlTagParagraph);
                 copyright.append(" * ").append("Copyright © ").append(super.getCreationYear())
-                                .append(Indentation.space()).append(super.getCreator()).append(". All rights reserved.")
-                                .append(returnCode);
-                copyright.append(" * ").append(htmlTagParagraph).append(returnCode);
+                                .append(Indentation.space()).append(super.getCreator())
+                                .append(". All rights reserved.");
+                copyright.append(" * ").append(htmlTagParagraph);
 
                 copyright.append(" * ").append("This source code or any portion thereof must not be")
-                                .append(htmlTagBreak).append(returnCode);
-                copyright.append(" * ").append("reproduced or used in any manner whatsoever.").append(returnCode);
+                                .append(htmlTagBreak);
+                copyright.append(" * ").append("reproduced or used in any manner whatsoever.");
                 copyright.append(" */");
 
                 return copyright.toString();

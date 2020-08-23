@@ -14,7 +14,6 @@
 
 package org.thinkit.generator.common.factory.dtogenerator;
 
-import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.common.factory.resource.Description;
 
 import lombok.EqualsAndHashCode;
@@ -44,13 +43,11 @@ final class DtoDescription extends Description {
 
     @Override
     public String createResource() {
-        final String indentSpaces = Indentation.getIndentSpaces();
-        final String returnCode = Indentation.returnCode();
 
         final StringBuilder description = new StringBuilder();
-        description.append(indentSpaces).append("/**").append(returnCode);
-        description.append(indentSpaces).append(" * ").append(super.getDescription()).append(returnCode);
-        description.append(indentSpaces).append(" */");
+        description.append("/**");
+        description.append(" * ").append(super.getDescription());
+        description.append(" */");
 
         return description.toString();
     }
