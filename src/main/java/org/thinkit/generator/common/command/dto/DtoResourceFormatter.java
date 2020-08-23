@@ -17,6 +17,8 @@ package org.thinkit.generator.common.command.dto;
 import java.nio.charset.StandardCharsets;
 
 import com.google.common.flogger.FluentLogger;
+import com.google.googlejavaformat.java.Formatter;
+import com.google.googlejavaformat.java.FormatterException;
 
 import org.thinkit.common.catalog.Extension;
 import org.thinkit.common.command.Command;
@@ -121,6 +123,8 @@ public final class DtoResourceFormatter implements Command<DtoResourceGroup> {
     private boolean formatDtoResourceRecursively(@NonNull final DtoMeta dtoMeta, @NonNull final DtoCreator dtoCreator,
             @NonNull final DtoDefinitionGroup dtoDefinitionGroup, @NonNull final DtoResourceGroup dtoResourceGroup) {
 
+        Formatter formatter = new Formatter();
+
         for (DtoDefinition dtoDefinition : dtoDefinitionGroup) {
             final String className = dtoDefinition.getClassName();
             final Resource resource = this.formatResource(className, dtoDefinition.getDtoFieldGroup(), dtoMeta,
@@ -131,7 +135,12 @@ public final class DtoResourceFormatter implements Command<DtoResourceGroup> {
                 return false;
             }
 
-            dtoResourceGroup.add(DtoResource.of(dtoMeta.getPackageName(), className, resource.createResource()));
+            try {
+                dtoResourceGroup.add(DtoResource.of(dtoMeta.getPackageName(), className,
+                        formatter.formatSource(resource.createResource())));
+            } catch (FormatterException e) {
+                e.printStackTrace();
+            }
         }
 
         return true;
