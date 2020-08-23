@@ -14,7 +14,6 @@
 
 package org.thinkit.generator.common.factory.content;
 
-import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.common.factory.json.ItemGroup;
 
 import lombok.EqualsAndHashCode;
@@ -35,14 +34,10 @@ final class ContentItemGroup extends ItemGroup {
     public String createResource() {
 
         final StringBuilder itemGroup = new StringBuilder();
-        final String indent = Indentation.getIndentSpaces();
-        final String returnCode = Indentation.returnCode();
 
         super.getItemGroup().forEach(item -> {
-            itemGroup.append(indent).append(item.createResource()).append(returnCode);
+            itemGroup.append(item.createResource());
         });
-
-        itemGroup.setLength(itemGroup.length() - returnCode.length());
 
         return itemGroup.toString();
     }

@@ -15,7 +15,6 @@
 package org.thinkit.generator.common.factory.content;
 
 import org.thinkit.common.catalog.Delimiter;
-import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.common.factory.json.LeafVertex;
 
 import lombok.EqualsAndHashCode;
@@ -36,14 +35,13 @@ final class ContentLeafVertex extends LeafVertex {
     public String createResource() {
 
         final StringBuilder leafVertex = new StringBuilder();
-        final String returnCode = Indentation.returnCode();
         final String comma = Delimiter.comma();
 
         super.getNodeGroups().forEach(nodeGroup -> {
-            leafVertex.append(nodeGroup.createResource()).append(comma).append(returnCode).append(returnCode);
+            leafVertex.append(nodeGroup.createResource()).append(comma);
         });
 
-        leafVertex.setLength(leafVertex.length() - (comma.length() + returnCode.length() * 2));
+        leafVertex.setLength(leafVertex.length() - comma.length());
 
         return leafVertex.toString();
     }

@@ -15,7 +15,6 @@
 package org.thinkit.generator.common.factory.content;
 
 import org.thinkit.common.catalog.Brace;
-import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.common.factory.json.ItemGroup;
 import org.thinkit.generator.common.factory.json.Node;
 import org.thinkit.generator.common.factory.json.NodeGroup;
@@ -43,15 +42,14 @@ final class ContentNode extends Node {
     public String createResource() {
 
         final StringBuilder node = new StringBuilder();
-        final String returnCode = Indentation.returnCode();
 
-        node.append(Brace.start()).append(returnCode);
-        node.append(super.getItemGroup().createResource()).append(returnCode);
+        node.append(Brace.start());
+        node.append(super.getItemGroup().createResource());
 
         final NodeGroup nodeGroup = super.getNodeGroup();
 
         if (!nodeGroup.isEmpty()) {
-            node.append(nodeGroup.createResource()).append(returnCode);
+            node.append(nodeGroup.createResource());
         }
 
         node.append(Brace.end());

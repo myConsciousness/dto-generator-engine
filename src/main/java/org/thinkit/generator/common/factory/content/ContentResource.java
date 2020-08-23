@@ -15,7 +15,6 @@
 package org.thinkit.generator.common.factory.content;
 
 import org.thinkit.common.catalog.Brace;
-import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.common.factory.json.LeafVertex;
 import org.thinkit.generator.common.factory.json.Resource;
 
@@ -49,11 +48,10 @@ final class ContentResource extends Resource {
     public String createResource() {
 
         final StringBuilder resource = new StringBuilder();
-        final String returnCode = Indentation.returnCode();
 
-        resource.append(Brace.start()).append(returnCode);
-        resource.append(super.getLeafVertex().createResource()).append(returnCode);
-        resource.append(Brace.end()).append(returnCode);
+        resource.append(Brace.start());
+        resource.append(super.getLeafVertex().createResource());
+        resource.append(Brace.end());
 
         return resource.toString();
     }

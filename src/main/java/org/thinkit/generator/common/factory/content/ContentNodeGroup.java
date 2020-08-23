@@ -15,7 +15,6 @@
 package org.thinkit.generator.common.factory.content;
 
 import org.thinkit.common.catalog.Delimiter;
-import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.common.factory.json.NodeGroup;
 
 import lombok.EqualsAndHashCode;
@@ -48,15 +47,14 @@ final class ContentNodeGroup extends NodeGroup {
     public String createResource() {
 
         final StringBuilder nodeGroup = new StringBuilder();
-        final String returnCode = Indentation.returnCode();
         final String comma = Delimiter.comma();
 
         super.getNodeGroup().forEach(node -> {
-            nodeGroup.append(String.format("\"%s\" : ", super.getKey())).append(returnCode);
-            nodeGroup.append(node.createResource()).append(comma).append(returnCode).append(returnCode);
+            nodeGroup.append(String.format("\"%s\" : ", super.getKey()));
+            nodeGroup.append(node.createResource()).append(comma);
         });
 
-        nodeGroup.setLength(nodeGroup.length() - (comma.length() + returnCode.length() * 2));
+        nodeGroup.setLength(nodeGroup.length() - comma.length());
 
         return nodeGroup.toString();
     }
