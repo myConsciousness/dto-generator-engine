@@ -1,5 +1,4 @@
-
- /*
+/*
  * Copyright 2020 Kato Shinya.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
@@ -54,32 +53,27 @@ repositories {
     jcenter()
 }
 
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-}
-
-tasks.withType(Javadoc) {
-    options.encoding = "UTF-8"
-}
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 dependencies {
     implementation 'com.google.guava:guava:28.2-jre'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.5.2'
 
-    compile group: 'com.google.flogger', name: 'flogger', version: '0.4'
-    runtime group: 'com.google.flogger', name: 'flogger-system-backend', version: '0.4'
+    implementation 'org.apache.commons:commons-lang3:3.4'
 
-    compileOnly 'org.projectlombok:lombok:1.18.12'
+    implementation group: 'com.google.flogger', name: 'flogger', version: '0.4'
+    implementation group: 'com.google.flogger', name: 'flogger-system-backend', version: '0.4'
+
+    implementation 'org.projectlombok:lombok:1.18.12'
 	annotationProcessor 'org.projectlombok:lombok:1.18.12'
 
-    dependencies {
-        compile 'com.google.googlejavaformat:google-java-format:1.8'
-    }
+    implementation 'com.google.googlejavaformat:google-java-format:1.9'
 
-    implementation 'org.thinkit.common:dev-utils:v1.0.0-5-g7db55aa'
+    implementation 'org.thinkit.common:dev-utils:v1.0.2'
     implementation 'org.thinkit.formatter.common:formatter-commons:v1.0.0'
-    implementation 'org.thinkit.formatter:json-formatter:v1.0.0-10-g56add94'
+    implementation 'org.thinkit.formatter:json-formatter:v1.0.1'
+    implementation 'org.thinkit.api.catalog:catalog-api:v1.0.1'
 }
 
 test {
@@ -90,4 +84,13 @@ test {
         events 'started', 'skipped', 'passed', 'failed'
         exceptionFormat 'full'
     }
+}
+
+task("reference", type: Javadoc) {
+    source = sourceSets.main.allJava
+    title = 'Generator Commons'
+    options.links('https://docs.oracle.com/en/java/javase/13/docs/api/')
+    options.charSet("utf-8")
+    options.showFromPublic()
+    destinationDir = file('./docs')
 }
