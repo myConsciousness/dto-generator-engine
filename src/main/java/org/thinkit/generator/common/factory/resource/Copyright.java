@@ -14,6 +14,9 @@
 
 package org.thinkit.generator.common.factory.resource;
 
+import java.time.LocalDate;
+
+import org.apache.commons.lang3.StringUtils;
 import org.thinkit.common.exception.LogicException;
 import org.thinkit.generator.common.factory.Component;
 
@@ -77,8 +80,7 @@ public abstract class Copyright implements Component {
     /**
      * デフォルトコンストラクタ
      */
-    @SuppressWarnings("unused")
-    private Copyright() {
+    protected Copyright() {
     }
 
     /**
@@ -101,14 +103,24 @@ public abstract class Copyright implements Component {
     }
 
     /**
-     * {@link #creationDate}から上4桁（yyyy）を抽出して返却します。
+     * {@link #creationDate} から上4桁（yyyy）を抽出して返却します。
+     * <p>
+     * {@link #creationDate} から取得した文字列が {@code null} または空文字列の場合はローカル日付から取得した年を
+     * {@code yyyy} 形式で返却します。
      *
-     * @return {@link #creationDate} から抽出した上4桁（yyyy）
-     * @throws LogicException {@link #creationDate} が4桁未満の場合
+     * @return {@link #creationDate} から抽出した上4桁（yyyy）、または、 {@link #creationDate}
+     *         から取得した文字列が {@code null} または空文字列の場合はローカル日付から取得した年
+     *
+     * @throws LogicException {@link #creationDate} から取得した文字列が {@code null}
+     *                        または空文字列ではなく、かつ文字列長が4桁未満の場合
      */
     protected String getCreationYear() {
 
         final String creationDate = this.getCreationDate();
+
+        if (StringUtils.isEmpty(creationDate)) {
+            return String.valueOf(LocalDate.now().getYear());
+        }
 
         if (creationDate.length() < 4) {
             throw new LogicException(String
