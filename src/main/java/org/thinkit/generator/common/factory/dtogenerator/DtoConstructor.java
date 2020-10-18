@@ -14,17 +14,12 @@
 
 package org.thinkit.generator.common.factory.dtogenerator;
 
-import java.util.List;
-
 import org.thinkit.common.catalog.Brace;
-import org.thinkit.common.catalog.Delimiter;
 import org.thinkit.common.catalog.Identifier;
 import org.thinkit.common.catalog.Indentation;
 import org.thinkit.common.catalog.Parenthesis;
 import org.thinkit.generator.common.factory.resource.Constructor;
 import org.thinkit.generator.common.factory.resource.FunctionDescription;
-import org.thinkit.generator.common.factory.resource.Parameter;
-import org.thinkit.generator.common.factory.resource.Process;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -61,61 +56,11 @@ final class DtoConstructor extends Constructor {
         final StringBuilder constructor = new StringBuilder();
         constructor.append(super.getFunctionDescription().createResource());
         constructor.append(Identifier.PUBLIC.toIdentifier()).append(space).append(super.getFunctionName());
-        constructor.append(Parenthesis.start()).append(this.toParameter()).append(Parenthesis.end()).append(space)
+        constructor.append(Parenthesis.start()).append(this.getParameter()).append(Parenthesis.end()).append(space)
                 .append(Brace.start());
-        constructor.append(this.toProcess());
+        constructor.append(this.getProcess());
         constructor.append(Indentation.getIndentSpaces()).append(Brace.end());
 
         return constructor.toString();
-    }
-
-    /**
-     * {@link Parameter} で設定された引数情報を文字列表現として返却します。<br>
-     * 引数情報が存在しない場合は必ず空文字列を返却します。
-     *
-     * @return 引数の文字列表現
-     */
-    private String toParameter() {
-
-        final List<Parameter> parameters = super.getParameters();
-
-        if (parameters.isEmpty()) {
-            return "";
-        }
-
-        final StringBuilder sb = new StringBuilder();
-        final String space = Indentation.space();
-        final String commma = Delimiter.comma();
-
-        parameters.forEach(parameter -> {
-            sb.append(parameter.createResource()).append(commma).append(space);
-        });
-
-        sb.setLength(sb.length() - (commma.length() + space.length()));
-
-        return sb.toString();
-    }
-
-    /**
-     * {@link Process} で設定された処理情報を文字列表現として返却します。<br>
-     * 処理情報が存在しない場合は必ず空文字列を返却します。
-     *
-     * @return 処理の文字列表現
-     */
-    private String toProcess() {
-
-        List<Process> processes = super.getProcesses();
-
-        if (processes.isEmpty()) {
-            return "";
-        }
-
-        final StringBuilder sb = new StringBuilder();
-
-        processes.forEach(process -> {
-            sb.append(process.createResource());
-        });
-
-        return sb.toString();
     }
 }
