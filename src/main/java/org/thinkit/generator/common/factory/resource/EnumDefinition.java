@@ -27,13 +27,13 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * プログラムリソースにおける列挙子を抽象化した抽象クラスです。
+ * プログラムリソースにおける列挙子の定義を抽象化した抽象クラスです。
  * <p>
- * この抽象クラスでは列挙子の定義に必要な情報を定義します。この抽象クラスを継承する具象クラスは必ず
+ * この抽象クラスでは列挙子の基本情報を定義します。この抽象クラスを継承する具象クラスは必ず
  * {@link Component#createResource()} を実装してください。
  * <p>
- * 列挙子に固有の値を設定したい場合は {@link Enumeration} クラスのインスタンスを生成した後に {@link #add(Object)}
- * メソッドを呼び出してください。
+ * 列挙子に固有の値を設定したい場合は {@link EnumDefinition} クラスのインスタンスを生成した後に
+ * {@link #add(Object)} メソッドを呼び出してください。
  *
  * @author Kato Shinya
  * @since 1.0
@@ -44,7 +44,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public abstract class Enumeration implements Component {
+public abstract class EnumDefinition implements Component {
 
     /**
      * 列挙子の値の区切り文字
@@ -67,15 +67,15 @@ public abstract class Enumeration implements Component {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private Enumeration() {
+    private EnumDefinition() {
     }
 
     /**
-     * 引数として渡された情報を基に {@link Enumeration} クラスの新しいインスタンスを生成し返却します。
+     * 引数として渡された情報を基に {@link EnumDefinition} クラスの新しいインスタンスを生成し返却します。
      *
      * @param literal 列挙定数名
      */
-    protected Enumeration(@NonNull String literal) {
+    protected EnumDefinition(@NonNull String literal) {
         this.literal = literal;
     }
 
@@ -88,7 +88,7 @@ public abstract class Enumeration implements Component {
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public Enumeration add(@NonNull Object value) {
+    public EnumDefinition add(@NonNull Object value) {
         this.values.add(value);
         return this;
     }

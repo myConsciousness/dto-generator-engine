@@ -22,7 +22,7 @@ package org.thinkit.generator.common.factory.resource;
  * {@link #createCopyright(String, String, String, String, String)} <br>
  * {@link #createClassDescription(String, String, String)} <br>
  * {@link #createDescription(String)} <br>
- * {@link #createEnumeration(String)} <br>
+ * {@link #createEnumDefinition(String)} <br>
  * {@link #createFieldDefinition(String, String, String)} <br>
  * {@link #createConstructor(String, FunctionDescription)} <br>
  * {@link #createConstructorProcess(String, String)} <br>
@@ -80,16 +80,16 @@ public abstract class ResourceFactory {
         public abstract Description createDescription(String description);
 
         /**
-         * {@link Enumeration} のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link createEnumDefinition} のインスタンスを生成し返却する抽象メソッドです。<br>
          * {@link ResourceFactory} を継承した具象クラスは必ず {@link #createEnumeration(String)}
          * を実装してください。
          *
          * @param literal 列挙定数の名称
-         * @return {@link Enumeration} のインスタンス
+         * @return {@link createEnumDefinition} のインスタンス
          *
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */
-        public abstract Enumeration createEnumeration(String literal);
+        public abstract EnumDefinition createEnumDefinition(String literal);
 
         /**
          * {@link FieldDefinition} のインスタンスを生成し返却する抽象メソッドです。<br>
