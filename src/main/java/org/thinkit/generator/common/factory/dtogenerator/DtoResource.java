@@ -55,7 +55,7 @@ final class DtoResource extends Resource {
      */
     public DtoResource(Copyright copyright, String packageName, ClassDescription classDescription,
             String resourceName) {
-        super(copyright, packageName, classDescription, resourceName, new DtoField());
+        super(copyright, packageName, classDescription, resourceName);
     }
 
     @Override
@@ -98,7 +98,14 @@ final class DtoResource extends Resource {
      * このメソッドではフィールド定義までを生成します。<br>
      */
     private void createFieldResource() {
-        this.createResource(super.getField().createResource());
+
+        final String returnCode = Indentation.returnCode();
+
+        super.getFields().forEach(field -> {
+            this.createResource(field.createResource());
+            this.createResource(returnCode);
+            this.createResource(returnCode);
+        });
     }
 
     /**

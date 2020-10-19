@@ -14,13 +14,13 @@
 
 package org.thinkit.generator.common.factory.dtogenerator;
 
-import java.util.List;
-
+import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.common.factory.resource.Description;
 import org.thinkit.generator.common.factory.resource.Field;
 import org.thinkit.generator.common.factory.resource.FieldDefinition;
 
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -34,27 +34,27 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-final class DtoField extends Field {
+public final class DtoField extends Field {
+
+    /**
+     * 引数として渡された情報を基に {@link DtoField} の新しいインスタンスを生成します。
+     *
+     * @param fieldDefinition フィールド定義
+     * @param description     フィールドの説明
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    public DtoField(@NonNull FieldDefinition fieldDefinition, @NonNull Description description) {
+        super(fieldDefinition, description);
+    }
 
     @Override
     public String createResource() {
 
-        super.validate();
+        final StringBuilder field = new StringBuilder();
+        field.append(super.getDescription().createResource()).append(Indentation.returnCode());
+        field.append(super.getFieldDefinition().createResource());
 
-        final List<Description> descriptions = super.getDescriptions();
-        final List<FieldDefinition> fieldDefinitions = super.getFieldDefinitions();
-
-        final StringBuilder fields = new StringBuilder();
-
-        for (int i = 0; i < descriptions.size(); i++) {
-            final StringBuilder field = new StringBuilder();
-            final Description description = descriptions.get(i);
-            final FieldDefinition fieldDefinition = fieldDefinitions.get(i);
-
-            field.append(description.createResource()).append(fieldDefinition.createResource());
-            fields.append(field.toString());
-        }
-
-        return fields.toString();
+        return field.toString();
     }
 }

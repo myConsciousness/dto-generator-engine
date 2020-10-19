@@ -48,9 +48,9 @@ public abstract class Constructor extends Function {
     /**
      * コンストラクタの説明定義に引数アノテーション定義を追加します。
      *
-     * @param functionParamAnnotation 関数の引数アノテーション定義
+     * @param descriptionTag 関数の引数アノテーション定義
      */
-    public void add(@NonNull DescriptionTag functionParamAnnotation) {
-        super.getFunctionDescription().add(functionParamAnnotation);
+    public void add(@NonNull DescriptionTag descriptionTag) {
+        super.getFunctionDescription().add(descriptionTag);
     }
 }

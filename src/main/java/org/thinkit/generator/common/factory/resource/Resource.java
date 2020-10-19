@@ -33,7 +33,7 @@ import lombok.ToString;
  * @version 1.0
  */
 @ToString
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode
 public abstract class Resource {
 
     /**
@@ -41,35 +41,42 @@ public abstract class Resource {
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private Copyright copyright = null;
+    private Copyright copyright;
 
     /**
      * パッケージ名
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String packageName = "";
+    private String packageName;
 
     /**
      * リソース名
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String resourceName = "";
+    private String resourceName;
 
     /**
      * クラスの説明
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private ClassDescription classDescription = null;
+    private ClassDescription classDescription;
 
     /**
-     * フィールド
+     * 列挙定数リスト
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private Field field = null;
+    private List<Enumeration> enumerations = new ArrayList<>(0);
+
+    /**
+     * フィールドリスト
+     */
+    @NonNull
+    @Getter(AccessLevel.PROTECTED)
+    private List<Field> fields = new ArrayList<>(0);
 
     /**
      * コンストラクタリスト
@@ -90,57 +97,67 @@ public abstract class Resource {
      * @param packageName      パッケージ名
      * @param classDescription クラスの説明
      * @param resourceName     リソース名
-     * @param field            フィールド定義
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected Resource(Copyright copyright, String packageName, ClassDescription classDescription, String resourceName,
-            Field field) {
+    protected Resource(Copyright copyright, String packageName, ClassDescription classDescription,
+            String resourceName) {
         this.copyright = copyright;
         this.packageName = packageName;
         this.classDescription = classDescription;
         this.resourceName = resourceName;
-        this.field = field;
     }
 
     /**
-     * 説明定義をフィールドへ追加します。
+     * Enum定数定義を追加します。
      *
-     * @param description 説明定義
+     * @param enumeration Enum定数定義
+     * @return 自分自身のインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public void add(@NonNull Description description) {
-        this.field.add(description);
+    public Resource add(@NonNull Enumeration enumeration) {
+        this.enumerations.add(enumeration);
+        return this;
     }
 
     /**
-     * フィールド定義をフィールドへ追加します。
+     * フィールド定義を追加します。
      *
-     * @param fieldDefinition フィールド定義
+     * @param enumeration フィールド定義
+     * @return 自分自身のインスタンス
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public void add(@NonNull FieldDefinition fieldDefinition) {
-        this.field.add(fieldDefinition);
+    public Resource add(@NonNull Field field) {
+        this.fields.add(field);
+        return this;
     }
 
     /**
      * コンストラクタ定義を追加します。
      *
      * @param constructor コンストラクタ定義
+     * @return 自分自身のインスタンス
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public void add(Constructor constructor) {
+    public Resource add(@NonNull Constructor constructor) {
         this.constructors.add(constructor);
+        return this;
     }
 
     /**
      * メソッド定義を追加します。
      *
      * @param method メソッド定義
+     * @return 自分自身のインスタンス
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public void add(Method method) {
+    public Resource add(@NonNull Method method) {
         this.methods.add(method);
+        return this;
     }
 
     /**
