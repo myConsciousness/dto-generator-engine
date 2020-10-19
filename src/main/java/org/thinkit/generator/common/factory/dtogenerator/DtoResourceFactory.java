@@ -19,6 +19,7 @@ import org.thinkit.generator.common.factory.resource.Constructor;
 import org.thinkit.generator.common.factory.resource.ConstructorProcess;
 import org.thinkit.generator.common.factory.resource.Copyright;
 import org.thinkit.generator.common.factory.resource.Description;
+import org.thinkit.generator.common.factory.resource.Enumeration;
 import org.thinkit.generator.common.factory.resource.FieldDefinition;
 import org.thinkit.generator.common.factory.resource.FunctionDescription;
 import org.thinkit.generator.common.factory.resource.FunctionParamAnnotation;
@@ -94,6 +95,11 @@ public final class DtoResourceFactory extends ResourceFactory {
     @Override
     public Description createDescription(String description) {
         return new DtoDescription(description);
+    }
+
+    @Override
+    public Enumeration createEnumeration(String literal) {
+        return null;
     }
 
     @Override
