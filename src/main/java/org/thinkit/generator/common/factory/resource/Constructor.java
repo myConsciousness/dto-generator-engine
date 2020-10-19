@@ -50,7 +50,7 @@ public abstract class Constructor extends Function {
      *
      * @param functionParamAnnotation 関数の引数アノテーション定義
      */
-    public void add(@NonNull FunctionParamAnnotation functionParamAnnotation) {
+    public void add(@NonNull DescriptionTag functionParamAnnotation) {
         super.getFunctionDescription().add(functionParamAnnotation);
     }
 }

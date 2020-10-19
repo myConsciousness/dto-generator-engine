@@ -36,7 +36,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public abstract class FunctionParamAnnotation implements Component {
+public abstract class DescriptionTag implements Component {
 
     /**
      * 変数名
@@ -56,7 +56,7 @@ public abstract class FunctionParamAnnotation implements Component {
      * デフォルトコンストラクタ
      */
     @SuppressWarnings("unused")
-    private FunctionParamAnnotation() {
+    private DescriptionTag() {
     }
 
     /**
@@ -66,7 +66,7 @@ public abstract class FunctionParamAnnotation implements Component {
      * @param description  説明
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected FunctionParamAnnotation(String variableName, String description) {
+    protected DescriptionTag(String variableName, String description) {
         this.variableName = variableName;
         this.description = description;
     }

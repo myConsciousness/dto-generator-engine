@@ -119,17 +119,17 @@ public abstract class ResourceFactory {
         public abstract FunctionDescription createFunctionDescription(String description);
 
         /**
-         * {@link FunctionParamAnnotation} のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link DescriptionTag} のインスタンスを生成し返却する抽象メソッドです。<br>
          * {@link ResourceFactory} を継承した具象クラスは必ず
-         * {@link #createFunctionParamAnnotation(String, String)} を実装してください。
+         * {@link #createDescriptionTag(String, String)} を実装してください。
          *
          * @param variableName 変数名
          * @param description  説明
-         * @return {@link FunctionParamAnnotation} のインスタンス
+         * @return {@link DescriptionTag} のインスタンス
          *
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */
-        public abstract FunctionParamAnnotation createFunctionParamAnnotation(String variableName, String description);
+        public abstract DescriptionTag createDescriptionTag(String variableName, String description);
 
         /**
          * {@link Constructor} のインスタンスを生成し返却する抽象メソッドです。<br>

@@ -185,8 +185,7 @@ public final class DtoResourceFormatter implements Command<DtoResourceGroup> {
             resource.add(resourceFactory.createFieldDefinition(dataType, variableName, dtoField.getInitialValue()));
 
             if (dtoField.isInvariant()) {
-                requiredConstructor
-                        .add(resourceFactory.createFunctionParamAnnotation(variableName, dtoField.getDescription()));
+                requiredConstructor.add(resourceFactory.createDescriptionTag(variableName, dtoField.getDescription()));
                 requiredConstructor.add(resourceFactory.createParameter(dataType, variableName));
                 requiredConstructor.add(resourceFactory.createConstructorProcess(variableName).toRequired());
             }

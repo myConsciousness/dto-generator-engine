@@ -16,7 +16,7 @@ package org.thinkit.generator.common.factory.dtogenerator;
 
 import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.common.catalog.Annotation;
-import org.thinkit.generator.common.factory.resource.FunctionParamAnnotation;
+import org.thinkit.generator.common.factory.resource.DescriptionTag;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -32,7 +32,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode(callSuper = false)
-final class DtoMethodParamAnnotation extends FunctionParamAnnotation {
+final class DtoDescriptionTag extends DescriptionTag {
 
     /**
      * コンストラクタ
@@ -41,7 +41,7 @@ final class DtoMethodParamAnnotation extends FunctionParamAnnotation {
      * @param description  説明
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected DtoMethodParamAnnotation(String variableName, String description) {
+    protected DtoDescriptionTag(String variableName, String description) {
         super(variableName, description);
     }
 

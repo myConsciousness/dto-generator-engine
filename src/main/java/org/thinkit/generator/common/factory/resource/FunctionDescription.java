@@ -46,7 +46,7 @@ public abstract class FunctionDescription extends Description {
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private List<FunctionParamAnnotation> functionParamAnnotations = new ArrayList<>(0);
+    private List<DescriptionTag> descriptionTags = new ArrayList<>(0);
 
     /**
      * コンストラクタ
@@ -62,12 +62,13 @@ public abstract class FunctionDescription extends Description {
      * 引数のアノテーション情報を追加します。<br>
      * 引数として {@code null} が渡された場合は実行時に必ず失敗します。
      *
-     * @param functionParamAnnotation 引数のアノテーション情報
+     * @param descriptionTag 引数のアノテーション情報
+     *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public void add(FunctionParamAnnotation functionParamAnnotation) {
-        Objects.requireNonNull(functionParamAnnotation);
-        this.functionParamAnnotations.add(functionParamAnnotation);
+    public void add(DescriptionTag descriptionTag) {
+        Objects.requireNonNull(descriptionTag);
+        this.descriptionTags.add(descriptionTag);
     }
 
     /**
@@ -76,7 +77,7 @@ public abstract class FunctionDescription extends Description {
      *
      * @return 関数の引数アノテーションが存在する場合は {@code true} 、それ以外は {@code false}
      */
-    protected boolean hasParamAnnotation() {
-        return !this.functionParamAnnotations.isEmpty();
+    protected boolean hasAnnotation() {
+        return !this.descriptionTags.isEmpty();
     }
 }

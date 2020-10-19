@@ -20,10 +20,10 @@ import org.thinkit.generator.common.factory.resource.Constructor;
 import org.thinkit.generator.common.factory.resource.ConstructorProcess;
 import org.thinkit.generator.common.factory.resource.Copyright;
 import org.thinkit.generator.common.factory.resource.Description;
+import org.thinkit.generator.common.factory.resource.DescriptionTag;
 import org.thinkit.generator.common.factory.resource.Enumeration;
 import org.thinkit.generator.common.factory.resource.FieldDefinition;
 import org.thinkit.generator.common.factory.resource.FunctionDescription;
-import org.thinkit.generator.common.factory.resource.FunctionParamAnnotation;
 import org.thinkit.generator.common.factory.resource.Parameter;
 import org.thinkit.generator.common.factory.resource.Resource;
 import org.thinkit.generator.common.factory.resource.ResourceFactory;
@@ -40,10 +40,9 @@ import lombok.ToString;
  * {@link #createDescription(String)} <br>
  * {@link #createFieldDefinition(String, String, String)} <br>
  * {@link #createFunctionDescription(String)} <br>
- * {@link #createFunctionParamAnnotation(String, String)} <br>
+ * {@link #createDescriptionTag(String, String)} <br>
  * {@link #createConstructor(String, FunctionDescription)} <br>
  * {@link #createParameter(String, String)} <br>
- * {@link #createConstructorProcess(String)} <br>
  * {@link #createConstructorProcess(String, String)} <br>
  * {@link #createResource(Copyright, String, ClassDescription, String)} <br>
  *
@@ -114,8 +113,8 @@ public final class DtoResourceFactory extends ResourceFactory {
     }
 
     @Override
-    public FunctionParamAnnotation createFunctionParamAnnotation(String variableName, String description) {
-        return new DtoMethodParamAnnotation(variableName, description);
+    public DescriptionTag createDescriptionTag(String variableName, String description) {
+        return new DtoDescriptionTag(variableName, description);
     }
 
     @Override
