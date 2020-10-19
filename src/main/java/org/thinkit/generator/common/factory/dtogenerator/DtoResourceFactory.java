@@ -14,6 +14,7 @@
 
 package org.thinkit.generator.common.factory.dtogenerator;
 
+import org.thinkit.common.exception.LogicException;
 import org.thinkit.generator.common.factory.resource.ClassDescription;
 import org.thinkit.generator.common.factory.resource.Constructor;
 import org.thinkit.generator.common.factory.resource.ConstructorProcess;
@@ -99,7 +100,7 @@ public final class DtoResourceFactory extends ResourceFactory {
 
     @Override
     public Enumeration createEnumeration(String literal) {
-        return null;
+        throw new LogicException("This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
