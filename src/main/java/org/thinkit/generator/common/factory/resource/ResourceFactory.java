@@ -80,12 +80,12 @@ public abstract class ResourceFactory {
         public abstract Description createDescription(String description);
 
         /**
-         * {@link createEnumDefinition} のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link EnumDefinition} のインスタンスを生成し返却する抽象メソッドです。<br>
          * {@link ResourceFactory} を継承した具象クラスは必ず {@link #createEnumeration(String)}
          * を実装してください。
          *
          * @param literal 列挙定数の名称
-         * @return {@link createEnumDefinition} のインスタンス
+         * @return {@link EnumDefinition} のインスタンス
          *
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */

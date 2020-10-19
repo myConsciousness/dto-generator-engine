@@ -21,7 +21,7 @@ import org.thinkit.generator.common.factory.resource.ConstructorProcess;
 import org.thinkit.generator.common.factory.resource.Copyright;
 import org.thinkit.generator.common.factory.resource.Description;
 import org.thinkit.generator.common.factory.resource.DescriptionTag;
-import org.thinkit.generator.common.factory.resource.Enumeration;
+import org.thinkit.generator.common.factory.resource.EnumDefinition;
 import org.thinkit.generator.common.factory.resource.FieldDefinition;
 import org.thinkit.generator.common.factory.resource.FunctionDescription;
 import org.thinkit.generator.common.factory.resource.Parameter;
@@ -98,7 +98,7 @@ public final class DtoResourceFactory extends ResourceFactory {
     }
 
     @Override
-    public Enumeration createEnumeration(String literal) {
+    public EnumDefinition createEnumDefinition(String literal) {
         throw new LogicException("This method is not supposed to be called when the DTO class is created");
     }
 
