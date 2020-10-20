@@ -21,18 +21,19 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * クラスで使用するアノテーションを管理するカタログです。<br>
- * {@link #getAnnotation()}を使用することで各要素のアノテーションを取得することができます。
+ * {@link #getAnnotation()} を使用することで各要素のアノテーションを取得することができます。
  * <p>
  * 以下の静的メソッドを使用することでも各アノテーションを取得することができます。<br>
- * {@link #author()}<br>
- * {@link #since()}<br>
- * {@link #version()}<br>
- * {@link #lombokNonNull()}<br>
- * {@link #lombokToString()}<br>
- * {@link #lombokEqualsAndHashCode()}<br>
- * {@link #param()}<br>
- * {@link #lombokSetter()}<br>
- * {@link #lombokGetter()}<br>
+ * {@link #author()} <br>
+ * {@link #since()} <br>
+ * {@link #version()} <br>
+ * {@link #lombokNonNull()} <br>
+ * {@link #lombokToString()} <br>
+ * {@link #lombokEqualsAndHashCode()} <br>
+ * {@link #param()} <br>
+ * {@link #lombokSetter()} <br>
+ * {@link #lombokGetter()} <br>
+ * {@link #returnValue()}
  *
  * @author Kato Shinya
  * @since 1.0
@@ -85,7 +86,12 @@ public enum Annotation implements Catalog<Annotation> {
     /**
      * Getter (Lombok)
      */
-    LOMBOK_GETTER(8, "@Getter");
+    LOMBOK_GETTER(8, "@Getter"),
+
+    /**
+     * 返却情報
+     */
+    RETURN(9, "@return");
 
     /**
      * コード値
@@ -185,5 +191,15 @@ public enum Annotation implements Catalog<Annotation> {
      */
     public static String lombokGetter() {
         return LOMBOK_GETTER.getAnnotation();
+    }
+
+    /**
+     * 返却情報アノテーションを返却します。
+     *
+     * @return 返却情報アノテーションを返却します。
+     * @see #RETURN
+     */
+    public static String returnValue() {
+        return RETURN.getAnnotation();
     }
 }
