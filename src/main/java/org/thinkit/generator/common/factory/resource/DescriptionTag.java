@@ -14,6 +14,7 @@
 
 package org.thinkit.generator.common.factory.resource;
 
+import org.thinkit.generator.common.catalog.Annotation;
 import org.thinkit.generator.common.factory.Component;
 
 import lombok.AccessLevel;
@@ -43,14 +44,21 @@ public abstract class DescriptionTag implements Component {
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String variableName = "";
+    private String variableName;
 
     /**
      * 説明
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String description = "";
+    private String description;
+
+    /**
+     * アノテーション
+     */
+    @NonNull
+    @Getter(AccessLevel.PROTECTED)
+    private Annotation annotation;
 
     /**
      * デフォルトコンストラクタ
@@ -64,10 +72,27 @@ public abstract class DescriptionTag implements Component {
      *
      * @param variableName 変数名
      * @param description  説明
+     *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected DescriptionTag(String variableName, String description) {
+    protected DescriptionTag(@NonNull String variableName, @NonNull String description) {
         this.variableName = variableName;
         this.description = description;
+    }
+
+    /**
+     * コンストラクタ
+     *
+     * @param variableName 変数名
+     * @param description  説明
+     * @param annotation   アノテーション
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    protected DescriptionTag(@NonNull String variableName, @NonNull String description,
+            @NonNull Annotation annotation) {
+        this.variableName = variableName;
+        this.description = description;
+        this.annotation = annotation;
     }
 }
