@@ -53,6 +53,12 @@ public abstract class Generics implements Component {
     protected Generics() {
     }
 
+    /**
+     * 引数として渡された文字列を総称型で指定するデータ型として追加します。
+     *
+     * @param dataType 総称型に設定するデータ型
+     * @return 自分自身のインスタンス
+     */
     public Generics add(@NonNull String dataType) {
         this.generics.add(dataType);
         return this;
