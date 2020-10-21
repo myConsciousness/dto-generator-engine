@@ -63,4 +63,15 @@ public abstract class Generics implements Component {
         this.generics.add(dataType);
         return this;
     }
+
+    /**
+     * 設定された総称型が存在するか判定します。
+     * <p>
+     * 設定された総称型が存在する場合は {@code true} を返却し、それ以外の場合は {@code false} を返却します。
+     *
+     * @return 設定された総称型が存在する場合は {@code true} 、それ以外は {@code false}
+     */
+    public boolean isEmpty() {
+        return this.generics.isEmpty();
+    }
 }

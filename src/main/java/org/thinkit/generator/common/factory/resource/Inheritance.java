@@ -60,6 +60,17 @@ public abstract class Inheritance implements Component {
     /**
      * コンストラクタ
      *
+     * @param literal 継承名
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    protected Inheritance(@NonNull String literal) {
+        this.literal = literal;
+    }
+
+    /**
+     * コンストラクタ
+     *
      * @param literal  継承名
      * @param generics 総称型
      *
@@ -68,5 +79,16 @@ public abstract class Inheritance implements Component {
     protected Inheritance(@NonNull String literal, @NonNull Generics generics) {
         this.literal = literal;
         this.generics = generics;
+    }
+
+    /**
+     * 総称型が設定されているか判定します。
+     * <p>
+     * 総称型が設定されている場合は {@code true} を返却し、それ以外の場合は {@code false} を設定します。
+     *
+     * @return 総称型が設定されている場合は {@code true} 、それ以外は {@code false}
+     */
+    protected boolean hasGenerics() {
+        return this.generics != null;
     }
 }
