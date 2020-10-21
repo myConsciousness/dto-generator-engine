@@ -97,7 +97,17 @@ public final class DtoResourceFactory extends ResourceFactory {
     }
 
     @Override
+    public Inheritance createInheritance(@NonNull String literal, @NonNull Generics generics) {
+        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+    }
+
+    @Override
     public Interface createInterface(@NonNull String literal) {
+        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+    }
+
+    @Override
+    public Interface createInterface(@NonNull String literal, @NonNull Generics generics) {
         throw new LogicException("This method is not supposed to be called when the DTO class is created");
     }
 

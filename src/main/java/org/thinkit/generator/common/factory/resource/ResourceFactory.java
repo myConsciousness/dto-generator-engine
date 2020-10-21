@@ -82,6 +82,19 @@ public abstract class ResourceFactory {
         public abstract Inheritance createInheritance(@NonNull String literal);
 
         /**
+         * {@link Inheritance} のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link ResourceFactory} を継承した具象クラスは必ず {@link #createDescription(String)}
+         * を実装してください。
+         *
+         * @param literal  継承名
+         * @param generics 総称型
+         * @return {@link Inheritance} のインスタンス
+         *
+         * @exception NullPointerException 引数として {@code null} が渡された場合
+         */
+        public abstract Inheritance createInheritance(@NonNull String literal, @NonNull Generics generics);
+
+        /**
          * {@link Interface} のインスタンスを生成し返却する抽象メソッドです。<br>
          * {@link ResourceFactory} を継承した具象クラスは必ず {@link #createDescription(String)}
          * を実装してください。
@@ -92,6 +105,19 @@ public abstract class ResourceFactory {
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */
         public abstract Interface createInterface(@NonNull String literal);
+
+        /**
+         * {@link Interface} のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link ResourceFactory} を継承した具象クラスは必ず {@link #createDescription(String)}
+         * を実装してください。
+         *
+         * @param literal  インターフェース名
+         * @param generics 総称型
+         * @return {@link Interface} のインスタンス
+         *
+         * @exception NullPointerException 引数として {@code null} が渡された場合
+         */
+        public abstract Interface createInterface(@NonNull String literal, @NonNull Generics generics);
 
         /**
          * {@link Generics} のインスタンスを生成し返却する抽象メソッドです。<br>
