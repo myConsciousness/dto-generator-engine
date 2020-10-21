@@ -92,36 +92,43 @@ public final class DtoResourceFactory extends ResourceFactory {
     }
 
     @Override
+    @Deprecated
     public Inheritance createInheritance(@NonNull String literal) {
         throw new LogicException("This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
+    @Deprecated
     public Inheritance createInheritance(@NonNull String literal, @NonNull Generics generics) {
         throw new LogicException("This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
+    @Deprecated
     public Interface createInterface(@NonNull String literal) {
         throw new LogicException("This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
+    @Deprecated
     public Interface createInterface(@NonNull String literal, @NonNull Generics generics) {
         throw new LogicException("This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
+    @Deprecated
     public Generics createGenerics() {
         throw new LogicException("This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
+    @Deprecated
     public EnumDefinition createEnumDefinition(@NonNull String literal) {
         throw new LogicException("This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
+    @Deprecated
     public Enumeration createEnumeration(@NonNull EnumDefinition enumDefinition, @NonNull Description description) {
         throw new LogicException("This method is not supposed to be called when the DTO class is created");
     }
