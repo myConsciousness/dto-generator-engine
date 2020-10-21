@@ -22,29 +22,22 @@ import org.thinkit.generator.common.factory.resource.Copyright;
 import org.thinkit.generator.common.factory.resource.Description;
 import org.thinkit.generator.common.factory.resource.DescriptionTag;
 import org.thinkit.generator.common.factory.resource.EnumDefinition;
+import org.thinkit.generator.common.factory.resource.Enumeration;
 import org.thinkit.generator.common.factory.resource.FieldDefinition;
 import org.thinkit.generator.common.factory.resource.FunctionDescription;
+import org.thinkit.generator.common.factory.resource.Generics;
+import org.thinkit.generator.common.factory.resource.Inheritance;
+import org.thinkit.generator.common.factory.resource.Interface;
 import org.thinkit.generator.common.factory.resource.Parameter;
 import org.thinkit.generator.common.factory.resource.Resource;
 import org.thinkit.generator.common.factory.resource.ResourceFactory;
 
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
  * {#link ResourceFactory} を実装する具象ファクトリクラスです。
- * <p>
- * 以下のメソッドを使用することで各リソースの部品オブジェクトを取得することができます。<br>
- * {@link #createCopyright(String, String, String, String, String)} <br>
- * {@link #createClassDescription(String, String, String)} <br>
- * {@link #createDescription(String)} <br>
- * {@link #createFieldDefinition(String, String, String)} <br>
- * {@link #createFunctionDescription(String)} <br>
- * {@link #createDescriptionTag(String, String)} <br>
- * {@link #createConstructor(String, FunctionDescription)} <br>
- * {@link #createParameter(String, String)} <br>
- * {@link #createConstructorProcess(String, String)} <br>
- * {@link #createResource(Copyright, String, ClassDescription, String)} <br>
  *
  * @author Kato Shinya
  * @since 1.0
@@ -82,64 +75,87 @@ public final class DtoResourceFactory extends ResourceFactory {
     }
 
     @Override
-    public Copyright createCopyright(String projectName, String fileName, String encoding, String creator,
-            String creationDate) {
+    public Copyright createCopyright(@NonNull String projectName, @NonNull String fileName, @NonNull String encoding,
+            @NonNull String creator, @NonNull String creationDate) {
         return new DtoCopyright(projectName, fileName, encoding, creator, creationDate);
     }
 
     @Override
-    public ClassDescription createClassDescription(String description, String creator, String version) {
+    public ClassDescription createClassDescription(@NonNull String description, @NonNull String creator,
+            @NonNull String version) {
         return new DtoClassDescription(description, creator, version);
     }
 
     @Override
-    public Description createDescription(String description) {
+    public Description createDescription(@NonNull String description) {
         return new DtoDescription(description);
     }
 
     @Override
-    public EnumDefinition createEnumDefinition(String literal) {
+    public Inheritance createInheritance(@NonNull String literal) {
         throw new LogicException("This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
-    public FieldDefinition createFieldDefinition(String dataType, String variableName, String initialValue) {
+    public Interface createInterface(@NonNull String literal) {
+        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+    }
+
+    @Override
+    public Generics createGenerics() {
+        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+    }
+
+    @Override
+    public EnumDefinition createEnumDefinition(@NonNull String literal) {
+        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+    }
+
+    @Override
+    public Enumeration createEnumeration(@NonNull EnumDefinition enumDefinition, @NonNull Description description) {
+        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+    }
+
+    @Override
+    public FieldDefinition createFieldDefinition(@NonNull String dataType, @NonNull String variableName,
+            @NonNull String initialValue) {
         return new DtoFieldDefinition(dataType, variableName, initialValue);
     }
 
     @Override
-    public FunctionDescription createFunctionDescription(String description) {
+    public FunctionDescription createFunctionDescription(@NonNull String description) {
         return new DtoMethodDescription(description);
     }
 
     @Override
-    public DescriptionTag createDescriptionTag(String variableName, String description) {
+    public DescriptionTag createDescriptionTag(@NonNull String variableName, @NonNull String description) {
         return new DtoDescriptionTag(variableName, description);
     }
 
     @Override
-    public Constructor createConstructor(String functionName, FunctionDescription functionDescription) {
+    public Constructor createConstructor(@NonNull String functionName,
+            @NonNull FunctionDescription functionDescription) {
         return new DtoConstructor(functionName, functionDescription);
     }
 
     @Override
-    public Parameter createParameter(String dataType, String variableName) {
+    public Parameter createParameter(@NonNull String dataType, @NonNull String variableName) {
         return new DtoParameter(dataType, variableName);
     }
 
     @Override
-    public ConstructorProcess createConstructorProcess(String variableName) {
+    public ConstructorProcess createConstructorProcess(@NonNull String variableName) {
         return new DtoConstructorProcess(variableName);
     }
 
     @Override
-    public ConstructorProcess createConstructorProcess(String variableName, String getterName) {
+    public ConstructorProcess createConstructorProcess(@NonNull String variableName, @NonNull String getterName) {
         return new DtoConstructorProcess(variableName, getterName);
     }
 
     @Override
-    public Resource createResource(Copyright copyright, String packageName, ClassDescription classDescription,
-            String resourceName) {
+    public Resource createResource(@NonNull Copyright copyright, @NonNull String packageName,
+            @NonNull ClassDescription classDescription, String resourceName) {
         return new DtoResource(copyright, packageName, classDescription, resourceName);
     }
 }

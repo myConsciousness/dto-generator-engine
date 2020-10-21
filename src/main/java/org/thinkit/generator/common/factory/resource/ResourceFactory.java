@@ -14,21 +14,10 @@
 
 package org.thinkit.generator.common.factory.resource;
 
+import lombok.NonNull;
+
 /**
- * プログラムリソースの各構成要素を抽象化したオブジェクトを返却するファクトリクラスです。<br>
- * {@link ResourceFactory} を継承した具象クラスは必ず各抽象メソッドを実装してください。
- * <p>
- * 以下のファクトリメソッドが正しく実装されることが期待されます。<br>
- * {@link #createCopyright(String, String, String, String, String)} <br>
- * {@link #createClassDescription(String, String, String)} <br>
- * {@link #createDescription(String)} <br>
- * {@link #createEnumDefinition(String)} <br>
- * {@link #createFieldDefinition(String, String, String)} <br>
- * {@link #createConstructor(String, FunctionDescription)} <br>
- * {@link #createConstructorProcess(String, String)} <br>
- * {@link #createParameter(String, String)} <br>
- * {@link #createConstructorProcess(String)} <br>
- * {@link #createResource(Copyright, String, ClassDescription, String)} <br>
+ * プログラムリソースの各構成要素を抽象化したオブジェクトを返却するファクトリクラスです。
  *
  * @author Kato Shinya
  * @since 1.0
@@ -50,8 +39,8 @@ public abstract class ResourceFactory {
          *
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */
-        public abstract Copyright createCopyright(String projectName, String fileName, String encoding, String creator,
-                        String creationDate);
+        public abstract Copyright createCopyright(@NonNull String projectName, @NonNull String fileName,
+                        @NonNull String encoding, @NonNull String creator, @NonNull String creationDate);
 
         /**
          * {@link ClassDescription} のインスタンスを生成し返却する抽象メソッドです。<br>
@@ -65,7 +54,8 @@ public abstract class ResourceFactory {
          *
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */
-        public abstract ClassDescription createClassDescription(String description, String creator, String version);
+        public abstract ClassDescription createClassDescription(@NonNull String description, @NonNull String creator,
+                        @NonNull String version);
 
         /**
          * {@link Description} のインスタンスを生成し返却する抽象メソッドです。<br>
@@ -77,7 +67,42 @@ public abstract class ResourceFactory {
          *
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */
-        public abstract Description createDescription(String description);
+        public abstract Description createDescription(@NonNull String description);
+
+        /**
+         * {@link Inheritance} のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link ResourceFactory} を継承した具象クラスは必ず {@link #createDescription(String)}
+         * を実装してください。
+         *
+         * @param literal 継承名
+         * @return {@link Inheritance} のインスタンス
+         *
+         * @exception NullPointerException 引数として {@code null} が渡された場合
+         */
+        public abstract Inheritance createInheritance(@NonNull String literal);
+
+        /**
+         * {@link Interface} のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link ResourceFactory} を継承した具象クラスは必ず {@link #createDescription(String)}
+         * を実装してください。
+         *
+         * @param literal インターフェース名
+         * @return {@link Interface} のインスタンス
+         *
+         * @exception NullPointerException 引数として {@code null} が渡された場合
+         */
+        public abstract Interface createInterface(@NonNull String literal);
+
+        /**
+         * {@link Generics} のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link ResourceFactory} を継承した具象クラスは必ず {@link #createDescription(String)}
+         * を実装してください。
+         *
+         * @return {@link Generics} のインスタンス
+         *
+         * @exception NullPointerException 引数として {@code null} が渡された場合
+         */
+        public abstract Generics createGenerics();
 
         /**
          * {@link EnumDefinition} のインスタンスを生成し返却する抽象メソッドです。<br>
@@ -89,7 +114,21 @@ public abstract class ResourceFactory {
          *
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */
-        public abstract EnumDefinition createEnumDefinition(String literal);
+        public abstract EnumDefinition createEnumDefinition(@NonNull String literal);
+
+        /**
+         * {@link Enumeration} のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link ResourceFactory} を継承した具象クラスは必ず {@link #createEnumeration(String)}
+         * を実装してください。
+         *
+         * @param enumDefinition 列挙子定義
+         * @param description    列挙子の説明
+         * @return {@link Enumeration} のインスタンス
+         *
+         * @exception NullPointerException 引数として {@code null} が渡された場合
+         */
+        public abstract Enumeration createEnumeration(@NonNull EnumDefinition enumDefinition,
+                        @NonNull Description description);
 
         /**
          * {@link FieldDefinition} のインスタンスを生成し返却する抽象メソッドです。<br>
@@ -103,8 +142,8 @@ public abstract class ResourceFactory {
          *
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */
-        public abstract FieldDefinition createFieldDefinition(String dataType, String variableName,
-                        String initialValue);
+        public abstract FieldDefinition createFieldDefinition(@NonNull String dataType, @NonNull String variableName,
+                        @NonNull String initialValue);
 
         /**
          * {@link FunctionDescription} のインスタンスを生成し返却する抽象メソッドです。<br>
@@ -116,7 +155,7 @@ public abstract class ResourceFactory {
          *
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */
-        public abstract FunctionDescription createFunctionDescription(String description);
+        public abstract FunctionDescription createFunctionDescription(@NonNull String description);
 
         /**
          * {@link DescriptionTag} のインスタンスを生成し返却する抽象メソッドです。<br>
@@ -129,7 +168,7 @@ public abstract class ResourceFactory {
          *
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */
-        public abstract DescriptionTag createDescriptionTag(String variableName, String description);
+        public abstract DescriptionTag createDescriptionTag(@NonNull String variableName, @NonNull String description);
 
         /**
          * {@link Constructor} のインスタンスを生成し返却する抽象メソッドです。<br>
@@ -142,7 +181,8 @@ public abstract class ResourceFactory {
          *
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */
-        public abstract Constructor createConstructor(String functionName, FunctionDescription functionDescription);
+        public abstract Constructor createConstructor(@NonNull String functionName,
+                        @NonNull FunctionDescription functionDescription);
 
         /**
          * {@link Parameter} のインスタンスを生成し返却する抽象メソッドです。<br>
@@ -155,7 +195,7 @@ public abstract class ResourceFactory {
          *
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */
-        public abstract Parameter createParameter(String dataType, String variableName);
+        public abstract Parameter createParameter(@NonNull String dataType, @NonNull String variableName);
 
         /**
          * {@link ConstructorProcess} のインスタンスを生成し返却する抽象メソッドです。<br>
@@ -180,7 +220,8 @@ public abstract class ResourceFactory {
          *
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */
-        public abstract ConstructorProcess createConstructorProcess(String variableName, String getterName);
+        public abstract ConstructorProcess createConstructorProcess(@NonNull String variableName,
+                        @NonNull String getterName);
 
         /**
          * {@link Resource} のインスタンスを生成し返却する抽象メソッドです。<br>
@@ -196,6 +237,6 @@ public abstract class ResourceFactory {
          *
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */
-        public abstract Resource createResource(Copyright copyright, String packageName,
-                        ClassDescription classDescription, String resourceName);
+        public abstract Resource createResource(@NonNull Copyright copyright, @NonNull String packageName,
+                        @NonNull ClassDescription classDescription, @NonNull String resourceName);
 }
