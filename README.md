@@ -18,7 +18,7 @@ Generator-Commons main repository
 <dependency>
   <groupId>org.thinkit.generator.common</groupId>
   <artifactId>generator-commons</artifactId>
-  <version>v1.0.7</version>
+  <version>v1.0.8</version>
 </dependency>
 
 <servers>
@@ -45,7 +45,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.thinkit.generator.common:generator-commons:v1.0.7'
+    implementation 'org.thinkit.generator.common:generator-commons:v1.0.8'
 }
 ```
 
