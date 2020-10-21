@@ -65,6 +65,20 @@ public abstract class Resource {
     private ClassDescription classDescription;
 
     /**
+     * 継承リスト
+     */
+    @NonNull
+    @Getter(AccessLevel.PROTECTED)
+    private List<Inheritance> inheritances = new ArrayList<>(0);
+
+    /**
+     * インターフェースリスト
+     */
+    @NonNull
+    @Getter(AccessLevel.PROTECTED)
+    private List<Interface> interfaces = new ArrayList<>(0);
+
+    /**
      * 列挙定数リスト
      */
     @NonNull
@@ -106,6 +120,32 @@ public abstract class Resource {
         this.packageName = packageName;
         this.classDescription = classDescription;
         this.resourceName = resourceName;
+    }
+
+    /**
+     * 継承定義を追加します。
+     *
+     * @param inheritance 継承
+     * @return 自分自身のインスタンス
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    public Resource add(@NonNull Inheritance inheritance) {
+        this.inheritances.add(inheritance);
+        return this;
+    }
+
+    /**
+     * インターフェース定義を追加します。
+     *
+     * @param _interface インターフェース
+     * @return 自分自身のインスタンス
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    public Resource add(@NonNull Interface _interface) {
+        this.interfaces.add(_interface);
+        return this;
     }
 
     /**
