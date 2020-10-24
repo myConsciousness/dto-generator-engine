@@ -15,6 +15,7 @@
 package org.thinkit.generator.common.factory.resource;
 
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -40,7 +41,7 @@ public abstract class Method extends Function {
      * @param functionDescription 関数の説明
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected Method(String functionName, FunctionDescription functionDescription) {
+    protected Method(@NonNull String functionName, @NonNull FunctionDescription functionDescription) {
         super(functionName, functionDescription);
     }
 }

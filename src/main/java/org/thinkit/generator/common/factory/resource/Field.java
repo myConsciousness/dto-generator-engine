@@ -39,14 +39,12 @@ public abstract class Field implements Component {
     /**
      * フィールドの定義
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private FieldDefinition fieldDefinition;
 
     /**
      * フィールドの説明
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private Description description;
 

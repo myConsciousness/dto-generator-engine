@@ -42,21 +42,18 @@ public abstract class DescriptionTag implements Component {
     /**
      * 変数名
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private String variableName;
 
     /**
      * 説明
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private String description;
 
     /**
      * アノテーション
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private Annotation annotation;
 

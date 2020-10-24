@@ -41,14 +41,12 @@ public abstract class ClassDescription extends Description {
     /**
      * 作成者
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private String creator;
 
     /**
      * バージョン
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private String version;
 

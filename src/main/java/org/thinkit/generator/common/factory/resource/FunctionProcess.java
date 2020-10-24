@@ -15,6 +15,7 @@
 package org.thinkit.generator.common.factory.resource;
 
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -39,7 +40,7 @@ public abstract class FunctionProcess extends Process {
      * @param variableName 変数名
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected FunctionProcess(String variableName) {
+    protected FunctionProcess(@NonNull String variableName) {
         super(variableName);
     }
 }

@@ -39,56 +39,48 @@ public abstract class Resource {
     /**
      * 著作権
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private Copyright copyright;
 
     /**
      * パッケージ名
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private String packageName;
 
     /**
      * リソース名
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private String resourceName;
 
     /**
      * クラスの説明
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private ClassDescription classDescription;
 
     /**
      * 継承リスト
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private List<Inheritance> inheritances = new ArrayList<>(0);
 
     /**
      * インターフェースリスト
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private List<Interface> interfaces = new ArrayList<>(0);
 
     /**
      * 列挙定数リスト
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private List<Enumeration> enumerations = new ArrayList<>(0);
 
     /**
      * フィールドリスト
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private List<Field> fields = new ArrayList<>(0);
 
@@ -114,8 +106,8 @@ public abstract class Resource {
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected Resource(Copyright copyright, String packageName, ClassDescription classDescription,
-            String resourceName) {
+    protected Resource(@NonNull Copyright copyright, @NonNull String packageName,
+            @NonNull ClassDescription classDescription, @NonNull String resourceName) {
         this.copyright = copyright;
         this.packageName = packageName;
         this.classDescription = classDescription;

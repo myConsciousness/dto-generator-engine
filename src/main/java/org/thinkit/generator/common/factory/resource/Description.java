@@ -41,7 +41,6 @@ public abstract class Description implements Component {
     /**
      * 説明
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private String description;
 
@@ -58,7 +57,7 @@ public abstract class Description implements Component {
      * @param description 説明
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected Description(String description) {
+    protected Description(@NonNull String description) {
         this.description = description;
     }
 }

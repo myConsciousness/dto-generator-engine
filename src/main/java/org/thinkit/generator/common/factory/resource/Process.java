@@ -41,7 +41,6 @@ public abstract class Process implements Component {
     /**
      * 変数名
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private String variableName;
 
@@ -59,7 +58,7 @@ public abstract class Process implements Component {
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected Process(String variableName) {
+    protected Process(@NonNull String variableName) {
         this.variableName = variableName;
     }
 }

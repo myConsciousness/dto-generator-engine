@@ -45,35 +45,30 @@ public abstract class Copyright implements Component {
     /**
      * プロジェクト名
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private String projectName = "";
 
     /**
      * ファイル名
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private String fileName;
 
     /**
      * エンコード
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private String encoding;
 
     /**
      * 作成者
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private String creator;
 
     /**
      * 作成日付
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private String creationDate;
 

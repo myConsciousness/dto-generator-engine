@@ -41,14 +41,12 @@ public abstract class Parameter implements Component {
     /**
      * データ型
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private String dataType;
 
     /**
      * 変数名
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private String variableName;
 
@@ -66,7 +64,7 @@ public abstract class Parameter implements Component {
      * @param variableName 変数名
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected Parameter(String dataType, String variableName) {
+    protected Parameter(@NonNull String dataType, @NonNull String variableName) {
         this.dataType = dataType;
         this.variableName = variableName;
     }

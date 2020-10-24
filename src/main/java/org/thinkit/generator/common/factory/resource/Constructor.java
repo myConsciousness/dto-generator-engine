@@ -41,7 +41,7 @@ public abstract class Constructor extends Function {
      * @param functionDescription 関数の説明
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected Constructor(String functionName, FunctionDescription functionDescription) {
+    protected Constructor(@NonNull String functionName, @NonNull FunctionDescription functionDescription) {
         super(functionName, functionDescription);
     }
 

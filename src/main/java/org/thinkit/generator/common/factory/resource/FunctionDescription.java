@@ -16,7 +16,6 @@ package org.thinkit.generator.common.factory.resource;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -44,7 +43,6 @@ public abstract class FunctionDescription extends Description {
     /**
      * 引数の変数名
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private List<DescriptionTag> descriptionTags = new ArrayList<>(0);
 
@@ -54,7 +52,7 @@ public abstract class FunctionDescription extends Description {
      * @param description 説明
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected FunctionDescription(String description) {
+    protected FunctionDescription(@NonNull String description) {
         super(description);
     }
 
@@ -66,8 +64,7 @@ public abstract class FunctionDescription extends Description {
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public void add(DescriptionTag descriptionTag) {
-        Objects.requireNonNull(descriptionTag);
+    public void add(@NonNull DescriptionTag descriptionTag) {
         this.descriptionTags.add(descriptionTag);
     }
 

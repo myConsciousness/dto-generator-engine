@@ -16,7 +16,6 @@ package org.thinkit.generator.common.factory.resource;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import org.thinkit.common.catalog.Delimiter;
 import org.thinkit.common.catalog.Indentation;
@@ -44,21 +43,21 @@ import lombok.ToString;
 @EqualsAndHashCode
 public abstract class Function implements Component {
 
-    @NonNull
+    /**
+     * 関数名
+     */
     @Getter(AccessLevel.PROTECTED)
     private String functionName;
 
     /**
      * 関数の説明
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private FunctionDescription functionDescription = null;
+    private FunctionDescription functionDescription;
 
     /**
      * 引数リスト
      */
-    @NonNull
     @Getter(AccessLevel.PROTECTED)
     private List<Parameter> parameters = new ArrayList<>(0);
 
@@ -81,9 +80,10 @@ public abstract class Function implements Component {
      *
      * @param functionName        機能名
      * @param functionDescription 関数の説明
+     *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected Function(String functionName, FunctionDescription functionDescription) {
+    protected Function(@NonNull String functionName, @NonNull FunctionDescription functionDescription) {
         this.functionName = functionName;
         this.functionDescription = functionDescription;
     }
@@ -93,10 +93,10 @@ public abstract class Function implements Component {
      * 引数として {@code null} が渡された場合は実行時に必ず失敗します。
      *
      * @param parameter 関数の引数
+     *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public void add(Parameter parameter) {
-        Objects.requireNonNull(parameter);
+    public void add(@NonNull Parameter parameter) {
         this.parameters.add(parameter);
     }
 
@@ -107,8 +107,7 @@ public abstract class Function implements Component {
      * @param process 関数の処理
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public void add(Process process) {
-        Objects.requireNonNull(process);
+    public void add(@NonNull Process process) {
         this.processes.add(process);
     }
 
