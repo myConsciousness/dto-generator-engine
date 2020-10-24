@@ -14,7 +14,7 @@
 
 package org.thinkit.generator.common.factory.dtogenerator;
 
-import org.thinkit.common.exception.LogicException;
+import org.thinkit.generator.common.catalog.Annotation;
 import org.thinkit.generator.common.factory.resource.ClassDescription;
 import org.thinkit.generator.common.factory.resource.Constructor;
 import org.thinkit.generator.common.factory.resource.ConstructorProcess;
@@ -77,7 +77,8 @@ public final class DtoResourceFactory extends ResourceFactory {
     @Override
     @Deprecated
     public Copyright createCopyright(@NonNull String creator) {
-        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+        throw new UnsupportedOperationException(
+                "This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
@@ -89,7 +90,8 @@ public final class DtoResourceFactory extends ResourceFactory {
     @Override
     @Deprecated
     public ClassDescription createClassDescription(@NonNull String creator, @NonNull String version) {
-        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+        throw new UnsupportedOperationException(
+                "This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
@@ -106,49 +108,57 @@ public final class DtoResourceFactory extends ResourceFactory {
     @Override
     @Deprecated
     public Inheritance createInheritance(@NonNull String literal) {
-        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+        throw new UnsupportedOperationException(
+                "This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
     @Deprecated
     public Inheritance createInheritance(@NonNull String literal, @NonNull Generics generics) {
-        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+        throw new UnsupportedOperationException(
+                "This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
     @Deprecated
     public Interface createInterface(@NonNull String literal) {
-        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+        throw new UnsupportedOperationException(
+                "This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
     @Deprecated
     public Interface createInterface(@NonNull String literal, @NonNull Generics generics) {
-        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+        throw new UnsupportedOperationException(
+                "This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
     @Deprecated
     public Generics createGenerics() {
-        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+        throw new UnsupportedOperationException(
+                "This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
     @Deprecated
     public EnumDefinition createEnumDefinition(@NonNull String literal) {
-        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+        throw new UnsupportedOperationException(
+                "This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
     @Deprecated
     public Enumeration createEnumeration(@NonNull EnumDefinition enumDefinition, @NonNull Description description) {
-        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+        throw new UnsupportedOperationException(
+                "This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
     @Deprecated
     public FieldDefinition createFieldDefinition(@NonNull String dataType, @NonNull String variableName) {
-        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+        throw new UnsupportedOperationException(
+                "This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
@@ -165,6 +175,14 @@ public final class DtoResourceFactory extends ResourceFactory {
     @Override
     public DescriptionTag createDescriptionTag(@NonNull String variableName, @NonNull String description) {
         return new DtoDescriptionTag(variableName, description);
+    }
+
+    @Override
+    @Deprecated
+    public DescriptionTag createDescriptionTag(@NonNull String variableName, @NonNull String description,
+            @NonNull Annotation annotation) {
+        throw new UnsupportedOperationException(
+                "This method is not supposed to be called when the DTO class is created");
     }
 
     @Override

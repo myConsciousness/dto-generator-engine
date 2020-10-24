@@ -14,6 +14,8 @@
 
 package org.thinkit.generator.common.factory.resource;
 
+import org.thinkit.generator.common.catalog.Annotation;
+
 import lombok.NonNull;
 
 /**
@@ -234,6 +236,21 @@ public abstract class ResourceFactory {
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */
         public abstract DescriptionTag createDescriptionTag(@NonNull String variableName, @NonNull String description);
+
+        /**
+         * {@link DescriptionTag} のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link ResourceFactory} を継承した具象クラスは必ず
+         * {@link #createDescriptionTag(String, String)} を実装してください。
+         *
+         * @param variableName 変数名
+         * @param description  説明
+         * @param annotation   アノテーション
+         * @return {@link DescriptionTag} のインスタンス
+         *
+         * @exception NullPointerException 引数として {@code null} が渡された場合
+         */
+        public abstract DescriptionTag createDescriptionTag(@NonNull String variableName, @NonNull String description,
+                        @NonNull Annotation annotation);
 
         /**
          * {@link Constructor} のインスタンスを生成し返却する抽象メソッドです。<br>
