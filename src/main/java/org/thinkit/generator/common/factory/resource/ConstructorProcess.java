@@ -56,7 +56,7 @@ public abstract class ConstructorProcess extends Process {
      * ゲッター名
      */
     @Getter(AccessLevel.PROTECTED)
-    private String getterName = "";
+    private String getterName;
 
     /**
      * コンストラクタ

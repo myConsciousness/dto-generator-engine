@@ -54,33 +54,44 @@ public abstract class Copyright implements Component {
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String fileName = "";
+    private String fileName;
 
     /**
      * エンコード
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String encoding = "";
+    private String encoding;
 
     /**
      * 作成者
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String creator = "";
+    private String creator;
 
     /**
      * 作成日付
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String creationDate = "";
+    private String creationDate;
 
     /**
      * デフォルトコンストラクタ
      */
     protected Copyright() {
+    }
+
+    /**
+     * コンストラクタ
+     *
+     * @param creator 作成者
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    protected Copyright(@NonNull String creator) {
+        this.creator = creator;
     }
 
     /**
@@ -94,7 +105,8 @@ public abstract class Copyright implements Component {
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected Copyright(String projectName, String fileName, String encoding, String creator, String creationDate) {
+    protected Copyright(@NonNull String projectName, @NonNull String fileName, @NonNull String encoding,
+            @NonNull String creator, @NonNull String creationDate) {
         this.projectName = projectName;
         this.fileName = fileName;
         this.encoding = encoding;

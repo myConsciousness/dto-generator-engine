@@ -43,7 +43,7 @@ public abstract class Description implements Component {
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String description = "";
+    private String description;
 
     /**
      * デフォルトコンストラクタ

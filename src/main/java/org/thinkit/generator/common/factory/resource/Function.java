@@ -46,7 +46,7 @@ public abstract class Function implements Component {
 
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String functionName = "";
+    private String functionName;
 
     /**
      * 関数の説明

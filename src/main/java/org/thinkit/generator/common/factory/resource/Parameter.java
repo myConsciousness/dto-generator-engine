@@ -43,14 +43,14 @@ public abstract class Parameter implements Component {
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String dataType = "";
+    private String dataType;
 
     /**
      * 変数名
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String variableName = "";
+    private String variableName;
 
     /**
      * デフォルトコンストラクタ

@@ -21,7 +21,8 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * プログラムリソースにおけるクラスの説明を抽象化した抽象クラスです。<br>
+ * プログラムリソースにおけるクラスの説明を抽象化した抽象クラスです。
+ * <p>
  * この抽象クラスではクラスの説明定義に必要な情報を保持します。<br>
  * この抽象クラスを継承する具象クラスは必ず {@link Component#createResource()} を実装してください。
  *
@@ -42,14 +43,28 @@ public abstract class ClassDescription extends Description {
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String creator = "";
+    private String creator;
 
     /**
      * バージョン
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String version = "";
+    private String version;
+
+    /**
+     * コンストラクタ
+     *
+     * @param creator クラスの作成者
+     * @param version クラスのバージョン
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    protected ClassDescription(@NonNull String creator, @NonNull String version) {
+        super("");
+        this.creator = creator;
+        this.version = version;
+    }
 
     /**
      * コンストラクタ
@@ -57,9 +72,10 @@ public abstract class ClassDescription extends Description {
      * @param description クラスの説明
      * @param creator     クラスの作成者
      * @param version     クラスのバージョン
+     *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected ClassDescription(String description, String creator, String version) {
+    protected ClassDescription(@NonNull String description, @NonNull String creator, @NonNull String version) {
         super(description);
         this.creator = creator;
         this.version = version;

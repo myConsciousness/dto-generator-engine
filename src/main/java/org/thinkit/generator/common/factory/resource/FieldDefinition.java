@@ -40,21 +40,21 @@ public abstract class FieldDefinition implements Component {
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String dataType = "";
+    private String dataType;
 
     /**
      * 変数名
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String variableName = "";
+    private String variableName;
 
     /**
      * 初期値
      */
     @NonNull
     @Getter(AccessLevel.PROTECTED)
-    private String initialValue = "";
+    private String initialValue;
 
     /**
      * デフォルトコンストラクタ
@@ -69,6 +69,21 @@ public abstract class FieldDefinition implements Component {
      * @param dataType     データ型
      * @param variableName 変数名
      * @param initialValue 初期値
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    protected FieldDefinition(String dataType, String variableName) {
+        this.dataType = dataType;
+        this.variableName = variableName;
+    }
+
+    /**
+     * コンストラクタ
+     *
+     * @param dataType     データ型
+     * @param variableName 変数名
+     * @param initialValue 初期値
+     *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     protected FieldDefinition(String dataType, String variableName, String initialValue) {
