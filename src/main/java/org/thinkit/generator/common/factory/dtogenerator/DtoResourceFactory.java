@@ -87,6 +87,7 @@ public final class DtoResourceFactory extends ResourceFactory {
     }
 
     @Override
+    @Deprecated
     public ClassDescription createClassDescription(@NonNull String creator, @NonNull String version) {
         throw new LogicException("This method is not supposed to be called when the DTO class is created");
     }
