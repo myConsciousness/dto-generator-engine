@@ -27,6 +27,19 @@ public abstract class ResourceFactory {
 
         /**
          * {@link Copyright}のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link ResourceFactory}を継承した具象クラスは必ず {@link #createCopyright(String, String)}
+         * を実装してください。
+         *
+         * @param creator      作成者
+         * @param creationDate 作成日付
+         * @return {@link Copyright} のインスタンス
+         *
+         * @exception NullPointerException 引数として {@code null} が渡された場合
+         */
+        public abstract Copyright createCopyright(@NonNull String creator);
+
+        /**
+         * {@link Copyright}のインスタンスを生成し返却する抽象メソッドです。<br>
          * {@link ResourceFactory}を継承した具象クラスは必ず
          * {@link #createCopyright(String, String, String, String, String)} を実装してください。
          *
@@ -41,6 +54,19 @@ public abstract class ResourceFactory {
          */
         public abstract Copyright createCopyright(@NonNull String projectName, @NonNull String fileName,
                         @NonNull String encoding, @NonNull String creator, @NonNull String creationDate);
+
+        /**
+         * {@link ClassDescription} のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link ResourceFactory} を継承した具象クラスは必ず
+         * {@link #createClassDescription(String, String)} を実装してください。
+         *
+         * @param creator 作成者
+         * @param version 現行バージョン
+         * @return {@link ClassDescription} のインスタンス
+         *
+         * @exception NullPointerException 引数として {@code null} が渡された場合
+         */
+        public abstract ClassDescription createClassDescription(@NonNull String creator, @NonNull String version);
 
         /**
          * {@link ClassDescription} のインスタンスを生成し返却する抽象メソッドです。<br>
@@ -155,6 +181,19 @@ public abstract class ResourceFactory {
          */
         public abstract Enumeration createEnumeration(@NonNull EnumDefinition enumDefinition,
                         @NonNull Description description);
+
+        /**
+         * {@link FieldDefinition} のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link ResourceFactory} を継承した具象クラスは必ず
+         * {@link #createFieldDefinition(String, String)} を実装してください。
+         *
+         * @param dataType     データ型
+         * @param variableName 変数名
+         * @return {@link FieldDefinition} のインスタンス
+         *
+         * @exception NullPointerException 引数として {@code null} が渡された場合
+         */
+        public abstract FieldDefinition createFieldDefinition(@NonNull String dataType, @NonNull String variableName);
 
         /**
          * {@link FieldDefinition} のインスタンスを生成し返却する抽象メソッドです。<br>

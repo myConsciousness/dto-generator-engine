@@ -75,9 +75,20 @@ public final class DtoResourceFactory extends ResourceFactory {
     }
 
     @Override
+    @Deprecated
+    public Copyright createCopyright(@NonNull String creator) {
+        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+    }
+
+    @Override
     public Copyright createCopyright(@NonNull String projectName, @NonNull String fileName, @NonNull String encoding,
             @NonNull String creator, @NonNull String creationDate) {
         return new DtoCopyright(projectName, fileName, encoding, creator, creationDate);
+    }
+
+    @Override
+    public ClassDescription createClassDescription(@NonNull String creator, @NonNull String version) {
+        throw new LogicException("This method is not supposed to be called when the DTO class is created");
     }
 
     @Override
@@ -130,6 +141,12 @@ public final class DtoResourceFactory extends ResourceFactory {
     @Override
     @Deprecated
     public Enumeration createEnumeration(@NonNull EnumDefinition enumDefinition, @NonNull Description description) {
+        throw new LogicException("This method is not supposed to be called when the DTO class is created");
+    }
+
+    @Override
+    @Deprecated
+    public FieldDefinition createFieldDefinition(@NonNull String dataType, @NonNull String variableName) {
         throw new LogicException("This method is not supposed to be called when the DTO class is created");
     }
 
