@@ -39,9 +39,19 @@ public abstract class Method extends Function {
      *
      * @param functionName        機能名
      * @param functionDescription 関数の説明
+     *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
     protected Method(@NonNull String functionName, @NonNull FunctionDescription functionDescription) {
         super(functionName, functionDescription);
+    }
+
+    /**
+     * コンストラクタの説明定義に引数アノテーション定義を追加します。
+     *
+     * @param descriptionTag 関数の引数アノテーション定義
+     */
+    public void add(@NonNull DescriptionTag descriptionTag) {
+        super.getFunctionDescription().add(descriptionTag);
     }
 }
