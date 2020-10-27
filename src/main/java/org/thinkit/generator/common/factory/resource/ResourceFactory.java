@@ -213,6 +213,19 @@ public abstract class ResourceFactory {
                         @NonNull String initialValue);
 
         /**
+         * {@link Field} のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link ResourceFactory} を継承した具象クラスは必ず
+         * {@link #createField(FieldDefinition, Description)} を実装してください。
+         *
+         * @param fieldDefinition フィールド定義
+         * @param description     説明
+         * @return {@link Field} のインスタンス
+         *
+         * @exception NullPointerException 引数として {@code null} が渡された場合
+         */
+        public abstract Field createField(@NonNull FieldDefinition fieldDefinition, @NonNull Description description);
+
+        /**
          * {@link FunctionDescription} のインスタンスを生成し返却する抽象メソッドです。<br>
          * {@link ResourceFactory} を継承した具象クラスは必ず
          * {@link #createFunctionDescription(String)} を実装してください。

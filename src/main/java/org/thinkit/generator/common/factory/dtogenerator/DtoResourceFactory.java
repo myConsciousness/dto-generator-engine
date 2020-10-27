@@ -23,6 +23,7 @@ import org.thinkit.generator.common.factory.resource.Description;
 import org.thinkit.generator.common.factory.resource.DescriptionTag;
 import org.thinkit.generator.common.factory.resource.EnumDefinition;
 import org.thinkit.generator.common.factory.resource.Enumeration;
+import org.thinkit.generator.common.factory.resource.Field;
 import org.thinkit.generator.common.factory.resource.FieldDefinition;
 import org.thinkit.generator.common.factory.resource.FunctionDescription;
 import org.thinkit.generator.common.factory.resource.Generics;
@@ -165,6 +166,11 @@ public final class DtoResourceFactory extends ResourceFactory {
     public FieldDefinition createFieldDefinition(@NonNull String dataType, @NonNull String variableName,
             @NonNull String initialValue) {
         return new DtoFieldDefinition(dataType, variableName, initialValue);
+    }
+
+    @Override
+    public Field createField(@NonNull FieldDefinition fieldDefinition, @NonNull Description description) {
+        return new DtoField(fieldDefinition, description);
     }
 
     @Override
