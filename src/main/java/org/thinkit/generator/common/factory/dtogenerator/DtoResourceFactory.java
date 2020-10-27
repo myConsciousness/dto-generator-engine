@@ -29,6 +29,7 @@ import org.thinkit.generator.common.factory.resource.FunctionDescription;
 import org.thinkit.generator.common.factory.resource.Generics;
 import org.thinkit.generator.common.factory.resource.Inheritance;
 import org.thinkit.generator.common.factory.resource.Interface;
+import org.thinkit.generator.common.factory.resource.Method;
 import org.thinkit.generator.common.factory.resource.MethodProcess;
 import org.thinkit.generator.common.factory.resource.Parameter;
 import org.thinkit.generator.common.factory.resource.Resource;
@@ -211,6 +212,12 @@ public final class DtoResourceFactory extends ResourceFactory {
     @Override
     public ConstructorProcess createConstructorProcess(@NonNull String variableName, @NonNull String getterName) {
         return new DtoConstructorProcess(variableName, getterName);
+    }
+
+    @Override
+    public Method createMethod(@NonNull String functionName, @NonNull FunctionDescription functionDescription) {
+        throw new UnsupportedOperationException(
+                "This method is not supposed to be called when the DTO class is created");
     }
 
     @Override

@@ -319,6 +319,20 @@ public abstract class ResourceFactory {
                         @NonNull String getterName);
 
         /**
+         * {@link Method} のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link ResourceFactory} を継承した具象クラスは必ず
+         * {@link #createMethod(String, FunctionDescription)} を実装してください。
+         *
+         * @param functionName        機能名
+         * @param functionDescription 機能の説明
+         * @return {@link Constructor} のインスタンス
+         *
+         * @exception NullPointerException 引数として {@code null} が渡された場合
+         */
+        public abstract Method createMethod(@NonNull String functionName,
+                        @NonNull FunctionDescription functionDescription);
+
+        /**
          * {@link MethodProcess} のインスタンスを生成し返却する抽象メソッドです。<br>
          * {@link ResourceFactory} を継承した具象クラスは必ず {@link #createMethodProcess(String)}
          * を実装してください。
