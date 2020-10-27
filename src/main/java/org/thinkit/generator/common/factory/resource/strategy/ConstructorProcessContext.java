@@ -32,7 +32,7 @@ import lombok.ToString;
  * @see #toConstructorProcess(String, String)
  */
 @ToString
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode
 public abstract class ConstructorProcessContext {
 
     /**
