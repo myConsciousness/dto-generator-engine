@@ -15,7 +15,6 @@
 package org.thinkit.generator.common.formatter;
 
 import org.thinkit.generator.common.dto.Resource;
-import org.thinkit.generator.common.dto.ResourceGroup;
 import org.thinkit.generator.common.dto.ResourceMatrix;
 
 import lombok.NonNull;
@@ -27,7 +26,7 @@ import lombok.NonNull;
  * @since 1.0
  * @version 1.0
  */
-public interface ResourceFormatter<I extends ResourceMatrix, R extends Resource & ResourceGroup> {
+public interface ResourceFormatter<I extends ResourceMatrix, R extends Resource> {
 
     /**
      * {@code resourceMatrix} に格納されたリソース情報からリソースを生成し返却します。
@@ -35,7 +34,7 @@ public interface ResourceFormatter<I extends ResourceMatrix, R extends Resource 
      * @param resourceMatrix リソース定義を格納したデータクラス。このデータクラスは必ずマーカーインターフェースの
      *                       {@link ResourceMatrix} を実装しているクラスである必要があります。
      * @return リソース定義から生成されたリソースを格納したデータクラス。このデータクラスは必ずマーカーインターフェースである
-     *         {@link Resource} または {@link ResourceGroup} を実装しているクラスである必要があります。
+     *         {@link Resource} を実装しているクラスである必要があります。
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
