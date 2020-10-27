@@ -31,8 +31,10 @@ public interface ResourceFormatter<I extends ResourceMatrix, R extends Resource>
     /**
      * {@code resourceMatrix} に格納されたリソース情報からリソースを生成し返却します。
      *
-     * @param resourceMatrix リソース定義を格納したデータクラス
-     * @return リソース定義から生成されたリソースを格納したデータクラス
+     * @param resourceMatrix リソース定義を格納したデータクラス。このデータクラスは必ずマーカーインターフェースの
+     *                       {@link ResourceMatrix} を実装しているクラスである必要があります。
+     * @return リソース定義から生成されたリソースを格納したデータクラス。このデータクラスは必ずマーカーインターフェースである
+     *         {@link Resource} を実装しているクラスである必要があります。
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
