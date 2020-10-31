@@ -1,5 +1,8 @@
 # Generator Commons
 
+<!-- START doctoc -->
+<!-- END doctoc -->
+
 ## What is it?
 
 Generator-Commons main repository
