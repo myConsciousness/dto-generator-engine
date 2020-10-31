@@ -14,7 +14,7 @@
 
 package org.thinkit.generator.common.factory.resource;
 
-import org.thinkit.generator.common.catalog.ConstructorState;
+import org.thinkit.generator.common.catalog.ConstructorType;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -47,10 +47,10 @@ public abstract class ConstructorProcess extends Process {
 
     /**
      * コンストラクタ状態。<br>
-     * 初期値は {@link ConstructorState#DEFAULT} が設定されています。
+     * 初期値は {@link ConstructorType#DEFAULT} が設定されています。
      */
     @Getter(AccessLevel.PROTECTED)
-    private ConstructorState constructorState = ConstructorState.DEFAULT;
+    private ConstructorType constructorType = ConstructorType.DEFAULT;
 
     /**
      * ゲッター名
@@ -83,13 +83,13 @@ public abstract class ConstructorProcess extends Process {
     /**
      * コンストラクタ状態をデフォルトコンストラクタに変更します。<br>
      * {@link Constructor} のインスタンス生成時では、<br>
-     * 初期値として {@link ConstructorState#DEFAULT} が設定されているため、<br>
+     * 初期値として {@link ConstructorType#DEFAULT} が設定されているため、<br>
      * {@link #toDefault()} の呼び出しは必要ありません。
      *
      * @return 当オブジェクトのインスタンス
      */
     public ConstructorProcess toDefault() {
-        this.constructorState = ConstructorState.DEFAULT;
+        this.constructorType = ConstructorType.DEFAULT;
         return this;
     }
 
@@ -99,7 +99,7 @@ public abstract class ConstructorProcess extends Process {
      * @return 当オブジェクトのインスタンス
      */
     public ConstructorProcess toRequired() {
-        this.constructorState = ConstructorState.REQUIRED;
+        this.constructorType = ConstructorType.REQUIRED;
         return this;
     }
 
@@ -109,7 +109,7 @@ public abstract class ConstructorProcess extends Process {
      * @return 当オブジェクトのインスタンス
      */
     public ConstructorProcess toCopying() {
-        this.constructorState = ConstructorState.COPYING;
+        this.constructorType = ConstructorType.COPYING;
         return this;
     }
 }

@@ -20,14 +20,14 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * コンストラクタ状態を管理するカタログです。
+ * コンストラクタ種別を管理するカタログです。
  *
  * @author Kato Shinya
  * @since 1.0
  * @version 1.0
  */
 @RequiredArgsConstructor
-public enum ConstructorState implements Catalog<ConstructorState> {
+public enum ConstructorType implements Catalog<ConstructorType> {
 
     /**
      * デフォルトコンストラクタ

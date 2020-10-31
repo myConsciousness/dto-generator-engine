@@ -14,7 +14,6 @@
 
 package org.thinkit.generator.common.factory.dtogenerator;
 
-import org.thinkit.generator.common.catalog.ConstructorState;
 import org.thinkit.generator.common.factory.dtogenerator.strategy.CopyingConstructorProcess;
 import org.thinkit.generator.common.factory.dtogenerator.strategy.DefaultConstructorProcess;
 import org.thinkit.generator.common.factory.dtogenerator.strategy.DtoConstructorProcessContext;
@@ -76,7 +75,7 @@ final class DtoConstructorProcess extends ConstructorProcess {
      */
     private DtoConstructorProcessContext getConstructorProcessContext() {
 
-        return switch (super.getConstructorState()) {
+        return switch (super.getConstructorType()) {
             case REQUIRED -> new DtoConstructorProcessContext(new RequiredConstructorProcess());
             case COPYING -> new DtoConstructorProcessContext(new CopyingConstructorProcess());
             default -> new DtoConstructorProcessContext(new DefaultConstructorProcess());
