@@ -348,9 +348,33 @@ public abstract class ResourceFactory {
         public abstract MethodProcess createMethodProcess(@NonNull String variableName);
 
         /**
+         * {@link Package} のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link ResourceFactory} を継承した具象クラスは必ず {@link #createPackage(String)}
+         * を実装してください。
+         *
+         * @param packageName パッケージ名
+         * @return {@link Package} のインスタンス
+         *
+         * @exception NullPointerException 引数として {@code null} が渡された場合
+         */
+        public abstract Package createPackage(@NonNull String packageName);
+
+        /**
+         * {@link DependentPackage} のインスタンスを生成し返却する抽象メソッドです。<br>
+         * {@link ResourceFactory} を継承した具象クラスは必ず {@link #createDependentPackage(String)}
+         * を実装してください。
+         *
+         * @param dependentPackage 依存パッケージ
+         * @return {@link DependentPackage} のインスタンス
+         *
+         * @exception NullPointerException 引数として {@code null} が渡された場合
+         */
+        public abstract DependentPackage createDependentPackage(@NonNull String dependentPackage);
+
+        /**
          * {@link Resource} のインスタンスを生成し返却する抽象メソッドです。<br>
          * {@link ResourceFactory} を継承した具象クラスは必ず
-         * {@link #createResource(Copyright, String, ClassDescription, String, Field)}
+         * {@link #createResource(Copyright, Package, ClassDescription, String, Field)}
          * を実装してください。
          *
          * @param copyright        著作権
@@ -361,6 +385,6 @@ public abstract class ResourceFactory {
          *
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */
-        public abstract Resource createResource(@NonNull Copyright copyright, @NonNull String packageName,
+        public abstract Resource createResource(@NonNull Copyright copyright, @NonNull Package packageName,
                         @NonNull ClassDescription classDescription, @NonNull String resourceName);
 }

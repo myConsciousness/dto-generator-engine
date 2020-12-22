@@ -46,7 +46,7 @@ public abstract class Resource {
      * パッケージ名
      */
     @Getter(AccessLevel.PROTECTED)
-    private String packageName;
+    private Package packageName;
 
     /**
      * リソース名
@@ -59,6 +59,12 @@ public abstract class Resource {
      */
     @Getter(AccessLevel.PROTECTED)
     private ClassDescription classDescription;
+
+    /**
+     * 依存パッケージ
+     */
+    @Getter(AccessLevel.PROTECTED)
+    private List<DependentPackage> dependentPackages = new ArrayList<>(0);
 
     /**
      * 継承リスト
@@ -106,12 +112,25 @@ public abstract class Resource {
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected Resource(@NonNull Copyright copyright, @NonNull String packageName,
+    protected Resource(@NonNull Copyright copyright, @NonNull Package packageName,
             @NonNull ClassDescription classDescription, @NonNull String resourceName) {
         this.copyright = copyright;
         this.packageName = packageName;
         this.classDescription = classDescription;
         this.resourceName = resourceName;
+    }
+
+    /**
+     * 依存パッケージ定義を追加します。
+     *
+     * @param dependentPackage 依存パッケージ
+     * @return 自分自身のインスタンス
+     *
+     * @exception NullPointerException 引数として {@code null} が渡された場合
+     */
+    public Resource add(@NonNull DependentPackage dependentPackage) {
+        this.dependentPackages.add(dependentPackage);
+        return this;
     }
 
     /**

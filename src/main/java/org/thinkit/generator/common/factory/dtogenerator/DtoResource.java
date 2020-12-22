@@ -20,6 +20,7 @@ import org.thinkit.common.catalog.Indentation;
 import org.thinkit.generator.common.catalog.Annotation;
 import org.thinkit.generator.common.factory.resource.ClassDescription;
 import org.thinkit.generator.common.factory.resource.Copyright;
+import org.thinkit.generator.common.factory.resource.Package;
 import org.thinkit.generator.common.factory.resource.Resource;
 
 import lombok.EqualsAndHashCode;
@@ -53,7 +54,7 @@ final class DtoResource extends Resource {
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    public DtoResource(Copyright copyright, String packageName, ClassDescription classDescription,
+    public DtoResource(Copyright copyright, Package packageName, ClassDescription classDescription,
             String resourceName) {
         super(copyright, packageName, classDescription, resourceName);
     }

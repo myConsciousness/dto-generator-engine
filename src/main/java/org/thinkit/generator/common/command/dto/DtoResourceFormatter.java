@@ -244,7 +244,8 @@ public final class DtoResourceFormatter implements Command<DtoResourceGroup> {
         final ClassDescription classDescription = resourceFactory.createClassDescription(dtoMeta.getDescription(),
                 dtoCreator.getCreator(), dtoMeta.getVersion());
 
-        return resourceFactory.createResource(copyright, dtoMeta.getPackageName(), classDescription, className);
+        return resourceFactory.createResource(copyright, resourceFactory.createPackage(dtoMeta.getPackageName()),
+                classDescription, className);
     }
 
     /**
