@@ -15,6 +15,7 @@
 package org.thinkit.generator.common.factory.resource;
 
 import org.thinkit.generator.common.catalog.Annotation;
+import org.thinkit.generator.common.catalog.Modifier;
 
 import lombok.NonNull;
 
@@ -323,14 +324,16 @@ public abstract class ResourceFactory {
          * {@link ResourceFactory} を継承した具象クラスは必ず
          * {@link #createMethod(String, FunctionDescription)} を実装してください。
          *
+         * @param modifier            アクセス修飾子
+         * @param returnType          返却する型
          * @param functionName        機能名
          * @param functionDescription 機能の説明
          * @return {@link Constructor} のインスタンス
          *
          * @exception NullPointerException 引数として {@code null} が渡された場合
          */
-        public abstract Method createMethod(@NonNull String functionName,
-                        @NonNull FunctionDescription functionDescription);
+        public abstract Method createMethod(@NonNull Modifier modifier, @NonNull String returnType,
+                        @NonNull String functionName, @NonNull FunctionDescription functionDescription);
 
         /**
          * {@link MethodProcess} のインスタンスを生成し返却する抽象メソッドです。<br>

@@ -14,7 +14,11 @@
 
 package org.thinkit.generator.common.factory.resource;
 
+import org.thinkit.generator.common.catalog.Modifier;
+
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 
@@ -35,15 +39,33 @@ import lombok.ToString;
 public abstract class Method extends Function {
 
     /**
+     * アクセス修飾子
+     */
+    @Getter(AccessLevel.PROTECTED)
+    private Modifier modifier;
+
+    /**
+     * 返却する型
+     */
+    @Getter(AccessLevel.PROTECTED)
+    private String returnType;
+
+    /**
      * コンストラクタ
      *
+     * @param modifier            アクセス修飾子
+     * @param returnType          返却する型
      * @param functionName        機能名
      * @param functionDescription 関数の説明
      *
      * @exception NullPointerException 引数として {@code null} が渡された場合
      */
-    protected Method(@NonNull String functionName, @NonNull FunctionDescription functionDescription) {
+    protected Method(@NonNull Modifier modifier, @NonNull String returnType, @NonNull String functionName,
+            @NonNull FunctionDescription functionDescription) {
         super(functionName, functionDescription);
+
+        this.modifier = modifier;
+        this.returnType = returnType;
     }
 
     /**

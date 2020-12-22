@@ -15,6 +15,7 @@
 package org.thinkit.generator.common.factory.dtogenerator;
 
 import org.thinkit.generator.common.catalog.Annotation;
+import org.thinkit.generator.common.catalog.Modifier;
 import org.thinkit.generator.common.factory.resource.ClassDescription;
 import org.thinkit.generator.common.factory.resource.Constructor;
 import org.thinkit.generator.common.factory.resource.ConstructorProcess;
@@ -215,7 +216,8 @@ public final class DtoResourceFactory extends ResourceFactory {
     }
 
     @Override
-    public Method createMethod(@NonNull String functionName, @NonNull FunctionDescription functionDescription) {
+    public Method createMethod(@NonNull Modifier modifier, @NonNull String returnType, @NonNull String functionName,
+            @NonNull FunctionDescription functionDescription) {
         throw new UnsupportedOperationException(
                 "This method is not supposed to be called when the DTO class is created");
     }
