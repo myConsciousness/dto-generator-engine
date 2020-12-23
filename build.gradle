@@ -12,15 +12,18 @@
  * the License.
  */
 
+import io.franzbecker.gradle.lombok.task.DelombokTask
+
 plugins {
     id 'java'
     id 'maven-publish'
-    id 'com.palantir.git-version' version '0.12.2'
+    id 'com.palantir.git-version' version '0.12.3'
+    id 'io.franzbecker.gradle-lombok' version '4.0.0'
 }
 
 publishing {
    publications {
-        group 'org.thinkit.generator.common'
+        group 'org.thinkit.generator.dto.engine'
         version = gitVersion()
 
         gpr(MavenPublication) {
@@ -31,7 +34,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/myConsciousness/generator-commons")
+            url = uri("https://maven.pkg.github.com/myConsciousness/dto-generator-engine")
             credentials {
                 username = System.getenv("GITHUB_USER")
                 password = System.getenv("GITHUB_PUBLISH_TOKEN")
@@ -43,7 +46,7 @@ publishing {
 repositories {
     maven {
         name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/myConsciousness/generator-commons")
+        url = uri("https://maven.pkg.github.com/myConsciousness/dto-generator-engine")
         credentials {
             username = System.getenv("GITHUB_USER")
             password = System.getenv("GITHUB_DOWNLOAD_PACKAGE_TOKEN")
@@ -71,8 +74,7 @@ dependencies {
     implementation 'com.google.googlejavaformat:google-java-format:1.9'
 
     implementation 'org.thinkit.common:dev-utils:v1.0.2'
-    implementation 'org.thinkit.formatter.common:formatter-commons:v1.0.0'
-    implementation 'org.thinkit.formatter:json-formatter:v1.0.1'
+    implementation 'org.thinkit.generator.common:generator-commons:v1.0.18'
     implementation 'org.thinkit.api.catalog:catalog-api:v1.0.2'
 }
 
@@ -86,11 +88,30 @@ test {
     }
 }
 
-task("reference", type: Javadoc) {
-    source = sourceSets.main.allJava
-    title = 'Generator Commons'
+lombok {
+    version = "1.18.16"
+}
+
+task delombok( type: DelombokTask ) {
+    description = 'Generates delomboked source.'
+
+    sourceSets.all {
+        if ( it.name != SourceSet.TEST_SOURCE_SET_NAME ) {
+            it.allJava.srcDirs.each {
+                args( it, '-d', "${buildDir}/${delombok.name}" )
+            }
+        }
+    }
+}
+
+javadoc {
+    dependsOn delombok
+
+    source = file( "${buildDir}/${delombok.name}" )
+    title = 'DTO Generator Engine'
     options.links('https://docs.oracle.com/en/java/javase/13/docs/api/')
     options.charSet("utf-8")
     options.showFromPublic()
     destinationDir = file('./docs')
+    failOnError = false
 }
